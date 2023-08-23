@@ -16,19 +16,13 @@ export const settingList = [
     key: '1',
     name: '个人信息',
     component: 'BaseSetting',
-    icon:'ant-design:user-outlined'
+    icon: 'ant-design:user-outlined',
   },
   {
-    key: '2',
-    name: '我的租户',
-    component: 'TenantSetting',
-    icon:'ant-design:team-outlined'
-  },
-   {
     key: '3',
     name: '账号安全',
     component: 'AccountSetting',
-    icon:'ant-design:lock-outlined'
+    icon: 'ant-design:lock-outlined',
   },
   {
     key: '4',
@@ -37,7 +31,6 @@ export const settingList = [
     icon: 'ant-design:contacts-outlined',
   },
 ];
-
 
 /**
  * 用户表单
@@ -48,16 +41,16 @@ export const formSchema: FormSchema[] = [
     component: 'Input',
     label: '姓名',
     colProps: { span: 24 },
-    required:true
+    required: true,
   },
   {
     field: 'birthday',
     component: 'DatePicker',
     label: '生日',
     colProps: { span: 24 },
-    componentProps:{
-      showTime:false,
-      valueFormat:"YYYY-MM-DD",
+    componentProps: {
+      showTime: false,
+      valueFormat: 'YYYY-MM-DD',
       getPopupContainer: () => document.body,
     },
   },
@@ -66,7 +59,7 @@ export const formSchema: FormSchema[] = [
     component: 'RadioGroup',
     label: '性别',
     colProps: { span: 24 },
-    componentProps:{
+    componentProps: {
       options: [
         {
           label: '男',
@@ -77,29 +70,18 @@ export const formSchema: FormSchema[] = [
           value: 2,
         },
       ],
-    }
-  },
-  {
-    field: 'relTenantIds',
-    component: 'JDictSelectTag',
-    label: '租户',
-    colProps: { span: 24 },
-    componentProps:{
-      mode:'multiple',
-      dictCode:'sys_tenant,name,id',
-      disabled:true
-    }
+    },
   },
   {
     field: 'post',
     component: 'JDictSelectTag',
     label: '职位',
     colProps: { span: 24 },
-    componentProps:{
-      mode:'multiple',
-      dictCode:'sys_position,name,code',
-      disabled:true
-    }
+    componentProps: {
+      mode: 'multiple',
+      dictCode: 'sys_position,name,code',
+      disabled: true,
+    },
   },
   {
     label: '',
@@ -107,7 +89,7 @@ export const formSchema: FormSchema[] = [
     component: 'Input',
     show: false,
   },
-]
+];
 
 //密码弹窗
 export const formPasswordSchema: FormSchema[] = [

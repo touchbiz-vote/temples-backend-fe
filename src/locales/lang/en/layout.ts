@@ -5,10 +5,9 @@ export default {
     dropdownItemDoc: 'Document',
     dropdownItemLoginOut: 'Login Out',
     dropdownItemSwitchPassword: 'Password Change',
-    dropdownItemSwitchDepart: 'Switch Department',
     dropdownItemRefreshCache: 'Clean cache',
     dropdownItemSwitchAccount: 'Account Setting',
-    
+
     tooltipErrorLog: 'Error log',
     tooltipLock: 'Lock screen',
     tooltipNotify: 'Notification',

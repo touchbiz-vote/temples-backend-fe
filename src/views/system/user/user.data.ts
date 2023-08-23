@@ -1,6 +1,6 @@
 import { BasicColumn } from '/@/components/Table';
 import { FormSchema } from '/@/components/Table';
-import { getAllRolesListNoByTenant, getAllTenantList } from './user.api';
+import { getAllRolesListNoByTenant } from './user.api';
 import { rules } from '/@/utils/helper/validator';
 import { render } from '/@/utils/common/renderUtils';
 export const columns: BasicColumn[] = [
@@ -217,18 +217,6 @@ export const formSchema: FormSchema[] = [
           formModel.departIds && (formModel.departIds = formModel.departIds.filter((item) => values.value.indexOf(item) > -1));
         },
       };
-    },
-  },
-  {
-    label: '租户',
-    field: 'relTenantIds',
-    component: 'ApiSelect',
-    componentProps: {
-      mode: 'multiple',
-      api: getAllTenantList,
-      numberToString: true,
-      labelField: 'name',
-      valueField: 'id',
     },
   },
   {
