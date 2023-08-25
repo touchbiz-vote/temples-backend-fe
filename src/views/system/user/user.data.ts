@@ -254,6 +254,11 @@ export const formSchema: FormSchema[] = [
     },
   },
   {
+    label: '介绍资料',
+    field: 'description',
+    component: 'JEditor',
+  },
+  {
     label: '生日',
     field: 'birthday',
     component: 'DatePicker',

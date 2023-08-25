@@ -2,7 +2,7 @@ import type { App } from 'vue';
 import { warn } from '/@/utils/log';
 import { registerDynamicRouter } from '/@/utils/monorepo/dynamicRouter';
 // 引入模块
-import PACKAGE_TEST_JEECG_ONLINE from '@jeecg/online';
+import PACKAGE_TEST_JEECG_ONLINE from '/@/views/online';
 
 export function registerPackages(app: App) {
   use(app, PACKAGE_TEST_JEECG_ONLINE);

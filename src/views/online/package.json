@@ -1,0 +1,6 @@
+{
+  "name": "@jeecg/online",
+  "version": "3.5.3-beta3",
+  "main": "./main.index.js",
+  "module": "./main.index.js"
+}
