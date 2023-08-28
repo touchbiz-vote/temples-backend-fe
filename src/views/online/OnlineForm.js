@@ -471,6 +471,10 @@ const _sfc_main = {
       });
       console.log('\u63D0\u4EA4\u8868\u5355\u6570\u636E\u300B\u300B\u300Bform:', formData);
       let customUrl = customEditSubmitUrl.value;
+      //针对文章分类album的提交处理
+      if (props.id === 'ff8080818a27ef16018a27ef162a0000') {
+        customUrl = '/api/temples/album'
+      }
       let url = `${urlObject.optPre}${props.id}?tabletype=${tableType.value}`;
       if (customUrl) {
         url = `${customUrl}?tabletype=${tableType.value}`;
