@@ -65,7 +65,7 @@
       bizPath: {
         type: String,
         required: false,
-        default: 'temp',
+        default: 'temples',
       },
       //是否禁用
       disabled: {

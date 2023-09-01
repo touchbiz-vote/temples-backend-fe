@@ -48,7 +48,7 @@
     text: propTypes.string.def('上传'),
     fileType: propTypes.string.def(UploadTypeEnum.all),
     /*这个属性用于控制文件上传的业务路径*/
-    bizPath: propTypes.string.def('temp'),
+    bizPath: propTypes.string.def('temples'),
     /**
      * 是否返回url，
      * true：仅返回url

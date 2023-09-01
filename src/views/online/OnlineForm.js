@@ -473,7 +473,9 @@ const _sfc_main = {
       let customUrl = customEditSubmitUrl.value;
       //针对文章分类album的提交处理
       if (props.id === 'ff8080818a27ef16018a27ef162a0000') {
-        customUrl = '/api/temples/album'
+        customUrl = '/api/temples/album';
+      } else if (props.id === 'c37247320d744855bf85fac76f0cebfa') {
+        customUrl = '/api/temples/product';
       }
       let url = `${urlObject.optPre}${props.id}?tabletype=${tableType.value}`;
       if (customUrl) {
