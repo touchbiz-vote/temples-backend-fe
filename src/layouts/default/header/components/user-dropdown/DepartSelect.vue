@@ -50,11 +50,9 @@
   </BasicModal>
 </template>
 <script lang="ts" setup>
-  import { ref, computed, watch, unref, defineExpose } from 'vue';
-  import { Avatar } from 'ant-design-vue';
+  import { ref, watch, unref, defineExpose } from 'vue';
   import { BasicModal } from '/@/components/Modal';
   import { getUserDeparts, selectDepart } from '/@/views/system/depart/depart.api';
-  import { getUserTenants } from '/@/views/system/tenant/tenant.api';
   import { useMessage } from '/@/hooks/web/useMessage';
   import { useUserStore } from '/@/store/modules/user';
 
@@ -134,24 +132,13 @@
   /**
    *加载租户信息
    */
-  async function loadTenantList() {
-    const result = await getUserTenants();
-    if (!result.list || result.list.length == 0) {
-      return;
-    }
-    let tenantId = userStore.getTenant;
-    let currentTenant = result.list.filter((item) => item.id == tenantId);
-    currentTenantName.value = currentTenant && currentTenant.length > 0 ? currentTenant[0].name : '';
-    tenantList.value = result.list;
-    tenantSelected.value = tenantId;
-    isMultiTenant.value = true;
-  }
+  async function loadTenantList() {}
 
   /**
    * 提交数据
    */
   async function handleSubmit() {
-    if (unref(isMultiTenant) && unref(tenantSelected)==null) {
+    if (unref(isMultiTenant) && unref(tenantSelected) == null) {
       validate_status.value = 'error';
       return false;
     }
@@ -165,7 +152,7 @@
           userStore.setTenant(unref(tenantSelected));
         }
         createMessage.success('切换成功');
-        
+
         //切换租户后要刷新首页
         window.location.reload();
       })
