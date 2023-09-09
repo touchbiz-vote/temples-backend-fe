@@ -83,7 +83,7 @@ let config = {
   sortField: "id",
   sortType: "asc",
   currentPage: 1,
-  pageSize: 10,
+  pageSize: 50,
   total: 0,
   selectedRowKeys: [],
   queryParam: {},
