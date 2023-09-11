@@ -53,7 +53,7 @@
   import 'tinymce/plugins/contextmenu';
   import { defineComponent, computed, nextTick, ref, unref, watch, onDeactivated, onBeforeUnmount } from 'vue';
   import ImgUpload from './ImgUpload.vue';
-  import { toolbar, plugins, simplePlugins, simpleToolbar, menubar } from './tinymce';
+  import { toolbar, plugins, menubar } from './tinymce';
   import { buildShortUUID } from '/@/utils/uuid';
   import { bindHandlers } from './helper';
   import { onMountedOrActivated } from '/@/hooks/core/onMountedOrActivated';
