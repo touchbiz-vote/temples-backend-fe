@@ -59,8 +59,8 @@ import JAddInput from './jeecg/components/JAddInput.vue';
 import { Time } from '/@/components/Time';
 import JRangeNumber from './jeecg/components/JRangeNumber.vue';
 import UserSelect from './jeecg/components/userSelect/index.vue';
-import JRangeDate from './jeecg/components/JRangeDate.vue'
-import JRangeTime from './jeecg/components/JRangeTime.vue'
+import JRangeDate from './jeecg/components/JRangeDate.vue';
+import JRangeTime from './jeecg/components/JRangeTime.vue';
 
 const componentMap = new Map<ComponentType, Component>();
 
