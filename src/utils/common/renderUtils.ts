@@ -63,7 +63,7 @@ const render = {
       //update-begin-author:taoyan date:2022-5-24 for:  VUEN-1084 【vue3】online表单测试发现的新问题 41、生成的代码，树默认图大小未改
       return h(
         Avatar,
-        { shape: 'square', size: 25 },
+        { size: 25 },
         {
           icon: () => h(Icon, { icon: 'ant-design:file-image-outlined', size: 25 }),
         }
@@ -74,14 +74,12 @@ const render = {
       'span',
       avatarList.map((item) => {
         return h(Avatar, {
-          src: getFileAccessHttpUrl(item),
-          shape: 'square',
+          src: item,
           size: 25,
           style: { marginRight: '5px' },
         });
       })
     );
-    //update-end-author:taoyan date:2022-5-24 for:  VUEN-1084 【vue3】online表单测试发现的新问题 41、生成的代码，树默认图大小未改
   },
   /**
    * 渲染 Tooltip
@@ -102,15 +100,12 @@ const render = {
    * 渲染a标签
    * @param text
    */
-  renderHref: ({ text }) => {
-    if (!text) {
-      return '';
-    }
+  renderHref: ({ text, url }) => {
     const len = 20;
     if (text.length > len) {
       text = text.substr(0, len);
     }
-    return h('a', { href: text, target: '_blank' }, text);
+    return h('a', { href: url, target: '_blank' }, text);
   },
   /**
    * 根据字典渲染

@@ -18,6 +18,7 @@ import {
   Card,
   List,
   Tabs,
+  Image,
   Descriptions,
   Tree,
   Table,
@@ -75,6 +76,7 @@ export function registerGlobComp(app: App) {
     .use(Radio)
     .use(Switch)
     .use(Card)
+    .use(Image)
     .use(List)
     .use(Descriptions)
     .use(Tree)
