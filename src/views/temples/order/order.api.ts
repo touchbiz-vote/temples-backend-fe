@@ -1,12 +1,13 @@
 import { defHttp } from '/@/utils/http/axios';
 import { Modal } from 'ant-design-vue';
 
-const tableId = 'c37247320d744855bf85fac76f0cebfa';
+const tableId = '4028f8c98a844d8c018a844d8ca40000';
 
 enum Api {
   list = '/online/cgform/api/getData/',
-  save = '/api/temples/product',
-  get = '/online/cgform/api/form/',
+  save = '/test/jeecgDemo/add',
+  edit = '/test/jeecgDemo/edit',
+  get = '/test/jeecgDemo/queryById',
   enabled = '/api/temples/product/enabled/',
   disable = '/api/temples/product/disable/',
   delete = '/api/temples/product/',
@@ -14,13 +15,6 @@ enum Api {
   exportXls = '/test/jeecgDemo/exportXls',
   importExcel = '/test/jeecgDemo/importExcel',
 }
-
-/**
- * 根据code获取字典数值
- * @param params
- */
-export const ajaxGetDictItems = (params) => defHttp.get({ url: `/sys/dict/getDictItems/${params.code}` });
-
 /**
  * 导出api
  */
@@ -41,16 +35,17 @@ export const getList = (params) => {
  * 保存或者更新示例
  * @param params
  */
-export const saveOrUpdate = (params, isUpdate) => {
-  return isUpdate ? defHttp.put({ url: Api.save, params }) : defHttp.post({ url: Api.save, params });
+export const saveOrUpdateDemo = (params, isUpdate) => {
+  let url = isUpdate ? Api.edit : Api.save;
+  return defHttp.post({ url: url, params });
 };
 
 /**
- * 查询详情
- * @param id
+ * 查询示例详情
+ * @param params
  */
-export const getById = (id) => {
-  return defHttp.get({ url: Api.get + tableId + '/' + id });
+export const getDemoById = (params) => {
+  return defHttp.get({ url: Api.get, params });
 };
 
 /**

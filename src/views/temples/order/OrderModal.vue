@@ -1,5 +1,8 @@
 <template>
-  <BasicModal v-bind="$attrs" @register="registerModal" :title="title" @ok="handleSubmit" width="80%">
+  <div>
+    
+  </div>
+  <BasicModal v-bind="$attrs" @register="registerModal" :title="title" @ok="handleSubmit" width="40%">
     <BasicForm @register="registerForm" :disabled="isDisabled" />
   </BasicModal>
 </template>
@@ -7,12 +10,12 @@
   import { ref, computed, unref, defineProps } from 'vue';
   import { BasicModal, useModalInner } from '/@/components/Modal';
   import { BasicForm, useForm } from '/@/components/Form/index';
-  import { formSchema } from './product.data';
-  import { saveOrUpdate, getById } from './product.api';
+  import { formSchema } from './order.data';
+  import { saveOrUpdateDemo, getDemoById } from './order.api';
   // 声明Emits
   const emit = defineEmits(['register', 'success']);
   const isUpdate = ref(true);
-  const isClone = ref(false);
+
   //自定义接受参数
   const props = defineProps({
     //是否禁用页面
@@ -32,20 +35,17 @@
   const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
     //重置表单
     await resetFields();
-    setModalProps({ confirmLoading: false, showOkBtn: !props.isDisabled });
+    setModalProps({ confirmLoading: false, showOkBtn: !props.isDisabled});
     isUpdate.value = !!data?.isUpdate;
-    isClone.value = !!data?.isClone;
-    if (unref(isUpdate) || unref(isClone)) {
+    if(data.createBy){
+      await setFieldsValue({createBy: data.createBy})
+    }
+    if(data.createTime){
+      await setFieldsValue({createTime: data.createTime})
+    }
+    if (unref(isUpdate)) {
       //获取详情
-      data.record = await getById(data.record.id);
-      if (data.record) {
-        if (data.record.start_date && data.record.end_date) {
-          data.record.avaliabDate = data.record.start_date + ',' + data.record.end_date;
-        }
-      }
-      if (isClone.value) {
-        data.record.id = null;
-      }
+      data.record = await getDemoById({ id: data.record.id });
       //表单赋值
       await setFieldsValue({
         ...data.record,
@@ -53,20 +53,14 @@
     }
   });
   //设置标题
-  const title = computed(() => (!unref(isUpdate) ? '新增' : !unref(isClone) ? '编辑' : '复制'));
+  const title = computed(() => (!unref(isUpdate) ? '新增' : '编辑'));
   //表单提交事件
   async function handleSubmit(v) {
     try {
       let values = await validate();
       setModalProps({ confirmLoading: true });
-      console.log(values);
-      if (values.avaliabDate) {
-        const dates = values.avaliabDate.split(',');
-        values.start_date = dates[0];
-        values.end_date = dates[1];
-      }
       //提交表单
-      await saveOrUpdate(values, isUpdate.value);
+      await saveOrUpdateDemo(values, isUpdate.value);
       //关闭弹窗
       closeModal();
       //刷新列表
@@ -76,3 +70,5 @@
     }
   }
 </script>
+./order.api
+./order.data
