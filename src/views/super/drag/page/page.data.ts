@@ -15,3 +15,52 @@ export const searchFormSchema: FormSchema[] = [
     colProps: { span: 6 },
   },
 ];
+
+export const formSchema: FormSchema[] = [
+  {
+    label: '',
+    field: 'id',
+    component: 'Input',
+    show: false,
+  },
+  {
+    label: '名称',
+    field: 'name',
+    component: 'Input',
+    required: true,
+  },
+  {
+    label: '封面图',
+    field: 'coverUrl',
+    component: 'JImageUpload',
+    componentProps: {
+      fileMax: 1,
+    },
+  },
+  {
+    label: '分类',
+    field: 'type',
+    component: 'Select',
+    defaultValue: '1',
+    required: true,
+    componentProps: {
+      options: [
+        {
+          label: '仪表盘设计',
+          value: '1',
+          key: '1',
+        },
+        {
+          label: '门户设计器',
+          value: '2',
+          key: '2',
+        }
+      ]
+    }
+  },
+  {
+    label: '商品介绍',
+    field: 'content',
+    component: 'JEditor',
+  },
+];
