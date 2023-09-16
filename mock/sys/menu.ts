@@ -41,33 +41,6 @@ const dashboardRoute = {
   ],
 };
 
-const backRoute = {
-  path: 'back',
-  name: 'PermissionBackDemo',
-  meta: {
-    title: 'routes.demo.permission.back',
-  },
-
-  children: [
-    {
-      path: 'page',
-      name: 'BackAuthPage',
-      component: '/demo/permission/back/index',
-      meta: {
-        title: 'routes.demo.permission.backPage',
-      },
-    },
-    {
-      path: 'btn',
-      name: 'BackAuthBtn',
-      component: '/demo/permission/back/Btn',
-      meta: {
-        title: 'routes.demo.permission.backBtn',
-      },
-    },
-  ],
-};
-
 const authRoute = {
   path: '/permission',
   name: 'Permission',
@@ -77,7 +50,6 @@ const authRoute = {
     icon: 'carbon:user-role',
     title: 'routes.demo.permission.permission',
   },
-  children: [backRoute],
 };
 
 const levelRoute = {
