@@ -4,9 +4,9 @@
     <BasicTable @register="registerTable" :rowSelection="rowSelection">
       <!--插槽:table标题-->
       <template #tableTitle>
-        <a-button type="primary" preIcon="ant-design:plus-outlined"  @click="handleCreate"> 新增</a-button>
+        <a-button type="primary" preIcon="ant-design:plus-outlined" @click="handleCreate"> 新增</a-button>
         <a-button type="primary" preIcon="ant-design:export-outlined" @click="onExportXls"> 导出</a-button>
-        <j-upload-button type="primary" preIcon="ant-design:import-outlined" @click="onImportXls" >导入</j-upload-button>
+        <j-upload-button type="primary" preIcon="ant-design:import-outlined" @click="onImportXls">导入</j-upload-button>
         <a-button type="primary" @click="handleSyncUser" preIcon="ant-design:sync-outlined"> 同步流程</a-button>
         <a-button type="primary" @click="openModal(true, {})" preIcon="ant-design:hdd-outlined"> 回收站</a-button>
         <JThirdAppButton biz-type="user" :selected-row-keys="selectedRowKeys" syncToApp syncToLocal @sync-finally="onSyncFinally" />
@@ -14,22 +14,22 @@
           <template #overlay>
             <a-menu>
               <a-menu-item key="1" @click="batchHandleDelete">
-                <Icon icon="ant-design:delete-outlined"></Icon>
+                <Icon icon="ant-design:delete-outlined" />
                 删除
               </a-menu-item>
               <a-menu-item key="2" @click="batchFrozen(2)">
-                <Icon icon="ant-design:lock-outlined"></Icon>
+                <Icon icon="ant-design:lock-outlined" />
                 冻结
               </a-menu-item>
               <a-menu-item key="3" @click="batchFrozen(1)">
-                <Icon icon="ant-design:unlock-outlined"></Icon>
+                <Icon icon="ant-design:unlock-outlined" />
                 解冻
               </a-menu-item>
             </a-menu>
           </template>
           <a-button
             >批量操作
-            <Icon icon="mdi:chevron-down"></Icon>
+            <Icon icon="mdi:chevron-down" />
           </a-button>
         </a-dropdown>
       </template>
@@ -70,7 +70,7 @@
   import { useMessage } from '/@/hooks/web/useMessage';
   import { columns, searchFormSchema } from './user.data';
   import { listNoCareTenant, deleteUser, batchDeleteUser, getImportUrl, getExportUrl, frozenBatch, syncUser } from './user.api';
-  import {usePermission} from "/@/hooks/web/usePermission";
+  import { usePermission } from '/@/hooks/web/usePermission';
 
   const { createMessage, createConfirm } = useMessage();
   const { isDisabledAuth } = usePermission();
