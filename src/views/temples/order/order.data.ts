@@ -9,6 +9,9 @@ export const columns: BasicColumn[] = [
     dataIndex: 'order_code',
     width: 80,
     resizable: true,
+    sorter: {
+      multiple: 1,
+    },
   },
   {
     title: '商品名称',
@@ -21,7 +24,7 @@ export const columns: BasicColumn[] = [
   },
   {
     title: '封面',
-    dataIndex: 'cover',
+    dataIndex: 'image',
     width: 80,
     resizable: true,
   },
@@ -49,6 +52,24 @@ export const columns: BasicColumn[] = [
     },
   },
   {
+    title: '联系电话',
+    dataIndex: 'contact_tel',
+    width: 130,
+    resizable: true,
+    sorter: {
+      multiple: 1,
+    },
+  },
+  {
+    title: '联系人',
+    dataIndex: 'contact_man',
+    width: 130,
+    resizable: true,
+    sorter: {
+      multiple: 1,
+    },
+  },
+  {
     title: '分类',
     dataIndex: 'category_id',
     width: 130,
@@ -67,7 +88,7 @@ export const columns: BasicColumn[] = [
     width: 120,
     resizable: true,
     customRender: ({ record }) => {
-      return record.start_date + '~' + record.end_date;
+      return record.start_date ? record.start_date + '~' + record.end_date : '';
     },
   },
   {
@@ -76,8 +97,8 @@ export const columns: BasicColumn[] = [
     width: 60,
     resizable: true,
     customRender: ({ text }) => {
-      const color = text == 1 ? 'green' : 'silver';
-      return render.renderTag(text == '1' ? '已确认' : '待确认', color);
+      const color = text == 1 ? 'green' : text == 100 ? 'red' : 'yellow';
+      return render.renderTag(text == '1' ? '已确认' : text == '100' ? '已取消' : '待确认', color);
     },
     sorter: {
       multiple: 1,
@@ -102,26 +123,29 @@ export const searchFormSchema: FormSchema[] = [
   {
     field: 'category_id',
     label: '商品分类',
-    component: 'RangePicker',
+    component: 'ApiSelect',
     componentProps: {
-      valueType: 'Date',
+      api: ajaxGetDictItems,
+      params: { code: 't_product_category,id,category_name' },
+      labelField: 'value',
+      valueField: 'text',
     },
     colProps: { span: 8 },
   },
   {
-    field: 'keyword',
+    field: 'product_name',
     label: '活动关键字',
     component: 'Input',
     colProps: { span: 8 },
   },
   {
-    field: 'enabled',
-    label: '是否上架',
+    field: 'order_status',
+    label: '订单状态',
     colProps: { span: 8 },
     component: 'JDictSelectTag',
     componentProps: {
-      dictCode: 'sex',
-      placeholder: '请选择性别',
+      dictCode: 'order_status',
+      placeholder: '请选择状态',
     },
   },
 ];

@@ -45,7 +45,7 @@
     }
     if (unref(isUpdate)) {
       //获取详情
-      data.record = await getDemoById({ id: data.record.id });
+      // data.record = await getDemoById({ id: data.record.id });
       //表单赋值
       await setFieldsValue({
         ...data.record,
@@ -60,7 +60,7 @@
       let values = await validate();
       setModalProps({ confirmLoading: true });
       //提交表单
-      await saveOrUpdateDemo(values, isUpdate.value);
+      // await saveOrUpdateDemo(values, isUpdate.value);
       //关闭弹窗
       closeModal();
       //刷新列表

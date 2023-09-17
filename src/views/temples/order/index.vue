@@ -6,8 +6,8 @@
         <!-- <a-button type="primary" preIcon="ant-design:export-outlined" @click="onExportXls">导出</a-button> -->
       </template>
       <template #bodyCell="{ column, record }">
-        <template v-if="column.dataIndex == 'cover'">
-          <a-image :preview="true" :src="record.cover" style="width: 40px; height: 40px" />
+        <template v-if="column.dataIndex == 'image' && record.image">
+          <a-image :preview="true" :src="record.image" style="width: 40px; height: 40px" />
         </template>
       </template>
       <!--操作栏-->
@@ -15,17 +15,16 @@
         <TableAction :actions="getTableAction(record)" :dropDownActions="getDropDownAction(record)" />
       </template>
     </BasicTable>
-    <DemoModal @register="registerModal" @success="reload" :isDisabled="isDisabled" />
+    <OrderModal @register="registerModal" @success="reload" :isDisabled="isDisabled" />
   </div>
 </template>
 <script lang="ts" setup>
-
   import { ref, unref, reactive, toRaw, watch, computed } from 'vue';
   import { BasicTable, useTable, TableAction } from '/@/components/Table';
   import { useModal } from '/@/components/Modal';
-  import DemoModal from './OrderModal.vue';
+  import OrderModal from './OrderModal.vue';
   import { useMethods } from '/@/hooks/system/useMethods';
-  import { getList, deleteProduct, enable, disable, getImportUrl } from './order.api';
+  import { getList, cancel, confirmOrder } from './order.api';
   import { columns, searchFormSchema } from './order.data';
   import { useRoute } from 'vue-router';
   import { filterObj } from '/@/utils/common/compUtils';
@@ -53,15 +52,17 @@
     title: '订单列表',
     api: getList,
     columns,
+    size: 'small',
     afterFetch: fillData,
+    beforeFetch: initFilter,
     formConfig: {
       //labelWidth: 120,
       schemas: searchFormSchema,
       // autoAdvancedCol: 3,
     },
-    // striped: true,
+    striped: true,
     useSearchForm: true,
-    // showTableSetting: true,
+    showTableSetting: true,
     clickToRowSelect: false,
     bordered: true,
     showIndexColumn: false,
@@ -78,12 +79,22 @@
     },
   });
 
+  function initFilter(params) {
+    console.log(params);
+    console.log(route.query);
+    if (route.query && route.query.productId) {
+      params.product_id = route.query.productId;
+    }
+    // console.log(useRoute.arguments);
+    // return params; //Object.assign(params, { column: "orderNum", order: "asc" });
+  }
+
   async function fillData(list) {
     for (const item of list) {
       const res = await fetchDataWithCache('t_biz_type', item.biz_type_id);
-      item.bizTypeName = res.biz_name;
-      // const category = await fetchDataWithCache('t_product_category', item.category_id);
-      // item.category_name = category.category_name;
+      if (res) item.bizTypeName = res.biz_name;
+      const category = await fetchDataWithCache('t_product_category', item.category_id);
+      if(category) item.category_name = category.category_name;
     }
   }
   /**
@@ -111,18 +122,18 @@
     return [
       {
         label: '订单确认',
-        ifShow: record.enabled == 2,
+        ifShow: record.order_status == 0,
         popConfirm: {
           title: '是否确认该订单',
-          confirm: handleEnable.bind(null, record),
+          confirm: handleConfirm.bind(null, record),
         },
       },
       {
         label: '订单取消',
-        ifShow: record.enabled == 1,
+        ifShow: record.order_status == 0,
         popConfirm: {
           title: '是否确认取消该订单,取消以后将无法进行恢复',
-          confirm: handleDisable.bind(null, record),
+          confirm: handleCancel.bind(null, record),
         },
       },
     ];
@@ -134,17 +145,17 @@
       //   label: '编辑',
       //   onClick: handleEdit.bind(null, record),
       // },
-      {
-        label: '详情',
-        onClick: handleDetail.bind(null, record),
-      },
-      {
-        label: '删除',
-        popConfirm: {
-          title: '是否确认删除',
-          confirm: handleDelete.bind(null, record),
-        },
-      },
+      // {
+      //   label: '详情',
+      //   onClick: handleDetail.bind(null, record),
+      // },
+      // {
+      //   label: '删除',
+      //   popConfirm: {
+      //     title: '是否确认删除',
+      //     confirm: handleDelete.bind(null, record),
+      //   },
+      // },
       // {
       //   label: '复制',
       //   onClick: handleClone.bind(null, record),
@@ -171,19 +182,12 @@
     });
   }
 
-  /**
-   * 删除事件
-   */
-  async function handleDelete(record) {
-    await deleteProduct(record, reload);
+  async function handleCancel(record) {
+    await cancel(record, reload);
   }
 
-  async function handleEnable(record) {
-    await enable(record, reload);
-  }
-
-  async function handleDisable(record) {
-    await disable(record, reload);
+  async function handleConfirm(record) {
+    await confirmOrder(record, reload);
   }
 
   const customSearch = ref(false);
