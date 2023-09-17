@@ -9,8 +9,6 @@
       <a-button type="primary" preIcon="ant-design:export-outlined" @click="onExportXls">导出</a-button>
     </div>
     <a-spin :spinning="loading">
-      <a-input-search placeholder="按部门名称搜索…" style="margin-bottom: 10px" @search="onSearch" />
-      <!--组织机构树-->
       <template v-if="treeData.length > 0">
         <a-tree
           v-if="!treeReloading"
@@ -59,8 +57,7 @@
   import { useModal } from '/@/components/Modal';
   import { useMessage } from '/@/hooks/web/useMessage';
   import { useMethods } from '/@/hooks/system/useMethods';
-  import { Api, deleteBatchDepart, queryDepartTreeSync } from '../table.api';
-  import { searchByKeywords } from '/@/views/system/departUser/depart.user.api';
+  import { Api, deleteBatchDepart, queryTreeSync } from '../table.api';
   import DepartFormModal from '/@/views/system/depart/components/DepartFormModal.vue';
   import { Popconfirm } from 'ant-design-vue';
 
@@ -72,8 +69,6 @@
   const loading = ref<boolean>(false);
   // 部门树列表数据
   const treeData = ref<any[]>([]);
-  // 当前选中的项
-  const checkedKeys = ref<any[]>([]);
   // 当前展开的项
   const expandedKeys = ref<any[]>([]);
   // 当前选中的项
@@ -86,8 +81,6 @@
   const currentDepart = ref<any>(null);
   // 控制确认删除提示框是否显示
   const visibleTreeKey = ref<any>(null);
-  // 搜索关键字
-  const searchKeyword = ref('');
 
   // 注册 modal
   const [registerModal, { openModal }] = useModal();
@@ -97,7 +90,7 @@
     try {
       loading.value = true;
       treeData.value = [];
-      const result = await queryDepartTreeSync();
+      const result = await queryTreeSync();
       if (Array.isArray(result)) {
         treeData.value = result;
       }
@@ -125,7 +118,7 @@
   // 加载子级部门信息
   async function loadChildrenTreeData(treeNode) {
     try {
-      const result = await queryDepartTreeSync({
+      const result = await queryTreeSync({
         pid: treeNode.dataRef.id,
       });
       if (result.length == 0) {
@@ -202,34 +195,6 @@
     openModal(true, { isUpdate: false, isChild: true, record });
   }
 
-  // 搜索事件
-  async function onSearch(value: string) {
-    if (value) {
-      try {
-        loading.value = true;
-        treeData.value = [];
-        let result = await searchByKeywords({ keyWord: value });
-        if (Array.isArray(result)) {
-          treeData.value = result;
-        }
-        autoExpandParentNode();
-      } finally {
-        loading.value = false;
-      }
-    } else {
-      loadRootTreeData();
-    }
-    searchKeyword.value = value;
-  }
-
-  // 树复选框选择事件
-  function onCheck(e) {
-    if (Array.isArray(e)) {
-      checkedKeys.value = e;
-    } else {
-      checkedKeys.value = e.checked;
-    }
-  }
 
   // 树选择事件
   function onSelect(selKeys, event) {
@@ -268,14 +233,6 @@
     }
   }
 
-  // 批量删除部门
-  async function onDeleteBatch() {
-    try {
-      await doDeleteDepart(checkedKeys);
-      checkedKeys.value = [];
-    } finally {
-    }
-  }
 
   function onVisibleChange(visible) {
     if (!visible) {

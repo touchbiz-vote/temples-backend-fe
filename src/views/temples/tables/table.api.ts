@@ -5,7 +5,7 @@ import { useMessage } from '/@/hooks/web/useMessage';
 const { createConfirm } = useMessage();
 
 export enum Api {
-  queryDepartTreeSync = '/sys/sysDepart/queryDepartTreeSync',
+  queryTreeSync = '/api/temples/location/queryTreeSync',
   save = '/sys/sysDepart/add',
   edit = '/sys/sysDepart/edit',
   delete = '/sys/sysDepart/delete',
@@ -29,7 +29,7 @@ export enum Api {
 /**
  * 获取部门树列表
  */
-export const queryDepartTreeSync = (params?) => defHttp.get({ url: Api.queryDepartTreeSync, params });
+export const queryTreeSync = (params?) => defHttp.get({ url: Api.queryTreeSync, params });
 
 /**
  * 保存或者更新部门角色
