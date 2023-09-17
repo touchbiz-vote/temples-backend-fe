@@ -135,7 +135,7 @@ export const searchFormSchema: FormSchema[] = [
   {
     field: 'product_name',
     label: '活动关键字',
-    component: 'Input',
+    component: 'JInput',
     colProps: { span: 8 },
   },
   {
