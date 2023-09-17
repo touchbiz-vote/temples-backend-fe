@@ -115,7 +115,6 @@ export const searchFormSchema: FormSchema[] = [
     field: 'biz_type_id',
     label: '业务类型',
     component: 'ApiSelect',
-    labelWidth: '120px',
     componentProps: {
       api: ajaxGetDictItems,
       params: { code: 't_biz_type,id,biz_name' },
@@ -137,9 +136,9 @@ export const searchFormSchema: FormSchema[] = [
     colProps: { span: 8 },
   },
   {
-    field: 'keyword',
+    field: 'name',
     label: '活动关键字',
-    component: 'Input',
+    component: 'JInput',
     colProps: { span: 8 },
   },
   {

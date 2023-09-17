@@ -1,6 +1,7 @@
 import { BasicColumn } from '/@/components/Table';
 import { FormSchema } from '/@/components/Table';
 import { render } from '/@/utils/common/renderUtils';
+import { ajaxGetDictItems } from './order.api';
 
 export const columns: BasicColumn[] = [
   {
@@ -11,14 +12,11 @@ export const columns: BasicColumn[] = [
   },
   {
     title: '商品名称',
-    dataIndex: 'name',
+    dataIndex: 'product_name',
     width: 140,
     resizable: true,
     sorter: {
       multiple: 1,
-    },
-    customRender: ({ record }) => {
-      return record.name + (record.sub_title ? '<br/>' + record.sub_title : '');
     },
   },
   {
@@ -30,9 +28,12 @@ export const columns: BasicColumn[] = [
 
   {
     title: '售价(元)',
-    dataIndex: 'sale_price',
+    dataIndex: 'unit_price',
     width: 80,
     resizable: true,
+    customRender: ({ record }) => {
+      return record.unit_price / 100;
+    },
   },
   {
     title: '业务类型',
@@ -71,12 +72,12 @@ export const columns: BasicColumn[] = [
   },
   {
     title: '状态',
-    dataIndex: 'enabled',
+    dataIndex: 'order_status',
     width: 60,
     resizable: true,
     customRender: ({ text }) => {
       const color = text == 1 ? 'green' : 'silver';
-      return render.renderTag(text == '1' ? '上架' : '下架', color);
+      return render.renderTag(text == '1' ? '已确认' : '待确认', color);
     },
     sorter: {
       multiple: 1,
@@ -88,7 +89,14 @@ export const searchFormSchema: FormSchema[] = [
   {
     field: 'biz_type_id',
     label: '业务类型',
-    component: 'JDictSelectTag',
+    component: 'ApiSelect',
+    componentProps: {
+      api: ajaxGetDictItems,
+      params: { code: 't_biz_type,id,biz_name' },
+      code: 't_biz_type,id,biz_name',
+      labelField: 'value',
+      valueField: 'text',
+    },
     colProps: { span: 8 },
   },
   {

@@ -195,9 +195,9 @@ export interface FormSchema {
 
   // 这个属性自定义的 用于自定义的业务 比如在表单打开的时候修改表单的禁用状态，但是又不能重写componentProps，因为他的内容太多了，所以使用dynamicDisabled和buss实现
   buss?: any;
-  
+
   //label字数控制（label宽度）
-  labelLength?: number
+  labelLength?: number;
 }
 export interface HelpComponentProps {
   maxWidth: string;

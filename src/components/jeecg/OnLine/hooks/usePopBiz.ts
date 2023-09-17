@@ -88,7 +88,7 @@ export function usePopBiz(ob, tableRef?) {
    */
   const pagination = reactive({
     current: 1,
-    pageSize: 50,
+    pageSize: 10,
     pageSizeOptions: ['10', '20', '30', '50', '100', '200'],
     // showTotal: (total, range) => {
     //     return range[0] + '-' + range[1] + ' 共' + total + '条'

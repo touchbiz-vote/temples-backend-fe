@@ -18,11 +18,11 @@ export default {
       totalField: 'total',
     },
     // 可选的分页选项
-    pageSizeOptions: ['10', '50', '80', '100'],
+    pageSizeOptions: ['10', '20', '50', '100', '200'],
     // 表格默认尺寸
-    defaultSize: 'middle',
+    defaultSize: 'small',
     //默认每页显示多少条
-    defaultPageSize: 10,
+    defaultPageSize: 20,
     // 默认排序方法
     defaultSortFn: (sortInfo: SorterResult) => {
       //update-begin-author:taoyan date:2022-10-21 for: VUEN-2199【表单设计器】多字段排序

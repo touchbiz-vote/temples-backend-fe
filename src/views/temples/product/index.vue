@@ -4,7 +4,6 @@
     <BasicTable @register="registerTable" :rowSelection="rowSelection">
       <template #tableTitle>
         <a-button preIcon="ant-design:plus-outlined" type="primary" @click="handleAdd">新增</a-button>
-      <!-- <a-button type="primary" preIcon="ant-design:export-outlined" @click="onExportXls">导出</a-button> -->
         <j-upload-button type="primary" preIcon="ant-design:import-outlined" @click="handleImport">导入</j-upload-button>
         <!-- <a-dropdown v-if="selectedRowKeys.length > 0">
           <template #overlay>
@@ -22,7 +21,7 @@
         </a-dropdown> -->
       </template>
       <template #bodyCell="{ column, record }">
-        <template v-if="column.dataIndex == 'cover'">
+        <template v-if="column.dataIndex == 'cover' && record.cover">
           <a-image :preview="true" :src="record.cover" style="width: 40px; height: 40px" />
         </template>
       </template>
@@ -31,7 +30,7 @@
         <TableAction :actions="getTableAction(record)" :dropDownActions="getDropDownAction(record)" />
       </template>
     </BasicTable>
-    <DemoModal @register="registerModal" @success="reload" :isDisabled="isDisabled" />
+    <ProductModal @register="registerModal" @success="reload" :isDisabled="isDisabled" />
     <JImportModal @register="registerModalJimport" :url="getImportUrl" online />
   </div>
 </template>
@@ -39,9 +38,8 @@
   import { ref, unref, reactive, toRaw, watch, computed } from 'vue';
   import { BasicTable, useTable, TableAction } from '/@/components/Table';
   import { useModal } from '/@/components/Modal';
-  import DemoModal from './ProductModal.vue';
+  import ProductModal from './ProductModal.vue';
   import JImportModal from '/@/components/Form/src/jeecg/components/JImportModal.vue';
-  import { useMethods } from '/@/hooks/system/useMethods';
   import { getList, deleteProduct, enable, disable, getImportUrl } from './product.api';
   import { columns, searchFormSchema } from './product.data';
   import { useRoute } from 'vue-router';
@@ -50,7 +48,6 @@
   const checkedKeys = ref<Array<string | number>>([]);
   const [registerModal, { openModal }] = useModal();
   const [registerModalJimport, { openModal: openModalJimport }] = useModal();
-  const { handleExportXls, handleImportXls } = useMethods();
   const isDisabled = ref(false);
 
   const tableId = '768afa9fde41486cb24d852ea96893d8';
@@ -72,36 +69,33 @@
     api: getList,
     columns,
     afterFetch: fillData,
+    size: 'small',
     formConfig: {
       //labelWidth: 120,
       schemas: searchFormSchema,
       // autoAdvancedCol: 3,
     },
-    // striped: true,
+    striped: true,
     useSearchForm: true,
-    // showTableSetting: true,
-    clickToRowSelect: false,
+    showTableSetting: true,
     bordered: true,
     showIndexColumn: false,
     tableSetting: { fullScreen: true },
-    canResize: false,
     rowKey: 'id',
-    pagination: { pageSize: 20 },
     actionColumn: {
       width: 240,
       title: '操作',
       dataIndex: 'action',
       slots: { customRender: 'action' },
-      fixed: undefined,
     },
   });
 
   async function fillData(list) {
     for (const item of list) {
       const res = await fetchDataWithCache('t_biz_type', item.biz_type_id);
-      item.bizTypeName = res.biz_name;
+      if (res) item.bizTypeName = res.biz_name;
       const category = await fetchDataWithCache('t_product_category', item.category_id);
-      item.category_name = category.category_name;
+      if (category) item.category_name = category.category_name;
     }
   }
   /**

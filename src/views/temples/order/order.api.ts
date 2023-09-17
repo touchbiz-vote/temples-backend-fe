@@ -15,6 +15,13 @@ enum Api {
   exportXls = '/test/jeecgDemo/exportXls',
   importExcel = '/test/jeecgDemo/importExcel',
 }
+
+/**
+ * 根据code获取字典数值
+ * @param params
+ */
+export const ajaxGetDictItems = (params) => defHttp.get({ url: `/sys/dict/getDictItems/${params.code}` });
+
 /**
  * 导出api
  */

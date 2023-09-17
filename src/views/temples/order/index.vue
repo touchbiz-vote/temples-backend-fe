@@ -3,9 +3,7 @@
     <!--自定义查询区域-->
     <BasicTable @register="registerTable" :rowSelection="rowSelection">
       <template #tableTitle>
-       
-      <!-- <a-button type="primary" preIcon="ant-design:export-outlined" @click="onExportXls">导出</a-button> -->
-    
+        <!-- <a-button type="primary" preIcon="ant-design:export-outlined" @click="onExportXls">导出</a-button> -->
       </template>
       <template #bodyCell="{ column, record }">
         <template v-if="column.dataIndex == 'cover'">
@@ -18,10 +16,10 @@
       </template>
     </BasicTable>
     <DemoModal @register="registerModal" @success="reload" :isDisabled="isDisabled" />
-  
   </div>
 </template>
 <script lang="ts" setup>
+
   import { ref, unref, reactive, toRaw, watch, computed } from 'vue';
   import { BasicTable, useTable, TableAction } from '/@/components/Table';
   import { useModal } from '/@/components/Modal';
@@ -84,8 +82,8 @@
     for (const item of list) {
       const res = await fetchDataWithCache('t_biz_type', item.biz_type_id);
       item.bizTypeName = res.biz_name;
-      const category = await fetchDataWithCache('t_product_category', item.category_id);
-      item.category_name = category.category_name;
+      // const category = await fetchDataWithCache('t_product_category', item.category_id);
+      // item.category_name = category.category_name;
     }
   }
   /**
@@ -97,7 +95,6 @@
     selectedRowKeys: checkedKeys,
     onChange: onSelectChange,
   };
-
 
   const exportParams = computed(() => {
     let paramsForm = {};
@@ -194,4 +191,3 @@
     setProps({ useSearchForm: !unref(customSearch) });
   });
 </script>
-

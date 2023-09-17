@@ -50,7 +50,7 @@
   import { Table } from 'ant-design-vue';
   import { BasicForm, useForm } from '/@/components/Form/index';
   import { PageWrapperFixedHeightKey } from '/@/components/Page/injectionKey';
-  import CustomSelectHeader from './components/CustomSelectHeader.vue'
+  import CustomSelectHeader from './components/CustomSelectHeader.vue';
   import expandIcon from './components/ExpandIcon';
   import HeaderCell from './components/HeaderCell.vue';
   import { InnerHandlers } from './types/table';
@@ -262,7 +262,7 @@
 
         // update-begin--author:sunjianlei---date:220230630---for：【QQYUN-5571】自封装选择列，解决数据行选择卡顿问题
         // 自定义选择列，需要去掉原生的
-        delete propsData.rowSelection
+        delete propsData.rowSelection;
         // update-end--author:sunjianlei---date:220230630---for：【QQYUN-5571】自封装选择列，解决数据行选择卡顿问题
 
         propsData = omit(propsData, ['class', 'onChange']);
@@ -369,6 +369,7 @@
 
       emit('register', tableAction, formActions);
 
+      
       return {
         tableElRef,
         getBindValues,

@@ -3,7 +3,7 @@
     <BasicForm @register="registerForm" :disabled="isDisabled" />
   </BasicModal>
 </template>
-<script lang="ts" setup>
+<script lang="ts" setup name="ProductModal">
   import { ref, computed, unref, defineProps } from 'vue';
   import { BasicModal, useModalInner } from '/@/components/Modal';
   import { BasicForm, useForm } from '/@/components/Form/index';
