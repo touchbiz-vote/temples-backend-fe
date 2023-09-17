@@ -5,7 +5,8 @@
       <template #tableTitle>
         <a-button preIcon="ant-design:plus-outlined" type="primary" @click="handleAdd">新增</a-button>
         <a-button type="primary" preIcon="ant-design:import-outlined" @click="handleImport">导入</a-button>
-        <a-button type="primary" preIcon="ant-design:export-outlined" @click="onExportXls"> 导出</a-button>
+        <a-button v-if="false" type="primary" preIcon="ant-design:export-outlined" @click="onExportXls"> 导出</a-button>
+        <a type="primary" preIcon="ant-design:export-outlined" href="https://jiangyan-static.oss-cn-beijing.aliyuncs.com/product_import_template.xlsx">下载导入文件模版</a>
         <!-- <a-dropdown v-if="selectedRowKeys.length > 0">
           <template #overlay>
             <a-menu>
@@ -48,7 +49,6 @@
   const { handleExportXls, handleImportXls } = useMethods();
 
   import { fetchDataWithCache } from '/@/utils/dict';
-  const checkedKeys = ref<Array<string | number>>([]);
   const [registerModal, { openModal }] = useModal();
   const [registerModalJimport, { openModal: openModalJimport }] = useModal();
   const isDisabled = ref(false);
