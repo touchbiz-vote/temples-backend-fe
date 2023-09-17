@@ -118,7 +118,7 @@ export const searchFormSchema: FormSchema[] = [
       labelField: 'value',
       valueField: 'text',
     },
-    colProps: { span: 8 },
+    colProps: { span: 4 },
   },
   {
     field: 'category_id',
@@ -130,18 +130,18 @@ export const searchFormSchema: FormSchema[] = [
       labelField: 'value',
       valueField: 'text',
     },
-    colProps: { span: 8 },
+    colProps: { span: 4 },
   },
   {
     field: 'product_name',
     label: '活动关键字',
     component: 'JInput',
-    colProps: { span: 8 },
+    colProps: { span: 4 },
   },
   {
     field: 'order_status',
     label: '订单状态',
-    colProps: { span: 8 },
+    colProps: { span: 3 },
     component: 'JDictSelectTag',
     componentProps: {
       dictCode: 'order_status',

@@ -71,7 +71,8 @@
     afterFetch: fillData,
     size: 'small',
     formConfig: {
-      //labelWidth: 120,
+      showAdvancedButton: false,
+      labelWidth: 80,
       schemas: searchFormSchema,
       // autoAdvancedCol: 3,
     },
