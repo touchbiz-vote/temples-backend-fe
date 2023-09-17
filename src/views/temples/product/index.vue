@@ -46,7 +46,7 @@
   import { columns, searchFormSchema } from './product.data';
   import { useMethods } from '/@/hooks/system/useMethods';
   //导入导出方法
-  const { handleExportXls, handleImportXls } = useMethods();
+  const { handleExportXls } = useMethods();
 
   import { fetchDataWithCache } from '/@/utils/dict';
   const [registerModal, { openModal }] = useModal();

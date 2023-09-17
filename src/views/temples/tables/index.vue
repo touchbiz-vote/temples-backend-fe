@@ -8,7 +8,7 @@
         <a-tabs v-show="departData != null" defaultActiveKey="base-info">
           <a-tab-pane tab="牌位列表" key="base-info" forceRender style="position: relative">
             <div style="padding: 20px">
-              <DepartFormTab :data="departData" :rootTreeData="rootTreeData" @success="onSuccess" />
+              <TableFormTab :data="departData" :rootTreeData="rootTreeData" @success="onSuccess" />
             </div>
           </a-tab-pane>
         </a-tabs>
@@ -24,7 +24,7 @@
   import { provide, ref } from 'vue';
   import { useDesign } from '/@/hooks/web/useDesign';
   import LocationLeftTree from './components/LocationLeftTree.vue';
-  import DepartFormTab from './components/DepartFormTab.vue';
+  import TableFormTab from './components/TableFormTab.vue';
 
   const { prefixCls } = useDesign('depart-manage');
   provide('prefixCls', prefixCls);

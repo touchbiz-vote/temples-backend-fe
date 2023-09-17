@@ -27,7 +27,6 @@
                 ok-text="确定"
                 cancel-text="取消"
                 placement="rightTop"
-                @confirm="onDelete(dataRef)"
                 @visibleChange="onVisibleChange"
               >
                 <span>{{ title }}</span>

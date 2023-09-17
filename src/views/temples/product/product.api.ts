@@ -10,8 +10,6 @@ enum Api {
   enabled = '/api/temples/product/enabled/',
   disable = '/api/temples/product/disable/',
   delete = '/api/temples/product/',
-  deleteBatch = '/test/jeecgDemo/deleteBatch',
-  exportXls = '/test/jeecgDemo/exportXls',
   importExcel = '/online/cgform/api/importXls/',
 }
 
@@ -21,10 +19,6 @@ enum Api {
  */
 export const ajaxGetDictItems = (params) => defHttp.get({ url: `/sys/dict/getDictItems/${params.code}` });
 
-/**
- * 导出api
- */
-export const getExportUrl = Api.exportXls;
 /**
  * 导入api
  */
