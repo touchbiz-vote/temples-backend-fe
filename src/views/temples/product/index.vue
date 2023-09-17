@@ -33,7 +33,7 @@
       </template>
     </BasicTable>
     <ProductModal @register="registerModal" @success="reload" :isDisabled="isDisabled" />
-    <JImportModal @register="registerModalJimport" :url="getImportUrl" online />
+    <JImportModal @register="registerModalJimport" :url="getImportUrl" />
   </div>
 </template>
 <script lang="ts" setup>
