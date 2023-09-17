@@ -13,8 +13,8 @@
 <script lang="ts" setup>
   import { watch, computed, inject, ref, unref, onMounted } from 'vue';
   import { BasicForm, useForm } from '/@/components/Form/index';
-  import { saveOrUpdateDepart } from '../table.api';
-  import { useBasicFormSchema, orgCategoryOptions } from '../depart.data';
+  import {  } from '../table.api';
+  import { useBasicFormSchema } from '../depart.data';
   import { useDesign } from '/@/hooks/web/useDesign';
 
   const { prefixCls } = useDesign('j-depart-form-content');
@@ -34,14 +34,6 @@
   const [registerForm, { resetFields, setFieldsValue, validate, updateSchema }] = useForm({
     schemas: useBasicFormSchema().basicFormSchema,
     showActionButtonGroup: false,
-  });
-
-  const categoryOptions = computed(() => {
-    if (!!props?.data?.parentId) {
-      return orgCategoryOptions.child;
-    } else {
-      return orgCategoryOptions.root;
-    }
   });
 
   onMounted(() => {
@@ -77,19 +69,6 @@
       },
       { deep: true, immediate: true }
     );
-    // 监听并更改 orgCategory options
-    watch(
-      categoryOptions,
-      async () => {
-        updateSchema([
-          {
-            field: 'orgCategory',
-            componentProps: { options: categoryOptions.value },
-          },
-        ]);
-      },
-      { immediate: true }
-    );
   });
 
   // 重置表单
@@ -105,7 +84,7 @@
       let values = await validate();
       values = Object.assign({}, model.value, values);
       //提交表单
-      await saveOrUpdateDepart(values, isUpdate.value);
+      // await saveOrUpdateDepart(values, isUpdate.value);
       //刷新列表
       emit('success');
       Object.assign(model.value, values);

@@ -1,12 +1,12 @@
 <template>
   <a-card :bordered="false" style="height: 100%">
     <div class="j-table-operator" style="width: 100%">
-      <a-button type="primary" preIcon="ant-design:plus-outlined" @click="onAddDepart">新增</a-button>
+      <!-- <a-button type="primary" preIcon="ant-design:plus-outlined" @click="onAddDepart">新增</a-button>
       <a-button type="primary" preIcon="ant-design:plus-outlined" @click="onAddChildDepart()">添加下级</a-button>
       <a-upload name="file" :showUploadList="false" :customRequest="onImportXls">
         <a-button type="primary" preIcon="ant-design:import-outlined">导入</a-button>
       </a-upload>
-      <a-button type="primary" preIcon="ant-design:export-outlined" @click="onExportXls">导出</a-button>
+      <a-button type="primary" preIcon="ant-design:export-outlined" @click="onExportXls">导出</a-button> -->
     </div>
     <a-spin :spinning="loading">
       <template v-if="treeData.length > 0">
@@ -15,7 +15,6 @@
           :clickRowToExpand="false"
           :treeData="treeData"
           :selectedKeys="selectedKeys"
-          :checkStrictly="checkStrictly"
           :load-data="loadChildrenTreeData"
           v-model:expandedKeys="expandedKeys"
           @select="onSelect"
@@ -34,38 +33,22 @@
                 <span>{{ title }}</span>
               </Popconfirm>
 
-              <template #overlay>
-                <a-menu @click="">
-                  <a-menu-item key="1" @click="onAddChildDepart(dataRef)">添加子级</a-menu-item>
-                  <a-menu-item key="2" @click="visibleTreeKey = treeKey">
-                    <span style="color: red">删除</span>
-                  </a-menu-item>
-                </a-menu>
-              </template>
             </a-dropdown>
           </template>
         </a-tree>
       </template>
       <a-empty v-else description="暂无数据" />
     </a-spin>
-    <DepartFormModal :rootTreeData="treeData" @register="registerModal" @success="loadRootTreeData" />
   </a-card>
 </template>
 
 <script lang="ts" setup>
   import { inject, nextTick, ref, unref, defineExpose } from 'vue';
-  import { useModal } from '/@/components/Modal';
-  import { useMessage } from '/@/hooks/web/useMessage';
-  import { useMethods } from '/@/hooks/system/useMethods';
-  import { Api, deleteBatchDepart, queryTreeSync } from '../table.api';
-  import DepartFormModal from '/@/views/system/depart/components/DepartFormModal.vue';
+  import { queryTreeSync } from '../table.api';
   import { Popconfirm } from 'ant-design-vue';
 
   const prefixCls = inject('prefixCls');
   const emit = defineEmits(['select', 'rootTreeData']);
-  const { createMessage } = useMessage();
-  const { handleImportXls, handleExportXls } = useMethods();
-
   const loading = ref<boolean>(false);
   // 部门树列表数据
   const treeData = ref<any[]>([]);
@@ -75,15 +58,10 @@
   const selectedKeys = ref<any[]>([]);
   // 树组件重新加载
   const treeReloading = ref<boolean>(false);
-  // 树父子是否关联
-  const checkStrictly = ref<boolean>(true);
   // 当前选中的部门
   const currentDepart = ref<any>(null);
   // 控制确认删除提示框是否显示
   const visibleTreeKey = ref<any>(null);
-
-  // 注册 modal
-  const [registerModal, { openModal }] = useModal();
 
   // 加载顶级部门信息
   async function loadRootTreeData() {
@@ -180,22 +158,6 @@
     }
   }
 
-  // 添加一级部门
-  function onAddDepart() {
-    openModal(true, { isUpdate: false, isChild: false });
-  }
-
-  // 添加子级部门
-  function onAddChildDepart(data = currentDepart.value) {
-    if (data == null) {
-      createMessage.warning('请先选择一个部门');
-      return;
-    }
-    const record = { parentId: data.id };
-    openModal(true, { isUpdate: false, isChild: true, record });
-  }
-
-
   // 树选择事件
   function onSelect(selKeys, event) {
     console.log('select: ', selKeys, event);
@@ -207,47 +169,10 @@
     }
   }
 
-  /**
-   * 根据 ids 删除部门
-   * @param idListRef array
-   * @param confirm 是否显示确认提示框
-   */
-  async function doDeleteDepart(idListRef, confirm = true) {
-    const idList = unref(idListRef);
-    if (idList.length > 0) {
-      try {
-        loading.value = true;
-        await deleteBatchDepart({ ids: idList.join(',') }, confirm);
-        await loadRootTreeData();
-      } finally {
-        loading.value = false;
-      }
-    }
-  }
-
-  // 删除单个部门
-  async function onDelete(data) {
-    if (data) {
-      onVisibleChange(false);
-      doDeleteDepart([data.id], false);
-    }
-  }
-
-
   function onVisibleChange(visible) {
     if (!visible) {
       visibleTreeKey.value = null;
     }
-  }
-
-  function onImportXls(d) {
-    handleImportXls(d, Api.importExcelUrl, () => {
-      loadRootTreeData();
-    });
-  }
-
-  function onExportXls() {
-    handleExportXls('部门信息', Api.exportXlsUrl);
   }
 
   defineExpose({

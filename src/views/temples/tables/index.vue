@@ -1,12 +1,12 @@
 <template>
   <a-row :class="['p-4', `${prefixCls}--box`]" type="flex" :gutter="10">
-    <a-col :xl="12" :lg="24" :md="24" style="margin-bottom: 10px">
-      <DepartLeftTree ref="leftTree" @select="onTreeSelect" @rootTreeData="onRootTreeData" />
+    <a-col :xl="8" :lg="24" :md="24" style="margin-bottom: 10px">
+      <LocationLeftTree ref="leftTree" @select="onTreeSelect" @rootTreeData="onRootTreeData" />
     </a-col>
-    <a-col :xl="12" :lg="24" :md="24" style="margin-bottom: 10px">
+    <a-col :xl="16" :lg="24" :md="24" style="margin-bottom: 10px">
       <div style="height: 100%;" :class="[`${prefixCls}`]">
         <a-tabs v-show="departData != null" defaultActiveKey="base-info">
-          <a-tab-pane tab="基本信息" key="base-info" forceRender style="position: relative">
+          <a-tab-pane tab="牌位列表" key="base-info" forceRender style="position: relative">
             <div style="padding: 20px">
               <DepartFormTab :data="departData" :rootTreeData="rootTreeData" @success="onSuccess" />
             </div>
@@ -23,7 +23,7 @@
 <script lang="ts" setup name="system-depart">
   import { provide, ref } from 'vue';
   import { useDesign } from '/@/hooks/web/useDesign';
-  import DepartLeftTree from './components/LocationLeftTree.vue';
+  import LocationLeftTree from './components/LocationLeftTree.vue';
   import DepartFormTab from './components/DepartFormTab.vue';
 
   const { prefixCls } = useDesign('depart-manage');

@@ -133,7 +133,7 @@ export const searchFormSchema: FormSchema[] = [
       labelField: 'value',
       valueField: 'text',
     },
-    colProps: { span: 3 },
+    colProps: { span: 4 },
   },
   {
     field: 'category_id',
@@ -145,7 +145,7 @@ export const searchFormSchema: FormSchema[] = [
       labelField: 'value',
       valueField: 'text',
     },
-    colProps: { span: 3 },
+    colProps: { span: 4 },
   },
   {
     field: 'name',
@@ -156,7 +156,7 @@ export const searchFormSchema: FormSchema[] = [
   {
     field: 'enabled',
     label: '是否上架',
-    colProps: { span: 3 },
+    colProps: { span: 4 },
     component: 'Select',
     componentProps: {
       options: [

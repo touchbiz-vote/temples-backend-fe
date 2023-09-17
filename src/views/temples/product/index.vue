@@ -1,10 +1,11 @@
 <template>
   <div>
     <!--自定义查询区域-->
-    <BasicTable @register="registerTable" :rowSelection="rowSelection">
+    <BasicTable @register="registerTable">
       <template #tableTitle>
         <a-button preIcon="ant-design:plus-outlined" type="primary" @click="handleAdd">新增</a-button>
         <a-button type="primary" preIcon="ant-design:import-outlined" @click="handleImport">导入</a-button>
+        <a-button type="primary" preIcon="ant-design:export-outlined" @click="onExportXls"> 导出</a-button>
         <!-- <a-dropdown v-if="selectedRowKeys.length > 0">
           <template #overlay>
             <a-menu>
@@ -42,7 +43,10 @@
   import JImportModal from '/@/components/Form/src/jeecg/components/JImportModal.vue';
   import { getList, deleteProduct, enable, disable, getImportUrl } from './product.api';
   import { columns, searchFormSchema } from './product.data';
-  import { filterObj } from '/@/utils/common/compUtils';
+  import { useMethods } from '/@/hooks/system/useMethods';
+  //导入导出方法
+  const { handleExportXls, handleImportXls } = useMethods();
+
   import { fetchDataWithCache } from '/@/utils/dict';
   const checkedKeys = ref<Array<string | number>>([]);
   const [registerModal, { openModal }] = useModal();
@@ -51,7 +55,8 @@
 
   const tableId = '768afa9fde41486cb24d852ea96893d8';
   const url = {
-    importExcel: '/online/cgform/api/importXls//',
+    importExcel: '/online/cgform/api/importXls/',
+    exportExcel: '/online/cgform/api/exportXlsOld/',
     list: '/online/cgform/api/getData/',
     update: '/online/cgform/api/form/',
     columns: '/online/cgform/api/getColumns/',
@@ -60,7 +65,7 @@
   url.update = url.update + tableId;
   url.columns = url.columns + tableId;
   url.importExcel = url.importExcel + tableId;
-
+  url.exportExcel = url.exportExcel + tableId;
   const [registerTable, { reload, setProps }] = useTable({
     title: '商品列表',
     api: getList,
@@ -96,27 +101,11 @@
       if (category) item.category_name = category.category_name;
     }
   }
-  /**
-   * 选择列配置
-   */
-  const rowSelection = {
-    type: 'checkbox',
-    columnWidth: 40,
-    selectedRowKeys: checkedKeys,
-    onChange: onSelectChange,
-  };
 
   function handleImport() {
     openModalJimport(true);
   }
 
-  const exportParams = computed(() => {
-    let paramsForm = {};
-    if (checkedKeys.value && checkedKeys.value.length > 0) {
-      paramsForm['selections'] = checkedKeys.value.join(',');
-    }
-    return filterObj(paramsForm);
-  });
   /**
    * 操作列定义
    * @param record
@@ -166,12 +155,8 @@
     ];
   }
 
-  /**
-   * 选择事件
-   */
-  function onSelectChange(selectedRowKeys: (string | number)[]) {
-    console.log('checkedKeys------>', checkedKeys);
-    checkedKeys.value = selectedRowKeys;
+  function onExportXls() {
+    handleExportXls('产品信息', url.exportExcel);
   }
 
   /**
