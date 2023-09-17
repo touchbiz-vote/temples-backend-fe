@@ -104,6 +104,12 @@ export const columns: BasicColumn[] = [
       multiple: 1,
     },
   },
+  {
+    title: '创建时间',
+    dataIndex: 'gmt_create',
+    width: 120,
+    resizable: true,
+  },
 ];
 
 export const searchFormSchema: FormSchema[] = [

@@ -12,7 +12,7 @@ enum Api {
   delete = '/api/temples/product/',
   deleteBatch = '/test/jeecgDemo/deleteBatch',
   exportXls = '/test/jeecgDemo/exportXls',
-  importExcel = '/test/jeecgDemo/importExcel',
+  importExcel = '/online/cgform/api/importXls/',
 }
 
 /**
@@ -28,7 +28,7 @@ export const getExportUrl = Api.exportXls;
 /**
  * 导入api
  */
-export const getImportUrl = Api.importExcel;
+export const getImportUrl = Api.importExcel + tableId;
 /**
  * 查询示例列表
  * @param params

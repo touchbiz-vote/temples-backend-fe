@@ -4,7 +4,7 @@
     <BasicTable @register="registerTable" :rowSelection="rowSelection">
       <template #tableTitle>
         <a-button preIcon="ant-design:plus-outlined" type="primary" @click="handleAdd">新增</a-button>
-        <j-upload-button type="primary" preIcon="ant-design:import-outlined" @click="handleImport">导入</j-upload-button>
+        <a-button type="primary" preIcon="ant-design:import-outlined" @click="handleImport">导入</a-button>
         <!-- <a-dropdown v-if="selectedRowKeys.length > 0">
           <template #overlay>
             <a-menu>
@@ -42,7 +42,6 @@
   import JImportModal from '/@/components/Form/src/jeecg/components/JImportModal.vue';
   import { getList, deleteProduct, enable, disable, getImportUrl } from './product.api';
   import { columns, searchFormSchema } from './product.data';
-  import { useRoute } from 'vue-router';
   import { filterObj } from '/@/utils/common/compUtils';
   import { fetchDataWithCache } from '/@/utils/dict';
   const checkedKeys = ref<Array<string | number>>([]);
@@ -52,17 +51,15 @@
 
   const tableId = '768afa9fde41486cb24d852ea96893d8';
   const url = {
-    importExcel: 'api/biz/activity/case/import/',
+    importExcel: '/online/cgform/api/importXls//',
     list: '/online/cgform/api/getData/',
     update: '/online/cgform/api/form/',
     columns: '/online/cgform/api/getColumns/',
-    exportXlsUrl: 'api/biz/activity/case/export/',
   };
 
   url.update = url.update + tableId;
   url.columns = url.columns + tableId;
-  const route = useRoute();
-  url.importExcel = url.importExcel + route.query.id;
+  url.importExcel = url.importExcel + tableId;
 
   const [registerTable, { reload, setProps }] = useTable({
     title: '商品列表',

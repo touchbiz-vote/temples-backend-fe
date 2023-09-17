@@ -70,7 +70,7 @@
       const uploadAction = ref('');
       const foreignKeys = ref('');
       //校验状态
-      const validateStatus = ref(0);
+      const validateStatus = ref(1);
       const getBindValue = Object.assign({}, unref(props), unref(attrs));
       //监听url
       watchEffect(() => {

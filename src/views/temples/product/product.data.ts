@@ -108,6 +108,18 @@ export const columns: BasicColumn[] = [
       multiple: 1,
     },
   },
+  {
+    title: '创建时间',
+    dataIndex: 'create_time',
+    width: 120,
+    resizable: true,
+  },
+  {
+    title: '更新时间',
+    dataIndex: 'update_time',
+    width: 120,
+    resizable: true,
+  },
 ];
 
 export const searchFormSchema: FormSchema[] = [
