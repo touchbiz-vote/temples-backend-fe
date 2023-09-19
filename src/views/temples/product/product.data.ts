@@ -4,6 +4,7 @@ import { render } from '/@/utils/common/renderUtils';
 import { rules } from '/@/utils/helper/validator';
 
 import { ajaxGetDictItems } from './product.api';
+import { UploadTypeEnum } from '/@/components/Form/src/jeecg/components/JUpload/upload.data';
 
 export const columns: BasicColumn[] = [
   {
@@ -133,7 +134,7 @@ export const searchFormSchema: FormSchema[] = [
       labelField: 'value',
       valueField: 'text',
     },
-    colProps: { span: 4 },
+    colProps: { style: 'width:220px' },
   },
   {
     field: 'category_id',
@@ -145,18 +146,18 @@ export const searchFormSchema: FormSchema[] = [
       labelField: 'value',
       valueField: 'text',
     },
-    colProps: { span: 4 },
+    colProps: { style: 'width:220px' },
   },
   {
     field: 'name',
     label: '活动关键字',
     component: 'JInput',
-    colProps: { span: 4 },
+    colProps: { style: 'width:220px' },
   },
   {
     field: 'enabled',
     label: '是否上架',
-    colProps: { span: 4 },
+    colProps: { style: 'width:220px' },
     component: 'Select',
     componentProps: {
       options: [
@@ -193,11 +194,45 @@ export const formSchema: FormSchema[] = [
     label: '业务类型',
     required: true,
     component: 'ApiSelect',
-    componentProps: {
-      api: ajaxGetDictItems,
-      params: { code: 't_biz_type,id,biz_name' },
-      labelField: 'value',
-      valueField: 'text',
+    componentProps: ({ formActionType, formModel }) => {
+      return {
+        api: ajaxGetDictItems,
+        params: { code: 't_biz_type,id,biz_name' },
+        labelField: 'value',
+        valueField: 'text',
+        onChange: (options, values) => {
+          const { updateSchema } = formActionType;
+          console.log(values);
+          formModel.category_id = undefined;
+          updateSchema([
+            {
+              field: 'category_id',
+              componentProps: {
+                api: ajaxGetDictItems,
+                params: { code: 't_product_category,id,category_name' + ',biz_type_id=' + values.value },
+                labelField: 'value',
+                valueField: 'text',
+              },
+            },
+          ]);
+        },
+        onSelect: (values) => {
+          const { updateSchema } = formActionType;
+          console.log(values);
+          formModel.category_id = undefined;
+          updateSchema([
+            {
+              field: 'category_id',
+              componentProps: {
+                api: ajaxGetDictItems,
+                params: { code: 't_product_category,id,category_name' + ',biz_type_id=' + values.value },
+                labelField: 'value',
+                valueField: 'text',
+              },
+            },
+          ]);
+        },
+      };
     },
   },
   {
@@ -205,28 +240,36 @@ export const formSchema: FormSchema[] = [
     label: '商品分类',
     required: true,
     component: 'ApiSelect',
-    componentProps: {
-      api: ajaxGetDictItems,
-      params: { code: 't_product_category,id,category_name' },
-      labelField: 'value',
-      valueField: 'text',
+    componentProps: ({ formModel }) => {
+      return {
+        api: ajaxGetDictItems,
+        params: { code: 't_product_category,id,category_name' + (formModel.biz_type_id ? ',biz_type_id=' + formModel.biz_type_id : '') },
+        labelField: 'value',
+        valueField: 'text',
+      };
     },
   },
   {
     field: 'cover',
     label: '封面',
-    component: 'JImageUpload',
+    component: 'JUpload',
     componentProps: {
-      fileMax: 1,
+      maxCount: 1,
+      sizeLimit: 20,
+      helpMessage: '单个文件大小不能超过20KB',
+      fileType: UploadTypeEnum.image,
     },
   },
   {
     field: 'carousel',
     label: '轮播图',
-    component: 'JImageUpload',
     helpMessage: '最多上传6张',
+    component: 'JUpload',
     componentProps: {
-      fileMax: 6,
+      maxCount: 6,
+      sizeLimit: 200,
+      helpMessage: '单个文件大小不能超过200KB, 高度不要超过150px',
+      fileType: UploadTypeEnum.image,
     },
   },
   {

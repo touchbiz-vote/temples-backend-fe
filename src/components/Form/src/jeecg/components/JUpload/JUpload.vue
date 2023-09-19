@@ -22,11 +22,17 @@
         <span>{{ text }}</span>
       </a-button>
     </a-upload>
+    <a-tag color="warning">
+      <template #icon>
+        <ExclamationCircleOutlined />
+      </template>
+      {{ helpMessage }}
+    </a-tag>
   </div>
 </template>
 
 <script lang="ts" setup>
-  import { ref, reactive, computed, watch, nextTick, createApp,unref } from 'vue';
+  import { ref, reactive, computed, watch, nextTick, createApp, unref } from 'vue';
   import { Icon } from '/@/components/Icon';
   import { getToken } from '/@/utils/auth';
   import { uploadUrl } from '/@/api/common/api';
@@ -38,7 +44,7 @@
   import { UploadTypeEnum } from './upload.data';
   import { getFileAccessHttpUrl } from '/@/utils/common/compUtils';
   import UploadItemActions from './components/UploadItemActions.vue';
-
+  import { ExclamationCircleOutlined } from '@ant-design/icons-vue';
   const { createMessage, createConfirm } = useMessage();
   const { prefixCls } = useDesign('j-upload');
   const attrs = useAttrs();
@@ -55,8 +61,11 @@
      * false：返回fileName filePath fileSize
      */
     returnUrl: propTypes.bool.def(true),
+    helpMessage: propTypes.string.def(''),
     // 最大上传数量
     maxCount: propTypes.number.def(0),
+    // 文件大小限制，单位为KB
+    sizeLimit: propTypes.number.def(0),
     buttonVisible: propTypes.bool.def(true),
     multiple: propTypes.bool.def(true),
     // 是否显示左右移动按钮
@@ -217,6 +226,7 @@
   // 文件上传之前的操作
   function onBeforeUpload(file) {
     uploadGoOn.value = true;
+
     if (isImageMode.value) {
       if (file.type.indexOf('image') < 0) {
         createMessage.warning('请上传图片');
@@ -249,6 +259,11 @@
 
   // upload组件change事件
   function onFileChange(info) {
+    console.log(props.sizeLimit, info.file.size);
+    if (props.sizeLimit > 0 && props.sizeLimit < info.file.size / 1024) {
+      createMessage.warning(`文件大小不能超过${props.sizeLimit}KB`);
+      return false;
+    }
     if (!info.file.status && uploadGoOn.value === false) {
       info.fileList.pop();
     }
@@ -275,9 +290,9 @@
           }
           return file;
         });
-      }else{
-        successFileList = fileListTemp.filter(item=>{
-          return item.uid!=info.file.uid;
+      } else {
+        successFileList = fileListTemp.filter((item) => {
+          return item.uid != info.file.uid;
         });
         createMessage.error(`${info.file.name} 上传失败.`);
       }
@@ -301,7 +316,7 @@
               fileSize: item.size,
             };
             newFileList.push(fileJson);
-          }else{
+          } else {
             return;
           }
         }

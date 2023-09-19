@@ -461,9 +461,10 @@ class FileWidget extends IFormSchema {
   }
   getComponentProps() {
     let json = this.getExtendData();
-    if (json && json.uploadnum) {
+    if (json) {
       return {
-        maxCount: Number(json.uploadnum),
+        maxCount: json.uploadnum ? Number(0) : Number(json.uploadnum),
+        sizeLimit: json.sizeLimit ? Number(0) : Number(json.sizeLimit),
       };
     }
     return {};
@@ -485,6 +486,9 @@ class ImageWidget extends IFormSchema {
     let json = this.getExtendData();
     if (json && json.uploadnum) {
       props['maxCount'] = Number(json.uploadnum);
+    }
+    if (json && json.sizeLimit) {
+      props['sizeLimit'] = Number(json.sizeLimit);
     }
     return props;
   }

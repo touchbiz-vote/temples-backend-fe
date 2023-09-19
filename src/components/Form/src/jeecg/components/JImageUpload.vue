@@ -2,7 +2,7 @@
   <div class="clearfix">
     <a-upload
       :listType="listType"
-      accept="image/*"
+      :accept="accept"
       :multiple="multiple"
       :action="uploadUrl"
       :headers="headers"
@@ -20,7 +20,7 @@
           <div class="ant-upload-text">{{ text }}</div>
         </div>
         <a-button v-if="listType == 'picture'" :disabled="disabled">
-          <UploadOutlined></UploadOutlined>
+          <UploadOutlined />
           {{ text }}
         </a-button>
       </div>
@@ -61,6 +61,11 @@
         required: false,
         default: '上传',
       },
+      accept: {
+        type: String,
+        required: false,
+        default: 'image/*',
+      },
       //这个属性用于控制文件上传的业务路径
       bizPath: {
         type: String,
@@ -72,6 +77,11 @@
         type: Boolean,
         required: false,
         default: false,
+      },
+      sizeLimit: {
+        type: Number,
+        required: false,
+        default: 0,
       },
       //上传数量
       fileMax: {
@@ -124,8 +134,7 @@
       watch(
         () => props.value,
         (val, prevCount) => {
-         //update-begin---author:liusq ---date:20230601  for：【issues/556】JImageUpload组件value赋初始值没显示图片------------
-            if (val && val instanceof Array) {
+          if (val && val instanceof Array) {
             val = val.join(',');
           }
           if (initTag.value == true) {
@@ -186,9 +195,7 @@
         if (file.status != 'uploading') {
           fileList.forEach((file) => {
             if (file.status === 'done') {
-              //update-begin---author:wangshuai ---date:20221121  for：[issues/248]原生表单内使用图片组件,关闭弹窗图片组件值不会被清空------------
               initTag.value = true;
-              //update-end---author:wangshuai ---date:20221121  for：[issues/248]原生表单内使用图片组件,关闭弹窗图片组件值不会被清空------------
               fileUrls.push(file.response.message);
             }
           });
@@ -215,13 +222,6 @@
       function handlePreview(file) {
         previewImage.value = file.url || file.thumbUrl;
         previewVisible.value = true;
-      }
-
-      function getAvatarView() {
-        if (uploadFileList.length > 0) {
-          let url = uploadFileList[0].url;
-          return getFileAccessHttpUrl(url, null);
-        }
       }
 
       function handleCancel() {
