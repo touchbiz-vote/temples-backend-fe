@@ -37,7 +37,6 @@
             :useSearchForm="true"
             :formConfig="{ showActionButtonGroup: false, baseRowStyle: { minHeight: '40px' } }"
           >
-            <!--操作栏-->
             <template #action="{ record }">
               <a href="javascript:void(0)" @click="handleDeleteSelected(record)"><Icon icon="ant-design:delete-outlined"></Icon></a>
             </template>

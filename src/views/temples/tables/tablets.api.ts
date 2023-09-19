@@ -10,6 +10,7 @@ export enum Api {
   exportXlsUrl = '/sys/sysDepart/exportXls',
   importExcelUrl = '/sys/sysDepart/importExcel',
   list = '/online/cgform/api/getData/',
+  searchOrder = '/api/temples/order/search',
 }
 
 /**
@@ -32,6 +33,14 @@ export const getById = (id) => {
  * 获取牌位位置列表
  */
 export const queryTreeSync = (params?) => defHttp.get({ url: Api.queryTreeSync, params });
+
+/**
+ * 获取牌位位置列表
+ */
+export const searchOrder = (params?) => {
+  params.bizCode = 'tablets';
+  return defHttp.get({ url: Api.searchOrder, params });
+};
 
 /**
  * 保存或者更新示例

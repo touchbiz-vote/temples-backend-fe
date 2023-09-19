@@ -7,8 +7,8 @@
   import { ref, computed, unref, defineProps } from 'vue';
   import { BasicModal, useModalInner } from '/@/components/Modal';
   import { BasicForm, useForm } from '/@/components/Form/index';
-  import { formSchema } from '../table.data';
-  import { saveOrUpdate, getById } from '../table.api';
+  import { formSchema } from '../tablets.data';
+  import { saveOrUpdate, getById } from '../tablets.api';
   // 声明Emits
   const emit = defineEmits(['register', 'success']);
   const isUpdate = ref(true);
@@ -47,7 +47,6 @@
     try {
       let values = await validate();
       setModalProps({ confirmLoading: true });
-      console.log(values);
       //提交表单
       await saveOrUpdate(values, isUpdate.value);
       //关闭弹窗
@@ -59,3 +58,4 @@
     }
   }
 </script>
+../tablets.data

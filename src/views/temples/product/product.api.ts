@@ -10,6 +10,7 @@ enum Api {
   enabled = '/api/temples/product/enabled/',
   disable = '/api/temples/product/disable/',
   delete = '/api/temples/product/',
+  batchDelete = '/online/cgform/api/form/',
   importExcel = '/online/cgform/api/importXls/',
 }
 
@@ -58,6 +59,16 @@ export const deleteProduct = (product, handleSuccess) => {
 };
 
 /**
+ * 删除示例
+ * @param params
+ */
+export const batchDelete = (ids, handleSuccess) => {
+  return defHttp.delete({ url: Api.batchDelete + tableId + '/' + ids }).then(() => {
+    handleSuccess();
+  });
+};
+
+/**
  * 上架
  * @param params
  */
@@ -76,7 +87,6 @@ export const disable = (product, handleSuccess) => {
     handleSuccess();
   });
 };
-
 
 /**
  * 批量删除示例

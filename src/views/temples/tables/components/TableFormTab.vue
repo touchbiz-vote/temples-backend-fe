@@ -10,19 +10,22 @@
       </template>
     </BasicTable>
     <TableFormModal @register="registerModal" @success="reload" />
+    <OrderSelectModal rowKey="id" @register="registerOrderModal" @success="reload" />
   </a-spin>
 </template>
 
 <script lang="ts" setup>
   import { useModal } from '/@/components/Modal';
   import TableFormModal from './TableFormModal.vue';
+  import OrderSelectModal from './OrderSelectModal.vue';
   import { watch, ref, unref, onMounted } from 'vue';
   import { BasicTable, useTable, TableAction } from '/@/components/Table';
-  import { getList, deleteTable } from '../table.api';
-  import { columns } from '../table.data';
-  import { useDesign } from '/@/hooks/web/useDesign';
+  import { getList, deleteTable } from '../tablets.api';
+  import { columns } from '../tablets.data';
+  // import { useDesign } from '/@/hooks/web/useDesign';
   const [registerModal, { openModal }] = useModal();
-  const { prefixCls } = useDesign('j-depart-form-content');
+  const [registerOrderModal, { openModal: openOrderModal }] = useModal();
+  // const { prefixCls } = useDesign('j-depart-form-content');
   const props = defineProps({
     data: { type: Object, default: () => ({}) },
     rootTreeData: { type: Array, default: () => [] },
@@ -75,6 +78,16 @@
   }
 
   /**
+   * 分配订单到牌位的事件
+   */
+  function handleSign(record) {
+    console.log(record);
+    openOrderModal(true, {
+      record,
+    });
+  }
+
+  /**
    * 删除事件
    */
   async function handleDelete(record) {
@@ -93,10 +106,8 @@
       },
       {
         label: '分配',
-        // popConfirm: {
-        //   title: '是否确认上架',
-        //   confirm: handleEnable.bind(null, record),
-        // },
+        // ifShow: record.status == 0,
+        onClick: handleSign.bind(null, record),
       },
       {
         label: '删除',
@@ -155,3 +166,4 @@
   /*end 兼容暗夜模式*/
   // update-end-author:liusq date:20230625 for: [issues/563]暗色主题部分失效
 </style>
+../tablets.data

@@ -1,13 +1,12 @@
 <template>
   <div>
     <!--自定义查询区域-->
-    <BasicTable @register="registerTable">
+    <BasicTable @register="registerTable" :rowSelection="rowSelection">
       <template #tableTitle>
         <a-button preIcon="ant-design:plus-outlined" type="primary" @click="handleAdd">新增</a-button>
         <a-button type="primary" preIcon="ant-design:import-outlined" @click="handleImport">导入</a-button>
         <a-button v-if="false" type="primary" preIcon="ant-design:export-outlined" @click="onExportXls"> 导出</a-button>
-        <a type="primary" preIcon="ant-design:export-outlined" href="https://jiangyan-static.oss-cn-beijing.aliyuncs.com/product_import_template.xlsx">下载导入文件模版</a>
-        <!-- <a-dropdown v-if="selectedRowKeys.length > 0">
+        <a-dropdown v-if="checkedKeys.length > 0">
           <template #overlay>
             <a-menu>
               <a-menu-item key="1" @click="batchHandleDelete">
@@ -20,7 +19,9 @@
             <span>批量操作</span>
             <Icon icon="mdi:chevron-down" />
           </a-button>
-        </a-dropdown> -->
+        </a-dropdown>
+        <a type="primary" preIcon="ant-design:export-outlined" href="https://jiangyan-static.oss-cn-beijing.aliyuncs.com/product_import_template.xlsx">下载导入文件模版</a>
+      
       </template>
       <template #bodyCell="{ column, record }">
         <template v-if="column.dataIndex == 'cover' && record.cover">
@@ -41,14 +42,17 @@
   import { BasicTable, useTable, TableAction } from '/@/components/Table';
   import { useModal } from '/@/components/Modal';
   import ProductModal from './ProductModal.vue';
+  import { useMessage } from '/@/hooks/web/useMessage';
+  const { createConfirm } = useMessage();
   import JImportModal from '/@/components/Form/src/jeecg/components/JImportModal.vue';
-  import { getList, deleteProduct, enable, disable, getImportUrl } from './product.api';
+  import { getList, batchDelete, deleteProduct, enable, disable, getImportUrl } from './product.api';
   import { columns, searchFormSchema } from './product.data';
   import { useMethods } from '/@/hooks/system/useMethods';
   //导入导出方法
   const { handleExportXls } = useMethods();
 
   import { fetchDataWithCache } from '/@/utils/dict';
+  const checkedKeys = ref<Array<string | number>>([]);
   const [registerModal, { openModal }] = useModal();
   const [registerModalJimport, { openModal: openModalJimport }] = useModal();
   const isDisabled = ref(false);
@@ -57,12 +61,9 @@
   const url = {
     importExcel: '/online/cgform/api/importXls/',
     exportExcel: '/online/cgform/api/exportXlsOld/',
-    list: '/online/cgform/api/getData/',
-    update: '/online/cgform/api/form/',
     columns: '/online/cgform/api/getColumns/',
   };
 
-  url.update = url.update + tableId;
   url.columns = url.columns + tableId;
   url.importExcel = url.importExcel + tableId;
   url.exportExcel = url.exportExcel + tableId;
@@ -92,6 +93,36 @@
       slots: { customRender: 'action' },
     },
   });
+
+  /**
+   * 选择列配置
+   */
+  const rowSelection = {
+    type: 'checkbox',
+    columnWidth: 50,
+    selectedRowKeys: checkedKeys,
+    onChange: onSelectChange,
+  };
+
+  /**
+   * 批量删除事件
+   */
+  function batchHandleDelete() {
+    createConfirm({
+      iconType: 'warning',
+      title: '删除',
+      content: '确定要永久删除吗？删除后将不可恢复！',
+      onOk: () => batchDelete(toRaw(unref(checkedKeys)).join(','), reload),
+      onCancel() {},
+    });
+  }
+
+  /**
+   * 选择事件
+   */
+  function onSelectChange(selectedRowKeys: (string | number)[]) {
+    checkedKeys.value = selectedRowKeys;
+  }
 
   async function fillData(list) {
     for (const item of list) {

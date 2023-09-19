@@ -43,7 +43,7 @@
 
 <script lang="ts" setup>
   import { inject, nextTick, ref, unref, defineExpose } from 'vue';
-  import { queryTreeSync } from '../table.api';
+  import { queryTreeSync } from '../tablets.api';
   import { Popconfirm } from 'ant-design-vue';
 
   const prefixCls = inject('prefixCls');

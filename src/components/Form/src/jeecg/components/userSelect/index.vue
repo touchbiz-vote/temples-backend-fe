@@ -1,25 +1,41 @@
 <template>
   <div>
-    <div v-if="isSearchFormComp" @click="click2Add" :class="disabled?'disabled-user-select':''" style="padding:0 5px;background-color: #fff;border: 1px solid #ccc;border-radius: 3px;box-sizing: border-box;display:flex;color: #9e9e9e;font-size: 14px;flex-wrap: wrap;min-height: 32px;">
+    <div
+      v-if="isSearchFormComp"
+      @click="click2Add"
+      :class="disabled ? 'disabled-user-select' : ''"
+      style="
+        padding: 0 5px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        box-sizing: border-box;
+        display: flex;
+        color: #9e9e9e;
+        font-size: 14px;
+        flex-wrap: wrap;
+        min-height: 32px;
+      "
+    >
       <template v-if="selectedUserList.length > 0">
         <SelectedUserItem v-for="item in showUserList" :info="item" @unSelect="unSelectUser" query />
       </template>
-      <span v-else style="height: 30px;line-height: 30px;display: inline-block;margin-left: 7px;color: #bfbfbf;">请选择用户</span>
+      <span v-else style="height: 30px; line-height: 30px; display: inline-block; margin-left: 7px; color: #bfbfbf">请选择用户</span>
       <div v-if="ellipsisInfo.status" class="user-selected-item">
         <div class="user-select-ellipsis">
-          <span style="color: red">+{{ellipsisInfo.count}}...</span>
+          <span style="color: red">+{{ ellipsisInfo.count }}...</span>
         </div>
       </div>
-    </div>    
-    
-    <div v-else style="display: flex; flex-wrap: wrap; flex-direction: row" >
+    </div>
+
+    <div v-else style="display: flex; flex-wrap: wrap; flex-direction: row">
       <template v-if="selectedUserList.length > 0">
         <SelectedUserItem v-for="item in selectedUserList" :info="item" @unSelect="unSelectUser" />
       </template>
       <a-button v-if="showAddButton" shape="circle" @click="onShowModal"><PlusOutlined /></a-button>
     </div>
 
-    <user-select-modal :multi="multi" :getContainer="getContainer" @register="registerModal" @selected="onSelected" :izExcludeMy="izExcludeMy"></user-select-modal>
+    <user-select-modal :multi="multi" :getContainer="getContainer" @register="registerModal" @selected="onSelected" :izExcludeMy="izExcludeMy" />
   </div>
 </template>
 
@@ -57,53 +73,53 @@
         default: null,
       },
       // 是否作为查询条件
-      query:{
+      query: {
         type: Boolean,
         default: false,
       },
       //最多显示几个人员-query为true有效
-      maxCount:{
+      maxCount: {
         type: Number,
-        default: 2
+        default: 2,
       },
-      disabled:{
+      disabled: {
         type: Boolean,
         default: false,
       },
       //是否排除我自己
-      izExcludeMy:{
+      izExcludeMy: {
         type: Boolean,
         default: false,
-      }
+      },
     },
     emits: ['update:value', 'change'],
     setup(props, { emit }) {
       const formItemContext = Form.useInjectFormItemContext();
       const loading = ref(true);
       const selectedUserList = ref<any[]>([]);
-      const showUserList = computed(()=>{
-        let list = selectedUserList.value
+      const showUserList = computed(() => {
+        let list = selectedUserList.value;
         let max = props.maxCount;
-        if(list.length<=max){
+        if (list.length <= max) {
           return list;
         }
-        return list.filter((_item, index)=>index<max);
+        return list.filter((_item, index) => index < max);
       });
-      const ellipsisInfo = computed(()=>{
+      const ellipsisInfo = computed(() => {
         let max = props.maxCount;
-        let len = selectedUserList.value.length
-        if(len > max){
-          return {status: true, count: len-max};
-        }else{
-          return {status: false}
+        let len = selectedUserList.value.length;
+        if (len > max) {
+          return { status: true, count: len - max };
+        } else {
+          return { status: false };
         }
       });
 
       // 注册弹窗
       const [registerModal, { openModal, closeModal }] = useModal();
       function onShowModal() {
-        if(props.disabled===true){
-          return ;
+        if (props.disabled === true) {
+          return;
         }
         let list = toRaw(selectedUserList.value);
         openModal(true, {
@@ -166,7 +182,7 @@
       }
 
       const showAddButton = computed(() => {
-        if(props.disabled === true){
+        if (props.disabled === true) {
           return false;
         }
         if (props.multi === true) {
@@ -197,21 +213,21 @@
           onSelectedChange();
         }
       }
-      
+
       function click2Add(e) {
         e.preventDefault();
         e.stopPropagation();
         onShowModal();
       }
-      
-      const isSearchFormComp = computed(()=>{
-        if(props.query===true){
+
+      const isSearchFormComp = computed(() => {
+        if (props.query === true) {
           return true;
-        }else{
-          return false
+        } else {
+          return false;
         }
       });
-      
+
       return {
         registerModal,
         onShowModal,
@@ -222,14 +238,14 @@
         selectedUserList,
         showUserList,
         ellipsisInfo,
-        click2Add
+        click2Add,
       };
     },
   });
 </script>
 
 <style lang="less" scoped>
-  .user-select-ellipsis{
+  .user-select-ellipsis {
     width: 40px;
     height: 24px;
     text-align: center;
@@ -238,7 +254,7 @@
     background: #f5f5f5;
     border: 1px solid #f0f0f0;
   }
-  .disabled-user-select{
+  .disabled-user-select {
     cursor: not-allowed;
     background-color: #f5f5f5 !important;
   }
