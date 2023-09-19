@@ -2,6 +2,7 @@ import { BasicColumn } from '/@/components/Table';
 import { FormSchema } from '/@/components/Table';
 import { render } from '/@/utils/common/renderUtils';
 import { ajaxGetDictItems } from './order.api';
+import { UploadTypeEnum } from '/@/components/Form/src/jeecg/components/JUpload';
 
 export const columns: BasicColumn[] = [
   {
@@ -166,17 +167,23 @@ export const formSchema: FormSchema[] = [
   {
     field: 'cover',
     label: '封面',
-    component: 'JImageUpload',
+    component: 'JUpload',
     componentProps: {
-      fileMax: 1,
+      maxCount: 1,
+      sizeLimit: 20,
+      helpMessage: '单个文件大小不能超过20KB',
+      fileType: UploadTypeEnum.image,
     },
   },
   {
     field: 'cover',
     label: '轮播图',
-    component: 'JImageUpload',
+    component: 'JUpload',
     componentProps: {
-      fileMax: 6,
+      maxCount: 6,
+      sizeLimit: 200,
+      helpMessage: '单个文件大小不能超过20KB',
+      fileType: UploadTypeEnum.image,
     },
   },
   {

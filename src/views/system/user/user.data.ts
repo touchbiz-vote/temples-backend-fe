@@ -3,6 +3,8 @@ import { FormSchema } from '/@/components/Table';
 import { getAllRolesListNoByTenant } from './user.api';
 import { rules } from '/@/utils/helper/validator';
 import { render } from '/@/utils/common/renderUtils';
+import { UploadTypeEnum } from '/@/components/Form/src/jeecg/components/JUpload';
+
 export const columns: BasicColumn[] = [
   {
     title: '用户账号',
@@ -248,9 +250,12 @@ export const formSchema: FormSchema[] = [
   {
     label: '头像',
     field: 'avatar',
-    component: 'JImageUpload',
+    component: 'JUpload',
     componentProps: {
-      fileMax: 1,
+      maxCount: 1,
+      sizeLimit: 200,
+      helpMessage: '单个文件大小不能超过200KB',
+      fileType: UploadTypeEnum.image,
     },
   },
   {

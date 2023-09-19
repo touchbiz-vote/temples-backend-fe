@@ -1,4 +1,5 @@
 import { BasicColumn, FormSchema } from '/@/components/Table';
+import { UploadTypeEnum } from '/@/components/Form/src/jeecg/components/JUpload';
 
 export const columns: BasicColumn[] = [
   {
@@ -32,9 +33,12 @@ export const formSchema: FormSchema[] = [
   {
     label: '封面图',
     field: 'coverUrl',
-    component: 'JImageUpload',
+    component: 'JUpload',
     componentProps: {
-      fileMax: 1,
+      maxCount: 1,
+      sizeLimit: 20,
+      helpMessage: '单个文件大小不能超过20KB',
+      fileType: UploadTypeEnum.image,
     },
   },
   {

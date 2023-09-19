@@ -117,7 +117,6 @@ export type ComponentType =
   | 'JSelectPosition'
   | 'JSelectRole'
   | 'JSelectUser'
-  | 'JImageUpload'
   | 'JDictSelectTag'
   | 'JSelectDept'
   | 'JAreaSelect'
