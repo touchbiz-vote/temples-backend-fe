@@ -259,8 +259,8 @@ export const formSchema: FormSchema[] = [
     component: 'JUpload',
     componentProps: {
       maxCount: 1,
-      sizeLimit: 20,
-      helpMessage: '单个文件大小不能超过20KB',
+      sizeLimit: 30,
+      helpMessage: '单个文件大小不能超过20KB, 宽度和高度保持 180px*200px的比例',
       fileType: UploadTypeEnum.image,
     },
   },
@@ -280,10 +280,10 @@ export const formSchema: FormSchema[] = [
     field: 'code',
     label: '商品编码',
     component: 'Input',
-    // required: true,
+    required: false,
     // show: false,
     componentProps: {
-      placeholder: '请输入商品编码',
+      // placeholder: '请输入商品编码',
       // readonly: true,
     },
     dynamicRules: ({ model, schema }) => rules.duplicateCheckRule('t_product', 'code', model, schema, true),
