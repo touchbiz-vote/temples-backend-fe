@@ -55,7 +55,7 @@
       },
     },
     emits: ['ok', 'register'],
-    setup(props, { emit, refs }) {
+    setup(props, { emit }) {
       const { createMessage, createWarningModal } = useMessage();
       //注册弹框
       const [register, { closeModal }] = useModalInner((data) => {
