@@ -184,7 +184,7 @@ export const formSchema: FormSchema[] = [
     componentProps: {
       placeholder: '请输入商品名称',
     },
-    dynamicRules: ({ model, schema }) => rules.duplicateCheckRule('t_product', 'name', model, schema, true),
+    // dynamicRules: ({ model, schema }) => rules.duplicateCheckRule('t_product', 'name', model, schema, true),
   },
   {
     field: 'sub_title',
@@ -280,7 +280,7 @@ export const formSchema: FormSchema[] = [
     field: 'code',
     label: '商品编码',
     component: 'Input',
-    required: true,
+    // required: true,
     // show: false,
     componentProps: {
       placeholder: '请输入商品编码',
