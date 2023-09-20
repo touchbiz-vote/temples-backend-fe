@@ -259,7 +259,6 @@
 
   // upload组件change事件
   function onFileChange(info) {
-    console.log(props.sizeLimit, info.file.size);
     if (props.sizeLimit > 0 && props.sizeLimit < info.file.size / 1024) {
       createMessage.warning(`文件大小不能超过${props.sizeLimit}KB`);
       return false;

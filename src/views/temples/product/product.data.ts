@@ -10,8 +10,7 @@ export const columns: BasicColumn[] = [
   {
     title: '封面',
     dataIndex: 'cover',
-    width: 80,
-    resizable: true,
+    width: 60,
   },
   {
     title: '商品名称',
@@ -47,7 +46,7 @@ export const columns: BasicColumn[] = [
   {
     title: '分类',
     dataIndex: 'category_id',
-    width: 130,
+    width: 90,
     resizable: true,
     sorter: {
       multiple: 1,
@@ -70,7 +69,16 @@ export const columns: BasicColumn[] = [
     },
   },
   {
-    title: '预约时间',
+    title: '顺序',
+    dataIndex: 'sequence',
+    width: 80,
+    resizable: true,
+    sorter: {
+      multiple: 1,
+    },
+  },
+  {
+    title: '预约时间段',
     dataIndex: 'content',
     width: 120,
     resizable: true,
@@ -343,7 +351,7 @@ export const formSchema: FormSchema[] = [
   },
   {
     label: '商品介绍',
-    field: 'content',
+    field: 'details',
     component: 'JEditor',
   },
 ];

@@ -87,7 +87,7 @@
     tableSetting: { fullScreen: true },
     rowKey: 'id',
     actionColumn: {
-      width: 240,
+      width: 160,
       title: '操作',
       dataIndex: 'action',
       slots: { customRender: 'action' },
@@ -99,7 +99,7 @@
    */
   const rowSelection = {
     type: 'checkbox',
-    columnWidth: 50,
+    columnWidth: 30,
     selectedRowKeys: checkedKeys,
     onChange: onSelectChange,
   };
@@ -168,12 +168,13 @@
         label: '编辑',
         onClick: handleEdit.bind(null, record),
       },
-      {
-        label: '详情',
-        onClick: handleDetail.bind(null, record),
-      },
+      // {
+      //   label: '详情',
+      //   onClick: handleDetail.bind(null, record),
+      // },
       {
         label: '删除',
+        disabled: record.enabled == 1,
         popConfirm: {
           title: '是否确认删除',
           confirm: handleDelete.bind(null, record),

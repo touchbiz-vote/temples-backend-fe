@@ -168,7 +168,6 @@
        * 自定义重置方法
        * */
       async function customResetFunc() {
-        console.log('自定义查询');
         //树节点清空
         selectedDepIds.value = [];
         //查询条件清空

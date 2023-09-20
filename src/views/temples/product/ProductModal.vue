@@ -4,6 +4,7 @@
   </BasicModal>
 </template>
 <script lang="ts" setup name="ProductModal">
+  import { convertKeysToCamelCase } from '/@/utils/json/convert';
   import { ref, computed, unref, defineProps } from 'vue';
   import { BasicModal, useModalInner } from '/@/components/Modal';
   import { BasicForm, useForm } from '/@/components/Form/index';
@@ -65,8 +66,9 @@
         values.start_date = dates[0];
         values.end_date = dates[1];
       }
+
       //提交表单
-      await saveOrUpdate(values, isUpdate.value);
+      await saveOrUpdate(convertKeysToCamelCase(values), isUpdate.value);
       //关闭弹窗
       closeModal();
       //刷新列表
