@@ -130,7 +130,9 @@ export const searchFormSchema: FormSchema[] = [
     component: 'ApiSelect',
     componentProps: {
       api: ajaxGetDictItems,
-      params: { code: 't_biz_type,id,biz_name' },
+      params: {
+        code: "t_biz_type,id,biz_name, biz_code !='volunteer' and biz_code != 'monks' and biz_code != 'album' and biz_code != 'todayTips' and biz_code != 'navigator' ",
+      },
       labelField: 'value',
       valueField: 'text',
     },
@@ -197,7 +199,9 @@ export const formSchema: FormSchema[] = [
     componentProps: ({ formActionType, formModel }) => {
       return {
         api: ajaxGetDictItems,
-        params: { code: 't_biz_type,id,biz_name' },
+        params: {
+          code: "t_biz_type,id,biz_name, biz_code !='volunteer' and biz_code != 'monks' and biz_code != 'album' and biz_code != 'todayTips' and biz_code != 'navigator' ",
+        },
         labelField: 'value',
         valueField: 'text',
         onChange: (options, values) => {
@@ -225,7 +229,7 @@ export const formSchema: FormSchema[] = [
               field: 'category_id',
               componentProps: {
                 api: ajaxGetDictItems,
-                params: { code: 't_product_category,id,category_name' + ',biz_type_id=' + values.value },
+                params: { code: 't_product_category,id,category_name' + ',biz_type_id=' + values },
                 labelField: 'value',
                 valueField: 'text',
               },
