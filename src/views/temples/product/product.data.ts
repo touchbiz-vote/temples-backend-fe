@@ -297,7 +297,7 @@ export const formSchema: FormSchema[] = [
   },
   {
     field: 'recommend',
-    label: '推荐位',
+    label: '首页推荐',
     component: 'JSwitch',
     componentProps: {
       options: [1, 2],
