@@ -23,7 +23,7 @@
             :rowSelection="rowSelection"
             :indexColumnProps="indexColumnProps"
             v-bind="getBindValue"
-          ></BasicTable>
+          />
         </a-col>
         <a-col :span="showSelected ? 6 : 0">
           <BasicTable
@@ -34,7 +34,7 @@
           >
             <!--操作栏-->
             <template #action="{ record }">
-              <a href="javascript:void(0)" @click="handleDeleteSelected(record)"><Icon icon="ant-design:delete-outlined"></Icon></a>
+              <a href="javascript:void(0)" @click="handleDeleteSelected(record)"><Icon icon="ant-design:delete-outlined" /></a>
             </template>
           </BasicTable>
         </a-col>

@@ -1,63 +1,35 @@
 <!--用户选择框-->
 <template>
   <div>
-    <BasicModal
-      v-bind="$attrs"
-      @register="register"
-      title="选择待分配的订单"
-      width="800px"
-      @ok="handleOk"
-      destroyOnClose
-      @visible-change="visibleChange"
-    >
+    <BasicModal :showCancelBtn="false" :showOkBtn="false" v-bind="$attrs" @register="register" title="选择待分配的订单" width="900px" destroyOnClose>
       <a-spin :spinning="loading">
         <BasicTable @register="registerTable">
           <!--操作栏-->
           <template #action="{ record }">
-            <!-- <TableAction :actions="getTableAction(record)" /> -->
+            <TableAction :actions="getTableAction(record)" />
           </template>
         </BasicTable>
       </a-spin>
-
-      <!-- <a-row>
-        <a-col :span="showSelected ? 18 : 24">
-          <BasicTable
-            ref="tableRef"
-            :columns="columns"
-            :scroll="tableScroll"
-            v-bind="getBindValue"
-            :useSearchForm="true"
-            :formConfig="formConfig"
-            :api="searchOrder"
-            :searchInfo="searchInfo"
-            :rowSelection="rowSelection"
-            :indexColumnProps="indexColumnProps"
-          >
-            <template #tableTitle></template>
-          </BasicTable>
-        </a-col>
-      </a-row>-->
     </BasicModal>
   </div>
 </template>
 <script lang="ts">
   import { FormSchema } from '/@/components/Form';
-  import { BasicColumn } from '/@/components/Table';
-  import { defineComponent, unref, ref } from 'vue';
+  import { BasicColumn, TableAction, BasicTable, useTable} from '/@/components/Table';
+  import { defineComponent, ref } from 'vue';
   import { BasicModal, useModalInner } from '/@/components/Modal';
   import { searchOrder } from '../tablets.api';
   import { createAsyncComponent } from '/@/utils/factory/createAsyncComponent';
-  // import { useSelectBiz } from '/@/components/Form/src/jeecg/hooks/useSelectBiz';
   import { useAttrs } from '/@/hooks/core/useAttrs';
   import { selectProps } from '/@/components/Form/src/jeecg/props/props';
 
-  import { BasicTable, useTable, TableAction } from '/@/components/Table';
 
   export default defineComponent({
     name: 'OrderSelectModal',
     components: {
       //此处需要异步加载BasicTable
       BasicModal,
+      TableAction,
       BasicTable: createAsyncComponent(() => import('/@/components/Table/src/BasicTable.vue'), {
         loading: true,
       }),
@@ -77,40 +49,42 @@
           label: '订单关键字',
           labelWidth: 160,
           field: 'keyword',
-          component: 'JInput',
-        }
+          component: 'Input',
+        },
       ];
       const columns: BasicColumn[] = [
         {
-          title: '联系人',
+          title: '联系方式',
           dataIndex: 'contactMan',
-          width: 120,
+          width: 180,
           align: 'left',
-        },
-        {
-          title: '联系电话',
-          dataIndex: 'contactTel',
-          width: 120,
+          resizable: true,
+          customRender: ({ record }) => {
+            return record.contactMan + '/' + record.contactTel;
+          },
         },
         {
           title: '牌位名称',
           dataIndex: 'productName',
           width: 120,
+          resizable: true,
         },
         {
           title: '下单时间',
-          dataIndex: 'sex_dictText',
-          width: 50,
+          dataIndex: 'gmtCreate',
+          width: 120,
+          resizable: true,
         },
         {
           title: '订单编号',
-          dataIndex: 'phone',
+          dataIndex: 'orderCode',
           width: 120,
+          resizable: true,
         },
         {
           title: '状态',
-          dataIndex: 'status_dictText',
-          width: 80,
+          dataIndex: 'orderStatusDesc',
+          width: 60,
         },
       ];
       const [registerTable] = useTable({
@@ -129,10 +103,11 @@
         showTableSetting: true,
         bordered: true,
         showIndexColumn: false,
+        pagination: false,
         tableSetting: { fullScreen: false },
         rowKey: 'id',
         actionColumn: {
-          width: 200,
+          width: 80,
           title: '操作',
           slots: { customRender: 'action' },
         },
@@ -153,16 +128,6 @@
           xl: 12,
           xxl: 12,
         },
-        //update-begin-author:taoyan date:2022-5-24 for: VUEN-1086 【移动端】用户选择 查询按钮 效果不好 列表展示没有滚动条---查询表单按钮的栅格布局和表单的保持一致
-        // actionColOptions: {
-        //   xs: 24,
-        //   sm: 8,
-        //   md: 8,
-        //   lg: 8,
-        //   xl: 8,
-        //   xxl: 8,
-        // },
-        //update-end-author:taoyan date:2022-5-24 for: VUEN-1086 【移动端】用户选择 查询按钮 效果不好 列表展示没有滚动条---查询表单按钮的栅格布局和表单的保持一致
       };
       //定义表格列
       //已选择的table信息
@@ -192,23 +157,27 @@
       /**
        * 确定选择
        */
-      function handleOk() {
-        // getSelectResult((options, values) => {
+      function handleEdit(record) {
         //   //回传选项和已选择的值
-        //   emit('getSelectResult', options, values);
-        //   //关闭弹窗
-        //   closeModal();
-        // });
+        emit('getSelectResult', record);
+        //关闭弹窗
+        closeModal();
+      }
+
+      /**
+       * 编辑
+       */
+      function getTableAction(record) {
+        return [{ label: '选择', onClick: handleEdit.bind(null, record) }];
       }
 
       return {
-        //config,
-        handleOk,
+        BasicTable,
+        getTableAction,
         // searchInfo,
         registerTable,
         register,
         // indexColumnProps,
-        // visibleChange,
         // getBindValue,
         searchOrder,
         formConfig,
@@ -216,6 +185,7 @@
         // rowSelection,
         // selectRows,
         loading,
+        TableAction,
         // selectedTable,
         // handleDeleteSelected,
         // tableScroll,

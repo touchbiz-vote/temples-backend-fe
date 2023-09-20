@@ -106,7 +106,7 @@ export const columns: BasicColumn[] = [
     },
   },
   {
-    title: '创建时间',
+    title: '下单时间',
     dataIndex: 'gmt_create',
     width: 120,
     resizable: true,
@@ -170,8 +170,8 @@ export const formSchema: FormSchema[] = [
     component: 'JUpload',
     componentProps: {
       maxCount: 1,
-      sizeLimit: 20,
-      helpMessage: '单个文件大小不能超过20KB',
+      sizeLimit: 40,
+      helpMessage: '单个文件大小不能超过40KB',
       fileType: UploadTypeEnum.image,
     },
   },

@@ -10,7 +10,7 @@
       </template>
     </BasicTable>
     <TableFormModal @register="registerModal" @success="reload" />
-    <OrderSelectModal rowKey="id" @register="registerOrderModal" @success="reload" />
+    <OrderSelectModal rowKey="id" @register="registerOrderModal" @getSelectResult="bindTablets" />
   </a-spin>
 </template>
 
@@ -64,6 +64,10 @@
     if (location.value && location.value.id) {
       params.location_id = location.value.id;
     }
+  }
+
+  function bindTablets(record) {
+    console.log(record);
   }
 
   /**
