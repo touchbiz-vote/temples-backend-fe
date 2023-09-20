@@ -1,6 +1,6 @@
 <template>
   <div :class="prefixCls" class="login-background-img">
-    <AppLocalePicker class="absolute top-4 right-4 enter-x xl:text-gray-600" :showText="false"/>
+    <AppLocalePicker class="absolute top-4 right-4 enter-x xl:text-gray-600" :showText="false" />
     <AppDarkModeToggle class="absolute top-3 right-7 enter-x" />
     <div class="aui-logo" v-if="!getIsMobile">
       <div>
@@ -89,7 +89,8 @@
                 <div class="aui-formButton">
                   <div class="aui-flex">
                     <a-button :loading="loginLoading" class="aui-link-login aui-flex-box" type="primary" @click="loginHandleClick">
-                      {{ t('sys.login.loginButton') }}</a-button>
+                      {{ t('sys.login.loginButton') }}</a-button
+                    >
                   </div>
                   <div class="aui-flex">
                     <a class="aui-linek-code aui-flex-box" @click="codeHandleClick">{{ t('sys.login.qrSignInFormTitle') }}</a>
@@ -106,11 +107,6 @@
                   </div>
                 </div>
                 <div class="aui-flex" :class="`${prefixCls}-sign-in-way`">
-                  <div class="aui-flex-box">
-                    <div class="aui-third-login">
-                      <a title="github" @click="onThirdLogin('github')"><GithubFilled /></a>
-                    </div>
-                  </div>
                   <div class="aui-flex-box">
                     <div class="aui-third-login">
                       <a title="企业微信" @click="onThirdLogin('wechat_enterprise')"><icon-font class="item-icon" type="icon-qiyeweixin3" /></a>
@@ -133,39 +129,30 @@
         </div>
       </div>
     </div>
-    <div v-show="type === 'forgot'" :class="`${prefixCls}-form`">
-      <MiniForgotpad ref="forgotRef" @go-back="goBack" @success="handleSuccess" />
-    </div>
-    <div v-show="type === 'register'" :class="`${prefixCls}-form`">
-      <MiniRegister ref="registerRef" @go-back="goBack" @success="handleSuccess" />
-    </div>
     <div v-show="type === 'codeLogin'" :class="`${prefixCls}-form`">
       <MiniCodelogin ref="codeRef" @go-back="goBack" @success="handleSuccess" />
     </div>
     <!-- 第三方登录相关弹框 -->
-    <ThirdModal ref="thirdModalRef"></ThirdModal>
+    <ThirdModal ref="thirdModalRef" />
   </div>
 </template>
 <script lang="ts" setup name="login-mini">
   import { getCaptcha, getCodeInfo } from '/@/api/sys/user';
-  import { computed, onMounted, reactive, ref, toRaw, unref } from 'vue';
+  import { onMounted, reactive, ref, toRaw, unref } from 'vue';
   import codeImg from '/@/assets/images/checkcode.png';
-  import { Rule } from '/@/components/Form';
   import { useUserStore } from '/@/store/modules/user';
   import { useMessage } from '/@/hooks/web/useMessage';
   import { useI18n } from '/@/hooks/web/useI18n';
   import { SmsEnum } from '/@/views/sys/login/useLogin';
   import ThirdModal from '/@/views/sys/login/ThirdModal.vue';
-  import MiniForgotpad from './MiniForgotpad.vue';
-  import MiniRegister from './MiniRegister.vue';
   import MiniCodelogin from './MiniCodelogin.vue';
   import logoImg from '/@/assets/loginmini/icon/jeecg_logo.png';
   import adTextImg from '/@/assets/loginmini/icon/jeecg_ad_text.png';
   import { AppLocalePicker, AppDarkModeToggle } from '/@/components/Application';
   import { useLocaleStore } from '/@/store/modules/locale';
-  import { useDesign } from "/@/hooks/web/useDesign";
-  import { useAppInject } from "/@/hooks/web/useAppInject";
-  import { GithubFilled, WechatFilled, DingtalkCircleFilled, createFromIconfontCN } from '@ant-design/icons-vue';
+  import { useDesign } from '/@/hooks/web/useDesign';
+  import { useAppInject } from '/@/hooks/web/useAppInject';
+  import { WechatFilled, DingtalkCircleFilled, createFromIconfontCN } from '@ant-design/icons-vue';
 
   const IconFont = createFromIconfontCN({
     scriptUrl: '//at.alicdn.com/t/font_2316098_umqusozousr.js',
@@ -387,7 +374,7 @@
    */
   function handleSuccess(value) {
     Object.assign(formData, value);
-    Object.assign(phoneFormData, { mobile: "", smscode: "" });
+    Object.assign(phoneFormData, { mobile: '', smscode: '' });
     type.value = 'login';
     activeIndex.value = 'accountLogin';
     handleChangeCheckCode();
@@ -448,11 +435,11 @@
     color: #aaa !important;
   }
 
-  :deep(.jeecg-dark-switch){
-    position:absolute;
+  :deep(.jeecg-dark-switch) {
+    position: absolute;
     margin-right: 10px;
   }
-  .aui-link-login{
+  .aui-link-login {
     height: 42px;
     padding: 10px 15px;
     font-size: 14px;
@@ -460,98 +447,101 @@
     margin-top: 15px;
     margin-bottom: 8px;
   }
-  .aui-phone-logo{
+  .aui-phone-logo {
     position: absolute;
     margin-left: 10px;
     width: 60px;
-    top:2px;
+    top: 2px;
     z-index: 4;
   }
-  .top-3{
+  .top-3 {
     top: 0.45rem;
   }
 </style>
 
 <style lang="less">
-@prefix-cls: ~'@{namespace}-mini-login';
-@dark-bg: #293146;
+  @prefix-cls: ~'@{namespace}-mini-login';
+  @dark-bg: #293146;
 
-html[data-theme='dark'] {
-  .@{prefix-cls} {
-    background-color: @dark-bg !important;
-    background-image: none;
-
-    &::before {
-      background-image: url(/@/assets/svg/login-bg-dark.svg);
-    }
-    .aui-inputClear{
-      background-color: #232a3b !important;
-    }
-    .ant-input,
-    .ant-input-password {
-      background-color: #232a3b !important;
-    }
-
-    .ant-btn:not(.ant-btn-link):not(.ant-btn-primary) {
-      border: 1px solid #4a5569 !important;
-    }
-
-    &-form {
-      background: @dark-bg !important;
-    }
-
-    .app-iconify {
-      color: #fff !important;
-    }
-    .aui-inputClear input,.aui-input-line input,.aui-choice{
-      color: #c9d1d9 !important;
-    }
-
-    .aui-formBox{
+  html[data-theme='dark'] {
+    .@{prefix-cls} {
       background-color: @dark-bg !important;
-    }
-    .aui-third-text span{
-      background-color: @dark-bg !important;
-    }
-    .aui-form-nav .aui-flex-box{
-      color: #c9d1d9 !important;
-    }
+      background-image: none;
 
-    .aui-formButton .aui-linek-code{
-      background:  @dark-bg !important;
-      color: white !important;
-    }
-    .aui-code-line{
-      border-left: none !important;
-    }
-    .ant-checkbox-inner,.aui-success h3{
-      border-color: #c9d1d9;
-    }
-  }
+      &::before {
+        background-image: url(/@/assets/svg/login-bg-dark.svg);
+      }
+      .aui-inputClear {
+        background-color: #232a3b !important;
+      }
+      .ant-input,
+      .ant-input-password {
+        background-color: #232a3b !important;
+      }
 
-  input.fix-auto-fill,
-  .fix-auto-fill input {
-    -webkit-text-fill-color: #c9d1d9 !important;
-    box-shadow: inherit !important;
-  }
+      .ant-btn:not(.ant-btn-link):not(.ant-btn-primary) {
+        border: 1px solid #4a5569 !important;
+      }
 
-  &-sign-in-way {
-    .anticon {
-      font-size: 22px !important;
-      color: #888 !important;
-      cursor: pointer !important;
+      &-form {
+        background: @dark-bg !important;
+      }
 
-      &:hover {
-        color: @primary-color !important;
+      .app-iconify {
+        color: #fff !important;
+      }
+      .aui-inputClear input,
+      .aui-input-line input,
+      .aui-choice {
+        color: #c9d1d9 !important;
+      }
+
+      .aui-formBox {
+        background-color: @dark-bg !important;
+      }
+      .aui-third-text span {
+        background-color: @dark-bg !important;
+      }
+      .aui-form-nav .aui-flex-box {
+        color: #c9d1d9 !important;
+      }
+
+      .aui-formButton .aui-linek-code {
+        background: @dark-bg !important;
+        color: white !important;
+      }
+      .aui-code-line {
+        border-left: none !important;
+      }
+      .ant-checkbox-inner,
+      .aui-success h3 {
+        border-color: #c9d1d9;
       }
     }
+
+    input.fix-auto-fill,
+    .fix-auto-fill input {
+      -webkit-text-fill-color: #c9d1d9 !important;
+      box-shadow: inherit !important;
+    }
+
+    &-sign-in-way {
+      .anticon {
+        font-size: 22px !important;
+        color: #888 !important;
+        cursor: pointer !important;
+
+        &:hover {
+          color: @primary-color !important;
+        }
+      }
+    }
+    .ant-divider-inner-text {
+      font-size: 12px !important;
+      color: @text-color-secondary !important;
+    }
+    .aui-third-login a {
+      background: transparent;
+    }
   }
-  .ant-divider-inner-text {
-    font-size: 12px !important;
-    color: @text-color-secondary !important;
-  }
-  .aui-third-login a{
-    background: transparent;
-  }
-}
 </style>

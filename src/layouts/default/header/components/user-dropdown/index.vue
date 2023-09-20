@@ -43,7 +43,6 @@
   import { useModal } from '/@/components/Modal';
   import { useMessage } from '/src/hooks/web/useMessage';
   import { useGo } from '/@/hooks/web/usePage';
-  import headerImg from '/@/assets/images/header.jpg';
   import { propTypes } from '/@/utils/propTypes';
   import { openWindow } from '/@/utils';
 
@@ -79,16 +78,12 @@
 
       const getUserInfo = computed(() => {
         const { realname = '', avatar, desc } = userStore.getUserInfo || {};
-        return { realname, avatar: avatar || headerImg, desc };
+        return { realname, avatar: avatar, desc };
       });
 
       const getAvatarUrl = computed(() => {
         let { avatar } = getUserInfo.value;
-        if (avatar == headerImg) {
-          return avatar;
-        } else {
-          return getFileAccessHttpUrl(avatar);
-        }
+        return getFileAccessHttpUrl(avatar);
       });
 
       const [register, { openModal }] = useModal();

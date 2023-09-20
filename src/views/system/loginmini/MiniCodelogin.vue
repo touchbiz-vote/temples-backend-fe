@@ -11,7 +11,7 @@
           <div class="aui-formWell">
             <form>
               <div class="aui-flex aui-form-nav investment_title" style="padding-bottom: 19px">
-                <div class="aui-flex-box activeNav">{{t('sys.login.qrSignInFormTitle')}}</div>
+                <div class="aui-flex-box activeNav">{{ t('sys.login.qrSignInFormTitle') }}</div>
               </div>
               <div class="aui-form-box">
                 <div class="aui-account" style="padding: 30px 0">
@@ -21,7 +21,7 @@
                 </div>
               </div>
               <div class="aui-formButton">
-                <a class="aui-linek-code aui-link-register" @click="goBackHandleClick">{{t('sys.login.backSignIn')}}</a>
+                <a class="aui-linek-code aui-link-register" @click="goBackHandleClick">{{ t('sys.login.backSignIn') }}</a>
               </div>
             </form>
           </div>
@@ -31,11 +31,6 @@
             </div>
           </div>
           <div class="aui-flex" :class="`${prefixCls}-sign-in-way`">
-            <div class="aui-flex-box">
-              <div class="aui-third-login">
-                <a href="" title="github" @click="onThirdLogin('github')"><GithubFilled /></a>
-              </div>
-            </div>
             <div class="aui-flex-box">
               <div class="aui-third-login">
                 <a href="" title="企业微信" @click="onThirdLogin('wechat_enterprise')"><icon-font class="item-icon" type="icon-qiyeweixin3" /></a>
@@ -57,7 +52,7 @@
     </div>
   </div>
   <!-- 第三方登录相关弹框 -->
-  <ThirdModal ref="thirdModalRef"></ThirdModal>
+  <ThirdModal ref="thirdModalRef" />
 </template>
 
 <script lang="ts" setup name="mini-code-login">
@@ -69,8 +64,8 @@
   import logoImg from '/@/assets/loginmini/icon/jeecg_logo.png';
   import adTextImg from '/@/assets/loginmini/icon/jeecg_ad_text.png';
   import { useI18n } from '/@/hooks/web/useI18n';
-  import { useDesign } from "/@/hooks/web/useDesign";
-  import { GithubFilled, WechatFilled, DingtalkCircleFilled, createFromIconfontCN } from '@ant-design/icons-vue';
+  import { useDesign } from '/@/hooks/web/useDesign';
+  import { WechatFilled, DingtalkCircleFilled, createFromIconfontCN } from '@ant-design/icons-vue';
 
   const IconFont = createFromIconfontCN({
     scriptUrl: '//at.alicdn.com/t/font_2316098_umqusozousr.js',
@@ -160,6 +155,6 @@
   });
 </script>
 <style lang="less" scoped>
-@import '/@/assets/loginmini/style/home.less';
-@import '/@/assets/loginmini/style/base.less';
+  @import '/@/assets/loginmini/style/home.less';
+  @import '/@/assets/loginmini/style/base.less';
 </style>

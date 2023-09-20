@@ -27,7 +27,6 @@
 
   import { useUserStore } from '/@/store/modules/user';
   import { useLockStore } from '/@/store/modules/lock';
-  import headerImg from '/@/assets/images/header.jpg';
   export default defineComponent({
     name: 'LockModal',
     components: { BasicModal, BasicForm },
@@ -68,7 +67,7 @@
 
       const avatar = computed(() => {
         const { avatar } = userStore.getUserInfo;
-        return avatar || headerImg;
+        return avatar;
       });
 
       return {

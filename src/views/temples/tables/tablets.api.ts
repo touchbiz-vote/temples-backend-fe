@@ -11,6 +11,7 @@ export enum Api {
   importExcelUrl = '/sys/sysDepart/importExcel',
   list = '/online/cgform/api/getData/',
   searchOrder = '/api/temples/order/search',
+  assign = '/api/temples/tablets/assign/byOrder',
 }
 
 /**
@@ -48,6 +49,12 @@ export const searchOrder = (params?) => {
  */
 export const saveOrUpdate = (params, isUpdate) => {
   return isUpdate ? defHttp.put({ url: Api.save, params }) : defHttp.post({ url: Api.save, params });
+};
+
+export const assign = (params, handleSuccess) => {
+  return defHttp.post({ url: Api.assign, params }).then(() => {
+    handleSuccess();
+  });
 };
 
 /**

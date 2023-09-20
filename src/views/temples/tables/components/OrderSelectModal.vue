@@ -37,9 +37,8 @@
     props: {
       ...selectProps,
       //选择框标题
-      modalTitle: {
-        type: String,
-        default: '选择待分配的订单',
+      tablets: {
+        type: Object,
       },
     },
     emits: ['register', 'getSelectResult'],
@@ -114,8 +113,12 @@
       });
 
       const loading = ref<boolean>(false);
+
+      const tablets = ref<Object>({});
       //注册弹框
-      const [register, { closeModal }] = useModalInner(() => {});
+      const [register, { closeModal }] = useModalInner(({record}) => {
+        tablets.value = record;
+      });
       const attrs = useAttrs();
 
       //查询form
@@ -159,7 +162,8 @@
        */
       function handleEdit(record) {
         //   //回传选项和已选择的值
-        emit('getSelectResult', record);
+        console.log(props)
+        emit('getSelectResult', record, tablets.value.id);
         //关闭弹窗
         closeModal();
       }
@@ -172,7 +176,6 @@
       }
 
       return {
-        BasicTable,
         getTableAction,
         // searchInfo,
         registerTable,
@@ -185,7 +188,6 @@
         // rowSelection,
         // selectRows,
         loading,
-        TableAction,
         // selectedTable,
         // handleDeleteSelected,
         // tableScroll,

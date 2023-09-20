@@ -20,7 +20,7 @@
   import OrderSelectModal from './OrderSelectModal.vue';
   import { watch, ref, unref, onMounted } from 'vue';
   import { BasicTable, useTable, TableAction } from '/@/components/Table';
-  import { getList, deleteTable } from '../tablets.api';
+  import { getList, deleteTable, assign } from '../tablets.api';
   import { columns } from '../tablets.data';
   // import { useDesign } from '/@/hooks/web/useDesign';
   const [registerModal, { openModal }] = useModal();
@@ -66,8 +66,9 @@
     }
   }
 
-  function bindTablets(record) {
+  function bindTablets(record, tabletsId) {
     console.log(record);
+    assign({ tabletsId: tabletsId, orderId: record.id }, reload);
   }
 
   /**
@@ -110,11 +111,12 @@
       },
       {
         label: '分配',
-        // ifShow: record.status == 0,
+        ifShow: record.status == 0,
         onClick: handleSign.bind(null, record),
       },
       {
         label: '删除',
+        ifShow: record.status == 0,
         popConfirm: {
           title: '是否确认删除,删除后将不可恢复',
           confirm: handleDelete.bind(null, record),
