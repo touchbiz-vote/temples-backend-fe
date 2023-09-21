@@ -24,14 +24,16 @@
             <Icon icon="mdi:chevron-down" />
           </a-button>
         </a-dropdown>
-        <a type="primary" preIcon="ant-design:export-outlined" href="https://jiangyan-static.oss-cn-beijing.aliyuncs.com/product_import_template.xlsx">下载导入文件模版</a>
+        <a type="primary" preIcon="ant-design:export-outlined" href="https://jiangyan-static.oss-cn-beijing.aliyuncs.com/product_import_template.xlsx"
+          >下载导入文件模版</a
+        >
       </template>
       <template #bodyCell="{ column, record }">
         <template v-if="column.dataIndex == 'file_url' && record.file_url">
           <a-image :preview="true" :src="record.file_url" style="width: 80px; height: 80px" />
         </template>
-        <template v-if="column.dataIndex == 'cover' && record.cover">
-          <a-image :preview="true" :src="record.cover" style="width: 80px; height: 80px" />
+        <template v-if="column.dataIndex == 'target_url' && record.target_url">
+          <a-image :preview="true" :src="record.target_url" style="width: 120px; height: 120px" />
         </template>
       </template>
       <!--操作栏-->
@@ -47,7 +49,7 @@
   import JImportModal from '/@/components/Form/src/jeecg/components/JImportModal.vue';
   import { BasicTable, useTable, TableAction } from '/@/components/Table';
   import { getColumns, getList } from '/@/api/common/api';
-  import { Api, cleanCase } from '../vote.api';
+  import { Api, cleanCase, generateImage } from '../vote.api';
   import { useModal } from '/@/components/Modal';
   import { ref } from 'vue';
   const [registerModalJimport, { openModal: openModalJimport }] = useModal();
@@ -91,11 +93,9 @@
     params.activity_id = props.activityId;
   }
 
-  function onExportXls() {
+  function onExportXls() {}
 
-  }
-
-   /**
+  /**
    * 选择列配置
    */
   const rowSelection = {
@@ -137,6 +137,10 @@
     return Api.importExcel + props.activityId;
   }
 
+  function handleGenerateImage(record) {
+    generateImage(record.id, reload);
+  }
+
   /**
    * 操作列定义
    * @param record
@@ -144,10 +148,10 @@
   function getTableAction(record) {
     return [
       {
-        label: '生成模版',
+        label: '图片处理',
         popConfirm: {
-          title: '是否确认上架',
-          // confirm: handleEnable.bind(null, record),
+          title: '是否确认重新处理，处理完成将覆盖原有结果',
+          confirm: handleGenerateImage.bind(null, record),
         },
       },
       {
@@ -160,7 +164,7 @@
     ];
   }
 
-  function getDropDownAction(record){
+  function getDropDownAction(record) {
     return [];
   }
 
@@ -212,12 +216,15 @@
     getColumns(tableId).then((res) => {
       columns.value = res.columns;
       columns.value.forEach((column) => {
-        column.width= 120;
-        if(column.dataIndex == 'activity_id') {
+        const { dataIndex } = column;
+        column.width = 120;
+        if (dataIndex == 'activity_id') {
           column.width = 0;
+        } else if (dataIndex == 'sequence') {
+          column.width = 70;
+        } else if (dataIndex == 'photo_time' || dataIndex == 'city' || column.title.indexOf('推荐') > -1) {
+          column.width = 80;
         }
-        // column.scopedSlots = { customRender: column.dataIndex };
-        // column.slots = column.scopedSlots;
       });
       columns.value = columns.value.concat();
     });
