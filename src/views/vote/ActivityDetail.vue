@@ -2,11 +2,8 @@
   <a-card :bordered="false">
     <a-spin :spinning="false">
       <a-card :bordered="true">
-        <a-form :model="model" :labelCol="{ span: 3, offset: 3 }">
-          <a-form-item label="活动名称/id">{{ model.act_name }}({{ model.id }})</a-form-item>
-          <a-form-item label="活动时间">{{ model.act_start_time }} ～ {{ model.act_end_time }}</a-form-item>
-          <a-form-item label="活动状态">{{ filterDictTextByCache('activity_status', model.status) }}</a-form-item>
-        </a-form>
+        活动名称/id: {{ model.act_name }}({{ model.id }}) 活动时间 {{ model.act_start_time }} ～ {{ model.act_end_time }} 活动状态:
+        <a-tag>{{ filterDictTextByCache('activity_status', model.status) }}</a-tag>
       </a-card>
 
       <a-tabs defaultActiveKey="1">
@@ -31,7 +28,6 @@
   import { useRouter } from 'vue-router';
   const { currentRoute } = useRouter();
   const route = currentRoute.value;
-
 
   const model = ref({
     act_name: '',

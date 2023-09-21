@@ -224,6 +224,8 @@
           column.width = 70;
         } else if (dataIndex == 'photo_time' || dataIndex == 'city' || column.title.indexOf('推荐') > -1) {
           column.width = 80;
+        } else if (dataIndex == 'code') {
+          column.width = 90;
         }
       });
       columns.value = columns.value.concat();
