@@ -4,7 +4,7 @@
       <LocationLeftTree ref="leftTree" @select="onTreeSelect" @rootTreeData="onRootTreeData" />
     </a-col>
     <a-col :xl="16" :lg="24" :md="24" style="margin-bottom: 10px">
-      <div style="height: 100%;" :class="[`${prefixCls}`]">
+      <div style="height: 100%" :class="[`${prefixCls}`]">
         <a-tabs v-show="departData != null" defaultActiveKey="base-info">
           <a-tab-pane tab="牌位列表" key="base-info" forceRender style="position: relative">
             <div style="padding: 20px">
@@ -20,7 +20,7 @@
   </a-row>
 </template>
 
-<script lang="ts" setup name="system-depart">
+<script lang="ts" setup>
   import { provide, ref } from 'vue';
   import { useDesign } from '/@/hooks/web/useDesign';
   import LocationLeftTree from './components/LocationLeftTree.vue';

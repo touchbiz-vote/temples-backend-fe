@@ -177,21 +177,12 @@
 
       return {
         getTableAction,
-        // searchInfo,
         registerTable,
         register,
-        // indexColumnProps,
-        // getBindValue,
         searchOrder,
         formConfig,
         columns,
-        // rowSelection,
-        // selectRows,
         loading,
-        // selectedTable,
-        // handleDeleteSelected,
-        // tableScroll,
-        // tableRef,
       };
     },
   });

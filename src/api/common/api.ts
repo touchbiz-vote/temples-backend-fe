@@ -14,6 +14,8 @@ enum Api {
   getDictItems = '/sys/dict/getDictItems/',
   getTableList = '/sys/user/queryUserComponentData',
   getCategoryData = '/sys/category/loadAllData',
+  getColumns = '/online/cgform/api/getColumns/',
+  getList = '/online/cgform/api/getData/',
 }
 
 /**
@@ -147,4 +149,21 @@ export const getFileblob = (url, parameter) => {
  */
 export const uploadMyFile = (url, data) => {
   return defHttp.uploadMyFile(url, data);
+};
+
+
+/**
+ * 查询详情
+ * @param id
+ */
+export const getColumns = (tableId) => {
+  return defHttp.get({ url: Api.getColumns + tableId});
+};
+
+/**
+ * 查询列表
+ * @param id
+ */
+export const getList = (tableId, params) => {
+  return defHttp.get({ url: Api.getList + tableId, params });
 };
