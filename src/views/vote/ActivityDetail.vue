@@ -29,6 +29,7 @@
   const { currentRoute } = useRouter();
   const route = currentRoute.value;
 
+  const tableId = '4028f8c98ab5cd05018ab5cd0ac90001';
   const model = ref({
     act_name: '',
     id: '',
@@ -37,7 +38,7 @@
     status: '',
   });
 
-  getActivityDetail(route.query.tableId, route.query.id).then((res) => {
+  getActivityDetail(tableId, route.query.id).then((res) => {
     model.value = res;
   });
 </script>
