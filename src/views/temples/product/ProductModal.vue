@@ -4,7 +4,7 @@
   </BasicModal>
 </template>
 <script lang="ts" setup name="ProductModal">
-  import { convertKeysToCamelCase } from '/@/utils/json/convert';
+  import { convertKeysToCamelCase } from '../../../utils/convert/convert';
   import { ref, computed, unref, defineProps } from 'vue';
   import { BasicModal, useModalInner } from '/@/components/Modal';
   import { BasicForm, useForm } from '/@/components/Form/index';
@@ -78,3 +78,4 @@
     }
   }
 </script>
+../../../utils/convert/convert

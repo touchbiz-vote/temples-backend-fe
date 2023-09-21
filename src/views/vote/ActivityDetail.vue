@@ -11,10 +11,10 @@
 
       <a-tabs defaultActiveKey="1">
         <a-tab-pane tab="作品列表" key="1" forceRender>
-          <!-- <ActivityMonitor /> -->
+          <ActivityCase :activityId="convertToNumber(route.query.id)" />
         </a-tab-pane>
         <a-tab-pane tab="进展监控列表" key="2" forceRender>
-          <ActivityMonitor :activityId="route.query.id" />
+          <ActivityMonitor :activityId="convertToNumber(route.query.id)" />
         </a-tab-pane>
       </a-tabs>
     </a-spin>
@@ -23,8 +23,9 @@
 
 <script lang="ts" setup>
   import { ref } from 'vue';
+  import { convertToNumber } from '../../utils/convert/convert';
   import ActivityMonitor from './components/ActivityMonitor.vue';
-  // import ActivityCaseModal from './modules/ActivityCaseModal';
+  import ActivityCase from './components/ActivityCase.vue';
   import { filterDictTextByCache } from '/@/utils/dict/JDictSelectUtil';
   import { getActivityDetail } from './vote.api';
   import { useRouter } from 'vue-router';
