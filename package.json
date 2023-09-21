@@ -36,11 +36,6 @@
   "dependencies": {
     "@ant-design/colors": "^6.0.0",
     "@ant-design/icons-vue": "^6.1.0",
-    "@fullcalendar/core": "^6.1.8",
-    "@fullcalendar/daygrid": "^6.1.8",
-    "@fullcalendar/list": "^6.1.8",
-    "@fullcalendar/timegrid": "^6.1.8",
-    "@fullcalendar/vue": "^6.1.8",
     "@iconify/iconify": "^2.2.1",
     "@jeecg/online": "3.5.3-beta3",
     "@logicflow/core": "^1.1.13",
