@@ -18,24 +18,19 @@
         <TableAction :actions="getTableAction(record)" :dropDownActions="getDropDownAction(record)" />
       </template>
     </BasicTable>
-    <!-- <JImportModal @register="registerModalJimport" :url="getImportUrl()" @ok="reload" /> -->
+    <ActivityModal @register="registerModal" @success="reload" />
   </div>
 </template>
 
 <script lang="ts" setup>
-  import JImportModal from '/@/components/Form/src/jeecg/components/JImportModal.vue';
+  import ActivityModal from './components/ActivityModal.vue';
   import { BasicTable, useTable, TableAction } from '/@/components/Table';
   import { getColumns, getList } from '/@/api/common/api';
-  import { Api, cleanCase, generateImage } from './vote.api';
+  import { Api } from './vote.api';
   import { useModal } from '/@/components/Modal';
   import { ref } from 'vue';
-  const [registerModalJimport, { openModal: openModalJimport }] = useModal();
-  const tableId = '4028f8c98ab5cd05018ab5cd154b0003';
-  const checkedKeys = ref<Array<string | number>>([]);
-
-  const props = defineProps({
-    activityId: { type: Number },
-  });
+  const [registerModal, { openModal }] = useModal();
+  const tableId = '4028f8c98ab5cd05018ab5cd0ac90001';
 
   loadColumn();
 
@@ -56,7 +51,7 @@
     showIndexColumn: false,
     tableSetting: { fullScreen: false },
     rowKey: 'id',
-    beforeFetch: initFilter,
+    // beforeFetch: initFilter,
     actionColumn: {
       width: 160,
       title: '操作',
@@ -65,15 +60,18 @@
     },
   });
 
-  function initFilter(params) {
-    console.log(props.activityId);
-    params.activity_id = props.activityId;
+  /**
+   * 新增事件
+   */
+  function handleAdd() {
+    openModal(true, {
+      isUpdate: false,
+    });
   }
 
   function loadData(params) {
     return getList(tableId, params);
   }
-
 
   /**
    * 操作列定义
@@ -81,6 +79,9 @@
    */
   function getTableAction(record) {
     return [
+      {
+        label: '编辑',
+      },
       {
         label: '删除',
         popConfirm: {
