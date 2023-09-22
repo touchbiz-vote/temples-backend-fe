@@ -231,7 +231,6 @@ export function useDataSource(
         pageParams[pageField] = (opt && opt.page) || current;
         pageParams[sizeField] = pageSize;
       }
-
       const { sortInfo = {}, filterInfo } = searchState;
 
       let params: Recordable = {
@@ -261,7 +260,7 @@ export function useDataSource(
       // 假如数据变少，导致总页数变少并小于当前选中页码，通过getPaginationRef获取到的页码是不正确的，需获取正确的页码再次执行
       if (resultTotal) {
         const currentTotalPage = Math.ceil(Number(resultTotal) / pageSize);
-        if (current > currentTotalPage) {
+        if (current > currentTotalPage && Number(resultTotal) > 0) {
           setPagination({
             current: currentTotalPage,
           });

@@ -4,6 +4,8 @@
       <a-card :bordered="true">
         活动名称/id: {{ model.act_name }}({{ model.id }}) 活动时间 {{ model.act_start_time }} ～ {{ model.act_end_time }} 活动状态:
         <a-tag>{{ filterDictTextByCache('activity_status', model.status) }}</a-tag>
+        作品总数:
+        <a-tag color="green">{{ model.case_count }}</a-tag>
       </a-card>
 
       <a-tabs defaultActiveKey="1">
@@ -36,6 +38,7 @@
     act_start_time: '',
     act_end_time: '',
     status: '',
+    case_count: 0,
   });
 
   getActivityDetail(tableId, route.query.id).then((res) => {

@@ -15,13 +15,13 @@
             :selectedKeys="selectedDepIds"
             :expandedKeys="expandedKeys"
             :clickRowToExpand="false"
-          ></BasicTree>
+          />
         </a-card>
       </a-col>
       <a-col :md="17" :sm="24">
         <a-card :style="{ minHeight: '613px', overflow: 'auto' }">
           <!--用户列表-->
-          <BasicTable ref="tableRef" v-bind="getBindValue" :searchInfo="searchInfo" :api="getTableList" :rowSelection="rowSelection"></BasicTable>
+          <BasicTable ref="tableRef" v-bind="getBindValue" :searchInfo="searchInfo" :api="getTableList" :rowSelection="rowSelection" />
         </a-card>
       </a-col>
     </a-row>

@@ -1,10 +1,11 @@
 {
-  "name": "jeecgboot-vue3",
+  "name": "temples-vue3",
   "version": "3.5.3",
   "author": {
-    "name": "jeecg",
-    "email": "jeecgos@163.com",
-    "url": "https://github.com/jeecgboot/jeecgboot-vue3"
+    "name": "steven",
+    "email": "mrjiangyan@hotmail.com",
+    "url": "https://www.touchbiz.tech",
+    "license" : "MIT"
   },
   "scripts": {
     "bootstrap": "pnpm install",
