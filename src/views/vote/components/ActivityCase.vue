@@ -52,9 +52,12 @@
   import { Api, cleanCase, generateImage } from '../vote.api';
   import { useModal } from '/@/components/Modal';
   import { ref } from 'vue';
+  import { useMethods } from '/@/hooks/system/useMethods';
   const [registerModalJimport, { openModal: openModalJimport }] = useModal();
   const tableId = '4028f8c98ab5cd05018ab5cd154b0003';
   const checkedKeys = ref<Array<string | number>>([]);
+
+  const { handleExportXls } = useMethods();
 
   const props = defineProps({
     activityId: { type: Number },
@@ -89,11 +92,21 @@
   });
 
   function initFilter(params) {
-    console.log(props.activityId);
+    console.log(params);
     params.activity_id = props.activityId;
+    if (!params.column) {
+      params.column = 'sequence';
+      params.order = 'asc';
+    }
   }
 
-  function onExportXls() {}
+  function onExportXls() {
+    handleExportXls('投票结果导出', '/api/biz/activity/exportXls?activityId=' + props.activityId + '&all=false');
+  }
+
+  function onExportXlsFull() {
+    handleExportXls('全量导出', '/api/biz/activity/exportXls?activityId=' + props.activityId + '&all=true');
+  }
 
   /**
    * 选择列配置
