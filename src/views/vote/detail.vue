@@ -12,7 +12,7 @@
         <a-tab-pane tab="作品列表" key="1" forceRender>
           <ActivityCase :activityId="convertToNumber(route.query.id)" />
         </a-tab-pane>
-        <a-tab-pane tab="进展监控列表" key="2" forceRender>
+        <a-tab-pane tab="评委投票进展" key="2" forceRender>
           <ActivityMonitor :activityId="convertToNumber(route.query.id)" />
         </a-tab-pane>
       </a-tabs>
