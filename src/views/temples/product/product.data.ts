@@ -24,12 +24,12 @@ export const columns: BasicColumn[] = [
       return record.name + (record.sub_title ? '<br/>' + record.sub_title : '');
     },
   },
-  {
-    title: '售价(元)',
-    dataIndex: 'sale_price',
-    width: 80,
-    resizable: true,
-  },
+  // {
+  //   title: '售价(元)',
+  //   dataIndex: 'sale_price',
+  //   width: 80,
+  //   resizable: true,
+  // },
   {
     title: '业务类型',
     dataIndex: 'biz_type_id',
@@ -284,29 +284,29 @@ export const formSchema: FormSchema[] = [
       fileType: UploadTypeEnum.image,
     },
   },
-  {
-    field: 'code',
-    label: '商品编码',
-    component: 'Input',
-    required: false,
-    // show: false,
-    componentProps: {
-      // placeholder: '请输入商品编码',
-      // readonly: true,
-    },
-    dynamicRules: ({ model, schema }) => rules.duplicateCheckRule('t_product', 'code', model, schema, true),
-  },
-  {
-    field: 'sale_price',
-    label: '售价(元)',
-    component: 'InputNumber',
-    required: true,
-    componentProps: {
-      min: 1,
-      max: 9999999,
-      placeholder: '请输入售价',
-    },
-  },
+  // {
+  //   field: 'code',
+  //   label: '商品编码',
+  //   component: 'Input',
+  //   required: false,
+  //   // show: false,
+  //   componentProps: {
+  //     // placeholder: '请输入商品编码',
+  //     // readonly: true,
+  //   },
+  //   dynamicRules: ({ model, schema }) => rules.duplicateCheckRule('t_product', 'code', model, schema, true),
+  // },
+  // {
+  //   field: 'sale_price',
+  //   label: '售价(元)',
+  //   component: 'InputNumber',
+  //   required: true,
+  //   componentProps: {
+  //     min: 1,
+  //     max: 9999999,
+  //     placeholder: '请输入售价',
+  //   },
+  // },
   {
     field: 'recommend',
     label: '首页推荐',
