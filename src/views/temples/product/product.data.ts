@@ -267,7 +267,7 @@ export const formSchema: FormSchema[] = [
     component: 'JUpload',
     componentProps: {
       maxCount: 1,
-      sizeLimit: 30,
+      sizeLimit: 50,
       helpMessage: '单个文件大小不能超过40KB, 宽度和高度保持 180px*200px的比例',
       fileType: UploadTypeEnum.image,
     },
