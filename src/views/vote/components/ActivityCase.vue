@@ -8,15 +8,15 @@
         </a-popconfirm>
         <!-- <a-button preIcon="ant-design:plus-outlined" type="primary" @click="handleAdd">新增</a-button> -->
         <a-button type="primary" preIcon="ant-design:import-outlined" @click="handleImport">导入</a-button>
-        <a-button type="second" preIcon="ant-design:export-outlined" @click="onExportXls"> 结果导出</a-button>
-        <a-button type="second" preIcon="ant-design:export-outlined" @click="onExportXls"> 全字段导出</a-button>
+        <a-button type="second" preIcon="ant-design:export-outlined" @click="onExportXls">结果导出</a-button>
+        <a-button type="second" preIcon="ant-design:export-outlined" @click="onExportXlsFull">全字段导出</a-button>
         <a-dropdown v-if="checkedKeys.length > 0">
           <template #overlay>
             <a-menu>
-              <a-menu-item key="1" @click="batchHandleDelete">
+              <!-- <a-menu-item key="1" @click="batchHandleDelete">
                 <Icon icon="ant-design:export-outlined" />
                 <span>批量图片导出</span>
-              </a-menu-item>
+              </a-menu-item> -->
             </a-menu>
           </template>
           <a-button>
