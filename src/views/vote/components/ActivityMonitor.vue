@@ -45,7 +45,7 @@
     bordered: true,
     showIndexColumn: false,
     tableSetting: { fullScreen: false },
-    rowKey: 'id',
+    rowKey: 'jeecg_row_key',
     beforeFetch: initFilter,
     actionColumn: {
       width: 160,
@@ -64,7 +64,7 @@
   }
 
   function handleDelete(record) {
-    return deleteMonitor(record.id, reload);
+    return deleteMonitor(record.jeecg_row_key, reload);
   }
 
   function bindAccount(options) {
