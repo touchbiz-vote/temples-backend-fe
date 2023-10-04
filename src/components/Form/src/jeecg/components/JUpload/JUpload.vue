@@ -106,7 +106,7 @@
     bind.data = {
       biz: props.bizPath,
       fileType: props.fileType,
-      sizeLimit: props.sizeLimit ? props.sizeLimit : null,
+      sizeLimit: props.sizeLimit ? props.sizeLimit : 0,
       height: props.height,
       width: props.width,
       ...bind.data,
