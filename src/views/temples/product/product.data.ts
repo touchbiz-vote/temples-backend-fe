@@ -176,6 +176,18 @@ export const searchFormSchema: FormSchema[] = [
       ],
     },
   },
+  {
+    field: 'recommend',
+    label: '首页推荐',
+    colProps: { style: 'width:220px' },
+    component: 'Select',
+    componentProps: {
+      options: [
+        { label: '推荐', value: 1 },
+        { label: '不推荐', value: 2 },
+      ],
+    },
+  },
 ];
 export const formSchema: FormSchema[] = [
   {

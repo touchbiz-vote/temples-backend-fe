@@ -3,7 +3,7 @@ import { Modal } from 'ant-design-vue';
 
 const tableId = 'c37247320d744855bf85fac76f0cebfa';
 
-enum Api {
+export enum Api {
   list = '/online/cgform/api/getData/',
   save = '/api/temples/product',
   get = '/online/cgform/api/form/',
@@ -12,6 +12,7 @@ enum Api {
   delete = '/api/temples/product/',
   batchDelete = '/online/cgform/api/form/',
   importExcel = '/online/cgform/api/importXls/',
+  exportExcel = '/sys/common/exportXls/',
 }
 
 /**
@@ -24,6 +25,8 @@ export const ajaxGetDictItems = (params) => defHttp.get({ url: `/sys/dict/getDic
  * 导入api
  */
 export const getImportUrl = Api.importExcel + tableId;
+
+export const getExportUrl = Api.exportExcel + tableId;
 /**
  * 查询示例列表
  * @param params

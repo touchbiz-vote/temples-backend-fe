@@ -56,7 +56,7 @@
       name: '数据源列表',
       url: getExportUrl,
     },
-    importConifg: {
+    importConfig: {
       url: getImportUrl,
     },
   });

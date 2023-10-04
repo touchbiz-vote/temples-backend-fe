@@ -4,7 +4,8 @@
     <BasicTable @register="registerTable" :rowSelection="rowSelection">
       <template #tableTitle>
         <a-button preIcon="ant-design:plus-outlined" type="primary" @click="handleAdd">新增</a-button>
-        <a-button type="primary" preIcon="ant-design:import-outlined" @click="handleImport">导入</a-button>
+        <j-upload-button type="primary" preIcon="ant-design:import-outlined" @click="onImportXls">导入</j-upload-button>
+        <!-- <a-button type="primary" preIcon="ant-design:import-outlined" @click="onImportXls">导入</a-button> -->
         <a-button type="primary" preIcon="ant-design:export-outlined" @click="onExportXls"> 导出</a-button>
         <a-dropdown v-if="checkedKeys.length > 0">
           <template #overlay>
@@ -20,8 +21,9 @@
             <Icon icon="mdi:chevron-down" />
           </a-button>
         </a-dropdown>
-        <a type="primary" preIcon="ant-design:export-outlined" href="https://jiangyan-static.oss-cn-beijing.aliyuncs.com/product_import_template.xlsx">下载导入文件模版</a>
-      
+        <a type="primary" preIcon="ant-design:export-outlined" href="https://jiangyan-static.oss-cn-beijing.aliyuncs.com/product_import_template.xlsx"
+          >下载导入文件模版</a
+        >
       </template>
       <template #bodyCell="{ column, record }">
         <template v-if="column.dataIndex == 'cover' && record.cover">
@@ -34,7 +36,7 @@
       </template>
     </BasicTable>
     <ProductModal @register="registerModal" @success="reload" :isDisabled="isDisabled" />
-    <JImportModal @register="registerModalJimport" :url="getImportUrl" />
+    <!-- <JImportModal @register="registerModalJimport" :url="getImportUrl" /> -->
   </div>
 </template>
 <script lang="ts" setup>
@@ -44,65 +46,93 @@
   import ProductModal from './ProductModal.vue';
   import { useMessage } from '/@/hooks/web/useMessage';
   const { createConfirm } = useMessage();
-  import JImportModal from '/@/components/Form/src/jeecg/components/JImportModal.vue';
-  import { getList, batchDelete, deleteProduct, enable, disable, getImportUrl } from './product.api';
+  // import JImportModal from '/@/components/Form/src/jeecg/components/JImportModal.vue';
+  import { getList, batchDelete, deleteProduct, enable, disable, getImportUrl, Api, getExportUrl } from './product.api';
   import { columns, searchFormSchema } from './product.data';
-  import { useMethods } from '/@/hooks/system/useMethods';
+  // import { useMethods } from '/@/hooks/system/useMethods';
+  import { useListPage } from '/@/hooks/system/useListPage';
+
   //导入导出方法
-  const { handleExportXls } = useMethods();
+  // const { handleExportXls } = useMethods();
 
   import { fetchDataWithCache } from '/@/utils/dict';
   const checkedKeys = ref<Array<string | number>>([]);
   const [registerModal, { openModal }] = useModal();
-  const [registerModalJimport, { openModal: openModalJimport }] = useModal();
+  // const [registerModalJimport, { openModal: openModalJimport }] = useModal();
   const isDisabled = ref(false);
 
   const tableId = '768afa9fde41486cb24d852ea96893d8';
   const url = {
-    importExcel: '/online/cgform/api/importXls/',
-    exportExcel: '/online/cgform/api/exportXlsOld/',
     columns: '/online/cgform/api/getColumns/',
   };
 
   url.columns = url.columns + tableId;
-  url.importExcel = url.importExcel + tableId;
-  url.exportExcel = url.exportExcel + tableId;
-  const [registerTable, { reload, setProps }] = useTable({
-    title: '商品列表',
-    api: getList,
-    columns,
-    afterFetch: fillData,
-    size: 'default',
-    formConfig: {
-      autoSubmitOnEnter: true,
-      showAdvancedButton: false,
-      schemas: searchFormSchema,
-      labelWidth: 80,
+
+  // 列表页面公共参数、方法
+  const { tableContext, onImportXls, onExportXls } = useListPage({
+    tableProps: {
+      title: '商品列表',
+      api: getList,
+      columns: columns,
+      afterFetch: fillData,
+      size: 'default',
+      formConfig: {
+        autoSubmitOnEnter: true,
+        showAdvancedButton: false,
+        schemas: searchFormSchema,
+        labelWidth: 80,
+      },
+      striped: true,
+      useSearchForm: true,
+      showTableSetting: true,
+      bordered: true,
+      showIndexColumn: false,
+      tableSetting: { fullScreen: true },
+      rowKey: 'id',
+      actionColumn: {
+        width: 160,
+        title: '操作',
+        dataIndex: 'action',
+        slots: { customRender: 'action' },
+      },
     },
-    striped: true,
-    useSearchForm: true,
-    showTableSetting: true,
-    bordered: true,
-    showIndexColumn: false,
-    tableSetting: { fullScreen: true },
-    rowKey: 'id',
-    actionColumn: {
-      width: 160,
-      title: '操作',
-      dataIndex: 'action',
-      slots: { customRender: 'action' },
+    exportConfig: {
+      name: '商品列表',
+      url: getExportUrl,
+    },
+    importConfig: {
+      url: getImportUrl,
     },
   });
 
-  /**
-   * 选择列配置
-   */
-  const rowSelection = {
-    type: 'checkbox',
-    columnWidth: 30,
-    selectedRowKeys: checkedKeys,
-    onChange: onSelectChange,
-  };
+  const [registerTable, { reload }, { rowSelection, selectedRowKeys }] = tableContext;
+
+  // const [registerTable, { reload, setProps }] = useTable({
+  //   title: '商品列表',
+  //   api: getList,
+  //   columns,
+  //   afterFetch: fillData,
+  //   size: 'default',
+  //   formConfig: {
+  //     autoSubmitOnEnter: true,
+  //     showAdvancedButton: false,
+  //     schemas: searchFormSchema,
+  //     labelWidth: 80,
+  //   },
+  //   striped: true,
+  //   useSearchForm: true,
+  //   showTableSetting: true,
+  //   bordered: true,
+  //   showIndexColumn: false,
+  //   tableSetting: { fullScreen: true },
+  //   rowKey: 'id',
+  //   actionColumn: {
+  //     width: 160,
+  //     title: '操作',
+  //     dataIndex: 'action',
+  //     slots: { customRender: 'action' },
+  //   },
+  // });
 
   /**
    * 批量删除事件
@@ -120,9 +150,9 @@
   /**
    * 选择事件
    */
-  function onSelectChange(selectedRowKeys: (string | number)[]) {
-    checkedKeys.value = selectedRowKeys;
-  }
+  // function onSelectChange(selectedRowKeys: (string | number)[]) {
+  //   checkedKeys.value = selectedRowKeys;
+  // }
 
   async function fillData(list) {
     for (const item of list) {
@@ -133,9 +163,9 @@
     }
   }
 
-  function handleImport() {
-    openModalJimport(true);
-  }
+  // function handleImport() {
+  //   openModalJimport(true);
+  // }
 
   /**
    * 操作列定义
@@ -187,9 +217,10 @@
     ];
   }
 
-  function onExportXls() {
-    handleExportXls('产品信息', url.exportExcel);
-  }
+  // function onExportXls() {
+  //   let params = {}; //查询条件
+  //   handleExportXls('产品信息', url.exportExcel, params);
+  // }
 
   /**
    * 新增事件
