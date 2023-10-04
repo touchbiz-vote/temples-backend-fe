@@ -14,8 +14,6 @@ export interface RequestOptions {
   joinPrefix?: boolean;
   // 接口地址，如果保留为空，则使用默认值
   apiUrl?: string;
-  // 请求拼接路径
-  urlPrefix?: string;
   // 错误消息提示类型
   errorMessageMode?: ErrorMessageMode;
   // 成功消息提示类型

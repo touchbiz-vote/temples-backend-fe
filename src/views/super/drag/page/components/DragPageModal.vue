@@ -11,29 +11,27 @@
     defaultFullscreen
     destroyOnClose
   >
-    <div id="dragEngineBox" style="height:100vh;overflow-y: auto">
+    <div id="dragEngineBox" style="height: 100vh; overflow-y: auto">
       <DragEngine
-          v-if="refresh"
-          :dragData="dragData"
-          :pageId="pageId"
-          :token="getToken()"
-          :tenantId="getTenantId()"
-          :lowAppId="lowAppId"
-          :isLowApp="false"
-          @save="handleSave"
-          @close="handleClose"
-          @scroll="handleScroll"
-          @openWindow="openWindow"
-      >
-      </DragEngine>
+        v-if="refresh"
+        :dragData="dragData"
+        :pageId="pageId"
+        :token="getToken()"
+        :tenantId="getTenantId()"
+        :isLowApp="false"
+        @save="handleSave"
+        @close="handleClose"
+        @scroll="handleScroll"
+        @openWindow="openWindow"
+      />
     </div>
   </BasicModal>
-  <PasswordModal ref="passwordRef" @closed="closeModal"></PasswordModal>
+  <PasswordModal ref="passwordRef" @closed="closeModal" />
 </template>
 
 <script lang="ts" setup>
-  import { ref, unref, reactive, nextTick,computed } from 'vue';
-  import { getToken,getTenantId } from '/@/utils/auth';
+  import { ref, unref, reactive, nextTick, computed } from 'vue';
+  import { getToken, getTenantId } from '/@/utils/auth';
   import { queryById } from '../page.api';
   import { BasicModal, useModalInner } from '/src/components/Modal';
   import { getCacheByDynKey } from '/@/utils/auth';
@@ -45,14 +43,6 @@
     padding: '0',
     height: window.innerHeight + 'px',
   };
-
-  //组件接受传参
-  const props = defineProps({
-    lowAppId: { type: String },
-    // 是否低代码模式（简化使用难度）
-    isLowApp: { type: Boolean, default: true }
-  });
-  
 
   //页面Id
   const pageId = ref('');
@@ -117,7 +107,7 @@
   function handleClose() {
     closeModal();
     emit('success');
-    emit('close')
+    emit('close');
   }
   /**
    * 保存布局后的回调事件
@@ -133,20 +123,20 @@
    * @param data
    */
   function handleScroll(scrollHeight) {
-    let dom = document.getElementById("dragEngineBox");
-    scrollIntoView(dom,scrollHeight)
+    let dom = document.getElementById('dragEngineBox');
+    scrollIntoView(dom, scrollHeight);
   }
-  
+
   /**
    * 模拟滚动效果
    * @param element 滚动元素
    * @param scrollHeight 滚动高度
    */
-  function scrollIntoView(element,scrollHeight) {
+  function scrollIntoView(element, scrollHeight) {
     // 当前滚动高度
     let scrollTop = element.scrollTop;
     // 滚动step方法
-    const step = () =>{
+    const step = () => {
       // 距离目标滚动距离
       let distance = scrollHeight - scrollTop;
       // 目标需要滚动的距离，也就是只走全部距离的十分之一
@@ -165,13 +155,13 @@
    * 打开分享
    * @param url
    */
-  function openWindow(url){
+  function openWindow(url) {
     window.open(url, '_blank');
   }
 </script>
 <style lang="less">
   @import '@qiaoqiaoyun/drag-free/lib/index.css';
-  
+
   .drag-design-process-modal {
     .ant-modal-header {
       padding: 0 !important;
@@ -179,7 +169,7 @@
     .ant-modal-body > .scrollbar {
       padding-top: 0;
     }
-    
+
     .jeecg-modal-content > .scroll-container {
       padding: 0 !important;
     }

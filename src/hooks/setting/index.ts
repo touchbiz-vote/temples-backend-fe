@@ -7,7 +7,6 @@ export const useGlobSetting = (): Readonly<GlobConfig> => {
     VITE_GLOB_APP_TITLE,
     VITE_GLOB_API_URL,
     VITE_GLOB_APP_SHORT_NAME,
-    VITE_GLOB_API_URL_PREFIX,
     VITE_GLOB_APP_CAS_BASE_URL,
     VITE_GLOB_APP_OPEN_SSO,
     VITE_GLOB_APP_OPEN_QIANKUN,
@@ -30,7 +29,6 @@ export const useGlobSetting = (): Readonly<GlobConfig> => {
     openSso: VITE_GLOB_APP_OPEN_SSO,
     openQianKun: VITE_GLOB_APP_OPEN_QIANKUN,
     casBaseUrl: VITE_GLOB_APP_CAS_BASE_URL,
-    urlPrefix: VITE_GLOB_API_URL_PREFIX,
     uploadUrl: VITE_GLOB_DOMAIN_URL,
     viewUrl: VITE_GLOB_ONLINE_VIEW_URL,
   };

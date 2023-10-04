@@ -149,8 +149,6 @@ export interface GlobConfig {
   casBaseUrl?: string;
   // onlineview url
   viewUrl?: string;
-  //  Service interface url prefix
-  urlPrefix?: string;
   // Project abbreviation
   shortName: string;
 }
@@ -160,8 +158,6 @@ export interface GlobEnvConfig {
   // Service interface url
   VITE_GLOB_API_URL: string;
   VITE_USE_MOCK: string;
-  // Service interface url prefix
-  VITE_GLOB_API_URL_PREFIX?: string;
   // Project abbreviation
   VITE_GLOB_APP_SHORT_NAME: string;
   //是否开启单点登录

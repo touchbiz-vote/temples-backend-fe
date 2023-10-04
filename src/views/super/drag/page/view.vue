@@ -94,7 +94,6 @@
         dataId: null,
         isOnline: false,
         viewId: '',
-        lowAppId: route.params.appId
       }
       console.log('创建记录 打开modal的参数', modalData)
       openRecordModal(true, modalData);

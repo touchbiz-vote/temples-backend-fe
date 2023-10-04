@@ -66,6 +66,11 @@
     maxCount: propTypes.number.def(0),
     // 文件大小限制，单位为KB
     sizeLimit: propTypes.number.def(0),
+    // 图片宽度的控制,单位为px
+    width: propTypes.number.def(0),
+    // 图片高度的控制,单位为px
+    height: propTypes.number.def(0),
+    checkSize: propTypes.bool.def(false),
     buttonVisible: propTypes.bool.def(true),
     multiple: propTypes.bool.def(true),
     // 是否显示左右移动按钮
@@ -98,7 +103,14 @@
     bind.name = 'file';
     bind.listType = isImageMode.value ? 'picture-card' : 'text';
     bind.class = [bind.class, { 'upload-disabled': props.disabled }];
-    bind.data = { biz: props.bizPath, ...bind.data };
+    bind.data = {
+      biz: props.bizPath,
+      fileType: props.fileType,
+      sizeLimit: props.sizeLimit ? props.sizeLimit : null,
+      height: props.height,
+      width: props.width,
+      ...bind.data,
+    };
     //update-begin-author:taoyan date:20220407 for: 自定义beforeUpload return false，并不能中断上传过程
     if (!bind.beforeUpload) {
       bind.beforeUpload = onBeforeUpload;
@@ -259,7 +271,7 @@
 
   // upload组件change事件
   function onFileChange(info) {
-    if (props.sizeLimit > 0 && props.sizeLimit < info.file.size / 1024) {
+    if (props.checkSize && props.sizeLimit > 0 && props.sizeLimit < info.file.size / 1024) {
       createMessage.warning(`文件大小不能超过${props.sizeLimit}KB`);
       return false;
     }

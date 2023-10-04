@@ -19,7 +19,6 @@ import { useI18n } from '/@/hooks/web/useI18n';
 import { joinTimestamp, formatRequestDate } from './helper';
 import { useUserStoreWithOut } from '/@/store/modules/user';
 const globSetting = useGlobSetting();
-const urlPrefix = globSetting.urlPrefix;
 const { createMessage, createErrorModal } = useMessage();
 
 /**
@@ -89,11 +88,7 @@ const transform: AxiosTransform = {
 
   // 请求之前处理config
   beforeRequestHook: (config, options) => {
-    const { apiUrl, joinPrefix, joinParamsToUrl, formatDate, joinTime = true, urlPrefix } = options;
-
-    if (joinPrefix) {
-      config.url = `${urlPrefix}${config.url}`;
-    }
+    const { apiUrl, joinParamsToUrl, formatDate, joinTime = true } = options;
 
     if (apiUrl && isString(apiUrl)) {
       config.url = `${apiUrl}${config.url}`;
@@ -261,8 +256,6 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
           successMessageMode: 'success',
           // 接口地址
           apiUrl: globSetting.apiUrl,
-          // 接口拼接地址
-          urlPrefix: urlPrefix,
           //  是否加入时间戳
           joinTime: true,
           // 忽略重复请求
