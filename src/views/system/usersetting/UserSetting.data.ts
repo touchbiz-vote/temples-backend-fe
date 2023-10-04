@@ -24,12 +24,12 @@ export const settingList = [
     component: 'AccountSetting',
     icon: 'ant-design:lock-outlined',
   },
-  {
-    key: '4',
-    name: '第三方APP',
-    component: 'WeChatDingSetting',
-    icon: 'ant-design:contacts-outlined',
-  },
+  // {
+  //   key: '4',
+  //   name: '第三方APP',
+  //   component: 'WeChatDingSetting',
+  //   icon: 'ant-design:contacts-outlined',
+  // },
 ];
 
 /**

@@ -258,11 +258,11 @@ export const formSchema: FormSchema[] = [
       fileType: UploadTypeEnum.image,
     },
   },
-  {
-    label: '介绍资料',
-    field: 'description',
-    component: 'JEditor',
-  },
+  // {
+  //   label: '介绍资料',
+  //   field: 'description',
+  //   component: 'JEditor',
+  // },
   {
     label: '生日',
     field: 'birthday',

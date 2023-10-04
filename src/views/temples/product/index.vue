@@ -5,7 +5,7 @@
       <template #tableTitle>
         <a-button preIcon="ant-design:plus-outlined" type="primary" @click="handleAdd">新增</a-button>
         <a-button type="primary" preIcon="ant-design:import-outlined" @click="handleImport">导入</a-button>
-        <a-button v-if="false" type="primary" preIcon="ant-design:export-outlined" @click="onExportXls"> 导出</a-button>
+        <a-button type="primary" preIcon="ant-design:export-outlined" @click="onExportXls"> 导出</a-button>
         <a-dropdown v-if="checkedKeys.length > 0">
           <template #overlay>
             <a-menu>

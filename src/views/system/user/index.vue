@@ -7,7 +7,7 @@
         <a-button type="primary" preIcon="ant-design:plus-outlined" @click="handleCreate"> 新增</a-button>
         <a-button type="primary" preIcon="ant-design:export-outlined" @click="onExportXls"> 导出</a-button>
         <j-upload-button type="primary" preIcon="ant-design:import-outlined" @click="onImportXls">导入</j-upload-button>
-        <a-button type="primary" @click="handleSyncUser" preIcon="ant-design:sync-outlined"> 同步流程</a-button>
+        <a-button type="primary" @click="handleSyncUser" v-if="false" preIcon="ant-design:sync-outlined"> 同步流程</a-button>
         <a-button type="primary" @click="openModal(true, {})" preIcon="ant-design:hdd-outlined"> 回收站</a-button>
         <JThirdAppButton biz-type="user" :selected-row-keys="selectedRowKeys" syncToApp syncToLocal @sync-finally="onSyncFinally" />
         <a-dropdown v-if="selectedRowKeys.length > 0">
