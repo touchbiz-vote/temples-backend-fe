@@ -1,7 +1,7 @@
 <!--用户选择框-->
 <template>
   <div>
-    <BasicModal :showCancelBtn="false" :showOkBtn="false" v-bind="$attrs" @register="register" title="选择待分配的订单" width="900px" destroyOnClose>
+    <BasicModal :showCancelBtn="false" :showOkBtn="false" v-bind="$attrs" @register="register" title="选择待分配的订单" width="1200px" destroyOnClose>
       <a-spin :spinning="loading">
         <BasicTable @register="registerTable">
           <!--操作栏-->
@@ -15,14 +15,13 @@
 </template>
 <script lang="ts">
   import { FormSchema } from '/@/components/Form';
-  import { BasicColumn, TableAction, BasicTable, useTable} from '/@/components/Table';
+  import { BasicColumn, TableAction, BasicTable, useTable } from '/@/components/Table';
   import { defineComponent, ref } from 'vue';
   import { BasicModal, useModalInner } from '/@/components/Modal';
   import { searchOrder } from '../tablets.api';
   import { createAsyncComponent } from '/@/utils/factory/createAsyncComponent';
   import { useAttrs } from '/@/hooks/core/useAttrs';
   import { selectProps } from '/@/components/Form/src/jeecg/props/props';
-
 
   export default defineComponent({
     name: 'OrderSelectModal',
@@ -71,7 +70,7 @@
         {
           title: '下单时间',
           dataIndex: 'gmtCreate',
-          width: 120,
+          width: 150,
           resizable: true,
         },
         {
@@ -85,10 +84,23 @@
           dataIndex: 'orderStatusDesc',
           width: 60,
         },
+        {
+          title: '牌位姓名',
+          dataIndex: 'name',
+          width: 120,
+          resizable: true,
+        },
+        {
+          title: '阳上姓名',
+          dataIndex: 'name2',
+          width: 120,
+          resizable: true,
+        },
       ];
       const [registerTable] = useTable({
         title: '订单列表',
         api: searchOrder,
+        afterFetch: fillData,
         columns,
         size: 'small',
         formConfig: {
@@ -116,7 +128,7 @@
 
       const tablets = ref<Object>({});
       //注册弹框
-      const [register, { closeModal }] = useModalInner(({record}) => {
+      const [register, { closeModal }] = useModalInner(({ record }) => {
         tablets.value = record;
       });
       const attrs = useAttrs();
@@ -132,37 +144,28 @@
           xxl: 12,
         },
       };
-      //定义表格列
-      //已选择的table信息
-      // const selectedTable = {
-      //   pagination: false,
-      //   showIndexColumn: false,
-      //   scroll: { y: 390 },
-      //   size: 'small',
-      //   canResize: false,
-      //   bordered: true,
-      //   rowKey: 'id',
-      //   columns: [
-      //     {
-      //       title: '用户姓名',
-      //       dataIndex: 'realname',
-      //       width: 40,
-      //     },
-      //     {
-      //       title: '操作',
-      //       dataIndex: 'action',
-      //       align: 'center',
-      //       width: 40,
-      //       slots: { customRender: 'action' },
-      //     },
-      //   ],
-      // };
+
+      async function fillData(list) {
+        for (const order of list) {
+          const orderInfo = JSON.parse(order.orderInfo);
+          console.log(orderInfo);
+          for (const item of orderInfo) {
+            if (item.name === 'name') {
+              order.name = item.value;
+            }
+            if (item.name === 'name2') {
+              order.name2 = item.value;
+            }
+          }
+        }
+      }
+
       /**
        * 确定选择
        */
       function handleEdit(record) {
         //   //回传选项和已选择的值
-        console.log(props)
+        console.log(props);
         emit('getSelectResult', record, tablets.value.id);
         //关闭弹窗
         closeModal();

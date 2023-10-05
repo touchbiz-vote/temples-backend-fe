@@ -54,7 +54,7 @@
     rowKey: 'id',
     beforeFetch: initFilter,
     actionColumn: {
-      width: 200,
+      width: 180,
       title: '操作',
       slots: { customRender: 'action' },
     },
@@ -86,7 +86,6 @@
    * 分配订单到牌位的事件
    */
   function handleSign(record) {
-    console.log(record);
     openOrderModal(true, {
       record,
     });

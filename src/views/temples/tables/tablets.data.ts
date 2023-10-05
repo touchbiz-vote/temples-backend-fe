@@ -13,19 +13,30 @@ export const columns: BasicColumn[] = [
       multiple: 1,
     },
   },
+  // {
+  //   title: '关联用户',
+  //   dataIndex: 'user_id',
+  //   width: 80,
+  //   resizable: true,
+  // },
+  // {
+  //   title: '关联订单',
+  //   dataIndex: 'order_id',
+  //   width: 130,
+  //   resizable: true,
+  // },
   {
-    title: '关联用户',
-    dataIndex: 'user_id',
-    width: 80,
-    resizable: true,
-  },
-  {
-    title: '关联订单',
-    dataIndex: 'order_id',
+    title: '牌位姓名',
+    dataIndex: 'name',
     width: 130,
     resizable: true,
   },
-
+  {
+    title: '阳上姓名',
+    dataIndex: 'name2',
+    width: 130,
+    resizable: true,
+  },
   {
     title: '状态',
     dataIndex: 'status',
@@ -39,18 +50,18 @@ export const columns: BasicColumn[] = [
       multiple: 1,
     },
   },
-  {
-    title: '创建时间',
-    dataIndex: 'create_time',
-    width: 150,
-    resizable: true,
-  },
-  {
-    title: '更新时间',
-    dataIndex: 'update_time',
-    width: 150,
-    resizable: true,
-  },
+  // {
+  //   title: '创建时间',
+  //   dataIndex: 'create_time',
+  //   width: 150,
+  //   resizable: true,
+  // },
+  // {
+  //   title: '更新时间',
+  //   dataIndex: 'update_time',
+  //   width: 150,
+  //   resizable: true,
+  // },
 ];
 
 export const formSchema: FormSchema[] = [

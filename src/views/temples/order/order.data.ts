@@ -82,7 +82,18 @@ export const columns: BasicColumn[] = [
       return record.category_name;
     },
   },
-
+  {
+    title: '特殊事项',
+    dataIndex: 'remark',
+    width: 150,
+    resizable: true,
+  },
+  {
+    title: '扩展信息',
+    dataIndex: 'orderInfo',
+    width: 150,
+    resizable: true,
+  },
   {
     title: '预约时间',
     dataIndex: 'content',
