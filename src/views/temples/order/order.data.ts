@@ -159,7 +159,7 @@ export const searchFormSchema: FormSchema[] = [
   {
     field: 'order_status',
     label: '订单状态',
-    colProps: { span: 3 },
+    colProps: { span: 4 },
     component: 'JDictSelectTag',
     componentProps: {
       dictCode: 'order_status',
