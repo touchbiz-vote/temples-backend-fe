@@ -21,6 +21,8 @@
 <script lang="ts" setup>
   import { ref, unref, reactive, toRaw, watch, computed } from 'vue';
   import { BasicTable, useTable, TableAction } from '/@/components/Table';
+  import { useListPage } from '/@/hooks/system/useListPage';
+
   import { useModal } from '/@/components/Modal';
   import OrderModal from './OrderModal.vue';
   import { useMethods } from '/@/hooks/system/useMethods';
@@ -48,38 +50,6 @@
   const route = useRoute();
   url.importExcel = url.importExcel + route.query.id;
 
-  const [registerTable, { reload, setProps }] = useTable({
-    title: '订单列表',
-    api: getList,
-    columns,
-    size: 'small',
-    afterFetch: fillData,
-    beforeFetch: initFilter,
-    formConfig: {
-      labelWidth: 80,
-      showAdvancedButton: false,
-      schemas: searchFormSchema,
-      // autoAdvancedCol: 3,
-    },
-    striped: true,
-    useSearchForm: true,
-    showTableSetting: true,
-    clickToRowSelect: false,
-    bordered: true,
-    showIndexColumn: false,
-    tableSetting: { fullScreen: true },
-    canResize: false,
-    rowKey: 'id',
-    pagination: { pageSize: 20 },
-    actionColumn: {
-      width: 240,
-      title: '操作',
-      dataIndex: 'action',
-      slots: { customRender: 'action' },
-      fixed: undefined,
-    },
-  });
-
   function initFilter(params) {
     console.log(params);
     console.log(route.query);
@@ -90,12 +60,48 @@
     // return params; //Object.assign(params, { column: "orderNum", order: "asc" });
   }
 
+  const {
+    tableContext: [registerTable, { reload, setProps }],
+  } = useListPage({
+    tableProps: {
+      title: '订单列表',
+      api: getList,
+      columns,
+      size: 'small',
+      afterFetch: fillData,
+      beforeFetch: initFilter,
+      formConfig: {
+        labelWidth: 80,
+        showAdvancedButton: false,
+        schemas: searchFormSchema,
+        // autoAdvancedCol: 3,
+      },
+      striped: true,
+      useSearchForm: true,
+      showTableSetting: true,
+      clickToRowSelect: false,
+      bordered: true,
+      showIndexColumn: false,
+      tableSetting: { fullScreen: true },
+      canResize: false,
+      rowKey: 'id',
+      pagination: { pageSize: 20 },
+      actionColumn: {
+        width: 240,
+        title: '操作',
+        dataIndex: 'action',
+        slots: { customRender: 'action' },
+        fixed: undefined,
+      },
+    },
+  });
+
   async function fillData(list) {
     for (const item of list) {
       const res = await fetchDataWithCache('t_biz_type', item.biz_type_id);
       if (res) item.bizTypeName = res.biz_name;
       const category = await fetchDataWithCache('t_product_category', item.category_id);
-      if(category) item.category_name = category.category_name;
+      if (category) item.category_name = category.category_name;
     }
   }
   /**
