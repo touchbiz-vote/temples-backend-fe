@@ -22,6 +22,7 @@
   import { createAsyncComponent } from '/@/utils/factory/createAsyncComponent';
   import { useAttrs } from '/@/hooks/core/useAttrs';
   import { selectProps } from '/@/components/Form/src/jeecg/props/props';
+  import { useListPage } from '/@/hooks/system/useListPage';
 
   export default defineComponent({
     name: 'OrderSelectModal',
@@ -97,32 +98,38 @@
           resizable: true,
         },
       ];
-      const [registerTable] = useTable({
-        title: '订单列表',
-        api: searchOrder,
-        afterFetch: fillData,
-        columns,
-        size: 'small',
-        formConfig: {
-          autoSubmitOnEnter: true,
-          showAdvancedButton: false,
-          schemas: searchFormSchema,
-          labelWidth: 80,
-        },
-        striped: true,
-        useSearchForm: true,
-        showTableSetting: true,
-        bordered: true,
-        showIndexColumn: false,
-        pagination: false,
-        tableSetting: { fullScreen: false },
-        rowKey: 'id',
-        actionColumn: {
-          width: 80,
-          title: '操作',
-          slots: { customRender: 'action' },
+
+      // 列表页面公共参数、方法
+      const { tableContext } = useListPage({
+        tableProps: {
+          title: '订单列表',
+          api: searchOrder,
+          afterFetch: fillData,
+          columns,
+          size: 'small',
+          formConfig: {
+            autoSubmitOnEnter: true,
+            showAdvancedButton: false,
+            schemas: searchFormSchema,
+            labelWidth: 80,
+          },
+          striped: true,
+          useSearchForm: true,
+          showTableSetting: true,
+          bordered: true,
+          showIndexColumn: false,
+          pagination: false,
+          tableSetting: { fullScreen: false },
+          rowKey: 'id',
+          actionColumn: {
+            width: 80,
+            title: '操作',
+            slots: { customRender: 'action' },
+          },
         },
       });
+
+      const [registerTable] = tableContext;
 
       const loading = ref<boolean>(false);
 

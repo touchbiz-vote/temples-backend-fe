@@ -20,7 +20,7 @@
 </template>
 <script lang="ts" setup>
   import { ref, unref, reactive, toRaw, watch, computed } from 'vue';
-  import { BasicTable, useTable, TableAction } from '/@/components/Table';
+  import { BasicTable, TableAction } from '/@/components/Table';
   import { useListPage } from '/@/hooks/system/useListPage';
 
   import { useModal } from '/@/components/Modal';
@@ -51,6 +51,9 @@
   url.importExcel = url.importExcel + route.query.id;
 
   function initFilter(params) {
+    if (params.column === 'createTime') {
+      params.column = 'gmt_create';
+    }
     console.log(params);
     console.log(route.query);
     if (route.query && route.query.productId) {
@@ -96,6 +99,10 @@
     },
   });
 
+  function sort(e) {
+    console.log(e);
+  }
+
   async function fillData(list) {
     for (const item of list) {
       const res = await fetchDataWithCache('t_biz_type', item.biz_type_id);
@@ -114,13 +121,6 @@
     onChange: onSelectChange,
   };
 
-  const exportParams = computed(() => {
-    let paramsForm = {};
-    if (checkedKeys.value && checkedKeys.value.length > 0) {
-      paramsForm['selections'] = checkedKeys.value.join(',');
-    }
-    return filterObj(paramsForm);
-  });
   /**
    * 操作列定义
    * @param record

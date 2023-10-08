@@ -45,17 +45,15 @@
   import { useDrawer } from '/src/components/Drawer';
   import CategoryModal from './components/CategoryModal.vue';
   import { useModal } from '/src/components/Modal';
-  import { useMethods } from '/src/hooks/system/useMethods';
   import { columns, searchFormSchema } from './category.data';
   import { list, deleteCategory, batchDeleteCategory, getExportUrl, getImportUrl, getChildList, getChildListBatch } from './category.api';
   import { useListPage } from '/@/hooks/system/useListPage';
 
   const expandedRowKeys = ref([]);
-  const { handleExportXls, handleImportXls } = useMethods();
   //字典model
   const [registerModal, { openModal }] = useModal();
   // 列表页面公共参数、方法
-  const { prefixCls, onExportXls, onImportXls, tableContext } = useListPage({
+  const { onExportXls, onImportXls, tableContext } = useListPage({
     designScope: 'category-template',
     tableProps: {
       title: '分类字典',

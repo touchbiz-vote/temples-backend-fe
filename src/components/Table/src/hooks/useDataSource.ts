@@ -58,7 +58,9 @@ export function useDataSource(
 
     const params: Recordable = {};
     if (sorter && isFunction(sortFn)) {
+      console.log(sorter);
       const sortInfo = sortFn(sorter);
+      console.log(sortInfo);
       searchState.sortInfo = sortInfo;
       params.sortInfo = sortInfo;
     }

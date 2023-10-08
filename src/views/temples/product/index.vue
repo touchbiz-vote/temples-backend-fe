@@ -36,12 +36,11 @@
       </template>
     </BasicTable>
     <ProductModal @register="registerModal" @success="reload" :isDisabled="isDisabled" />
-    <!-- <JImportModal @register="registerModalJimport" :url="getImportUrl" /> -->
   </div>
 </template>
 <script lang="ts" setup>
-  import { ref, unref, reactive, toRaw, watch, computed } from 'vue';
-  import { BasicTable, useTable, TableAction } from '/@/components/Table';
+  import { ref, unref, toRaw, watch } from 'vue';
+  import { BasicTable, TableAction } from '/@/components/Table';
   import { useModal } from '/@/components/Modal';
   import ProductModal from './ProductModal.vue';
   import { useMessage } from '/@/hooks/web/useMessage';
@@ -106,33 +105,6 @@
   });
 
   const [registerTable, { reload }, { rowSelection, selectedRowKeys }] = tableContext;
-
-  // const [registerTable, { reload, setProps }] = useTable({
-  //   title: '商品列表',
-  //   api: getList,
-  //   columns,
-  //   afterFetch: fillData,
-  //   size: 'default',
-  //   formConfig: {
-  //     autoSubmitOnEnter: true,
-  //     showAdvancedButton: false,
-  //     schemas: searchFormSchema,
-  //     labelWidth: 80,
-  //   },
-  //   striped: true,
-  //   useSearchForm: true,
-  //   showTableSetting: true,
-  //   bordered: true,
-  //   showIndexColumn: false,
-  //   tableSetting: { fullScreen: true },
-  //   rowKey: 'id',
-  //   actionColumn: {
-  //     width: 160,
-  //     title: '操作',
-  //     dataIndex: 'action',
-  //     slots: { customRender: 'action' },
-  //   },
-  // });
 
   /**
    * 批量删除事件
