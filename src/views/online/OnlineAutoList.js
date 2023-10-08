@@ -75,7 +75,6 @@ import './_arrayPush.js';
 import './omit.js';
 import './_baseClone.js';
 import './_baseSlice.js';
-import '/@/components/jeecg/comment/CommentPanel.vue';
 import './OnlineFormDetail.js';
 import './DetailForm.js';
 import '/@/utils/propTypes';
