@@ -1,10 +1,11 @@
-import { a as arrayMap } from "./toString.js";
-import { g as getPrototype, c as copyObject, a as getAllKeysIn, b as baseClone } from "./_baseClone.js";
-import { b as baseGet, c as castPath, t as toKey, f as flatRest } from "./_flatRest.js";
-import { b as baseSlice } from "./_baseSlice.js";
-import { i as isObjectLike, b as baseGetTag } from "./isArray.js";
-var objectTag = "[object Object]";
-var funcProto = Function.prototype, objectProto = Object.prototype;
+import { a as arrayMap } from './toString.js';
+import { g as getPrototype, c as copyObject, a as getAllKeysIn, b as baseClone } from './_baseClone.js';
+import { b as baseGet, c as castPath, t as toKey, f as flatRest } from './_flatRest.js';
+import { b as baseSlice } from './_baseSlice.js';
+import { i as isObjectLike, b as baseGetTag } from './isArray.js';
+var objectTag = '[object Object]';
+var funcProto = Function.prototype,
+  objectProto = Object.prototype;
 var funcToString = funcProto.toString;
 var hasOwnProperty = objectProto.hasOwnProperty;
 var objectCtorString = funcToString.call(Object);
@@ -16,8 +17,8 @@ function isPlainObject(value) {
   if (proto === null) {
     return true;
   }
-  var Ctor = hasOwnProperty.call(proto, "constructor") && proto.constructor;
-  return typeof Ctor == "function" && Ctor instanceof Ctor && funcToString.call(Ctor) == objectCtorString;
+  var Ctor = hasOwnProperty.call(proto, 'constructor') && proto.constructor;
+  return typeof Ctor == 'function' && Ctor instanceof Ctor && funcToString.call(Ctor) == objectCtorString;
 }
 function last(array) {
   var length = array == null ? 0 : array.length;
@@ -34,14 +35,16 @@ function baseUnset(object, path) {
 function customOmitClone(value) {
   return isPlainObject(value) ? void 0 : value;
 }
-var CLONE_DEEP_FLAG = 1, CLONE_FLAT_FLAG = 2, CLONE_SYMBOLS_FLAG = 4;
-var omit = flatRest(function(object, paths) {
+var CLONE_DEEP_FLAG = 1,
+  CLONE_FLAT_FLAG = 2,
+  CLONE_SYMBOLS_FLAG = 4;
+var omit = flatRest(function (object, paths) {
   var result = {};
   if (object == null) {
     return result;
   }
   var isDeep = false;
-  paths = arrayMap(paths, function(path) {
+  paths = arrayMap(paths, function (path) {
     path = castPath(path, object);
     isDeep || (isDeep = path.length > 1);
     return path;

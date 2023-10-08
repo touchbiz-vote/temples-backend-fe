@@ -1,7 +1,7 @@
-var freeGlobal = typeof global == "object" && global && global.Object === Object && global;
+var freeGlobal = typeof global == 'object' && global && global.Object === Object && global;
 var freeGlobal$1 = freeGlobal;
-var freeSelf = typeof self == "object" && self && self.Object === Object && self;
-var root = freeGlobal$1 || freeSelf || Function("return this")();
+var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
+var root = freeGlobal$1 || freeSelf || Function('return this')();
 var root$1 = root;
 var Symbol$1 = root$1.Symbol;
 var Symbol$2 = Symbol$1;
@@ -10,12 +10,12 @@ var hasOwnProperty = objectProto$1.hasOwnProperty;
 var nativeObjectToString$1 = objectProto$1.toString;
 var symToStringTag$1 = Symbol$2 ? Symbol$2.toStringTag : void 0;
 function getRawTag(value) {
-  var isOwn = hasOwnProperty.call(value, symToStringTag$1), tag = value[symToStringTag$1];
+  var isOwn = hasOwnProperty.call(value, symToStringTag$1),
+    tag = value[symToStringTag$1];
   try {
     value[symToStringTag$1] = void 0;
     var unmasked = true;
-  } catch (e) {
-  }
+  } catch (e) {}
   var result = nativeObjectToString$1.call(value);
   if (unmasked) {
     if (isOwn) {
@@ -31,7 +31,8 @@ var nativeObjectToString = objectProto.toString;
 function objectToString(value) {
   return nativeObjectToString.call(value);
 }
-var nullTag = "[object Null]", undefinedTag = "[object Undefined]";
+var nullTag = '[object Null]',
+  undefinedTag = '[object Undefined]';
 var symToStringTag = Symbol$2 ? Symbol$2.toStringTag : void 0;
 function baseGetTag(value) {
   if (value == null) {
@@ -40,7 +41,7 @@ function baseGetTag(value) {
   return symToStringTag && symToStringTag in Object(value) ? getRawTag(value) : objectToString(value);
 }
 function isObjectLike(value) {
-  return value != null && typeof value == "object";
+  return value != null && typeof value == 'object';
 }
 var isArray = Array.isArray;
 var isArray$1 = isArray;
