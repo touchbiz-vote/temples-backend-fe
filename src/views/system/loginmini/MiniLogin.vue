@@ -2,7 +2,7 @@
   <div :class="prefixCls" class="login-background-img">
     <AppLocalePicker class="absolute top-4 right-4 enter-x xl:text-gray-600" :showText="false" />
     <AppDarkModeToggle class="absolute top-3 right-7 enter-x" />
-    <div class="aui-logo" v-if="!getIsMobile">
+    <!-- <div class="aui-logo" v-show="false" v-if="!getIsMobile">
       <div>
         <h3>
           <img :src="logoImg" alt="jeecg" />
@@ -11,14 +11,14 @@
     </div>
     <div v-else class="aui-phone-logo">
       <img :src="logoImg" alt="jeecg" />
-    </div>
+    </div> -->
     <div v-show="type === 'login'">
       <div class="aui-content">
         <div class="aui-container">
           <div class="aui-form">
             <div class="aui-image">
               <div class="aui-image-text">
-                <img :src="adTextImg" />
+                <!-- <img :src="adTextImg" /> -->
               </div>
             </div>
             <div class="aui-formBox">
@@ -27,7 +27,7 @@
                   <div class="aui-flex-box" :class="activeIndex === 'accountLogin' ? 'activeNav on' : ''" @click="loginClick('accountLogin')"
                     >{{ t('sys.login.signInFormTitle') }}
                   </div>
-                  <div class="aui-flex-box" :class="activeIndex === 'phoneLogin' ? 'activeNav on' : ''" @click="loginClick('phoneLogin')"
+                  <div v-if="false" class="aui-flex-box" :class="activeIndex === 'phoneLogin' ? 'activeNav on' : ''" @click="loginClick('phoneLogin')"
                     >{{ t('sys.login.mobileSignInFormTitle') }}
                   </div>
                 </div>
@@ -63,9 +63,6 @@
                             <span style="margin-left: 5px">{{ t('sys.login.rememberMe') }}</span>
                           </div>
                         </div>
-                        <div class="aui-forget">
-                          <a @click="forgetHandelClick"> {{ t('sys.login.forgetPassword') }}</a>
-                        </div>
                       </div>
                     </div>
                   </a-form>
@@ -92,15 +89,15 @@
                       {{ t('sys.login.loginButton') }}</a-button
                     >
                   </div>
-                  <div class="aui-flex">
+                  <div v-if="false" class="aui-flex">
                     <a class="aui-linek-code aui-flex-box" @click="codeHandleClick">{{ t('sys.login.qrSignInFormTitle') }}</a>
                   </div>
-                  <div class="aui-flex">
+                  <div v-if="false" class="aui-flex">
                     <a class="aui-linek-code aui-flex-box" @click="registerHandleClick">{{ t('sys.login.registerButton') }}</a>
                   </div>
                 </div>
               </div>
-              <a-form @keyup.enter.native="loginHandleClick">
+              <a-form v-if="false" @keyup.enter.native="loginHandleClick">
                 <div class="aui-flex aui-third-text">
                   <div class="aui-flex-box aui-third-border">
                     <span>{{ t('sys.login.otherSignIn') }}</span>

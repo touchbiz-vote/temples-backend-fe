@@ -14,16 +14,16 @@
   import VisitAnalysis from './VisitAnalysis.vue';
   import VisitAnalysisBar from './VisitAnalysisBar.vue';
 
-  const activeKey = ref('tab1');
+  const activeKey = ref('tab2');
 
   const tabListTitle = [
-    {
-      key: 'tab1',
-      tab: '流量趋势',
-    },
+    // {
+    //   key: 'tab1',
+    //   tab: '流量趋势',
+    // },
     {
       key: 'tab2',
-      tab: '访问量',
+      tab: '预约量',
     },
   ];
 

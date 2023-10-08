@@ -61,21 +61,21 @@
           {{ t('sys.login.mobileSignInFormTitle') }}
         </Button>
       </ACol>
-      <ACol :md="8" :xs="24" class="!my-2 !md:my-0 xs:mx-0 md:mx-2">
+      <ACol v-if="false" :md="8" :xs="24" class="!my-2 !md:my-0 xs:mx-0 md:mx-2">
         <Button block @click="setLoginState(LoginStateEnum.QR_CODE)">
           {{ t('sys.login.qrSignInFormTitle') }}
         </Button>
       </ACol>
-      <ACol :md="7" :xs="24">
+      <ACol v-if="false" :md="7" :xs="24">
         <Button block @click="setLoginState(LoginStateEnum.REGISTER)">
           {{ t('sys.login.registerButton') }}
         </Button>
       </ACol>
     </ARow>
 
-    <Divider class="enter-x">{{ t('sys.login.otherSignIn') }}</Divider>
+    <Divider v-if="false" class="enter-x">{{ t('sys.login.otherSignIn') }}</Divider>
 
-    <div class="flex justify-evenly enter-x" :class="`${prefixCls}-sign-in-way`">
+    <div v-if="false" class="flex justify-evenly enter-x" :class="`${prefixCls}-sign-in-way`">
       <a @click="onThirdLogin('wechat_enterprise')" title="企业微信"> <icon-font class="item-icon" type="icon-qiyeweixin3" /></a>
       <a @click="onThirdLogin('dingtalk')" title="钉钉"><DingtalkCircleFilled /></a>
       <a @click="onThirdLogin('wechat_open')" title="微信"><WechatFilled /></a>

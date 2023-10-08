@@ -25,12 +25,12 @@
               </div>
             </form>
           </div>
-          <div class="aui-flex aui-third-text">
+          <div v-if="false" class="aui-flex aui-third-text">
             <div class="aui-flex-box aui-third-border">
               <span>{{ t('sys.login.otherSignIn') }}</span>
             </div>
           </div>
-          <div class="aui-flex" :class="`${prefixCls}-sign-in-way`">
+          <div v-if="false" class="aui-flex" :class="`${prefixCls}-sign-in-way`">
             <div class="aui-flex-box">
               <div class="aui-third-login">
                 <a href="" title="企业微信" @click="onThirdLogin('wechat_enterprise')"><icon-font class="item-icon" type="icon-qiyeweixin3" /></a>

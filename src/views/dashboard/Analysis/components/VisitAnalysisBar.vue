@@ -26,7 +26,7 @@
       grid: { left: '1%', right: '1%', top: '2  %', bottom: 0, containLabel: true },
       xAxis: {
         type: 'category',
-        data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+        data: ['佛事', '法会', '素斋', '功德', '建设', '法物', '牌位'],
       },
       yAxis: {
         type: 'value',
