@@ -8,7 +8,7 @@ import { error } from '/@/utils/log';
 import { getDynamicProps, getValueType } from '/@/utils';
 import { add } from "/@/components/Form/src/componentMap";
 //集成online专用控件
-import { OnlineSelectCascade, LinkTableCard, LinkTableSelect } from  '@jeecg/online';
+import { OnlineSelectCascade, LinkTableCard, LinkTableSelect } from '/@/views/online';
 
 export declare type ValidateFields = (nameList?: NamePath[]) => Promise<Recordable>;
 

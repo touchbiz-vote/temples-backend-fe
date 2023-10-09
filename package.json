@@ -41,7 +41,6 @@
     "@fullcalendar/daygrid": "^6.1.9",
     "@fullcalendar/vue3": "^6.1.9",
     "@iconify/iconify": "^2.2.1",
-    "@jeecg/online": "3.5.3-beta3",
     "@logicflow/core": "^1.1.13",
     "@logicflow/extension": "^1.1.13",
     "@qiaoqiaoyun/drag-free": "^1.0.52",
