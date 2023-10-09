@@ -1,12 +1,14 @@
-import { c as castPath, t as toKey, b as baseGet, f as flatRest } from "./_flatRest.js";
-import { i as isLength, a as isIndex, b as isArguments, c as isObject, d as assignValue } from "./_arrayPush.js";
-import { a as isArray } from "./isArray.js";
+import { c as castPath, t as toKey, b as baseGet, f as flatRest } from './_flatRest.js';
+import { i as isLength, a as isIndex, b as isArguments, c as isObject, d as assignValue } from './_arrayPush.js';
+import { a as isArray } from './isArray.js';
 function baseHasIn(object, key) {
   return object != null && key in Object(object);
 }
 function hasPath(object, path, hasFunc) {
   path = castPath(path, object);
-  var index = -1, length = path.length, result = false;
+  var index = -1,
+    length = path.length,
+    result = false;
   while (++index < length) {
     var key = toKey(path[index]);
     if (!(result = object != null && hasFunc(object, key))) {
@@ -28,10 +30,14 @@ function baseSet(object, path, value, customizer) {
     return object;
   }
   path = castPath(path, object);
-  var index = -1, length = path.length, lastIndex = length - 1, nested = object;
+  var index = -1,
+    length = path.length,
+    lastIndex = length - 1,
+    nested = object;
   while (nested != null && ++index < length) {
-    var key = toKey(path[index]), newValue = value;
-    if (key === "__proto__" || key === "constructor" || key === "prototype") {
+    var key = toKey(path[index]),
+      newValue = value;
+    if (key === '__proto__' || key === 'constructor' || key === 'prototype') {
       return object;
     }
     if (index != lastIndex) {
@@ -47,9 +53,12 @@ function baseSet(object, path, value, customizer) {
   return object;
 }
 function basePickBy(object, paths, predicate) {
-  var index = -1, length = paths.length, result = {};
+  var index = -1,
+    length = paths.length,
+    result = {};
   while (++index < length) {
-    var path = paths[index], value = baseGet(object, path);
+    var path = paths[index],
+      value = baseGet(object, path);
     if (predicate(value, path)) {
       baseSet(result, castPath(path, object), value);
     }
@@ -57,11 +66,11 @@ function basePickBy(object, paths, predicate) {
   return result;
 }
 function basePick(object, paths) {
-  return basePickBy(object, paths, function(value, path) {
+  return basePickBy(object, paths, function (value, path) {
     return hasIn(object, path);
   });
 }
-var pick = flatRest(function(object, paths) {
+var pick = flatRest(function (object, paths) {
   return object == null ? {} : basePick(object, paths);
 });
 var pick$1 = pick;

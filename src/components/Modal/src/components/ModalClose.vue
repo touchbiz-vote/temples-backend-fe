@@ -9,16 +9,6 @@
       </Tooltip>
     </template>
 
-    <!-- 是否开启评论区域 -->
-    <template v-if="enableComment">
-      <Tooltip title="收起" placement="bottom" v-if="commentSpan>0">
-        <RightSquareOutlined @click="handleCloseComment" style="font-size: 16px"/>
-      </Tooltip>
-      <Tooltip title="展开" placement="bottom" v-else>
-        <LeftSquareOutlined @click="handleOpenComment" style="font-size: 16px"/>
-      </Tooltip>
-    </template>
-    
     <Tooltip :title="t('component.modal.close')" placement="bottom">
       <CloseOutlined @click="handleCancel" />
     </Tooltip>
@@ -37,10 +27,8 @@
     props: {
       canFullscreen: { type: Boolean, default: true },
       fullScreen: { type: Boolean },
-      enableComment: { type: Boolean, default: false },
-      commentSpan: { type: Number, default: 0 },
     },
-    emits: ['cancel', 'fullscreen', 'comment'],
+    emits: ['cancel', 'fullscreen'],
     setup(props, { emit }) {
       const { prefixCls } = useDesign('basic-modal-close');
       const { t } = useI18n();
@@ -50,7 +38,7 @@
           prefixCls,
           `${prefixCls}--custom`,
           {
-            [`${prefixCls}--can-full`]: props.canFullscreen || props.enableComment,
+            [`${prefixCls}--can-full`]: props.canFullscreen,
           },
         ];
       });
@@ -62,54 +50,22 @@
       function handleFullScreen(e: Event) {
         e?.stopPropagation();
         e?.preventDefault();
-        if(props.commentSpan==0 || props.enableComment == false){
-          emit('fullscreen');
-        }
-      }
-
-      /**
-       * 开启评论区域
-       * @param e
-       */
-      function handleOpenComment(e: Event){
-        e?.stopPropagation();
-        e?.preventDefault();
-        if(props.fullScreen==false){
-          emit('fullscreen');
-        }
-        emit('comment', true);
-      }
-
-      /**
-       * 关闭评论区域
-       * @param e
-       */
-      function handleCloseComment(e: Event){
-        e?.stopPropagation();
-        e?.preventDefault();
-        emit('comment', false);
       }
 
       /**
        * 有评论的时候不需要设置全屏
        */
-      const fullScreenStatus = computed(()=>{
-        if(props.enableComment===true){
-          return false
-        }else{
-          return props.canFullscreen;
-        }
+      const fullScreenStatus = computed(() => {
+        return props.canFullscreen;
       });
-      
+
       return {
         t,
         getClass,
         prefixCls,
         handleCancel,
         handleFullScreen,
-        handleOpenComment,
-        handleCloseComment,
-        fullScreenStatus
+        fullScreenStatus,
       };
     },
   });

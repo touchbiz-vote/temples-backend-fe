@@ -75,9 +75,6 @@ var index = {
         import('./CgformModal.js').then(function (n) {
           return n.h;
         }),
-      './src/views/super/online/cgform/components/CodeFileListModal.vue': () => import('./CodeFileListModal.js'),
-      './src/views/super/online/cgform/components/CodeFileViewModal.vue': () => import('./CodeFileViewModal.js'),
-      './src/views/super/online/cgform/components/CodeGeneratorModal.vue': () => import('./CodeGeneratorModal.js'),
       './src/views/super/online/cgform/components/DbToOnlineModal.vue': () => import('./DbToOnlineModal.js'),
       './src/views/super/online/cgform/components/ExtendConfigModal.vue': () => import('./ExtendConfigModal.js'),
       './src/views/super/online/cgform/components/FileSelectModal.vue': () => import('./FileSelectModal.js'),

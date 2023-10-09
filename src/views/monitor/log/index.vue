@@ -25,15 +25,13 @@
   import { BasicTable, useTable, TableAction } from '/@/components/Table';
   import { getLogList } from './log.api';
   import { columns, searchFormSchema, operationLogColumn } from './log.data';
-  import { useMessage } from '/@/hooks/web/useMessage';
   import { useListPage } from '/@/hooks/system/useListPage';
-  const { createMessage } = useMessage();
   const checkedKeys = ref<Array<string | number>>([]);
 
   const logColumns = ref<any>(columns);
   const searchInfo = { logType: '1' };
   // 列表页面公共参数、方法
-  const { prefixCls, tableContext } = useListPage({
+  const { tableContext } = useListPage({
     designScope: 'user-list',
     tableProps: {
       title: '日志列表',

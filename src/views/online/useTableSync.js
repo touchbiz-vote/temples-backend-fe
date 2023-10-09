@@ -14,32 +14,32 @@ var __async = (__this, __arguments, generator) => {
         reject(e);
       }
     };
-    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    var step = (x) => (x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected));
     step((generator = generator.apply(__this, __arguments)).next());
   });
 };
-import { inject, ref, computed, nextTick } from "vue";
-import { V as VALIDATE_FAILED } from "./cgform.data.js";
-import { p as pick } from "./pick.js";
+import { inject, ref, computed, nextTick } from 'vue';
+import { V as VALIDATE_FAILED } from './cgform.data.js';
+import { p as pick } from './pick.js';
 function useTableSync(columns) {
-  const tables = inject("tables");
-  const fullScreenRef = inject("fullScreenRef");
+  const tables = inject('tables');
+  const fullScreenRef = inject('fullScreenRef');
   const tableRef = ref();
   const loading = ref(false);
   const dataSource = ref([]);
   const tableHeight = computed(() => ({
     normal: (fullScreenRef == null ? void 0 : fullScreenRef.value) ? 430 : 260,
-    noToolbar: (fullScreenRef == null ? void 0 : fullScreenRef.value) ? 480 : 320
+    noToolbar: (fullScreenRef == null ? void 0 : fullScreenRef.value) ? 480 : 320,
   }));
-  const columnKeys = computed(() => ["id"].concat(columns.value.map((col) => col.key)));
+  const columnKeys = computed(() => ['id'].concat(columns.value.map((col) => col.key)));
   const tableProps = computed(() => {
     return {
       scrollY: {
-        gt: 15
+        gt: 15,
       },
       scrollX: {
-        gt: 20
-      }
+        gt: 20,
+      },
     };
   });
   function validateData(activeKey) {
@@ -77,17 +77,17 @@ function useTableSync(columns) {
       let flag = false;
       targetData.forEach((targetValue) => {
         if (sourceValue.id === targetValue.id) {
-          let dbFieldName = targetValue["dbFieldName"];
-          let dbFieldTxt = targetValue["dbFieldTxt"];
+          let dbFieldName = targetValue['dbFieldName'];
+          let dbFieldTxt = targetValue['dbFieldTxt'];
           if (sourceValue.dbFieldName !== dbFieldName || sourceValue.dbFieldTxt !== dbFieldTxt) {
             targetTable.setValues([
               {
                 rowKey: targetValue.id,
                 values: {
                   dbFieldName: sourceValue.dbFieldName,
-                  dbFieldTxt: sourceValue.dbFieldTxt
-                }
-              }
+                  dbFieldTxt: sourceValue.dbFieldTxt,
+                },
+              },
             ]);
           }
           flag = true;
@@ -103,7 +103,7 @@ function useTableSync(columns) {
       if (!flag) {
         let record = Object.assign({}, sourceValue);
         columns.value.forEach((column) => {
-          if (column.key !== "dbFieldName" && column.key !== "dbFieldTxt") {
+          if (column.key !== 'dbFieldName' && column.key !== 'dbFieldTxt') {
             record[column.key] = column.defaultValue;
           }
         });

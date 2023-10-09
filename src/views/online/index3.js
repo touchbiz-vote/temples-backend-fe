@@ -59,7 +59,6 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     let router = useRouter();
     const [registerModal, { openModal }] = useModal();
     const {
-      prefixCls,
       tableContext,
       createMessage: $message,
       createConfirm: $confirm,

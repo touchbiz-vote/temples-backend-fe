@@ -343,7 +343,7 @@ function useExtendConfigFormSchemas(_props, handlers) {
     ),
     mapFormSchema(
       {
-        label: '\u5F00\u542F\u8868\u5355\u8BC4\u8BBA',
+        label: '开启数据操作日志',
         field: 'commentStatus',
         component: 'RadioButtonGroup',
         componentProps: {
@@ -365,6 +365,7 @@ function useExtendConfigFormSchemas(_props, handlers) {
       },
       'right'
     ),
+
     mapFormSchema(
       {
         label: '\u542F\u7528\u8054\u5408\u67E5\u8BE2',
@@ -503,154 +504,4 @@ function useExtendConfigFormSchemas(_props, handlers) {
   ];
   return { formSchemas };
 }
-function useCodeGeneratorFormSchemas(_, handlers, single) {
-  const mapFormSchema = bindMapFormSchema(
-    {
-      one: {
-        colProps: { xs: 24, sm: 24 },
-        itemProps: {
-          labelCol: { xs: 24, sm: 5 },
-          wrapperCol: { xs: 24, sm: 16 },
-        },
-      },
-      towOne: {
-        colProps: { xs: 24, sm: 24 },
-        itemProps: {
-          labelCol: { xs: 24, sm: 3 },
-          wrapperCol: { xs: 24, sm: 20 },
-        },
-      },
-      tow: {
-        colProps: { xs: 24, sm: 12 },
-        itemProps: {
-          labelCol: { xs: 24, sm: 6 },
-          wrapperCol: { xs: 24, sm: 16 },
-        },
-      },
-    },
-    'one'
-  );
-  const getColSize = computed(() => (single.value ? 'one' : 'tow'));
-  const formSchemas = computed(() => [
-    mapFormSchema(
-      {
-        label: '\u4EE3\u7801\u751F\u6210\u76EE\u5F55',
-        field: 'projectPath',
-        render: ({ model, field }) =>
-          h(
-            Input.Search,
-            {
-              value: model[field],
-              onChange: (e) => {
-                model[field] = e.target.value;
-                handlers.onProjectPathChange(e);
-              },
-              onSearch: handlers.onProjectPathSearch,
-            },
-            {
-              enterButton: () =>
-                h(
-                  Button,
-                  {
-                    preIcon: 'ant-design:folder-open',
-                  },
-                  {
-                    default: () => '\u6D4F\u89C8',
-                    icon: () => h(FolderOpenOutlined),
-                  }
-                ),
-            }
-          ),
-        component: 'InputSearch',
-        required: true,
-      },
-      single.value ? 'one' : 'towOne'
-    ),
-    mapFormSchema(
-      {
-        label: '\u9875\u9762\u98CE\u683C',
-        field: 'jspMode',
-        component: 'Select',
-        componentProps: {
-          options: handlers.jspModeOptions.value,
-        },
-      },
-      getColSize.value
-    ),
-    mapFormSchema(
-      {
-        label: '\u529F\u80FD\u8BF4\u660E',
-        field: 'ftlDescription',
-        component: 'Input',
-      },
-      getColSize.value
-    ),
-    { label: '\u6570\u636E\u6A21\u578B', field: 'jformType', component: 'Input', show: false },
-    mapFormSchema(
-      {
-        label: '\u8868\u540D',
-        field: 'tableName_tmp',
-        required: true,
-        dynamicDisabled: true,
-        component: 'Input',
-      },
-      getColSize.value
-    ),
-    mapFormSchema(
-      {
-        label: '\u5B9E\u4F53\u7C7B\u540D',
-        field: 'entityName',
-        required: true,
-        component: 'Input',
-        componentProps: {
-          placeholder: '\u8BF7\u8F93\u5165\u5B9E\u4F53\u7C7B\u540D(\u9996\u5B57\u6BCD\u5927\u5199)',
-        },
-      },
-      getColSize.value
-    ),
-    mapFormSchema(
-      {
-        label: '\u5305\u540D(\u5C0F\u5199)',
-        field: 'entityPackage',
-        required: true,
-        component: 'Input',
-      },
-      getColSize.value
-    ),
-    mapFormSchema(
-      {
-        label: '\u4EE3\u7801\u5206\u5C42\u6837\u5F0F',
-        field: 'packageStyle',
-        component: 'Select',
-        componentProps: {
-          disabled: true,
-          options: [
-            { label: '\u4E1A\u52A1\u5206\u5C42', value: 'service' },
-            { label: '\u4EE3\u7801\u5206\u5C42', value: 'project' },
-          ],
-        },
-      },
-      getColSize.value
-    ),
-    mapFormSchema(
-      {
-        label: '\u9875\u9762\u4EE3\u7801',
-        field: 'vueStyle',
-        required: true,
-        component: 'RadioGroup',
-        defaultValue: 'vue3',
-        componentProps: {
-          options: [
-            { label: 'Vue3', value: 'vue3' },
-            { label: 'Vue3 \u539F\u751F', value: 'vue3Native' },
-            { label: 'Vue2', value: 'vue' },
-          ],
-        },
-      },
-      getColSize.value
-    ),
-    { label: '\u9700\u8981\u751F\u6210\u7684\u4EE3\u7801', field: 'codeTypes', component: 'Input', show: false },
-  ]);
-  return { formSchemas };
-}
-export { useExtendConfigFormSchemas as a, useCodeGeneratorFormSchemas as b, useFormSchemas as u };
+export { useExtendConfigFormSchemas as a, useFormSchemas as u };

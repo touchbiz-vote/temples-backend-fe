@@ -19,10 +19,10 @@
   import TableFormModal from './TableFormModal.vue';
   import OrderSelectModal from './OrderSelectModal.vue';
   import { watch, ref, unref, onMounted } from 'vue';
-  import { BasicTable, useTable, TableAction } from '/@/components/Table';
+  import { BasicTable, TableAction } from '/@/components/Table';
   import { getList, deleteTable, assign } from '../tablets.api';
   import { columns } from '../tablets.data';
-  // import { useDesign } from '/@/hooks/web/useDesign';
+  import { useListPage } from '/@/hooks/system/useListPage';
   const [registerModal, { openModal }] = useModal();
   const [registerOrderModal, { openModal: openOrderModal }] = useModal();
   // const { prefixCls } = useDesign('j-depart-form-content');
@@ -33,32 +33,36 @@
   const loading = ref<boolean>(false);
   // 当前的弹窗数据
   const location = ref<object>({});
-
-  const [registerTable, { reload }] = useTable({
-    title: '牌位列表',
-    api: getList,
-    columns,
-    // afterFetch: fillData,
-    size: 'small',
-    formConfig: {
-      showAdvancedButton: false,
-      labelWidth: 80,
-      // autoAdvancedCol: 3,
-    },
-    striped: true,
-    useSearchForm: false,
-    showTableSetting: true,
-    bordered: true,
-    showIndexColumn: false,
-    tableSetting: { fullScreen: false },
-    rowKey: 'id',
-    beforeFetch: initFilter,
-    actionColumn: {
-      width: 180,
-      title: '操作',
-      slots: { customRender: 'action' },
+  // 列表页面公共参数、方法
+  const { tableContext } = useListPage({
+    tableProps: {
+      title: '牌位列表',
+      api: getList,
+      columns,
+      // afterFetch: fillData,
+      size: 'small',
+      formConfig: {
+        showAdvancedButton: false,
+        labelWidth: 80,
+        // autoAdvancedCol: 3,
+      },
+      striped: true,
+      useSearchForm: false,
+      showTableSetting: true,
+      bordered: true,
+      showIndexColumn: false,
+      tableSetting: { fullScreen: false },
+      rowKey: 'id',
+      beforeFetch: initFilter,
+      actionColumn: {
+        width: 180,
+        title: '操作',
+        slots: { customRender: 'action' },
+      },
     },
   });
+
+  const [registerTable, { reload }] = tableContext;
 
   function initFilter(params) {
     if (location.value && location.value.id) {

@@ -16,7 +16,6 @@ import {
 import { BasicTable, TableAction } from '/@/components/Table';
 import { C as CgformModal } from './CgformModal.js';
 import DbToOnlineModal from './DbToOnlineModal.js';
-import CodeGeneratorModal from './CodeGeneratorModal.js';
 import CustomButtonList from './CustomButtonList.js';
 import EnhanceJsModal from './EnhanceJsModal.js';
 import EnhanceJavaModal from './EnhanceJavaModal.js';
@@ -85,8 +84,6 @@ import '/@/components/Loading';
 import '/@/utils/auth';
 import './JModalTip.js';
 import '@vueuse/core';
-import './CodeFileListModal.js';
-import './CodeFileViewModal.js';
 import '/@/utils/file/download';
 import './FileSelectModal.js';
 import './EnhanceJsHistory.js';
@@ -118,7 +115,6 @@ const _sfc_main = defineComponent({
     TableAction,
     CgformModal,
     DbToOnlineModal,
-    CodeGeneratorModal,
     CustomButtonList,
     EnhanceJsModal,
     EnhanceJavaModal,
@@ -147,7 +143,6 @@ const _sfc_main = defineComponent({
       registerEnhanceJavaModal,
       registerCgformModal,
       registerDbToOnlineModal,
-      registerCodeGeneratorModal,
     } = useCgformList({
       pageType: CgformPageType.normal,
       designScope: 'online-cgform-list',
@@ -180,7 +175,6 @@ const _sfc_main = defineComponent({
       registerTable,
       registerCgformModal,
       registerDbToOnlineModal,
-      registerCodeGeneratorModal,
     };
   },
 });
@@ -204,7 +198,6 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_BasicTable = resolveComponent('BasicTable');
   const _component_CgformModal = resolveComponent('CgformModal');
   const _component_DbToOnlineModal = resolveComponent('DbToOnlineModal');
-  const _component_CodeGeneratorModal = resolveComponent('CodeGeneratorModal');
   const _component_CustomButtonList = resolveComponent('CustomButtonList');
   const _component_EnhanceJsModal = resolveComponent('EnhanceJsModal');
   const _component_EnhanceJavaModal = resolveComponent('EnhanceJavaModal');
@@ -318,20 +311,6 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
                     8,
                     ['onClick']
                   ),
-                  createVNode(
-                    _component_a_button,
-                    {
-                      onClick: _ctx.onGenerateCode,
-                      type: 'primary',
-                      preIcon: 'bx:bx-code-alt',
-                    },
-                    {
-                      default: withCtx(() => [createTextVNode(' \u4EE3\u7801\u751F\u6210 ')]),
-                      _: 1,
-                    },
-                    8,
-                    ['onClick']
-                  ),
                   _ctx.selectedRowKeys.length > 0
                     ? (openBlock(),
                       createBlock(
@@ -413,7 +392,6 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
           8,
           ['onRegister', 'onSuccess']
         ),
-        createVNode(_component_CodeGeneratorModal, { onRegister: _ctx.registerCodeGeneratorModal }, null, 8, ['onRegister']),
         createVNode(_component_CustomButtonList, { onRegister: _ctx.registerCustomButtonModal }, null, 8, ['onRegister']),
         createVNode(_component_EnhanceJsModal, { onRegister: _ctx.registerEnhanceJsModal }, null, 8, ['onRegister']),
         createVNode(_component_EnhanceJavaModal, { onRegister: _ctx.registerEnhanceJavaModal }, null, 8, ['onRegister']),

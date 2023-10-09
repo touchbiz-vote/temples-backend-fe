@@ -3524,7 +3524,6 @@ function useAutoModal(isBpm, { emit } = {}, callback) {
   };
   const tableName = ref('');
   const formDataId = ref('');
-  const enableComment = ref(false);
   let onlineExtConfig = {};
   const title = computed(() => {
     let temp = customTitle.value;
@@ -3580,8 +3579,6 @@ function useAutoModal(isBpm, { emit } = {}, callback) {
       yield nextTick(() =>
         __async(this, null, function* () {
           yield getRefPromise(formRendered);
-          handleCommentConfig();
-
           const { onlineFormContext, resetContext } = useOnlineFormContext();
           let { EnhanceJS: EnhanceJS2, initCgEnhanceJs: initCgEnhanceJs2 } = useEnhance(onlineFormContext, false);
 
@@ -3604,15 +3601,7 @@ function useAutoModal(isBpm, { emit } = {}, callback) {
     }
     onlineExtConfig = extConfig;
   }
-  function handleCommentConfig() {
-    let dataIdValue = formDataId.value;
-    if (onlineExtConfig['commentStatus'] == 1 && dataIdValue) {
-      enableComment.value = true;
-      setModalProps({ defaultFullscreen: true });
-    } else {
-      enableComment.value = false;
-    }
-  }
+
   const singleWidth = 800;
   const one2ManyWidth = 1100;
   const modalWidth = computed(() => {
@@ -3737,7 +3726,6 @@ function useAutoModal(isBpm, { emit } = {}, callback) {
     showSub,
     tableName,
     formDataId,
-    enableComment,
     popBodyStyle,
     popModalFixedWidth,
     getFormStatus,
