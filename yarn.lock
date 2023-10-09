@@ -1413,10 +1413,10 @@
     preact "^10.0.5"
     tslib "^2.1.0"
 
-"@fullcalendar/core@^6.1.8":
-  version "6.1.8"
-  resolved "https://registry.npmmirror.com/@fullcalendar/core/-/core-6.1.8.tgz#62008f7b2785dc01f0bf8c2f0c853925eab1c03a"
-  integrity sha512-i8JBIvZCWGO9dsMEDcx9bnsQZ9PtGSJdOXGgWbhLaGq2iq41OBdp9g9gM4b/Otv2oK8bL5Gl6CsMmb/HkDtA6Q==
+"@fullcalendar/core@^6.1.9":
+  version "6.1.9"
+  resolved "https://registry.npmmirror.com/@fullcalendar/core/-/core-6.1.9.tgz#ea735b0dd0a0a487969ebbb6c99b0967e07568c0"
+  integrity sha512-eeG+z9BWerdsU9Ac6j16rpYpPnE0wxtnEHiHrh/u/ADbGTR3hCOjCD9PxQOfhOTHbWOVs7JQunGcksSPu5WZBQ==
   dependencies:
     preact "~10.12.1"
 
@@ -1428,10 +1428,10 @@
     "@fullcalendar/common" "~5.10.1"
     tslib "^2.1.0"
 
-"@fullcalendar/daygrid@^6.1.8", "@fullcalendar/daygrid@~6.1.8":
-  version "6.1.8"
-  resolved "https://registry.npmmirror.com/@fullcalendar/daygrid/-/daygrid-6.1.8.tgz#2ca4a10892f5e2abeac0f8a8ecc8f07c002a4bf4"
-  integrity sha512-kCZxQFKb9Vqa3CZRX0v7rMSJ2mlTt4gDpyLfiNJKxUAq7W51uKurPaFZWicaXy1ESHVBxKNlbx5uNjBpyu50JQ==
+"@fullcalendar/daygrid@^6.1.9":
+  version "6.1.9"
+  resolved "https://registry.npmmirror.com/@fullcalendar/daygrid/-/daygrid-6.1.9.tgz#efb8aabb2f928ac0b05a77c5443accb546ae5818"
+  integrity sha512-o/6joH/7lmVHXAkbaa/tUbzWYnGp/LgfdiFyYPkqQbjKEeivNZWF1WhHqFbhx0zbFONSHtrvkjY2bjr+Ef2quQ==
 
 "@fullcalendar/interaction@5.10.1":
   version "5.10.1"
@@ -1440,11 +1440,6 @@
   dependencies:
     "@fullcalendar/common" "~5.10.1"
     tslib "^2.1.0"
-
-"@fullcalendar/list@^6.1.8":
-  version "6.1.8"
-  resolved "https://registry.npmmirror.com/@fullcalendar/list/-/list-6.1.8.tgz#69e5efba0cb8416955a3ad1cd7d550345ffaa16d"
-  integrity sha512-10N0T/vCtId1cE3JGLpnbAivWVnaWCCkVO7wmbsyr5Y+I939kr/zq4BUNwBoP/xSFVVxx59FETh3iyA+MkV8Fw==
 
 "@fullcalendar/timegrid@5.10.1":
   version "5.10.1"
@@ -1455,13 +1450,6 @@
     "@fullcalendar/daygrid" "~5.10.1"
     tslib "^2.1.0"
 
-"@fullcalendar/timegrid@^6.1.8":
-  version "6.1.8"
-  resolved "https://registry.npmmirror.com/@fullcalendar/timegrid/-/timegrid-6.1.8.tgz#30b9860eb900c5dc9b72ceaab98c0728018a0ff1"
-  integrity sha512-3+3KHHCoNcaLs/gQt004hAqICbY5+WAffrZ0ePv+80HFB1OVh8BQ5XXLHSOUbTvXdgtUTcfBHuw9fhO31kt5gA==
-  dependencies:
-    "@fullcalendar/daygrid" "~6.1.8"
-
 "@fullcalendar/vue3@5.10.1":
   version "5.10.1"
   resolved "https://registry.npmmirror.com/@fullcalendar/vue3/-/vue3-5.10.1.tgz#b34adcaf7837256a5aa9240592a0d97b55eb675d"
@@ -1470,10 +1458,10 @@
     "@fullcalendar/core" "~5.10.1"
     tslib "^2.1.0"
 
-"@fullcalendar/vue@^6.1.8":
-  version "6.1.8"
-  resolved "https://registry.npmmirror.com/@fullcalendar/vue/-/vue-6.1.8.tgz#b0cd7a765e82707244dcc8760cd9f4f55e8b409f"
-  integrity sha512-rCfmpwsNkMQhhNiSGt2ZVW0yNmFyXC6O5dto+Rsj3MsJDVXAjI9pR2KRtg1vBh/6hgp8vHcMFcSCJZxIqfui+A==
+"@fullcalendar/vue3@^6.1.9":
+  version "6.1.9"
+  resolved "https://registry.npmmirror.com/@fullcalendar/vue3/-/vue3-6.1.9.tgz#d622bca73978a2f6a17e2eb3581c8da2a69b3a19"
+  integrity sha512-nuEEb/6uRhD0AH3PzU4Mtod3dD7S729nA1oYorMdCYMgUvXoHJlz2wOKK8w4LGZIn6K2R8Yzo8ol33ElBjHo3A==
 
 "@humanwhocodes/config-array@^0.11.10":
   version "0.11.10"
