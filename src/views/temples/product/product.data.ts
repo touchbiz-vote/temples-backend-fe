@@ -280,9 +280,9 @@ export const formSchema: FormSchema[] = [
     componentProps: {
       maxCount: 1,
       sizeLimit: 50,
-      width: 180,
-      height: 200,
-      helpMessage: '宽度和高度请尽量保持 180px*200px的比例',
+      width: 200,
+      height: 180,
+      helpMessage: '宽度和高度请尽量保持 200px*180px的比例',
       fileType: UploadTypeEnum.image,
     },
   },
