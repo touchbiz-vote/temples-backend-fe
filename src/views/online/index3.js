@@ -118,7 +118,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     function getDropDownAction(record) {
       return [
         {
-          label: '\u529F\u80FD\u6D4B\u8BD5',
+          label: '功能测试',
           class: ['low-app-hide'],
           onClick: () => onShowList(record.id),
         },

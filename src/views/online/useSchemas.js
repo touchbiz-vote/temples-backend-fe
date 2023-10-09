@@ -107,7 +107,7 @@ function useFormSchemas(_props, handlers) {
       ifShow: fieldIfShow,
     }),
     mapFormSchema({
-      label: '\u8868\u5355\u5206\u7C7B',
+      label: '表单分类',
       field: 'formCategory',
       component: 'JDictSelectTag',
       defaultValue: 'temp',
@@ -147,7 +147,7 @@ function useFormSchemas(_props, handlers) {
       },
     }),
     mapFormSchema({
-      label: '\u4E3B\u9898\u6A21\u677F',
+      label: '主题模板',
       field: 'themeTemplate',
       component: 'Select',
       defaultValue: 'normal',

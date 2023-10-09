@@ -375,7 +375,15 @@ const _sfc_main = defineComponent({
         disabled: !props.actionButton,
       },
       {
-        title: '\u540C\u6B65\u6570\u636E\u5E93',
+        title: '填充规则',
+        key: 'fillRule',
+        width: 140,
+        type: JVxeTypes.input,
+        defaultValue: '',
+        disabled: !props.actionButton,
+      },
+      {
+        title: '同步数据库',
         key: 'dbIsPersist',
         minWidth: 80,
         type: JVxeTypes.checkbox,

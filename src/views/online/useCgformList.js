@@ -375,7 +375,7 @@ function useCgformList(options) {
         ifShow: () => isNormalPage && record.isDbSynch != 'Y',
       },
       {
-        label: '\u529F\u80FD\u6D4B\u8BD5',
+        label: '功能测试',
         class: ['low-app-hide'],
         onClick: () => onGoToTest(record),
         ifShow: () => (isNormalPage ? record.isDbSynch == 'Y' && record.tableType !== 3 : true),

@@ -496,7 +496,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
                       onClick: ($event) => _ctx.openConfig(props),
                     },
                     {
-                      default: withCtx(() => [createTextVNode('\u9AD8\u7EA7\u914D\u7F6E')]),
+                      default: withCtx(() => [createTextVNode('高级配置')]),
                       _: 2,
                     },
                     1032,

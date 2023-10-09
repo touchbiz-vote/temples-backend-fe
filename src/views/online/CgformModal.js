@@ -104,13 +104,13 @@ const doCopyOnlineView = (id) => defHttp.post({ url: `${'/online/cgform/head/cop
 const doCopyTable = (id, tableName, params) =>
   defHttp.get({ url: `${'/online/cgform/head/copyOnlineTable'}/${id}`, params: __spreadValues({ tableName }, params) });
 const formApi = {
-  doQueryField: (headId, params) => defHttp.get({ url: '/online/cgform/field/listByHeadId', params: __spreadValues({ headId }, params) }),
+  doQueryField: (headId, params) => defHttp.get({ url: '/api/online/cgform/field/listByHeadId', params: __spreadValues({ headId }, params) }),
   doQueryIndexes: (headId, params) => defHttp.get({ url: '/online/cgform/index/listByHeadId', params: __spreadValues({ headId }, params) }),
   doSaveOrUpdate: (params, isUpdate) => {
     if (isUpdate) {
-      return defHttp.put({ url: '/online/cgform/api/editAll', params });
+      return defHttp.put({ url: '/api/online/cgform/api/editAll', params });
     } else {
-      return defHttp.post({ url: '/online/cgform/api/addAll', params });
+      return defHttp.post({ url: '/api/online/cgform/api/addAll', params });
     }
   },
   editHead: (params) => {

@@ -178,11 +178,22 @@ const _sfc_main = defineComponent({
         },
       },
       {
-        label: '\u6821\u9A8C\u63D0\u793A',
+        label: '校验提示',
         field: 'validateError',
         component: 'Input',
         componentProps: {
           placeholder: '\u8BF7\u8F93\u5165\u6821\u9A8C\u63D0\u793A\u6587\u672C',
+        },
+        ifShow: () => {
+          return sortFlag.value === '1';
+        },
+      },
+      {
+        label: '内容生成器',
+        field: 'validateError',
+        component: 'Input',
+        componentProps: {
+          placeholder: '请输入生成器对象class全称',
         },
       },
       {
