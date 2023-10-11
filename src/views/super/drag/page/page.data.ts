@@ -37,7 +37,7 @@ export const formSchema: FormSchema[] = [
     componentProps: {
       maxCount: 1,
       sizeLimit: 50,
-      helpMessage: '单个文件大小不能超过20KB',
+      helpMessage: '单个文件大小不能超过50KB',
       fileType: UploadTypeEnum.image,
     },
   },

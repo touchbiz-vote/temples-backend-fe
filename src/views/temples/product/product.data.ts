@@ -10,7 +10,7 @@ export const columns: BasicColumn[] = [
   {
     title: '封面',
     dataIndex: 'cover',
-    width: 60,
+    width: 90,
   },
   {
     title: '商品名称',
@@ -280,9 +280,11 @@ export const formSchema: FormSchema[] = [
     componentProps: {
       maxCount: 1,
       sizeLimit: 50,
-      width: 200,
-      height: 180,
-      helpMessage: '宽度和高度请尽量保持 200px*180px的比例',
+      // width: 200,
+      // height: 180,
+      width: 300,
+      height: 270,
+      helpMessage: '宽度和高度请尽量保持 300px*270px的比例',
       fileType: UploadTypeEnum.image,
     },
   },

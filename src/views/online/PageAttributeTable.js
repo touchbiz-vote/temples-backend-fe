@@ -478,7 +478,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
               loading: _ctx.loading,
               columns: _ctx.columns,
               dataSource: _ctx.dataSource,
-              disabledRows: { dbFieldName: [ 'has_child'] },
+              disabledRows: { dbFieldName: ['has_child'] },
             },
             _ctx.tableProps
           ),

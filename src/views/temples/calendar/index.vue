@@ -37,7 +37,6 @@
   //传递开始结束时间查询法会列表
   function queryScheduleList(startDate, endDate) {
     getScheduleList({ startDate, endDate }).then((res) => {
-
     });
   }
 
