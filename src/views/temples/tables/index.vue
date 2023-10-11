@@ -23,7 +23,7 @@
 <script lang="ts" setup>
   import { provide, ref } from 'vue';
   import { useDesign } from '/@/hooks/web/useDesign';
-  import LocationLeftTree from './components/LocationLeftTree.vue';
+  import { LocationLeftTree } from './components/LocationLeftTree.vue';
   import TableFormTab from './components/TableFormTab.vue';
 
   const { prefixCls } = useDesign('depart-manage');
