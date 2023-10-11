@@ -25,15 +25,12 @@
 
   import { useModal } from '/@/components/Modal';
   import OrderModal from './OrderModal.vue';
-  import { useMethods } from '/@/hooks/system/useMethods';
   import { getList, cancel, confirmOrder } from './order.api';
   import { columns, searchFormSchema } from './order.data';
   import { useRoute } from 'vue-router';
-  import { filterObj } from '/@/utils/common/compUtils';
   import { fetchDataWithCache } from '/@/utils/dict';
   const checkedKeys = ref<Array<string | number>>([]);
   const [registerModal, { openModal }] = useModal();
-  const { handleExportXls } = useMethods();
   const isDisabled = ref(false);
 
   const tableId = '4028f8c98a844d8c018a844d8ca40000';

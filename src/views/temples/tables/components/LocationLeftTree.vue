@@ -19,7 +19,7 @@
           v-model:expandedKeys="expandedKeys"
           @select="onSelect"
         >
-          <template #title="{ key: treeKey, title, dataRef }">
+          <template #title="{ key: treeKey, title }">
             <a-dropdown :trigger="['contextmenu']">
               <Popconfirm
                 :visible="visibleTreeKey === treeKey"
@@ -31,7 +31,6 @@
               >
                 <span>{{ title }}</span>
               </Popconfirm>
-
             </a-dropdown>
           </template>
         </a-tree>
@@ -42,11 +41,10 @@
 </template>
 
 <script lang="ts" setup>
-  import { inject, nextTick, ref, unref, defineExpose } from 'vue';
+  import { nextTick, ref, defineExpose } from 'vue';
   import { queryTreeSync } from '../tablets.api';
   import { Popconfirm } from 'ant-design-vue';
 
-  const prefixCls = inject('prefixCls');
   const emit = defineEmits(['select', 'rootTreeData']);
   const loading = ref<boolean>(false);
   // 部门树列表数据

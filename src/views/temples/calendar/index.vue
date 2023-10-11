@@ -2,7 +2,6 @@
   <FullCalendar :options="calendarOptions" />
   <PujaDetailModal @register="registerPujaModal" />
   <ScheduleDetailModal @register="registerScheduleDetailModal" />
-  <ScheduleEditModal @register="registerScheduleEditModal" @success="reload" />
 </template>
 <script setup lang="ts">
   import { ref } from 'vue';
@@ -12,14 +11,12 @@
   import { useModal } from '/@/components/Modal';
   import PujaDetailModal from './components/PujaDetailModal.vue';
   import ScheduleDetailModal from './components/ScheduleDetailModal.vue';
-  import ScheduleEditModal from './components/ScheduleEditModal.vue';
 
   //传递开始结束时间查询法schedule信息
-  import { getScheduleList } from './schedule.api';
+  import { getScheduleList, disable, enabled } from './schedule.api';
 
-  const [registerPujaModal, { openPujaModal }] = useModal();
-  const [registerScheduleDetailModal, { openScheduleDetailModal }] = useModal();
-  const [registerScheduleEditModal, { openScheduleEditModal }] = useModal();
+  const [registerPujaModal, { openModal: openPujaModal }] = useModal();
+  const [registerScheduleDetailModal, { openModal: openScheduleDetailModal }] = useModal();
 
   const calendarOptions = ref({
     plugins: [dayGridPlugin],
@@ -62,13 +59,4 @@
     });
   }
 
-  /**
-   * 详情法会页面
-   */
-  function handleScheduleEdit(record) {
-    openScheduleEditModal(true, {
-      record,
-      isUpdate: true,
-    });
-  }
 </script>

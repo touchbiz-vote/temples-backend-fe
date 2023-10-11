@@ -5,18 +5,14 @@
       <template #tableTitle>
         <a-button preIcon="ant-design:plus-outlined" type="primary" @click="handleAdd">新增</a-button>
       </template>
-      <!--操作栏-->
-      <template #action="{ record }">
-        <TableAction :actions="getTableAction(record)" />
-      </template>
     </BasicTable>
   </BasicModal>
 </template>
 
 <script lang="ts" setup name="PujaDetailModal">
   //显示法会详情, 包含法会的信息以及参与人的信息等
-  import { ref, computed, unref, defineProps } from 'vue';
-  import { BasicTable, TableAction } from '/@/components/Table';
+  import { ref } from 'vue';
+  import { BasicTable } from '/@/components/Table';
   import { BasicModal, useModalInner } from '/@/components/Modal';
   import { BasicForm, useForm } from '/@/components/Form/index';
   import { formPujaSchema, pujaColumns } from '../schedule.data';

@@ -19,7 +19,7 @@
   import ScheduleEditModal from './ScheduleDetailModal.vue';
   import { watch, ref, unref, onMounted } from 'vue';
   import { BasicTable, TableAction } from '/@/components/Table';
-  import { getList, deleteTable, assign } from '../schedule.api';
+  import { getScheduleList  } from '../schedule.api';
   import { columns } from '../schedule.data';
   import { useListPage } from '/@/hooks/system/useListPage';
   const [registerModal, { openModal }] = useModal();
@@ -34,7 +34,7 @@
   const { tableContext } = useListPage({
     tableProps: {
       title: '牌位列表',
-      api: getList,
+      api: getScheduleList,
       columns,
       // afterFetch: fillData,
       size: 'small',
@@ -78,12 +78,6 @@
     });
   }
 
-  /**
-   * 删除事件
-   */
-  async function handleDelete(record) {
-    await deleteTable(record, reload);
-  }
 
   /**
    * 操作列定义
@@ -99,14 +93,6 @@
         label: '停用',
         ifShow: record.status == 0,
         onClick: handleEdit.bind(null, record),
-      },
-      {
-        label: '详情',
-        ifShow: record.status == 0,
-        popConfirm: {
-          title: '是否确认删除,删除后将不可恢复',
-          confirm: handleDelete.bind(null, record),
-        },
       },
     ];
   }

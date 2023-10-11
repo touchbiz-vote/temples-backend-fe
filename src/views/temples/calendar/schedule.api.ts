@@ -4,12 +4,10 @@ const tableId = 'cb26678c67b4465aa17a8a99e28c256a';
 
 export enum Api {
   scheduleList = '/api/temples/client/schedule/list',
-  queryTreeSync = '/api/temples/location/queryTreeSync',
+  disable = '/api/temples/client/schedule/disable/',
+  enabled = '/api/temples/client/schedule/enabled/',
   save = '/online/cgform/api/form/' + tableId,
-  delete = '/online/cgform/api/form/' + tableId,
   get = '/online/cgform/api/form/',
-  exportXlsUrl = '/sys/sysDepart/exportXls',
-  importExcelUrl = '/sys/sysDepart/importExcel',
 
   searchOrder = '/api/temples/order/search',
   assign = '/api/temples/tablets/assign/byOrder',
@@ -52,18 +50,22 @@ export const saveOrUpdate = (params, isUpdate) => {
   return isUpdate ? defHttp.put({ url: Api.save, params }) : defHttp.post({ url: Api.save, params });
 };
 
-export const assign = (params, handleSuccess) => {
-  return defHttp.post({ url: Api.assign, params }).then(() => {
+/**
+ * 禁用某一个活动schedule
+ * @param params
+ */
+export const enabled = (id, handleSuccess) => {
+  return defHttp.post({ url: Api.enabled + id }).then(() => {
     handleSuccess();
   });
 };
 
 /**
- * 删除示例
+ * 禁用某一个活动schedule
  * @param params
  */
-export const deleteTable = (table, handleSuccess) => {
-  return defHttp.delete({ url: Api.delete + '/' + table.jeecg_row_key }).then(() => {
+export const disable = (id, handleSuccess) => {
+  return defHttp.delete({ url: Api.disable + id }).then(() => {
     handleSuccess();
   });
 };
