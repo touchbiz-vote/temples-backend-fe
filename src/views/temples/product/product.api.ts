@@ -11,7 +11,7 @@ export enum Api {
   disable = '/api/temples/product/disable/',
   delete = '/api/temples/product/',
   batchDelete = '/online/cgform/api/form/',
-  importExcel = '/online/cgform/api/importXls/',
+  importExcel = '/api/online/cgform/api/importXls/',
   exportExcel = '/sys/common/exportXls/',
 }
 

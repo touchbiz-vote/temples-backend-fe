@@ -74,7 +74,7 @@ const onlineUrl = {
   optPre: '/online/cgform/api/form/',
   buttonAction: '/online/cgform/api/doButton',
   exportXls: '/online/cgform/api/exportXlsOld/',
-  importXls: '/online/cgform/api/importXls/',
+  importXls: '/api/online/cgform/api/importXls/',
   startProcess: '/act/process/extActProcess/startMutilProcess',
 };
 let config = {

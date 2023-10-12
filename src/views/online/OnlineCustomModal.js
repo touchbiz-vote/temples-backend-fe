@@ -107,7 +107,7 @@ const _sfc_main = defineComponent({
     let onlineFormEditUrl = '';
     let currentRowData = {};
     const url = {
-      loadFormItems: '/online/cgform/api/getFormItem/',
+      loadFormItems: '/api/online/cgform/api/getFormItem/',
       optPre: '/online/cgform/api/form/',
     };
     const modalStyle = { position: 'relative' };
@@ -198,7 +198,7 @@ const _sfc_main = defineComponent({
       });
     }
     function loadFormItems() {
-      let url2 = `/online/cgform/api/getFormItem/${id.value}`;
+      let url2 = `/api/online/cgform/api/getFormItem/${id.value}`;
       return new Promise((resolve, reject) => {
         defHttp
           .get({ url: url2 }, { isTransformResponse: false })
