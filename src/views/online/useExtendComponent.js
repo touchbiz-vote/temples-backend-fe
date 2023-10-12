@@ -499,9 +499,9 @@ class TextAreaWidget extends IFormSchema {
     return Object.assign({}, item, {
       component: 'InputTextArea',
       componentProps: {
-        autosize: {
+        autoSize: {
           minRows: 4,
-          maxRows: 10,
+          maxRows: 20,
         },
       },
     });
@@ -3602,10 +3602,10 @@ function useAutoModal(isBpm, { emit } = {}, callback) {
     onlineExtConfig = extConfig;
   }
 
-  const singleWidth = 800;
+  const singleWidth = 1000;
   const one2ManyWidth = 1100;
   const modalWidth = computed(() => {
-    let diff = 200 * (formTemplate.value - 1);
+    let diff = 100 * (formTemplate.value - 1);
     let width = (!unref(single) ? one2ManyWidth : singleWidth) + diff;
     width = calcModalMixWidth(width);
     let minWidth = modalMinWidth.value;
@@ -3644,7 +3644,7 @@ function useAutoModal(isBpm, { emit } = {}, callback) {
     closeModal();
   }
   function loadFormItems(id, params = {}) {
-    let url = `/online/cgform/api/getFormItem/${id}`;
+    let url = `/api/online/cgform/api/getFormItem/${id}`;
     return new Promise((resolve, reject) => {
       defHttp
         .get({ url, params }, { isTransformResponse: false })
