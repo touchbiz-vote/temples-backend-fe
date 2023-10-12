@@ -17,7 +17,7 @@ const calendar: AppRouteModule = {
     {
       path: 'index',
       name: 'CalendarDemo',
-      component: () => import('/@/views/calendar/index.vue'),
+      component: () => import('/@/views/temples/calendar/index.vue'),
       meta: {
         title: t('routes.dashboard.about'),
         icon: 'simple-icons:about-dot-me',
