@@ -1,7 +1,7 @@
 <template>
   <FullCalendar :options="calendarOptions" ref="calendarRef" />
-  <!-- <PujaDetailModal @register="registerPujaModal" />
-  <ScheduleDetailModal @register="registerScheduleDetailModal" /> -->
+  <!-- <PujaDetailModal @register="registerPujaModal" /> -->
+  <ScheduleDetailModal @register="registerScheduleDetailModal" />
 </template>
 <script setup lang="ts">
   import { onBeforeUnmount, onMounted, ref } from 'vue';
@@ -9,20 +9,20 @@
   import dayGridPlugin from '@fullcalendar/daygrid';
   import zhLocale from '@fullcalendar/core/locales/zh-cn';
   import dayjs from 'dayjs';
-  // import { useModal } from '/@/components/Modal';
+  import { useModal } from '/@/components/Modal';
   // import PujaDetailModal from './components/PujaDetailModal.vue';
-  // import ScheduleDetailModal from './components/ScheduleDetailModal.vue';
+  import ScheduleDetailModal from './components/ScheduleDetailModal.vue';
 
   //传递开始结束时间查询法schedule信息
   import { getScheduleList, disable, enabled } from './schedule.api';
   import calendar from '/@/router/routes/modules/calendar';
 
   // const [registerPujaModal, { openModal: openPujaModal }] = useModal();
-  // const [registerScheduleDetailModal, { openModal: openScheduleDetailModal }] = useModal();
+  const [registerScheduleDetailModal, { openModal: openScheduleDetailModal }] = useModal();
 
   function handleEventClick(info) {
-    alert(info.toString());
-    console.log('handleViewRender', info, info.event.extendedProps);
+    console.log(info.event.extendedProps);
+    handleScheduleDetail(info.event.extendedProps.details);
   }
 
   function handleDateClick(info) {
@@ -102,7 +102,6 @@
   onMounted(() => {
     document.body.querySelector('.fc-toolbar .fc-prev-button')?.addEventListener('click', handlePrevMonthClick);
     document.body.querySelector('.fc-toolbar .fc-next-button')?.addEventListener('click', handleNextMonthClick);
-
     queryScheduleList();
   });
   onBeforeUnmount(() => {

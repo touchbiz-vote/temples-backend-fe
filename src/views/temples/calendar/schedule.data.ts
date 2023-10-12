@@ -13,18 +13,6 @@ export const columns: BasicColumn[] = [
       multiple: 1,
     },
   },
-  // {
-  //   title: '关联用户',
-  //   dataIndex: 'user_id',
-  //   width: 80,
-  //   resizable: true,
-  // },
-  // {
-  //   title: '关联订单',
-  //   dataIndex: 'order_id',
-  //   width: 130,
-  //   resizable: true,
-  // },
   {
     title: '牌位姓名',
     dataIndex: 'name',
