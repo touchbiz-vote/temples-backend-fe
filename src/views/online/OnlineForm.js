@@ -136,7 +136,7 @@ function useCustomHook(otherExports, context) {
 }
 const GET_FUN_BODY_REG = /(?:\/\*[\s\S]*?\*\/|\/\/.*?\r?\n|[^{])+\{([\s\S]*)\}$/;
 const urlObject = {
-  optPre: '/online/cgform/api/form/',
+  optPre: '/api/online/cgform/api/form/',
   urlButtonAction: '/online/cgform/api/doButton',
 };
 const _sfc_main = {

@@ -18,7 +18,6 @@
   </FullCalendar>
   <PujaDetailModal @register="registerPujaModal" />
   <!-- <ScheduleDetailModal @register="registerScheduleDetailModal" /> -->
-  -->
 </template>
 <script setup lang="ts">
   import { onBeforeUnmount, onMounted, ref } from 'vue';
@@ -133,7 +132,6 @@
   onMounted(() => {
     document.body.querySelector('.fc-toolbar .fc-prev-button')?.addEventListener('click', handlePrevMonthClick);
     document.body.querySelector('.fc-toolbar .fc-next-button')?.addEventListener('click', handleNextMonthClick);
-
     queryScheduleList();
   });
   onBeforeUnmount(() => {
