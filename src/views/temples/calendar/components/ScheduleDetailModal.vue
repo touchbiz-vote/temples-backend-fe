@@ -29,6 +29,7 @@
   import { useListPage } from '/@/hooks/system/useListPage';
   import { disable, enabled } from '../schedule.api';
   import { Button } from '/@/components/Button';
+  import { getList as getOrderList } from '../../order/order.api';
 
   export default defineComponent({
     name: 'ScheduleDetailModal',
@@ -48,7 +49,7 @@
       const { tableContext } = useListPage({
         tableProps: {
           title: '预定列表',
-          // api: searchOrder,
+          api: getOrderList,
           afterFetch: fillData,
           columns,
           size: 'small',
@@ -74,8 +75,17 @@
             title: '操作',
             slots: { customRender: 'action' },
           },
+          beforeFetch: initFilter,
         },
       });
+
+      function initFilter(params) {
+        if (params.column === 'createTime') {
+          params.column = 'gmt_create';
+        }
+        params.order_status = 1;
+        params.schedule_id = schedule.value.scheduleId;
+      }
 
       const [registerTable] = tableContext;
 
@@ -132,7 +142,6 @@
       }
 
       function handleDisable() {
-        //   //回传选项和已选择的值
         console.log(props);
         emit('success');
         disable(schedule.value.scheduleId, () => {
