@@ -3,9 +3,9 @@
   <div>
     <BasicModal :showCancelBtn="false" :showOkBtn="false" v-bind="$attrs" @register="register" title="预定详情" width="1200px" destroyOnClose>
       <a-spin :spinning="loading">
-         <b>法会名称:</b> {{ product.Name }}</div>
-         <div> <b>日期:</b>{{ schedule.date }}
-         <b> 预定数:</b> {{ schedule.avaliableNumber }}</div>
+        <div> <b>法会名称:</b> {{ product.Name }}</div>
+        <div> <b>日期:</b>{{ schedule.date }}</div>
+        <div> <b> 预定数:</b> {{ schedule.avaliableNumber }}</div>
         <BasicTable @register="registerTable">
           <!--操作栏-->
           <template #action="{ record }">
@@ -119,8 +119,6 @@
           }
         }
       }
-
-
 
       /**
        * 编辑
