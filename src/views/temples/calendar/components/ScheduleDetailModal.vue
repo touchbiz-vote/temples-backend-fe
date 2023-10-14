@@ -63,7 +63,7 @@
             labelWidth: 80,
           },
           striped: true,
-          useSearchForm: true,
+          useSearchForm: false,
           showTableSetting: true,
           bordered: true,
           showIndexColumn: false,

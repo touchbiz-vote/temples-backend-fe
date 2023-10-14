@@ -70,6 +70,8 @@ const _sfc_main = defineComponent({
     const extendConfig = reactive({
       uploadnum: 0,
       sizeLimit: 0,
+      imageHeightLimit: 0,
+      imageWidthLimit: 0,
       showLength: '',
       popupMulti: true,
       store: '',
@@ -90,7 +92,7 @@ const _sfc_main = defineComponent({
         show: false,
       },
       {
-        label: '\u6587\u4EF6\u4E0A\u4F20\u6570\u91CF',
+        label: '文件数量',
         field: 'uploadnum',
         component: 'InputNumber',
         componentProps: {
@@ -113,6 +115,45 @@ const _sfc_main = defineComponent({
         },
         ifShow: () => {
           return fieldShowType.value === 'file' || fieldShowType.value === 'image';
+        },
+      },
+      {
+        label: '文件上传提示文案',
+        field: 'uploadHelpMessage',
+        component: 'Input',
+        componentProps: {
+          style: {
+            width: '100%',
+          },
+        },
+        ifShow: () => {
+          return fieldShowType.value === 'file' || fieldShowType.value === 'image';
+        },
+      },
+      {
+        label: '图片高度要求(px)',
+        field: 'imageHeightLimit',
+        component: 'InputNumber',
+        componentProps: {
+          style: {
+            width: '100%',
+          },
+        },
+        ifShow: () => {
+          return fieldShowType.value === 'image';
+        },
+      },
+      {
+        label: '图片宽度要求(px)',
+        field: 'imageWidthLimit',
+        component: 'InputNumber',
+        componentProps: {
+          style: {
+            width: '100%',
+          },
+        },
+        ifShow: () => {
+          return fieldShowType.value === 'image';
         },
       },
       {
@@ -209,7 +250,7 @@ const _sfc_main = defineComponent({
       schemas: formSchemas,
       showActionButtonGroup: false,
       labelAlign: 'right',
-      labelWidth: 100,
+      labelWidth: 150,
     });
     const [registerModal, { closeModal }] = useModalInner((data) =>
       __async(this, null, function* () {
@@ -246,6 +287,15 @@ const _sfc_main = defineComponent({
           }
           if (data.sizeLimit && data.sizeLimit > 0) {
             obj.sizeLimit = data.sizeLimit;
+          }
+          if (data.imageWidthLimit && data.imageWidthLimit > 0) {
+            obj.imageWidthLimit = data.imageWidthLimit;
+          }
+          if (data.imageHeightLimit && data.imageHeightLimit > 0) {
+            obj.imageHeightLimit = data.imageHeightLimit;
+          }
+          if (data.uploadHelpMessage) {
+            obj.uploadHelpMessage = data.uploadHelpMessage;
           }
         } else if (type === 'textarea' || type === 'text') {
           if (data.showLength && data.showLength > 0) {

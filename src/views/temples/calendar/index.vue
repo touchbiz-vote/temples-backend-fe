@@ -1,23 +1,26 @@
 <template>
   <FullCalendar :options="calendarOptions" ref="calendarRef">
-    <template v-slot:eventContent="arg">
+    <template #eventContent="arg">
       <template v-if="arg.event.extendedProps.details.type == 1">
         <div class="event-item rituals-event-item bg-green-500 border-0">
           <span class="event-item--title" :disabled="arg.event.extendedProps?.details.status == 2">{{ arg.event.title }}</span>
-          <div class="event-item--inventory">可用数量: {{ arg.event.extendedProps.details.avaliableNumber }}</div>
+          <div class="event-item--inventory">可用数: {{ arg.event.extendedProps.details.avaliableNumber }}</div>
+          <div class="event-item--sold"
+            >预定数: {{ arg.event.extendedProps.details.totalNumber - arg.event.extendedProps.details.avaliableNumber }}</div
+          >
         </div>
       </template>
       <template v-else-if="arg.event.extendedProps.details.type == 2">
         <div class="event-item puja-event-item bg-lime-500 border-0">
           <span class="event-item--title" :disabled="arg.event.extendedProps?.details.status == 2">{{ arg.event.title }}</span>
-          <div class="event-item--inventory">可用数量: {{ arg.event.extendedProps.details.inventory }}</div>
-          <div class="event-item--sold">预定数量: {{ arg.event.extendedProps.details.reserveNumber }}</div>
+          <div class="event-item--inventory">可用数: {{ arg.event.extendedProps.details.inventory }}</div>
+          <div class="event-item--sold">预定数: {{ arg.event.extendedProps.details.reserveNumber }}</div>
         </div>
       </template>
     </template>
   </FullCalendar>
   <PujaDetailModal @register="registerPujaModal" />
-  <!-- <ScheduleDetailModal @register="registerScheduleDetailModal" /> -->
+  <ScheduleDetailModal @register="registerScheduleDetailModal" />
 </template>
 <script setup lang="ts">
   import { onBeforeUnmount, onMounted, ref } from 'vue';
@@ -27,18 +30,22 @@
   import dayjs from 'dayjs';
   import { useModal } from '/@/components/Modal';
   import PujaDetailModal from './components/PujaDetailModal.vue';
-  // import ScheduleDetailModal from './components/ScheduleDetailModal.vue';
+  import ScheduleDetailModal from './components/ScheduleDetailModal.vue';
 
   //传递开始结束时间查询法schedule信息
-  import { getScheduleList, disable, enabled } from './schedule.api';
-  import calendar from '/@/router/routes/modules/calendar';
+  import { getScheduleList } from './schedule.api';
 
   const [registerPujaModal, { openModal: openPujaModal }] = useModal();
-  // const [registerScheduleDetailModal, { openModal: openScheduleDetailModal }] = useModal();
+  const [registerScheduleDetailModal, { openModal: openScheduleDetailModal }] = useModal();
 
   function handleEventClick(info) {
     if (info.event.extendedProps.details.type == 2) {
       openPujaModal(true, {
+        record: info.event.extendedProps.details,
+        isUpdate: true,
+      });
+    } else if (info.event.extendedProps.details.type == 1) {
+      openScheduleDetailModal(true, {
         record: info.event.extendedProps.details,
         isUpdate: true,
       });

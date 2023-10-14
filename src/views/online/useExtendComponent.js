@@ -465,6 +465,9 @@ class FileWidget extends IFormSchema {
       return {
         maxCount: json.uploadnum ? Number(0) : Number(json.uploadnum),
         sizeLimit: json.sizeLimit ? Number(0) : Number(json.sizeLimit),
+        imageHeightLimit: json.imageHeightLimit ? null : Number(json.imageHeightLimit),
+        imageWidthLimit: json.imageWidthLimit ? null : Number(json.imageWidthLimit),
+        helpMessage: json.uploadHelpMessage,
       };
     }
     return {};
@@ -489,6 +492,15 @@ class ImageWidget extends IFormSchema {
     }
     if (json && json.sizeLimit) {
       props['sizeLimit'] = Number(json.sizeLimit);
+    }
+    if (json && json.imageWidthLimit) {
+      props['width'] = Number(json.imageWidthLimit);
+    }
+    if (json && json.imageHeightLimit) {
+      props['height'] = Number(json.imageHeightLimit);
+    }
+    if (json && json.uploadHelpMessage) {
+      props['helpMessage'] = json.uploadHelpMessage;
     }
     return props;
   }

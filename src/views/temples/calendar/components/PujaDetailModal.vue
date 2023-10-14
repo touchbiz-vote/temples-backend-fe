@@ -1,101 +1,143 @@
+<!--用户选择框-->
 <template>
-  <BasicModal v-bind="$attrs" @register="registerModal" :title="title" @ok="handleSubmit" width="40%">
-    <BasicForm @register="registerForm" />
-    <BasicTable @register="registerTable">
-      <template #tableTitle>
-        <a-button preIcon="ant-design:plus-outlined" type="primary" @click="handleAdd">新增</a-button>
-      </template>
-    </BasicTable>
-  </BasicModal>
+  <div>
+    <BasicModal :showCancelBtn="false" :showOkBtn="false" v-bind="$attrs" @register="register" title="预定详情" width="1200px" destroyOnClose>
+      <a-spin :spinning="loading">
+         <b>法会名称:</b> {{ product.Name }}</div>
+         <div> <b>日期:</b>{{ schedule.date }}
+         <b> 预定数:</b> {{ schedule.avaliableNumber }}</div>
+        <BasicTable @register="registerTable">
+          <!--操作栏-->
+          <template #action="{ record }">
+            <TableAction :actions="getTableAction(record)" />
+          </template>
+        </BasicTable>
+      </a-spin>
+    </BasicModal>
+  </div>
 </template>
-
-<script lang="ts" setup name="PujaDetailModal">
-  //显示法会详情, 包含法会的信息以及参与人的信息等
-  import { ref } from 'vue';
-  import { BasicTable } from '/@/components/Table';
+<script lang="ts">
+  import { BasicColumn, TableAction, BasicTable } from '/@/components/Table';
+  import { defineComponent, ref, watch } from 'vue';
   import { BasicModal, useModalInner } from '/@/components/Modal';
-  import { BasicForm, useForm } from '/@/components/Form/index';
-  import { formPujaSchema, pujaColumns } from '../schedule.data';
-  import { getList as getOrderList } from '../../order/order.api';
-  import { getById as getProductById } from '../../product/product.api';
+  import { columns } from '../schedule.data';
+  import { useAttrs } from '/@/hooks/core/useAttrs';
+  import { selectProps } from '/@/components/Form/src/jeecg/props/props';
   import { useListPage } from '/@/hooks/system/useListPage';
+  import { getList as getOrderList } from '../../order/order.api';
 
-  const productId = ref(null);
-  // 列表页面公共参数、方法
-  const { tableContext } = useListPage({
-    tableProps: {
-      title: '法会报名列表',
-      api: getOrderList,
-      columns: pujaColumns,
-      // afterFetch: fillData,
-      size: 'small',
-      formConfig: {
-        showAdvancedButton: false,
-        labelWidth: 80,
-        // autoAdvancedCol: 3,
-      },
-      striped: true,
-      useSearchForm: false,
-      showTableSetting: true,
-      bordered: true,
-      showIndexColumn: false,
-      tableSetting: { fullScreen: false },
-      rowKey: 'id',
-      beforeFetch: initFilter,
-      actionColumn: {
-        width: 180,
-        title: '操作',
-        slots: { customRender: 'action' },
-      },
+  export default defineComponent({
+    name: 'PujaDetailModal',
+    components: {
+      //此处需要异步加载BasicTable
+      BasicModal,
+      TableAction,
+      BasicTable,
+    },
+    props: {
+      ...selectProps,
+    },
+    emits: ['register', 'success'],
+    setup(props, { emit, refs }) {
+      // 列表页面公共参数、方法
+      const { tableContext } = useListPage({
+        tableProps: {
+          title: '法会预约人列表',
+          api: getOrderList,
+          afterFetch: fillData,
+          columns,
+          size: 'small',
+          formConfig: {
+            autoSubmitOnEnter: true,
+            showAdvancedButton: false,
+            showSubmitButton: false,
+            showResetButton: false,
+            // schemas: searchFormSchema,
+            size: 'small',
+            labelWidth: 80,
+          },
+          striped: true,
+          useSearchForm: false,
+          showTableSetting: true,
+          bordered: true,
+          showIndexColumn: false,
+          pagination: false,
+          tableSetting: { fullScreen: false },
+          rowKey: 'id',
+          actionColumn: {
+            width: 80,
+            title: '操作',
+            slots: { customRender: 'action' },
+          },
+          beforeFetch: initFilter,
+        },
+      });
+
+      function initFilter(params) {
+        if (params.column === 'createTime') {
+          params.column = 'gmt_create';
+        }
+        params.order_status = 1;
+        params.product_id = product.value.id;
+      }
+
+      const [registerTable] = tableContext;
+
+      const loading = ref<boolean>(false);
+
+      const product = ref<Object>({ scheduleName: '', date: '' });
+
+      //注册弹框
+      const [register, { closeModal }] = useModalInner(({ record }) => {
+        product.value = record;
+      });
+      const attrs = useAttrs();
+
+      //查询form
+      const formConfig = {
+        baseColProps: {
+          xs: 36,
+          sm: 16,
+          md: 16,
+          lg: 16,
+          xl: 12,
+          xxl: 12,
+        },
+      };
+
+      async function fillData(list) {
+        for (const order of list) {
+          const orderInfo = JSON.parse(order.orderInfo);
+          console.log(orderInfo);
+          for (const item of orderInfo) {
+            if (item.name === 'name') {
+              order.name = item.value;
+            }
+            if (item.name === 'name2') {
+              order.name2 = item.value;
+            }
+          }
+        }
+      }
+
+
+
+      /**
+       * 编辑
+       */
+      function getTableAction(record) {
+        return [];
+      }
+
+      return {
+        getTableAction,
+        registerTable,
+        register,
+        formConfig,
+        columns,
+        loading,
+        schedule,
+      };
     },
   });
-
-  function initFilter(params) {
-    //TODO这个要填充传进来的法会产品id
-    params.productId = productId.value;
-    params.status = 2;
-  }
-
-  const [registerTable] = tableContext;
-
-  // 声明Emits
-  const emit = defineEmits(['register', 'success']);
-  const isUpdate = ref(true);
-  //表单配置
-  const [registerForm, { resetFields, setFieldsValue, validate }] = useForm({
-    //labelWidth: 150,
-    schemas: formPujaSchema,
-    showActionButtonGroup: false,
-  });
-  //表单赋值
-  const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
-    //重置表单
-    await resetFields();
-    setModalProps({ confirmLoading: false });
-    isUpdate.value = !!data?.isUpdate;
-    //获取详情
-    productId.value = data.record.id;
-    data.record = await getProductById(data.record.id);
-    //表单赋值
-    await setFieldsValue({
-      ...data.record,
-    });
-  });
-  //设置标题
-  const title = '法会详情';
-  //表单提交事件
-  async function handleSubmit(v) {
-    try {
-      let values = await validate();
-      setModalProps({ confirmLoading: true });
-      //提交表单
-      // await saveOrUpdate(values, isUpdate.value);
-      //关闭弹窗
-      closeModal();
-      // //刷新列表
-      // emit('success', values);
-    } finally {
-      setModalProps({ confirmLoading: false });
-    }
-  }
 </script>
