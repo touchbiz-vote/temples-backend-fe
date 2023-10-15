@@ -4,6 +4,7 @@ const tableId = 'cb26678c67b4465aa17a8a99e28c256a';
 
 export enum Api {
   scheduleList = '/api/temples/schedule/list',
+  orderList = '/api/temples/schedule/viewList',
   disable = '/api/temples/schedule/disable/',
   enabled = '/api/temples/schedule/enabled/',
   save = '/online/cgform/api/form/' + tableId,
@@ -18,6 +19,14 @@ export enum Api {
  */
 export const getScheduleList = (params) => {
   return defHttp.get({ url: Api.scheduleList, params });
+};
+
+/**
+ * 查询日历中的每日订单和佛事订单列表
+ * @param params
+ */
+export const getOrdrList = (params) => {
+  return defHttp.get({ url: Api.orderList, params });
 };
 
 /**
