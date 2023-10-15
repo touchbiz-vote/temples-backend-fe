@@ -27,44 +27,16 @@
   import dayGridPlugin from '@fullcalendar/daygrid';
   import zhLocale from '@fullcalendar/core/locales/zh-cn';
   import dayjs from 'dayjs';
-  import { useModal } from '/@/components/Modal';
-  import PujaDetailModal from './components/PujaDetailModal.vue';
-  import ScheduleDetailModal from './components/ScheduleDetailModal.vue';
 
   //传递开始结束时间查询法schedule信息
-  import { getOrdrList } from './schedule.api';
-
-  const [registerPujaModal, { openModal: openPujaModal }] = useModal();
-  const [registerScheduleDetailModal, { openModal: openScheduleDetailModal }] = useModal();
-
-  function handleEventClick(info) {
-    if (info.event.extendedProps.details.type == 2) {
-      openPujaModal(true, {
-        record: info.event.extendedProps.details,
-        isUpdate: true,
-      });
-    } else if (info.event.extendedProps.details.type == 1) {
-      openScheduleDetailModal(true, {
-        record: info.event.extendedProps.details,
-        isUpdate: true,
-      });
-    }
-  }
-
-  function handleDateClick(info) {
-    // alert(info.toString());
-  }
+  import { getOrdrList } from '/@/views/temples/calendar/schedule.api';
 
   const calendarRef = ref();
   const calendarOptions = ref({
     plugins: [dayGridPlugin],
     initialView: 'dayGridMonth',
     locale: zhLocale,
-    // weekends: false,
     events: [],
-    // eventClick: handleEventClick,
-    eventClick: handleEventClick,
-    dateClick: handleDateClick,
     customButtons: {
       puja: {
         text: '本月法会场次: 0',
@@ -126,28 +98,6 @@
         )}`;
       }
       calendarOptions.value.events = events;
-    });
-  }
-
-  function reload() {}
-
-  /**
-   * 详情法会页面
-   */
-  function handlePujaDetail(record) {
-    openPujaModal(true, {
-      record,
-      isUpdate: true,
-    });
-  }
-
-  /**
-   * 详情法会页面
-   */
-  function handleScheduleDetail(record) {
-    openScheduleDetailModal(true, {
-      record,
-      isUpdate: true,
     });
   }
 

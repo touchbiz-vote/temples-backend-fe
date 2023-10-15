@@ -3,9 +3,14 @@
   <div>
     <BasicModal :showCancelBtn="false" :showOkBtn="false" v-bind="$attrs" @register="register" title="预定详情" width="1200px" destroyOnClose>
       <a-spin :spinning="loading">
-        <div> <b>法会名称:</b> {{ product.Name }}</div>
-        <div> <b>日期:</b>{{ schedule.date }}</div>
-        <div> <b> 预定数:</b> {{ schedule.avaliableNumber }}</div>
+        <!-- <div> <b>法会名称:</b> {{ product?.name }}</div>
+        <div> <b>日期:</b>{{ product.startDate }} - {{ product.endDate }}</div>
+        <div> <b> 预定数:</b> {{ product.reserveNumber }}</div> -->
+        <a-descriptions :column="1">
+          <a-descriptions-item label="法会名称">{{ product?.name }}</a-descriptions-item>
+          <a-descriptions-item label="日期">{{ product.startDate }} - {{ product.endDate }}</a-descriptions-item>
+          <a-descriptions-item label="预定数">{{ product.reserveNumber }}</a-descriptions-item>
+        </a-descriptions>
         <BasicTable @register="registerTable">
           <!--操作栏-->
           <template #action="{ record }">
@@ -89,6 +94,7 @@
 
       //注册弹框
       const [register, { closeModal }] = useModalInner(({ record }) => {
+        console.log('record', record);
         product.value = record;
       });
       const attrs = useAttrs();
@@ -134,7 +140,8 @@
         formConfig,
         columns,
         loading,
-        schedule,
+        product,
+        // schedule,
       };
     },
   });
