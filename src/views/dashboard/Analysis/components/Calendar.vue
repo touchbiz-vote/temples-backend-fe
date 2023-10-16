@@ -22,6 +22,9 @@
   <ScheduleDetailModal @register="registerScheduleDetailModal" />
 </template>
 <script setup lang="ts">
+  //TODO 这个页面只显示相关预定的信息。
+  //针对佛事的点击是查看该佛事预定相关的信息，包括预定人/预定电话/备注/参与人数/佛事类型等等。
+  //法会弹框显示法会的基本信息以及法会的具体报名人员信息列表。
   import { onBeforeUnmount, onMounted, ref } from 'vue';
   import FullCalendar from '@fullcalendar/vue3';
   import dayGridPlugin from '@fullcalendar/daygrid';

@@ -31,6 +31,10 @@
   import PujaDetailModal from './components/PujaDetailModal.vue';
   import ScheduleDetailModal from './components/ScheduleDetailModal.vue';
 
+  //TODO 这个页面只显示之前佛事和法会相关的配置。
+  //佛事的点击是针对该佛事进行配置操作，暂时只有 开启和关闭两个操作。
+  //法会只需要显示即可，暂时不需要加操作。
+
   //传递开始结束时间查询法schedule信息
   import { getOrdrList } from './schedule.api';
 
