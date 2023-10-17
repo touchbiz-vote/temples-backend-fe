@@ -70,6 +70,8 @@ const _sfc_main = defineComponent({
     const extendConfig = reactive({
       uploadnum: 0,
       sizeLimit: 0,
+      accept: '',
+      uploadHelpMessage: '',
       imageHeightLimit: 0,
       imageWidthLimit: 0,
       showLength: '',
@@ -154,6 +156,19 @@ const _sfc_main = defineComponent({
         },
         ifShow: () => {
           return fieldShowType.value === 'image';
+        },
+      },
+      {
+        label: '文件类型',
+        field: 'accept',
+        component: 'Input',
+        componentProps: {
+          style: {
+            width: '100%',
+          },
+        },
+        ifShow: () => {
+          return fieldShowType.value === 'file';
         },
       },
       {
@@ -287,6 +302,9 @@ const _sfc_main = defineComponent({
           }
           if (data.sizeLimit && data.sizeLimit > 0) {
             obj.sizeLimit = data.sizeLimit;
+          }
+          if (data.accept) {
+            obj.accept = data.accept;
           }
           if (data.imageWidthLimit && data.imageWidthLimit > 0) {
             obj.imageWidthLimit = data.imageWidthLimit;

@@ -53,6 +53,7 @@
     value: propTypes.oneOfType([propTypes.string, propTypes.array]),
     text: propTypes.string.def('上传'),
     fileType: propTypes.string.def(UploadTypeEnum.all),
+    accept: propTypes.string.def(''),
     /*这个属性用于控制文件上传的业务路径*/
     bizPath: propTypes.string.def('temples'),
     /**
@@ -94,6 +95,7 @@
   const isMaxCount = computed(() => props.maxCount > 0 && fileList.value.length >= props.maxCount);
   // 当前是否是上传图片模式
   const isImageMode = computed(() => props.fileType === UploadTypeEnum.image);
+
   // 合并 props 和 attrs
   const bindProps = computed(() => {
     //update-begin-author:liusq date:20220411 for: [issue/455]上传组件传入accept限制上传文件类型无效
@@ -103,11 +105,16 @@
     bind.name = 'file';
     bind.listType = isImageMode.value ? 'picture-card' : 'text';
     bind.class = [bind.class, { 'upload-disabled': props.disabled }];
+
+    console.log(props);
     bind.data = {
       biz: props.bizPath,
       fileType: props.fileType,
+      accept: props.accept,
+      helpMessage: props.helpMessage,
       sizeLimit: props.sizeLimit ? props.sizeLimit : 0,
       height: props.height,
+
       width: props.width,
       ...bind.data,
     };
@@ -119,6 +126,8 @@
     // 如果当前是图片上传模式，就只能上传图片
     if (isImageMode.value && !bind.accept) {
       bind.accept = 'image/*';
+    } else if (!bind.accept && props.accept) {
+      bind.accept = props.accept;
     }
     return bind;
   });
