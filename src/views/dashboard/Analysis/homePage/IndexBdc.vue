@@ -58,11 +58,6 @@
 </template>
 <script lang="ts" setup>
   import { ref, unref } from 'vue';
-  import { Progress } from 'ant-design-vue';
-  import ChartGroupCard from '../components/ChartGroupCard.vue';
-  import BdcTabCard from '../components/BdcTabCard.vue';
-  import LineMulti from '/@/components/chart/LineMulti.vue';
-  import HeadInfo from '/@/components/chart/HeadInfo.vue';
   import { table, table1 } from '../data';
 
   const loading = ref(true);
