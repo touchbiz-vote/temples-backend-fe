@@ -71,7 +71,6 @@
     width: propTypes.number.def(0),
     // 图片高度的控制,单位为px
     height: propTypes.number.def(0),
-    checkSize: propTypes.bool.def(false),
     buttonVisible: propTypes.bool.def(true),
     multiple: propTypes.bool.def(true),
     // 是否显示左右移动按钮
@@ -280,7 +279,7 @@
 
   // upload组件change事件
   function onFileChange(info) {
-    if (props.checkSize && props.sizeLimit > 0 && props.sizeLimit < info.file.size / 1024) {
+    if (props.sizeLimit > 0 && props.sizeLimit < info.file.size / 1024) {
       createMessage.warning(`文件大小不能超过${props.sizeLimit}KB`);
       return false;
     }
