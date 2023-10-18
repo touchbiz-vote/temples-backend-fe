@@ -16,7 +16,7 @@
   import { ref } from 'vue';
   import GrowCard from '../components/GrowCard.vue';
   import SiteAnalysis from '../components/SiteAnalysis.vue';
-  import Calendar from '../components/Calendar.vue';
+  import Calendar from '../components/Calendar/index.vue';
 
   const loading = ref(true);
 

@@ -1,35 +1,33 @@
 <!--用户选择框-->
 <template>
-  <div>
-    <BasicModal :showCancelBtn="false" :showOkBtn="false" v-bind="$attrs" @register="register" title="预定详情" width="1200px" destroyOnClose>
-      <a-spin :spinning="loading">
-        <!-- <div> <b>法会名称:</b> {{ product?.name }}</div>
+  <BasicModal :showCancelBtn="false" :showOkBtn="false" v-bind="$attrs" @register="register" title="预定详情" width="1200px" destroyOnClose>
+    <a-spin :spinning="loading">
+      <!-- <div> <b>法会名称:</b> {{ product?.name }}</div>
         <div> <b>日期:</b>{{ product.startDate }} - {{ product.endDate }}</div>
         <div> <b> 预定数:</b> {{ product.reserveNumber }}</div> -->
-        <a-descriptions :column="3">
-          <a-descriptions-item label="法会名称">{{ product?.name }}</a-descriptions-item>
-          <a-descriptions-item label="日期">{{ product.startDate }} - {{ product.endDate }}</a-descriptions-item>
-          <a-descriptions-item label="预定数">{{ product.reserveNumber }}</a-descriptions-item>
-        </a-descriptions>
-        <BasicTable @register="registerTable">
-          <!--操作栏-->
-          <template #action="{ record }">
-            <TableAction :actions="getTableAction(record)" />
-          </template>
-        </BasicTable>
-      </a-spin>
-    </BasicModal>
-  </div>
+      <a-descriptions :column="3">
+        <a-descriptions-item label="法会名称">{{ product?.name }}</a-descriptions-item>
+        <a-descriptions-item label="日期">{{ product.startDate }} - {{ product.endDate }}</a-descriptions-item>
+        <a-descriptions-item label="预定数">{{ product.reserveNumber }}</a-descriptions-item>
+      </a-descriptions>
+      <BasicTable @register="registerTable">
+        <!--操作栏-->
+        <template #action="{ record }">
+          <TableAction :actions="getTableAction(record)" />
+        </template>
+      </BasicTable>
+    </a-spin>
+  </BasicModal>
 </template>
 <script lang="ts">
-  import { BasicColumn, TableAction, BasicTable } from '/@/components/Table';
-  import { defineComponent, ref, watch } from 'vue';
+  import { TableAction, BasicTable } from '/@/components/Table';
+  import { defineComponent, ref } from 'vue';
   import { BasicModal, useModalInner } from '/@/components/Modal';
-  import { columns } from '../schedule.data';
+  import { columns } from './schedule.data';
   import { useAttrs } from '/@/hooks/core/useAttrs';
   import { selectProps } from '/@/components/Form/src/jeecg/props/props';
   import { useListPage } from '/@/hooks/system/useListPage';
-  import { getList as getOrderList } from '../../order/order.api';
+  import { getList as getOrderList } from '../../../../temples/order/order.api';
 
   export default defineComponent({
     name: 'PujaDetailModal',

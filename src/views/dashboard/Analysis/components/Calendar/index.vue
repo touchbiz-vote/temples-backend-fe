@@ -33,6 +33,27 @@
 
   //传递开始结束时间查询法schedule信息
   import { getOrdrList } from '/@/views/temples/calendar/schedule.api';
+  import PujaDetailModal from './PujaDetailModal.vue';
+  import ScheduleDetailModal from './ScheduleDetailModal.vue';
+  import { useModal } from '/@/components/Modal';
+
+  const [registerPujaModal, { openModal: openPujaModal }] = useModal();
+  const [registerScheduleDetailModal, { openModal: openScheduleDetailModal }] = useModal();
+
+  function handleEventClick(info) {
+    console.log('info', info);
+    if (info.event.extendedProps.details.type == 2) {
+      openPujaModal(true, {
+        record: info.event.extendedProps.details,
+        isUpdate: true,
+      });
+    } else if (info.event.extendedProps.details.type == 1) {
+      openScheduleDetailModal(true, {
+        record: info.event.extendedProps.details,
+        isUpdate: true,
+      });
+    }
+  }
 
   const calendarRef = ref();
   const calendarOptions = ref({
@@ -53,6 +74,7 @@
       center: 'puja,rituals',
       right: 'prev,next',
     },
+    eventClick: handleEventClick,
   });
 
   const currentDate = ref();
@@ -129,15 +151,19 @@
     padding: 15px;
     :deep(.fc-h-event) {
       border: 0;
-      // background: transparent;
+      color: #ffffff;
+      margin-top: 5px;
+      white-space: nowrap;
       &.rituals-event {
+        color: #3788d8;
         background: transparent;
-        color: #000000;
+        border: 1px solid #3788d8;
+        display: flex;
       }
 
-      &.puja-event {
-        color: #ffffff;
-      }
+      // &.puja-event {
+      //   color: #ffffff;
+      // }
 
       .fc-event-main {
         color: inherit;
@@ -155,6 +181,5 @@
   .event-item {
     // padding: 5px 10px;
     border-radius: 4px;
-    margin-top: 5px;
   }
 </style>
