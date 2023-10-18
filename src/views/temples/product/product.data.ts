@@ -279,7 +279,6 @@ export const formSchema: FormSchema[] = [
     component: 'JUpload',
     componentProps: {
       maxCount: 1,
-      sizeLimit: 50,
       // width: 200,
       // height: 180,
       width: 300,
@@ -295,7 +294,6 @@ export const formSchema: FormSchema[] = [
     component: 'JUpload',
     componentProps: {
       maxCount: 6,
-      sizeLimit: 100,
       width: 720,
       height: 180,
       helpMessage: '宽度和高度请尽量保持 720px*180px的比例',
