@@ -157,7 +157,6 @@ export interface GlobEnvConfig {
   VITE_GLOB_APP_TITLE: string;
   // Service interface url
   VITE_GLOB_API_URL: string;
-  VITE_USE_MOCK: string;
   // Project abbreviation
   VITE_GLOB_APP_SHORT_NAME: string;
   //是否开启单点登录

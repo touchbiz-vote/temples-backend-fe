@@ -64,7 +64,7 @@ const _sfc_main = defineComponent({
       return defHttp
         .get(
           {
-            url: '/online/cgform/head/queryTables/',
+            url: '/api/online/cgform/head/queryTables/',
           },
           {
             errorMessageMode: 'none',
@@ -112,7 +112,7 @@ const _sfc_main = defineComponent({
         btnLoading.value = true;
         let tbNames = selectedRowKeys.value.join(',');
         defHttp
-          .post({ url: '/online/cgform/head/transTables/' + tbNames })
+          .post({ url: '/api/online/cgform/head/transTables/' + tbNames })
           .then(() => {
             closeModal();
             emit('success');
