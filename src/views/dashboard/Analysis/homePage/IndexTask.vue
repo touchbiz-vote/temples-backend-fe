@@ -287,25 +287,6 @@
     }
   }
 
-  function mock() {
-    dataSource1.value = tempSs1;
-    dataSource2.value = tempSs2;
-    dataSource3.value = tempSs1;
-    dataSource4.value = tempSs2;
-    ifNullDataSource(dataSource4, '.tytable4');
-  }
-
-  function ifNullDataSource(ds, tb) {
-    if (!ds || ds.length == 0) {
-      var tmp = document.createElement('img');
-      tmp.src = noDataPng;
-      tmp.width = 300;
-      let tbclass = `${tb} .ant-table-placeholder`;
-      document.querySelector(tbclass).innerHTML = '';
-      document.querySelector(tbclass).appendChild(tmp);
-    }
-  }
-
   function handleData() {
     $message.createMessage.success('办理完成');
   }
@@ -314,7 +295,6 @@
     $message.createMessage.success('请根据具体业务跳转页面');
   }
 
-  mock();
 </script>
 
 <style scoped lang="less">
