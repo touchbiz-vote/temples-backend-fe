@@ -5,8 +5,8 @@ import { rules } from '/@/utils/helper/validator';
 
 export const columns: BasicColumn[] = [
   {
-    title: '牌位编号',
-    dataIndex: 'code',
+    title: '订单编号',
+    dataIndex: 'order_code',
     width: 140,
     resizable: true,
     sorter: {
@@ -14,41 +14,35 @@ export const columns: BasicColumn[] = [
     },
   },
   {
-    title: '牌位姓名',
-    dataIndex: 'name',
+    title: '佛事名称',
+    dataIndex: 'product_name',
     width: 130,
     resizable: true,
   },
   {
-    title: '阳上姓名',
-    dataIndex: 'name2',
+    title: '联系人',
+    dataIndex: 'contact_man',
     width: 130,
     resizable: true,
   },
   {
-    title: '状态',
-    dataIndex: 'status',
-    width: 60,
+    title: '联系电话',
+    dataIndex: 'contact_tel',
+    width: 130,
     resizable: true,
-    customRender: ({ text }) => {
-      const color = text == 1 ? 'green' : 'silver';
-      return render.renderTag(text == '1' ? '已分配' : '未使用', color);
-    },
-    sorter: {
-      multiple: 1,
-    },
   },
   // {
-  //   title: '创建时间',
-  //   dataIndex: 'create_time',
-  //   width: 150,
+  //   title: '状态',
+  //   dataIndex: 'status',
+  //   width: 60,
   //   resizable: true,
-  // },
-  // {
-  //   title: '更新时间',
-  //   dataIndex: 'update_time',
-  //   width: 150,
-  //   resizable: true,
+  //   customRender: ({ text }) => {
+  //     const color = text == 1 ? 'green' : 'silver';
+  //     return render.renderTag(text == '1' ? '已分配' : '未使用', color);
+  //   },
+  //   sorter: {
+  //     multiple: 1,
+  //   },
   // },
 ];
 

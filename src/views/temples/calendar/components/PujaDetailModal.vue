@@ -3,9 +3,6 @@
   <div>
     <BasicModal :showCancelBtn="false" :showOkBtn="false" v-bind="$attrs" @register="register" title="预定详情" width="1200px" destroyOnClose>
       <a-spin :spinning="loading">
-        <!-- <div> <b>法会名称:</b> {{ product?.name }}</div>
-        <div> <b>日期:</b>{{ product.startDate }} - {{ product.endDate }}</div>
-        <div> <b> 预定数:</b> {{ product.reserveNumber }}</div> -->
         <a-descriptions :column="3">
           <a-descriptions-item label="法会名称">{{ product?.name }}</a-descriptions-item>
           <a-descriptions-item label="日期">{{ product.startDate }} - {{ product.endDate }}</a-descriptions-item>
@@ -49,7 +46,6 @@
         tableProps: {
           title: '法会预约人列表',
           api: getOrderList,
-          afterFetch: fillData,
           columns,
           size: 'small',
           formConfig: {
@@ -69,11 +65,12 @@
           pagination: false,
           tableSetting: { fullScreen: false },
           rowKey: 'id',
-          actionColumn: {
-            width: 80,
-            title: '操作',
-            slots: { customRender: 'action' },
-          },
+          showActionColumn: false,
+          // actionColumn: {
+          //   width: 80,
+          //   title: '操作',
+          //   slots: { customRender: 'action' },
+          // },
           beforeFetch: initFilter,
         },
       });

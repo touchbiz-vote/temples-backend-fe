@@ -3,12 +3,12 @@
   <div>
     <BasicModal :showCancelBtn="false" :showOkBtn="false" v-bind="$attrs" @register="register" title="预定详情" width="1200px" destroyOnClose>
       <a-spin :spinning="loading">
-        <div> <b>日期:</b>{{ schedule.date }} <b>活动场次:</b> {{ schedule.scheduleName }}</div>
-        <div><b>可预定总数:</b> {{ schedule.totalNumber }} <b> 可预定数:</b> {{ schedule.avaliableNumber }}</div>
-        <div>
-          <Button type="primary" v-if="showDisable" @click="handleDisable"> 禁用</Button>
-          <Button type="primary" v-if="showEnabled" @click="handleEnabled"> 启用</Button>
-        </div>
+        <a-descriptions :column="2">
+          <a-descriptions-item label="日期">{{ schedule.date }}</a-descriptions-item>
+          <a-descriptions-item label="活动场次">{{ schedule.scheduleName }}</a-descriptions-item>
+          <a-descriptions-item label="可预订总数">{{ schedule.totalNumber }}</a-descriptions-item>
+          <a-descriptions-item label="可预订数">{{ schedule.avaliableNumber }}</a-descriptions-item>
+        </a-descriptions>
         <BasicTable @register="registerTable">
           <!--操作栏-->
           <template #action="{ record }">
@@ -16,6 +16,10 @@
           </template>
         </BasicTable>
       </a-spin>
+      <template #footer>
+        <Button type="primary" v-if="showDisable" @click="handleDisable"> 禁用</Button>
+        <Button type="primary" v-if="showEnabled" @click="handleEnabled"> 启用</Button>
+      </template>
     </BasicModal>
   </div>
 </template>
@@ -50,7 +54,6 @@
         tableProps: {
           title: '预定列表',
           api: getOrderList,
-          afterFetch: fillData,
           columns,
           size: 'small',
           formConfig: {
@@ -70,11 +73,12 @@
           pagination: false,
           tableSetting: { fullScreen: false },
           rowKey: 'id',
-          actionColumn: {
-            width: 80,
-            title: '操作',
-            slots: { customRender: 'action' },
-          },
+          showActionColumn: false,
+          // actionColumn: {
+          //   width: 80,
+          //   title: '操作',
+          //   slots: { customRender: 'action' },
+          // },
           beforeFetch: initFilter,
         },
       });

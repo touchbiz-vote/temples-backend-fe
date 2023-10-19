@@ -47,7 +47,6 @@
         tableProps: {
           title: '法会预约人列表',
           api: getOrderList,
-          afterFetch: fillData,
           columns,
           size: 'small',
           formConfig: {
@@ -67,11 +66,7 @@
           pagination: false,
           tableSetting: { fullScreen: false },
           rowKey: 'id',
-          actionColumn: {
-            width: 80,
-            title: '操作',
-            slots: { customRender: 'action' },
-          },
+          showActionColumn: false,
           beforeFetch: initFilter,
         },
       });

@@ -6,7 +6,7 @@
           <span class="event-item--title" :disabled="arg.event.extendedProps?.details.status == 2">{{ arg.event.title }}</span>
           <div class="event-item--inventory">可用数: {{ arg.event.extendedProps.details.avaliableNumber }}</div>
           <!-- <div class="event-item--sold"> -->
-            <!-- 预定数: {{ arg.event.extendedProps.details.totalNumber - arg.event.extendedProps.details.avaliableNumber }} -->
+          <!-- 预定数: {{ arg.event.extendedProps.details.totalNumber - arg.event.extendedProps.details.avaliableNumber }} -->
           <!-- </div> -->
         </div>
       </template>
@@ -20,7 +20,7 @@
     </template>
   </FullCalendar>
   <PujaDetailModal @register="registerPujaModal" />
-  <!-- <ScheduleDetailModal @register="registerScheduleDetailModal" /> -->
+  <ScheduleDetailModal @register="registerScheduleDetailModal" />
 </template>
 <script setup lang="ts">
   import { onBeforeUnmount, onMounted, ref } from 'vue';
@@ -30,20 +30,24 @@
   import dayjs from 'dayjs';
   import { useModal } from '/@/components/Modal';
   import PujaDetailModal from './components/PujaDetailModal.vue';
-  // import ScheduleDetailModal from './components/ScheduleDetailModal.vue';
+  import ScheduleDetailModal from './components/ScheduleDetailModal.vue';
 
   //传递开始结束时间查询法schedule信息
   import { getScheduleList, disable, enabled } from './schedule.api';
   import calendar from '/@/router/routes/modules/calendar';
 
   const [registerPujaModal, { openModal: openPujaModal }] = useModal();
-  // const [registerScheduleDetailModal, { openModal: openScheduleDetailModal }] = useModal();
+  const [registerScheduleDetailModal, { openModal: openScheduleDetailModal }] = useModal();
 
   function handleEventClick(info) {
     if (info.event.extendedProps.details.type == 2) {
       openPujaModal(true, {
         record: info.event.extendedProps.details,
         isUpdate: true,
+      });
+    } else if (info.event.extendedProps.details.type == 1) {
+      openScheduleDetailModal(true, {
+        record: info.event.extendedProps.details,
       });
     }
   }
@@ -166,6 +170,7 @@
 
       .fc-event-main {
         color: inherit;
+        width: 100%;
       }
     }
     :deep(.fc-daygrid-day-number),
@@ -185,5 +190,12 @@
   .event-item {
     padding: 3px 5px;
     border-radius: 4px;
+    user-select: none;
+
+    &.rituals-event-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
   }
 </style>
