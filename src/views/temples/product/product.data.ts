@@ -220,7 +220,7 @@ export const formSchema: FormSchema[] = [
       return {
         api: ajaxGetDictItems,
         params: {
-          code: "t_biz_type,id,biz_name, biz_code !='volunteer' and biz_code != 'monks' and biz_code != 'album' and biz_code != 'todayTips' and biz_code != 'navigator' ",
+          code: "t_biz_type,id,biz_name, biz_code not in ('volunteer','monks' ,'album' ,'todayTips','navigator','commonweal','cultural') ",
         },
         labelField: 'value',
         valueField: 'text',
