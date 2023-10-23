@@ -1,7 +1,6 @@
 import { BasicColumn } from '/@/components/Table';
 import { FormSchema } from '/@/components/Table';
 import { render } from '/@/utils/common/renderUtils';
-import { rules } from '/@/utils/helper/validator';
 
 import { ajaxGetDictItems } from './product.api';
 import { UploadTypeEnum } from '/@/components/Form/src/jeecg/components/JUpload';

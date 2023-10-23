@@ -26,8 +26,11 @@
     isUpdate.value = !!data?.isUpdate;
     if (unref(isUpdate)) {
       //获取详情
+      const id = data.record.id;
       data.record = await getById(data.record.id);
       data.record.title = data.location.title;
+      data.record.jeecg_row_key = id;
+      data.record.id = id;
       //表单赋值
       await setFieldsValue({
         ...data.record,
