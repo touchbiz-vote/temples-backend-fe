@@ -1019,6 +1019,11 @@
   resolved "https://registry.npmmirror.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
+"@claviska/jquery-minicolors@^2.3.6":
+  version "2.3.6"
+  resolved "https://registry.npmmirror.com/@claviska/jquery-minicolors/-/jquery-minicolors-2.3.6.tgz#0f3dfe9baf11e93a3b1b1dcf2448177cf4c32e3e"
+  integrity sha512-8Ro6D4GCrmOl41+6w4NFhEOpx8vjxwVRI69bulXsFDt49uVRKhLU5TnzEV7AmOJrylkVq+ugnYNMiGHBieeKUQ==
+
 "@commitlint/cli@^16.2.3":
   version "16.3.0"
   resolved "https://registry.npmmirror.com/@commitlint/cli/-/cli-16.3.0.tgz#5689f5c2abbb7880d5ff13329251e5648a784b16"
@@ -2204,6 +2209,11 @@
   integrity sha512-OAPJUAtgeINhh/TAlUID4QTs53Njm7xzddaVlEs/SXwgtiD1tW22zAB/W1wdqfrpmikgaWQ9Fw6Ws+hsiRm5Vg==
   dependencies:
     "@sinonjs/commons" "^1.7.0"
+
+"@socket.io/component-emitter@~3.1.0":
+  version "3.1.0"
+  resolved "https://registry.npmmirror.com/@socket.io/component-emitter/-/component-emitter-3.1.0.tgz#96116f2a912e0c02817345b3c10751069920d553"
+  integrity sha512-+9jVqKhRSpsc591z5vX+X5Yyw+he/HCB4iQ/RYxw35CEPaY1gnsNE43nf9n9AaYjAQrTiI/mOwKUKdUs9vf7Xg==
 
 "@surma/rollup-plugin-off-main-thread@^2.2.3":
   version "2.2.3"
@@ -3818,7 +3828,7 @@ caniuse-lite@^1.0.30001517, caniuse-lite@^1.0.30001520:
   resolved "https://registry.npmmirror.com/caniuse-lite/-/caniuse-lite-1.0.30001522.tgz#44b87a406c901269adcdb834713e23582dd71856"
   integrity sha512-TKiyTVZxJGhsTszLuzb+6vUZSjVOAhClszBr2Ta2k9IwtNBT/4dzmL6aywt0HCgEZlmwJzXJd8yNiob6HgwTRg==
 
-canvg@^3.0.6:
+canvg@^3.0.10, canvg@^3.0.6:
   version "3.0.10"
   resolved "https://registry.npmmirror.com/canvg/-/canvg-3.0.10.tgz#8e52a2d088b6ffa23ac78970b2a9eebfae0ef4b3"
   integrity sha512-qwR2FRNO9NlzTeKIPIKpnTY6fqwuYSequ8Ru8c0YkYU7U0oW+hLUvWadLvAu1Rl72OMNiFhoLu4f8eUjQ7l/+Q==
@@ -4714,7 +4724,7 @@ dayjs@^1.10.5, dayjs@^1.11.1:
   resolved "https://registry.npmmirror.com/dayjs/-/dayjs-1.11.9.tgz#9ca491933fadd0a60a2c19f6c237c03517d71d1a"
   integrity sha512-QvzAURSbQ0pKdIye2txOzNaHmxtUBXerpY0FJsFXUMKbIZeFm5ht1LS/jFsrncjnmtv8HsG0W2g6c0zUjZWmpA==
 
-debug@4, debug@^4.1.0, debug@^4.1.1, debug@^4.3.2, debug@^4.3.3, debug@^4.3.4:
+debug@4, debug@^4.1.0, debug@^4.1.1, debug@^4.3.2, debug@^4.3.3, debug@^4.3.4, debug@~4.3.1, debug@~4.3.2:
   version "4.3.4"
   resolved "https://registry.npmmirror.com/debug/-/debug-4.3.4.tgz#1319f6579357f2338d3337d2cdd4914bb5dcc865"
   integrity sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==
@@ -5204,6 +5214,22 @@ end-of-stream@^1.0.0, end-of-stream@^1.1.0:
   integrity sha512-+uw1inIHVPQoaVuHzRyXd21icM+cnt4CzD5rW+NC1wjOUSTOs+Te7FOv7AhN7vS9x/oIyhLP5PR1H+phQAHu5Q==
   dependencies:
     once "^1.4.0"
+
+engine.io-client@~6.5.2:
+  version "6.5.2"
+  resolved "https://registry.npmmirror.com/engine.io-client/-/engine.io-client-6.5.2.tgz#8709e22c291d4297ae80318d3c8baeae71f0e002"
+  integrity sha512-CQZqbrpEYnrpGqC07a9dJDz4gePZUgTPMU3NKJPSeQOyw27Tst4Pl3FemKoFGAlHzgZmKjoRmiJvbWfhCXUlIg==
+  dependencies:
+    "@socket.io/component-emitter" "~3.1.0"
+    debug "~4.3.1"
+    engine.io-parser "~5.2.1"
+    ws "~8.11.0"
+    xmlhttprequest-ssl "~2.0.0"
+
+engine.io-parser@~5.2.1:
+  version "5.2.1"
+  resolved "https://registry.npmmirror.com/engine.io-parser/-/engine.io-parser-5.2.1.tgz#9f213c77512ff1a6cc0c7a86108a7ffceb16fcfb"
+  integrity sha512-9JktcM3u18nU9N2Lz3bWeBgxVgOKpw7yhRaoxQA3FUDZzzw+9WlA6p4G4u0RixNkg14fH7EfEc/RhpurtiROTQ==
 
 enquire.js@^2.1.6:
   version "2.1.6"
@@ -8129,6 +8155,11 @@ jpegtran-bin@^6.0.1:
     bin-build "^3.0.0"
     bin-wrapper "^4.0.0"
 
+jquery@^3.6.0:
+  version "3.7.1"
+  resolved "https://registry.npmmirror.com/jquery/-/jquery-3.7.1.tgz#083ef98927c9a6a74d05a6af02806566d16274de"
+  integrity sha512-m4avr8yL8kmFN8psrbFFFmB/If14iN5o9nw/NgnnM+kybDJpRsAynV2BsfpTYrTRysYUdADVD7CkUUizgkpLfg==
+
 js-base64@^2.1.9:
   version "2.6.4"
   resolved "https://registry.npmmirror.com/js-base64/-/js-base64-2.6.4.tgz#f4e686c5de1ea1f867dbcad3d46d969428df98c4"
@@ -8168,6 +8199,11 @@ js-yaml@^4.1.0:
   integrity sha512-wpxZs9NoxZaJESJGIZTyDEaYpl0FKSA+FB9aJiyemKhMwkxQg63h4T1KJgUGHpTqPDNRcmmYLugrRjJlBtWvRA==
   dependencies:
     argparse "^2.0.1"
+
+jsbarcode@^3.11.5:
+  version "3.11.5"
+  resolved "https://registry.npmmirror.com/jsbarcode/-/jsbarcode-3.11.5.tgz#390b3efd0271f35b9d68c7b8af6e972445969014"
+  integrity sha512-zv3KsH51zD00I/LrFzFSM6dst7rDn0vIMzaiZFL7qusTjPZiPtxg3zxetp0RR7obmjTw4f6NyGgbdkBCgZUIrA==
 
 jsdom@^16.6.0:
   version "16.7.0"
@@ -9192,6 +9228,11 @@ nwsapi@^2.2.0:
   version "2.2.7"
   resolved "https://registry.npmmirror.com/nwsapi/-/nwsapi-2.2.7.tgz#738e0707d3128cb750dddcfe90e4610482df0f30"
   integrity sha512-ub5E4+FBPKwAZx0UwIQOjYWGHTEq5sPqHQNRN8Z9e4A7u3Tj1weLJsL59yH9vmvqEtBHaOmT6cYQKIZOxp35FQ==
+
+nzh@^1.0.8:
+  version "1.0.11"
+  resolved "https://registry.npmmirror.com/nzh/-/nzh-1.0.11.tgz#9e04842cd578f2e3004e62a23aa767bc29526313"
+  integrity sha512-Hmx1wuoj5zoFCEhfic4zW/2csg/vb5BxXAUGUNIyBlSu7ZtZezGVGloqNCnRcHVU1fMC9ZTfvbi6ayPWC1sRSQ==
 
 object-assign@^4, object-assign@^4.0.1, object-assign@^4.1.0, object-assign@^4.1.1:
   version "4.1.1"
@@ -10689,6 +10730,24 @@ snapdragon@^0.8.1:
     source-map "^0.5.6"
     source-map-resolve "^0.5.0"
     use "^3.1.0"
+
+socket.io-client@^4.5.1:
+  version "4.7.2"
+  resolved "https://registry.npmmirror.com/socket.io-client/-/socket.io-client-4.7.2.tgz#f2f13f68058bd4e40f94f2a1541f275157ff2c08"
+  integrity sha512-vtA0uD4ibrYD793SOIAwlo8cj6haOeMHrGvwPxJsxH7CeIksqJ+3Zc06RvWTIFgiSqx4A3sOnTXpfAEE2Zyz6w==
+  dependencies:
+    "@socket.io/component-emitter" "~3.1.0"
+    debug "~4.3.2"
+    engine.io-client "~6.5.2"
+    socket.io-parser "~4.2.4"
+
+socket.io-parser@~4.2.4:
+  version "4.2.4"
+  resolved "https://registry.npmmirror.com/socket.io-parser/-/socket.io-parser-4.2.4.tgz#c806966cf7270601e47469ddeec30fbdfda44c83"
+  integrity sha512-/GbIKmo8ioc+NIWIhwdecY0ge+qVBSMdgxGygevmdHj24bsfgtCmcUUcQ5ZzcylGFHsN3k4HB4Cgkl96KVnuew==
+  dependencies:
+    "@socket.io/component-emitter" "~3.1.0"
+    debug "~4.3.1"
 
 sort-keys-length@^1.0.0:
   version "1.0.1"
@@ -12202,6 +12261,20 @@ vue-observe-visibility@^0.4.4:
   resolved "https://registry.npmmirror.com/vue-observe-visibility/-/vue-observe-visibility-0.4.6.tgz#878cb8ebcf3078e40807af29774e97105ebd519e"
   integrity sha512-xo0CEVdkjSjhJoDdLSvoZoQrw/H2BlzB5jrCBKGZNXN2zdZgMuZ9BKrxXDjNP2AxlcCoKc8OahI3F3r3JGLv2Q==
 
+vue-plugin-hiprint@^0.0.54-fix:
+  version "0.0.54-fix"
+  resolved "https://registry.npmmirror.com/vue-plugin-hiprint/-/vue-plugin-hiprint-0.0.54-fix.tgz#5ed94a96b65ad4ddbbe1c494cbff074e27573c85"
+  integrity sha512-WVUQdTIsxixS1VFr5nNIa0Hztrb9szJgS3z4MPUvu9gdqdu32lU3Jhux8QBTeVYrjIfNGuiNKNn5WUb+A5RK5Q==
+  dependencies:
+    "@claviska/jquery-minicolors" "^2.3.6"
+    canvg "^3.0.10"
+    html2canvas "^1.4.1"
+    jquery "^3.6.0"
+    jsbarcode "^3.11.5"
+    jspdf "^2.5.1"
+    nzh "^1.0.8"
+    socket.io-client "^4.5.1"
+
 vue-print-nb-jeecg@^1.0.12:
   version "1.0.12"
   resolved "https://registry.npmmirror.com/vue-print-nb-jeecg/-/vue-print-nb-jeecg-1.0.12.tgz#975e1dac3da8c9736ac81b82a2b099cafe1bb3df"
@@ -12662,6 +12735,11 @@ ws@^7.4.6:
   resolved "https://registry.npmmirror.com/ws/-/ws-7.5.9.tgz#54fa7db29f4c7cec68b1ddd3a89de099942bb591"
   integrity sha512-F+P9Jil7UiSKSkppIiD94dN07AwvFixvLIj1Og1Rl9GGMuNipJnV9JzjD6XuqmAeiswGvUmNLjr5cFuXwNS77Q==
 
+ws@~8.11.0:
+  version "8.11.0"
+  resolved "https://registry.npmmirror.com/ws/-/ws-8.11.0.tgz#6a0d36b8edfd9f96d8b25683db2f8d7de6e8e143"
+  integrity sha512-HPG3wQd9sNQoT9xHyNCXoDUa+Xw/VevmY9FoHyQ+g+rrMn4j6FB4np7Z0OhdTgjx6MgQLK7jwSy1YecU1+4Asg==
+
 xe-utils@^3.3.1:
   version "3.5.12"
   resolved "https://registry.npmmirror.com/xe-utils/-/xe-utils-3.5.12.tgz#51e6f752ce037aac80d1ebab33559a88fbd1685c"
@@ -12694,6 +12772,11 @@ xmlchars@^2.2.0:
   version "2.2.0"
   resolved "https://registry.npmmirror.com/xmlchars/-/xmlchars-2.2.0.tgz#060fe1bcb7f9c76fe2a17db86a9bc3ab894210cb"
   integrity sha512-JZnDKK8B0RCDw84FNdDAIpZK+JuJw+s7Lz8nksI7SIuU3UXJJslUthsi+uWBUYOwPFwW7W7PRLRfUKpxjtjFCw==
+
+xmlhttprequest-ssl@~2.0.0:
+  version "2.0.0"
+  resolved "https://registry.npmmirror.com/xmlhttprequest-ssl/-/xmlhttprequest-ssl-2.0.0.tgz#91360c86b914e67f44dce769180027c0da618c67"
+  integrity sha512-QKxVRxiRACQcVuQEYFsI1hhkrMlrXHPegbbd1yn9UHOmRxY+si12nQYzri3vbzt8VdTTRviqcKxcyllFas5z2A==
 
 xss@^1.0.13:
   version "1.0.14"

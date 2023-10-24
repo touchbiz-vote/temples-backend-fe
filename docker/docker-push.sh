@@ -1,6 +1,6 @@
 #!/bin/sh
 
-version=20230829.1
+version=20231023.6
 serviceName=registry.cn-hangzhou.aliyuncs.com/touchbiz/nginx-temples
 targetTagName=$serviceName:$version
 
