@@ -9,15 +9,7 @@
 <template>
   <BasicModal @register="registerModal" :title="title" :showOkBtn="false" :showCancelBtn="false" width="95%">
     <a-row :gutter="[8, 0]" style="margin-bottom: 10px">
-      <a-col :span="4">
-        <!-- 模板选择 -->
-        <a-select v-model:value="mode" showSearch @change="changeMode" :defaultValue="0" option-label-prop="label" style="width: 100%">
-          <a-select-option v-for="(opt, idx) in modeList" :key="idx" :label="opt.name" :value="idx">
-            {{ opt.name }}
-          </a-select-option>
-        </a-select>
-      </a-col>
-      <a-col :span="20">
+      <a-col :span="24">
         <a-space>
           <!-- 纸张设置 -->
           <a-button-group>
@@ -53,10 +45,6 @@
           <!-- 预览/打印 -->
           <a-button-group>
             <a-button type="primary" preIcon="ant-design:eye" @click="preView"> 预览 </a-button>
-            <a-button type="primary" @click="print">
-              直接打印
-              <a-icon type="printer" />
-            </a-button>
           </a-button-group>
           <!-- 保存/清空 -->
           <a-button-group>
@@ -77,7 +65,19 @@
       <a-col :span="4">
         <a-card style="height: 100vh">
           <a-row>
-            <a-col :span="24" class="rect-printElement-types hiprintEpContainer" />
+            <div class="flex-2 left">
+              <div class="flex-row justify-center flex-wrap">
+                <div class="title">基础元素</div>
+                <div class="ep-draggable-item item" tid="defaultModule.text">
+                  <i class="iconfont sv-text"></i>
+                  <span>文本</span>
+                </div>
+                <div class="ep-draggable-item item" tid="defaultModule.longText">
+                  <i class="iconfont sv-longText"></i>
+                  <span>长文</span>
+                </div>
+              </div>
+            </div>
           </a-row>
         </a-card>
       </a-col>
@@ -101,22 +101,22 @@
 
 <script lang="ts" setup>
   import { BasicModal, useModalInner } from '/@/components/Modal';
-  import { hiprint } from 'vue-plugin-hiprint';
+  import { hiprint, defaultElementTypeProvider } from 'vue-plugin-hiprint';
   import printPreview from './preview.vue';
   import jsonView from './json-view.vue';
-  import providers from './providers';
   import printData from './print-data';
-  import { onMounted, ref, computed, h, unref } from 'vue';
+  import { onMounted, ref, computed, unref } from 'vue';
   import { useMessage } from '/@/hooks/web/useMessage';
   import $ from 'jquery';
-  import 'vue-plugin-hiprint/dist/print-lock.css';
+  // import 'vue-plugin-hiprint/dist/print-lock.css';
 
   const { createMessage } = useMessage();
   const template = ref(null);
-  const previewRef = ref();
+  const previewRef = ref(null);
+
   // 模板选择
-  const mode = ref(0);
-  const modeList = ref([]);
+  // const mode = ref(0);
+  // const modeList = ref([]);
   // 当前纸张
   const curPaper = ref({
     type: 'other',
@@ -158,7 +158,6 @@
   const paperPopVisible = ref(false);
   const paperWidth = ref('220');
   const paperHeight = ref('80');
-  const lastjson = ref('');
   const curPaperType = computed(() => {
     let type = 'other';
     for (const key in paperTypes.value) {
@@ -171,6 +170,19 @@
     return type;
   });
   let hiprintTemplate;
+  onMounted(() => {
+    buildLeftElement();
+    buildDesigner();
+  });
+  /**
+   * 构建左侧可拖拽元素
+   * 注意: 可拖拽元素必须在 hiprint.init() 之后调用
+   * 而且 必须包含 class="ep-draggable-item" 否则无法拖拽进设计器
+   */
+  const buildLeftElement = () => {
+    // eslint-disable-next-line no-undef
+    hiprint.PrintElementTypeManager.buildByHtml($('.ep-draggable-item'));
+  };
 
   const isUpdate = ref(true);
   const isClone = ref(false);
@@ -182,22 +194,13 @@
   });
   const title = computed(() => (!unref(isUpdate) ? '新增' : !unref(isClone) ? '编辑' : '复制'));
   function init() {
-    modeList.value = providers.map((e) => {
-      return { type: e.type, name: e.name, value: e.value };
-    });
-    changeMode();
-  }
-  function changeMode() {
-    let provider = providers[mode.value];
     hiprint.init({
-      providers: [provider.f],
+      providers: [defaultElementTypeProvider()],
     });
-    $('.hiprintEpContainer').empty();
-    hiprint.PrintElementTypeManager.build('.hiprintEpContainer', provider.value);
     $('#hiprint-printTemplate').empty();
-    let templates = JSON.parse(window.localStorage.getItem('KEY_TEMPLATES') || '{}');
+    // let templates = JSON.parse(window.localStorage.getItem('KEY_TEMPLATES') || '{}');
     template.value = hiprintTemplate = new hiprint.PrintTemplate({
-      template: templates[provider.value] ? templates[provider.value] : {},
+      template: {},
       dataMode: 1, // 1:getJson 其他：getJsonTid 默认1
       history: false, // 是否需要 撤销重做功能
       onDataChanged: (type, json) => {
@@ -208,12 +211,24 @@
         // console.log(hiprintTemplate.historyList)
       },
       settingContainer: '#PrintElementOptionSetting',
-      paginationContainer: '.hiprint-printPagination',
+      // paginationContainer: '.hiprint-printPagination',
     });
     hiprintTemplate.design('#hiprint-printTemplate');
     // 获取当前放大比例, 当zoom时传true 才会有
     scaleValue.value = hiprintTemplate.editingPanel.scale || 1;
   }
+
+  const buildDesigner = () => {
+    // eslint-disable-next-line no-undef
+    $('#hiprint-printTemplate').empty(); // 先清空, 避免重复构建
+    hiprintTemplate = new hiprint.PrintTemplate({
+      settingContainer: '#PrintElementOptionSetting', // 元素参数容器
+    });
+    // 构建 并填充到 容器中
+    // 可以先 console.log($("#hiprint-printTemplate")) 看看是否有该 dom
+    hiprintTemplate.design('#hiprint-printTemplate');
+  };
+
   /**
    * 设置纸张大小
    * @param type [A3, A4, A5, B3, B4, B5, other]
@@ -258,38 +273,10 @@
     let { width } = curPaper.value;
     previewRef.value.show(hiprintTemplate, printData, width);
   }
-  function print() {
-    if (hiprint.hiwebSocket.opened) {
-      const printerList = hiprintTemplate.getPrinterList();
-      console.log(printerList);
-      hiprintTemplate.print2(printData, { printer: '', title: 'hiprint测试打印' });
-      return;
-    }
-    createMessage.error({
-      title: '客户端未连接',
-      content: () =>
-        h('div', {}, [
-          `连接【${hiprint.hiwebSocket.host}】失败！`,
-          h('br', {}),
-          '请确保目标服务器已',
-          h(
-            'a',
-            {
-              href: 'https://gitee.com/CsSimple/electron-hiprint/releases',
-              target: '_blank',
-            },
-            ['下载']
-          ),
-          '并',
-          h('a', { href: 'hiprint://', target: '_blank' }, ['运行']),
-          '打印服务！',
-        ]),
-    });
-  }
   function save() {
-    let provider = providers[mode.value];
+    //let provider = providers[mode.value];
     setTemplate({
-      name: provider.value,
+      //name: provider.value,
       json: hiprintTemplate.getJson(),
     });
   }
@@ -331,5 +318,57 @@
     overflow: hidden;
     overflow-x: auto;
     overflow-y: auto;
+  }
+
+  /* 区域 */
+  .left {
+    background: white;
+    border-radius: 4px;
+    border: 1px solid #d9d9d9;
+    padding: 10px 0;
+    box-shadow: 2px 2px 2px 0px rgb(128 0 128 / 20%);
+    overflow: auto;
+  }
+  .center {
+    margin: 0 10px;
+    background: white;
+    border-radius: 4px;
+    border: 1px solid #d9d9d9;
+    padding: 20px;
+    box-shadow: 2px 2px 2px 0px rgb(128 0 128 / 20%);
+    overflow: auto;
+  }
+  .right {
+    background: white;
+    border-radius: 4px;
+    border: 1px solid #d9d9d9;
+    padding: 10px 0;
+    box-shadow: 2px 2px 2px 0px rgb(128 0 128 / 20%);
+    overflow: auto;
+  }
+  /* 左侧拖拽元素样式 */
+  .title {
+    font-size: 16px;
+    font-weight: 500;
+    width: 100%;
+    margin: 10px 0 0 24px;
+  }
+  .item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: white;
+    padding: 4px 10px;
+    margin: 10px 8px 4px 8px;
+    width: 38%;
+    min-height: 60px;
+    border-radius: 4px;
+    box-shadow: 2px 2px 2px 2px rgba(171, 171, 171, 0.2);
+  }
+  .item .iconfont {
+    font-size: 1.5rem;
+  }
+  .item span {
+    font-size: 14px;
   }
 </style>

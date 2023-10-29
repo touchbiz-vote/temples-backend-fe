@@ -188,11 +188,6 @@
     });
   };
 
-  // const getHtmlList = () => {
-  //   let html = hiprintTemplate.getHtml([printData, printData2]);
-  //   preview.value.showModal(html);
-  // };
-
   const printList = () => {
     // 参数: 打印时设置 左偏移量，上偏移量
     let options = { leftOffset: -1, topOffset: -1 };
