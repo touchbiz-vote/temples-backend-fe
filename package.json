@@ -63,6 +63,7 @@
     "emoji-mart-vue-fast": "^11.1.1",
     "enquire.js": "^2.1.6",
     "intro.js": "^5.1.0",
+    "jquery": "^3.7.1",
     "lodash-es": "^4.17.21",
     "lodash.get": "^4.4.2",
     "md5": "^2.3.0",
