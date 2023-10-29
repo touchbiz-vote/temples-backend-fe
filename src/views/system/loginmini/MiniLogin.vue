@@ -2,25 +2,11 @@
   <div :class="prefixCls" class="login-background-img">
     <AppLocalePicker class="absolute top-4 right-4 enter-x xl:text-gray-600" :showText="false" />
     <AppDarkModeToggle class="absolute top-3 right-7 enter-x" />
-    <!-- <div class="aui-logo" v-show="false" v-if="!getIsMobile">
-      <div>
-        <h3>
-          <img :src="logoImg" alt="jeecg" />
-        </h3>
-      </div>
-    </div>
-    <div v-else class="aui-phone-logo">
-      <img :src="logoImg" alt="jeecg" />
-    </div> -->
     <div v-show="type === 'login'">
       <div class="aui-content">
         <div class="aui-container">
           <div class="aui-form">
-            <div class="aui-image">
-              <div class="aui-image-text">
-                <!-- <img :src="adTextImg" /> -->
-              </div>
-            </div>
+            <div class="aui-image"></div>
             <div class="aui-formBox">
               <div class="aui-formWell">
                 <div class="aui-flex aui-form-nav investment_title">

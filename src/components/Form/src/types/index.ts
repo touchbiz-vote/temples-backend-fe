@@ -114,7 +114,6 @@ export type ComponentType =
   | 'Rate'
   | 'Divider'
   | 'JAreaLinkage'
-  | 'JSelectPosition'
   | 'JSelectRole'
   | 'JSelectUser'
   | 'JDictSelectTag'

@@ -31,7 +31,6 @@ import { CountdownInput } from '/@/components/CountDown';
 //自定义组件
 import JAreaLinkage from './jeecg/components/JAreaLinkage.vue';
 import JSelectUser from './jeecg/components/JSelectUser.vue';
-import JSelectPosition from './jeecg/components/JSelectPosition.vue';
 import JSelectRole from './jeecg/components/JSelectRole.vue';
 import JDictSelectTag from './jeecg/components/JDictSelectTag.vue';
 import JSelectDept from './jeecg/components/JSelectDept.vue';
@@ -100,7 +99,6 @@ componentMap.set('Divider', Divider);
 
 //注册自定义组件
 componentMap.set('JAreaLinkage', JAreaLinkage);
-componentMap.set('JSelectPosition', JSelectPosition);
 componentMap.set('JSelectUser', JSelectUser);
 componentMap.set('JSelectRole', JSelectRole);
 componentMap.set('JDictSelectTag', JDictSelectTag);

@@ -22,7 +22,7 @@
           style="width: 100%"
           @click="!disabled && openModal(false)"
           v-bind="attrs"
-        ></a-select>
+        />
       </a-col>
       <a-col v-if="showButton" class="right">
         <a-button v-if="buttonIcon" :preIcon="buttonIcon" type="primary" @click="openModal(true)" :disabled="disabled">选择</a-button>

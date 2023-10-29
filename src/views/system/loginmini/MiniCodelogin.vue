@@ -2,11 +2,7 @@
   <div class="aui-content">
     <div class="aui-container">
       <div class="aui-form">
-        <div class="aui-image">
-          <div class="aui-image-text">
-            <img :src="adTextImg" alt="" />
-          </div>
-        </div>
+        <div class="aui-image"></div>
         <div class="aui-formBox aui-formEwm">
           <div class="aui-formWell">
             <form>

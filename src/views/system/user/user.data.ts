@@ -176,16 +176,6 @@ export const formSchema: FormSchema[] = [
     dynamicRules: ({ model, schema }) => rules.duplicateCheckRule('sys_user', 'work_no', model, schema, true),
   },
   {
-    label: '职务',
-    field: 'post',
-    required: false,
-    component: 'JSelectPosition',
-    componentProps: {
-      rowKey: 'code',
-      labelKey: 'name',
-    },
-  },
-  {
     label: '角色',
     field: 'selectedroles',
     component: 'ApiSelect',

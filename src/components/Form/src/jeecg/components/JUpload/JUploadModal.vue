@@ -7,12 +7,10 @@
 <script lang="ts" setup>
   import { ref, unref, reactive, computed, nextTick } from 'vue';
   import { BasicModal, useModalInner } from '/@/components/Modal';
-  import { useMessage } from '/@/hooks/web/useMessage';
   import JUpload from './JUpload.vue';
   import { UploadTypeEnum } from './upload.data';
   import { propTypes } from '/@/utils/propTypes';
 
-  const { createMessage } = useMessage();
   const emit = defineEmits(['change', 'update:value', 'register']);
   const props = defineProps({
     value: propTypes.oneOfType([propTypes.string, propTypes.array]),
