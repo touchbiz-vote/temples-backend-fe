@@ -38,7 +38,7 @@
   import { treeProps } from '/@/components/Form/src/jeecg/props/props';
   import { BasicTree, TreeActionType } from '/@/components/Tree';
   import { useTreeBiz } from '/@/components/Form/src/jeecg/hooks/useTreeBiz';
-  import {propTypes} from "/@/utils/propTypes";
+  import { propTypes } from '/@/utils/propTypes';
 
   export default defineComponent({
     name: 'DeptSelectModal',
@@ -53,22 +53,22 @@
         type: String,
         default: '部门选择',
       },
-      value: propTypes.oneOfType([propTypes.string, propTypes.array])
+      value: propTypes.oneOfType([propTypes.string, propTypes.array]),
     },
     emits: ['register', 'getSelectResult'],
-    setup(props, { emit, refs }) {
+    setup(props, { emit }) {
       //注册弹框
       const [register, { closeModal }] = useModalInner();
       const attrs = useAttrs();
       const treeRef = ref<Nullable<TreeActionType>>(null);
-      
+
       //update-begin-author:taoyan date:2022-10-28 for: 部门选择警告类型不匹配
-      let propValue = props.value === ''?[]:props.value;
+      let propValue = props.value === '' ? [] : props.value;
       //update-begin-author:liusq date:2023-05-26 for:  [issues/538]JSelectDept组件受 dynamicDisabled 影响
-      const getBindValue = Object.assign({}, unref(props), unref(attrs), {value: propValue},{disabled: false});
+      const getBindValue = Object.assign({}, unref(props), unref(attrs), { value: propValue }, { disabled: false });
       //update-end-author:liusq date:2023-05-26 for:  [issues/538]JSelectDept组件受 dynamicDisabled 影响
-     //update-end-author:taoyan date:2022-10-28 for: 部门选择警告类型不匹配
-      
+      //update-end-author:taoyan date:2022-10-28 for: 部门选择警告类型不匹配
+
       const queryUrl = getQueryUrl();
       const [{ visibleChange, checkedKeys, getCheckStrictly, getSelectTreeData, onCheck, onLoadData, treeData, checkALL, expandAll, onSelect }] =
         useTreeBiz(treeRef, queryUrl, getBindValue);

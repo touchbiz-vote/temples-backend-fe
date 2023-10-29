@@ -2,21 +2,23 @@
 <template>
   <BasicModal :showCancelBtn="false" :showOkBtn="false" v-bind="$attrs" @register="register" title="预定详情" width="1200px" destroyOnClose>
     <a-spin :spinning="loading">
-      <!-- <div> <b>法会名称:</b> {{ product?.name }}</div>
-        <div> <b>日期:</b>{{ product.startDate }} - {{ product.endDate }}</div>
-        <div> <b> 预定数:</b> {{ product.reserveNumber }}</div> -->
       <a-descriptions :column="3">
         <a-descriptions-item label="法会名称">{{ product?.name }}</a-descriptions-item>
         <a-descriptions-item label="日期">{{ product.startDate }} - {{ product.endDate }}</a-descriptions-item>
         <a-descriptions-item label="预定数">{{ product.reserveNumber }}</a-descriptions-item>
       </a-descriptions>
       <BasicTable @register="registerTable">
+        <!--插槽:table标题-->
+        <template #tableTitle>
+          <a-button type="primary" preIcon="ant-design:printer-outlined" @click="handlePrint">打印</a-button>
+        </template>
         <!--操作栏-->
         <template #action="{ record }">
           <TableAction :actions="getTableAction(record)" />
         </template>
       </BasicTable>
     </a-spin>
+    <PrintModal @register="registerModal" />
   </BasicModal>
 </template>
 <script lang="ts">
@@ -28,6 +30,8 @@
   import { selectProps } from '/@/components/Form/src/jeecg/props/props';
   import { useListPage } from '/@/hooks/system/useListPage';
   import { getList as getOrderList } from '../../../../temples/order/order.api';
+  import { useModal } from '/@/components/Modal';
+  import PrintModal from '/@/views/print/PrintModal.vue';
 
   export default defineComponent({
     name: 'PujaDetailModal',
@@ -36,6 +40,7 @@
       BasicModal,
       TableAction,
       BasicTable,
+      PrintModal,
     },
     props: {
       ...selectProps,
@@ -85,6 +90,7 @@
 
       const product = ref<Object>({ scheduleName: '', date: '' });
 
+      const [registerModal, { openModal }] = useModal();
       //注册弹框
       const [register, { closeModal }] = useModalInner(({ record }) => {
         console.log('record', record);
@@ -104,20 +110,24 @@
         },
       };
 
-      async function fillData(list) {
-        for (const order of list) {
-          const orderInfo = JSON.parse(order.orderInfo);
-          console.log(orderInfo);
-          for (const item of orderInfo) {
-            if (item.name === 'name') {
-              order.name = item.value;
-            }
-            if (item.name === 'name2') {
-              order.name2 = item.value;
-            }
-          }
-        }
+      function handlePrint() {
+        openModal(true, {});
       }
+
+      // async function fillData(list) {
+      //   for (const order of list) {
+      //     const orderInfo = JSON.parse(order.orderInfo);
+      //     console.log(orderInfo);
+      //     for (const item of orderInfo) {
+      //       if (item.name === 'name') {
+      //         order.name = item.value;
+      //       }
+      //       if (item.name === 'name2') {
+      //         order.name2 = item.value;
+      //       }
+      //     }
+      //   }
+      // }
 
       /**
        * 编辑
@@ -134,7 +144,9 @@
         columns,
         loading,
         product,
-        // schedule,
+        handlePrint,
+        openModal,
+        registerModal,
       };
     },
   });

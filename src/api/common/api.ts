@@ -4,7 +4,6 @@ import { useGlobSetting } from '/@/hooks/setting';
 const globSetting = useGlobSetting();
 const baseUploadUrl = globSetting.uploadUrl;
 enum Api {
-  positionList = '/sys/position/list',
   userList = '/sys/user/list',
   roleList = '/sys/role/list',
   queryDepartTreeSync = '/sys/sysDepart/queryDepartTreeSync',
@@ -22,14 +21,6 @@ enum Api {
  * 上传父路径
  */
 export const uploadUrl = `${baseUploadUrl}/sys/common/upload`;
-
-/**
- * 职务列表
- * @param params
- */
-export const getPositionList = (params) => {
-  return defHttp.get({ url: Api.positionList, params });
-};
 
 /**
  * 用户列表
@@ -114,8 +105,8 @@ export const downloadFile = (url, fileName?, parameter?) => {
     if (typeof window.navigator.msSaveBlob !== 'undefined') {
       window.navigator.msSaveBlob(new Blob([data]), fileName);
     } else {
-      let url = window.URL.createObjectURL(new Blob([data]));
-      let link = document.createElement('a');
+      const url = window.URL.createObjectURL(new Blob([data]));
+      const link = document.createElement('a');
       link.style.display = 'none';
       link.href = url;
       link.setAttribute('download', fileName);
@@ -151,13 +142,12 @@ export const uploadMyFile = (url, data) => {
   return defHttp.uploadMyFile(url, data);
 };
 
-
 /**
  * 查询详情
  * @param id
  */
 export const getColumns = (tableId) => {
-  return defHttp.get({ url: Api.getColumns + tableId});
+  return defHttp.get({ url: Api.getColumns + tableId });
 };
 
 /**

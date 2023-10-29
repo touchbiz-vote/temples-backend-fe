@@ -19,7 +19,6 @@ enum Api {
   deleteRecycleBin = '/sys/user/deleteRecycleBin',
   allRolesList = '/sys/role/queryall',
   allRolesListNoByTenant = '/sys/role/queryallNoByTenant',
-  allPostList = '/sys/position/list',
   userDepartList = '/sys/user/userDepartList',
   changePassword = '/sys/user/changePassword',
   frozenBatch = '/sys/user/frozenBatch',

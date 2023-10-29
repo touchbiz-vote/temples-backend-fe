@@ -50,19 +50,19 @@
   </template>
 </template>
 <script lang="ts">
-  import { defineComponent, PropType, ref, reactive, watchEffect, computed, unref, watch, onMounted, nextTick } from 'vue';
+  import { defineComponent, ref, watchEffect, computed, unref, watch, nextTick } from 'vue';
   import { propTypes } from '/@/utils/propTypes';
   import { useAttrs } from '/@/hooks/core/useAttrs';
   import { initDictOptions } from '/@/utils/dict';
-  import { get, omit } from 'lodash-es';
+  import { omit } from 'lodash-es';
   import { useRuleFormItem } from '/@/hooks/component/useFormItem';
   import { CompTypeEnum } from '/@/enums/CompTypeEnum';
   import { LoadingOutlined } from '@ant-design/icons-vue';
 
   export default defineComponent({
     name: 'JDictSelectTag',
-    inheritAttrs: false,
     components: { LoadingOutlined },
+    inheritAttrs: false,
     props: {
       value: propTypes.oneOfType([propTypes.string, propTypes.number, propTypes.array]),
       dictCode: propTypes.string,
@@ -83,8 +83,8 @@
       },
       style: propTypes.any,
     },
-    emits: ['options-change', 'change','update:value'],
-    setup(props, { emit, refs }) {
+    emits: ['options-change', 'change', 'update:value'],
+    setup(props, { emit }) {
       const dictOptions = ref<any[]>([]);
       const attrs = useAttrs();
       const [state, , , formItemContext] = useRuleFormItem(props, 'value', 'change');
@@ -148,9 +148,9 @@
 
       function handleChange(e) {
         const { mode } = unref<Recordable>(getBindValue);
-        let changeValue:any;
+        let changeValue: any;
         // 兼容多选模式
-        
+
         //update-begin---author:wangshuai ---date:20230216  for：[QQYUN-4290]公文发文：选择机关代字报错,是因为值改变触发了change事件三次，导致数据发生改变------------
         //采用一个值，不然的话state值变换触发多个change
         if (mode === 'multiple') {
@@ -168,10 +168,10 @@
         state.value = changeValue;
 
         //update-begin---author:wangshuai ---date:20230403  for：【issues/4507】JDictSelectTag组件使用时，浏览器给出警告提示：Expected Function, got Array------------
-        emit('update:value',changeValue)
+        emit('update:value', changeValue);
         //update-end---author:wangshuai ---date:20230403  for：【issues/4507】JDictSelectTag组件使用时，浏览器给出警告提示：Expected Function, got Array述------------
         //update-end---author:wangshuai ---date:20230216  for：[QQYUN-4290]公文发文：选择机关代字报错,是因为值改变触发了change事件三次，导致数据发生改变------------
-        
+
         // nextTick(() => formItemContext.onFieldChange());
       }
 
@@ -179,7 +179,7 @@
       function handleChangeRadio(e) {
         state.value = e?.target?.value ?? e;
         //update-begin---author:wangshuai ---date:20230504  for：【issues/506】JDictSelectTag 组件 type="radio" 没有返回值------------
-        emit('update:value',e?.target?.value ?? e)
+        emit('update:value', e?.target?.value ?? e);
         //update-end---author:wangshuai ---date:20230504  for：【issues/506】JDictSelectTag 组件 type="radio" 没有返回值------------
       }
 

@@ -1,18 +1,27 @@
 import { defHttp } from '/@/utils/http/axios';
-import { Modal } from 'ant-design-vue';
 
 const tableId = '20231016174250';
 
 export enum Api {
   list = '/online/cgform/api/getData/',
-  save = '/api/temples/product',
+  save = '/online/cgform/api/form/' + tableId,
   get = '/online/cgform/api/form/',
   delete = '/api/temples/product/',
+  printHost = '/sys/setting',
 }
 /**
- * 查询示例列表
+ * 查询打印的系统配置
  * @param params
  */
+export const getPrintHost = (params) => {
+  return defHttp.get({ url: Api.printHost, params });
+};
+
+export const getTemplateContent = (id) => {
+  const table = 't_print_template';
+  return defHttp.get({ url: `/api/temples/data?table=${table}&id=${id}` });
+};
+
 export const getList = (params) => {
   return defHttp.get({ url: Api.list + tableId, params });
 };

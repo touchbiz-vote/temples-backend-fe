@@ -18,12 +18,12 @@
             <template v-for="(item, index) in queryInfo">
               <template v-if="item.hidden === '1'">
                 <a-col :md="8" :sm="24" :key="'query' + index" v-show="toggleSearchStatus">
-                  <SearchFormItem :formElRef="formRef" :queryParam="queryParam" :item="item" :dictOptions="dictOptions"></SearchFormItem>
+                  <SearchFormItem :formElRef="formRef" :queryParam="queryParam" :item="item" :dictOptions="dictOptions" />
                 </a-col>
               </template>
               <template v-else>
                 <a-col :md="8" :sm="24" :key="'query' + index">
-                  <SearchFormItem :formElRef="formRef" :queryParam="queryParam" :item="item" :dictOptions="dictOptions"></SearchFormItem>
+                  <SearchFormItem :formElRef="formRef" :queryParam="queryParam" :item="item" :dictOptions="dictOptions" />
                 </a-col>
               </template>
             </template>
@@ -84,7 +84,7 @@
     },
     props: ['multi', 'code', 'sorter', 'groupId', 'param'],
     emits: ['ok', 'register'],
-    setup(props, { emit, refs }) {
+    setup(props, { emit }) {
       const { createMessage } = useMessage();
       const labelCol = reactive({
         xs: { span: 24 },
@@ -133,7 +133,7 @@
           queryParam,
           dictOptions,
         },
-      ] = usePopBiz(getBindValue,tableRef);
+      ] = usePopBiz(getBindValue, tableRef);
 
       const showSearchFlag = computed(() => unref(queryInfo) && unref(queryInfo).length > 0);
       /**

@@ -108,7 +108,6 @@
   import { hiprint } from 'vue-plugin-hiprint';
   import { formSchema } from './print.data';
   import { saveOrUpdate, getById } from './print.api';
-  import { provider1 } from './provider1';
   import { provider2 } from './provider2';
   import template from './template';
   import printData from './printData';
@@ -143,7 +142,7 @@
   };
   // 初始化 provider
   hiprint.init({
-    providers: [provider1(options), provider2(options)],
+    providers: [provider2(options)],
   });
   /**
    * 这里必须要在 onMounted 中去构建 左侧可拖拽元素 或者 设计器
