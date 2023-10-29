@@ -18,7 +18,7 @@
         </template>
       </BasicTable>
     </a-spin>
-    <PrintModal @register="registerModal" />
+    <PrintModal @register="registerModal" :printData="printData" />
   </BasicModal>
 </template>
 <script lang="ts">
@@ -26,7 +26,6 @@
   import { defineComponent, ref } from 'vue';
   import { BasicModal, useModalInner } from '/@/components/Modal';
   import { columns } from './schedule.data';
-  import { useAttrs } from '/@/hooks/core/useAttrs';
   import { selectProps } from '/@/components/Form/src/jeecg/props/props';
   import { useListPage } from '/@/hooks/system/useListPage';
   import { getList as getOrderList } from '../../../../temples/order/order.api';
@@ -69,12 +68,31 @@
           bordered: true,
           showIndexColumn: false,
           pagination: false,
+          afterFetch: fillData,
           tableSetting: { fullScreen: false },
           rowKey: 'id',
           showActionColumn: false,
           beforeFetch: initFilter,
         },
       });
+
+      async function fillData(list) {
+        for (const order of list) {
+          const orderInfo = JSON.parse(order.orderInfo);
+          console.log(orderInfo);
+          // for (const item of orderInfo) {
+          //   if (item.name === 'name') {
+          //     order.name = item.value;
+          //   }
+          //   if (item.name === 'name2') {
+          //     order.name2 = item.value;
+          //   }
+          // }
+          printData.value.push(order);
+        }
+      }
+
+      const printData = ref<Array<object>>([]);
 
       function initFilter(params) {
         if (params.column === 'createTime') {
@@ -92,11 +110,10 @@
 
       const [registerModal, { openModal }] = useModal();
       //注册弹框
-      const [register, { closeModal }] = useModalInner(({ record }) => {
+      const [register] = useModalInner(({ record }) => {
         console.log('record', record);
         product.value = record;
       });
-      const attrs = useAttrs();
 
       //查询form
       const formConfig = {
@@ -113,21 +130,6 @@
       function handlePrint() {
         openModal(true, {});
       }
-
-      // async function fillData(list) {
-      //   for (const order of list) {
-      //     const orderInfo = JSON.parse(order.orderInfo);
-      //     console.log(orderInfo);
-      //     for (const item of orderInfo) {
-      //       if (item.name === 'name') {
-      //         order.name = item.value;
-      //       }
-      //       if (item.name === 'name2') {
-      //         order.name2 = item.value;
-      //       }
-      //     }
-      //   }
-      // }
 
       /**
        * 编辑
@@ -147,6 +149,7 @@
         handlePrint,
         openModal,
         registerModal,
+        printData,
       };
     },
   });
