@@ -76,20 +76,21 @@
         },
       });
 
-      async function fillData(list) {
-        for (const order of list) {
-          const orderInfo = JSON.parse(order.orderInfo);
-          console.log(orderInfo);
-          // for (const item of orderInfo) {
-          //   if (item.name === 'name') {
-          //     order.name = item.value;
-          //   }
-          //   if (item.name === 'name2') {
-          //     order.name2 = item.value;
-          //   }
-          // }
-          printData.value.push(order);
-        }
+      function fillData(list) {
+        // for (const order of list) {
+        //   const orderInfo = JSON.parse(order.orderInfo);
+        //   console.log(orderInfo);
+        //   // for (const item of orderInfo) {
+        //   //   if (item.name === 'name') {
+        //   //     order.name = item.value;
+        //   //   }
+        //   //   if (item.name === 'name2') {
+        //   //     order.name2 = item.value;
+        //   //   }
+        //   // }
+        //   // printData.value.push(order);
+        // }
+        printData.value = list;
       }
 
       const printData = ref<Array<object>>([]);

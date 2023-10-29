@@ -71,7 +71,6 @@
   import { hiprint } from 'vue-plugin-hiprint';
   import startPreview from './components/preview.vue';
 
-  import printData2 from './printData2';
   import { getList, getPrintHost, getTemplateContent } from './print.api';
   //提示弹窗
   const $message = useMessage();
@@ -208,11 +207,11 @@
       },
     };
     // 调用浏览器打印
-    hiprintTemplate.print([ printData2], options, ext);
+    hiprintTemplate.print(props.printData, options, ext);
   };
   const print2List = () => {
     if (hiprint.hiwebSocket.opened) {
-      hiprintTemplate.print2([printData2]);
+      hiprintTemplate.print2(props.printData);
     } else {
       alert('请先连接客户端(刷新网页), 然后再点击「直接打印」');
     }
