@@ -127,7 +127,6 @@
       async function initTableData() {
         console.info('params', params);
         queryCompareList(unref(params)).then((res) => {
-          console.info('test', res);
           dataVersion1Num.value = res[0].dataVersion;
           dataVersion2Num.value = res[1].dataVersion;
           let json1 = JSON.parse(res[0].dataContent);

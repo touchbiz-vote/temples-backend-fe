@@ -105,7 +105,6 @@
     bind.listType = isImageMode.value ? 'picture-card' : 'text';
     bind.class = [bind.class, { 'upload-disabled': props.disabled }];
 
-    console.log(props);
     bind.data = {
       biz: props.bizPath,
       fileType: props.fileType,

@@ -109,7 +109,6 @@ export function getCodeInfo(currdatetime) {
 export function getCaptcha(params) {
   return new Promise((resolve, reject) => {
     defHttp.post({ url: Api.getCaptcha, params }, { isTransformResponse: false }).then((res) => {
-      console.log(res);
       if (res.success) {
         resolve(true);
       } else {
@@ -161,7 +160,6 @@ export function thirdLogin(params, mode: ErrorMessageMode = 'modal') {
 export function setThirdCaptcha(params) {
   return new Promise((resolve, reject) => {
     defHttp.post({ url: Api.getThirdCaptcha, params }, { isTransformResponse: false }).then((res) => {
-      console.log(res);
       if (res.success) {
         resolve(true);
       } else {

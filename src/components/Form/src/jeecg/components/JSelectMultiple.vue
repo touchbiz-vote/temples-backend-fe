@@ -71,7 +71,6 @@
     },
     emits: ['options-change', 'change', 'input', 'update:value'],
     setup(props, { emit, refs }) {
-      //console.info(props);
       const emitData = ref<any[]>([]);
       const arrayValue = ref<any[]>(!props.value ? [] : props.value.split(props.spliter));
       const dictOptions = ref<any[]>([]);
@@ -136,7 +135,6 @@
         getDictItems(temp).then((res) => {
           if (res) {
             dictOptions.value = res.map((item) => ({ value: item.value, label: item.text }));
-            //console.info('res', dictOptions.value);
           } else {
             console.error('getDictItems error: : ', res);
             dictOptions.value = [];
