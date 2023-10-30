@@ -40,7 +40,6 @@
       <SettingDrawer v-if="getShowSetting" :class="`${prefixCls}-action__item`" />
     </div>
   </Header>
-  <LoginSelect ref="loginSelectRef" @success="loginSelectOk"></LoginSelect>
 </template>
 <script lang="ts">
   import { defineComponent, unref, computed, ref, onMounted, toRaw } from 'vue';
@@ -69,7 +68,6 @@
   import { createAsyncComponent } from '/@/utils/factory/createAsyncComponent';
   import { useLocale } from '/@/locales/useLocale';
 
-  import LoginSelect from '/@/views/sys/login/LoginSelect.vue';
   import { useUserStore } from '/@/store/modules/user';
 
   export default defineComponent({
@@ -87,7 +85,6 @@
       AppSearch,
       ErrorAction,
       LockScreen,
-      LoginSelect,
       SettingDrawer: createAsyncComponent(() => import('/@/layouts/default/setting/index.vue'), {
         loading: true,
       }),
@@ -159,29 +156,6 @@
         return unref(getSplit) ? MenuModeEnum.HORIZONTAL : null;
       });
 
-      /**
-       * 首页多租户部门弹窗逻辑
-       */
-      const loginSelectRef = ref();
-
-      function showLoginSelect() {
-        //update-begin---author:liusq  Date:20220101  for：判断登录进来是否需要弹窗选择租户----
-        //判断是否是登陆进来
-        const loginInfo = toRaw(userStore.getLoginInfo) || {};
-        if (!!loginInfo.isLogin) {
-          loginSelectRef.value.show(loginInfo);
-        }
-        //update-end---author:liusq  Date:20220101  for：判断登录进来是否需要弹窗选择租户----
-      }
-
-      function loginSelectOk() {
-        console.log('成功。。。。。');
-      }
-
-      onMounted(() => {
-        showLoginSelect();
-      });
-
       return {
         prefixCls,
         getHeaderClass,
@@ -206,8 +180,6 @@
         getShowSetting,
         getShowSearch,
         getUseLockPage,
-        loginSelectOk,
-        loginSelectRef,
         title
       };
     },

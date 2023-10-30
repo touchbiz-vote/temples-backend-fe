@@ -236,13 +236,6 @@ export const useUserStore = defineStore({
         }
       }
 
-      // //update-begin-author:taoyan date:2022-5-5 for: src/layouts/default/header/index.vue showLoginSelect方法 获取tenantId 退出登录后再次登录依然能获取到值，没有清空
-      // let username:any = this.userInfo && this.userInfo.username;
-      // if(username){
-      //   removeAuthCache(username)
-      // }
-      // //update-end-author:taoyan date:2022-5-5 for: src/layouts/default/header/index.vue showLoginSelect方法 获取tenantId 退出登录后再次登录依然能获取到值，没有清空
-
       this.setToken('');
       setAuthCache(TOKEN_KEY, null);
       this.setSessionTimeout(false);

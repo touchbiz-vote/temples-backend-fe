@@ -25,7 +25,6 @@
     </template>
   </Dropdown>
   <LockAction @register="register" />
-  <DepartSelect ref="loginSelectRef" />
   <UpdatePassword ref="updatePasswordRef" />
 </template>
 <script lang="ts">
@@ -63,7 +62,6 @@
       MenuItem: createAsyncComponent(() => import('./DropMenuItem.vue')),
       MenuDivider: Menu.Divider,
       LockAction: createAsyncComponent(() => import('../lock/LockModal.vue')),
-      DepartSelect: createAsyncComponent(() => import('./DepartSelect.vue')),
       UpdatePassword: createAsyncComponent(() => import('./UpdatePassword.vue')),
     },
     props: {
@@ -87,13 +85,6 @@
       });
 
       const [register, { openModal }] = useModal();
-      /**
-       * 多部门弹窗逻辑
-       */
-      const loginSelectRef = ref();
-      function handleLock() {
-        openModal(true);
-      }
 
       //  login out
       function handleLoginOut() {
@@ -160,7 +151,6 @@
         getShowDoc,
         register,
         getUseLockPage,
-        loginSelectRef,
         updatePasswordRef,
       };
     },
