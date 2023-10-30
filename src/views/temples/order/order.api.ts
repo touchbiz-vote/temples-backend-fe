@@ -1,5 +1,4 @@
 import { defHttp } from '/@/utils/http/axios';
-import { Modal } from 'ant-design-vue';
 
 const tableId = '4028f8c98a844d8c018a844d8ca40000';
 
@@ -59,20 +58,3 @@ export const confirmOrder = (order, handleSuccess) => {
 };
 
 
-/**
- * 批量删除示例
- * @param params
- */
-export const batchDeleteDemo = (params, handleSuccess) => {
-  Modal.confirm({
-    title: '确认删除',
-    content: '是否删除选中数据',
-    okText: '确认',
-    cancelText: '取消',
-    onOk: () => {
-      return defHttp.delete({ url: Api.deleteBatch, data: params }, { joinParamsToUrl: true }).then(() => {
-        handleSuccess();
-      });
-    },
-  });
-};

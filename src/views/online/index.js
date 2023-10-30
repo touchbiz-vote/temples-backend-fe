@@ -87,7 +87,6 @@ var index = {
         import('./CgreportModal.js').then(function (n) {
           return n.C;
         }),
-      './src/views/super/online/cgreport/demo/ModalFormDemo.vue': () => import('./ModalFormDemo.js'),
       './src/views/super/online/cgform/auto/comp/JOnlineSearchSelect.vue': () => import('./JOnlineSearchSelect.js'),
       './src/views/super/online/cgform/auto/comp/OnlineForm.vue': () =>
         import('./OnlineForm.js').then(function (n) {
