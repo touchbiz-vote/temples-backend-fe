@@ -95,20 +95,6 @@ export const aProvider = function () {
             textType: 'qrcode',
           },
         },
-        {
-          tid: 'aProviderModule.platform',
-          title: '平台名称',
-          data: '平台名称',
-          type: 'text',
-          options: {
-            testData: '平台名称',
-            height: 17,
-            fontSize: 16.5,
-            fontWeight: '700',
-            textAlign: 'center',
-            hideTitle: true,
-          },
-        },
      ]),
       // new hiprint.PrintElementTypeGroup('库管', [
       //   {
@@ -285,20 +271,6 @@ export const bProvider = function () {
             fontSize: 12,
             lineHeight: 18,
             textType: 'qrcode',
-          },
-        },
-        {
-          tid: 'bProviderModule.platform',
-          title: '平台名称',
-          data: '平台名称',
-          type: 'text',
-          options: {
-            testData: '平台名称',
-            height: 17,
-            fontSize: 16.5,
-            fontWeight: '700',
-            textAlign: 'center',
-            hideTitle: true,
           },
         },
       ]),
