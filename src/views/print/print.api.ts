@@ -6,7 +6,7 @@ export enum Api {
   list = '/online/cgform/api/getData/',
   save = '/online/cgform/api/form/' + tableId,
   get = '/online/cgform/api/form/',
-  delete = '/api/temples/product/',
+  delete = '/online/cgform/api/form/',
   printHost = '/sys/setting',
 }
 /**
@@ -46,8 +46,8 @@ export const getById = (id) => {
  * 删除示例
  * @param params
  */
-export const deleteProduct = (product, handleSuccess) => {
-  return defHttp.delete({ url: Api.delete + product.jeecg_row_key }).then(() => {
+export const deleteTemplate = (template, handleSuccess) => {
+  return defHttp.delete({ url: Api.delete + tableId + '/' + template.jeecg_row_key }).then(() => {
     handleSuccess();
   });
 };

@@ -49,7 +49,7 @@
     </a-form>
     <template #footer>
       <a-button type="primary" @click="handleOk">打印</a-button>
-      <a-button type="primary" @click="getHtml">打印预览</a-button>
+      <!-- <a-button type="primary" @click="getHtml">打印预览</a-button> -->
       <a-button type="primary" @click="closeModal">取消</a-button>
     </template>
     <start-preview ref="preview" />
@@ -113,7 +113,26 @@
       });
       return;
     }
+
     console.log(state);
+
+    const json = hiprintTemplate.getJson();
+    console.log(json);
+    if (!json) {
+      $message.createWarningModal({
+        title: '错误',
+        content: '打印模版尚未进行具体设置，无法进行打印处理',
+      });
+      return;
+    }
+    const panel = json.panels[0];
+    if (!panel || panel.printElements === null || Object.keys(panel.printElements).length === 0) {
+      $message.createWarningModal({
+        title: '错误',
+        content: '打印模版尚未进行具体设置，无法进行打印处理',
+      });
+      return;
+    }
 
     console.log(props.printData);
     if (state.printType === 'web') {
@@ -206,7 +225,16 @@
   };
   const print2List = () => {
     if (hiprint.hiwebSocket.opened) {
-      hiprintTemplate.print2(props.printData);
+      const panel = hiprintTemplate.getJson().panels[0];
+      //从模版中获取打印尺寸
+      hiprintTemplate.print2(props.printData, {
+        printer: formState.value.print, // 打印机 名称
+        title: '打印任务名称',
+        color: false, // 是否打印颜色 默认 true
+        copies: 1, // 打印份数 默认 1
+        deviceName: formState.value.print,
+        pageSize: { height: panel.height * 1000, widfht: panel.width * 1000 },
+      });
     } else {
       alert('请先连接客户端(刷新网页), 然后再点击「直接打印」');
     }

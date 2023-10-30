@@ -18,10 +18,8 @@
   import { BasicTable, TableAction } from '/@/components/Table';
   import { useModal } from '/@/components/Modal';
   import PrintTemplateModal from './PrintTemplateModal.vue';
-  import { useMessage } from '/@/hooks/web/useMessage';
-  import { getList, } from './print.api';
+  import { getList, deleteTemplate } from './print.api';
   import { columns, searchFormSchema } from './print.data';
-  // import { useMethods } from '/@/hooks/system/useMethods';
   import { useListPage } from '/@/hooks/system/useListPage';
 
   const [registerModal, { openModal }] = useModal();
@@ -137,7 +135,7 @@
    * 删除事件
    */
   async function handleDelete(record) {
-    await deleteProduct(record, reload);
+    await deleteTemplate(record, reload);
   }
 
   const customSearch = ref(false);
