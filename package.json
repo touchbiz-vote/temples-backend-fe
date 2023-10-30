@@ -82,6 +82,7 @@
     "vxe-table": "4.1.0",
     "vxe-table-plugin-antd": "3.0.5",
     "xe-utils": "^3.3.1",
+    "xlsx": "^0.18.5",
     "xss": "^1.0.13"
   },
   "devDependencies": {

@@ -129,13 +129,15 @@
       };
 
       function handlePrint() {
-        openModal(true, {});
+        openModal(true, {
+          printData: printData.value,
+        });
       }
 
       /**
        * 编辑
        */
-      function getTableAction(record) {
+      function getTableAction() {
         return [];
       }
 

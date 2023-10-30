@@ -1,7 +1,7 @@
 import type { App } from 'vue';
 import { Icon } from './Icon';
 import AIcon from '/@/components/jeecg/AIcon.vue';
-import { Button, JUploadButton } from './Button';
+import { Button } from './Button';
 //敲敲云—仪表盘设计器（拖拽设计）
 import DragEngine from '@qiaoqiaoyun/drag-free';
 import {
@@ -57,7 +57,7 @@ import {
   Rate,
 } from 'ant-design-vue';
 
-const compList = [AntButton.Group, Icon, AIcon, JUploadButton];
+const compList = [AntButton.Group, Icon, AIcon];
 
 export function registerGlobComp(app: App) {
   compList.forEach((comp) => {

@@ -24,7 +24,6 @@
 
 <script>
   import { ref } from 'vue';
-  // let $ = require('jquery');
   export default {
     name: 'StartPreview',
     setup() {
