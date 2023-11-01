@@ -6,11 +6,11 @@
     <template #title>
       <a-space>
         <div style="margin-right: 20px">打印预览</div>
-        <a-button :loading="waitShowPrinter" type="primary" icon="printer" @click.stop="print">打印</a-button>
-        <a-button type="primary" icon="printer" @click.stop="toPdf">pdf</a-button>
       </a-space>
     </template>
     <template #footer>
+      <a-button :loading="waitShowPrinter" type="primary" preIcon="ant-design:printer" @click.stop="print">打印</a-button>
+      <a-button type="primary" preIcon="ant-design:printer" @click.stop="toPdf">pdf</a-button>
       <a-button key="close" type="info" @click="hideModal"> 关闭 </a-button>
     </template>
   </a-modal>
