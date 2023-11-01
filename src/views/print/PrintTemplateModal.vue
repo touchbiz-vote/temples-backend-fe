@@ -148,8 +148,8 @@
       // 当前纸张
       const curPaper = ref({
         type: 'other',
-        width: 220,
-        height: 80,
+        width: '220',
+        height: '80',
       });
 
       // 纸张类型
@@ -215,17 +215,6 @@
             height: paperTypes.value[curPaperType.value].height,
           };
         }
-      });
-      const curPaperWidth = computed(() => {
-        return curPaperSize.value.width + 'mm';
-      });
-
-      const curPaperHeight = computed(() => {
-        return curPaperSize.value.height + 'mm';
-      });
-
-      const background = computed(() => {
-        return `url('${record.value.background}')`;
       });
 
       function handleUpload() {
@@ -391,9 +380,6 @@
         record,
         curPaperType,
         curPaperSize,
-        curPaperWidth,
-        curPaperHeight,
-        background,
         title,
         handleUpload,
         setPaper,
@@ -418,6 +404,10 @@
     background-size: 100%;
     background-repeat: no-repeat;
     background-position: left top;
+  }
+  ::v-deep .hiprint_rul_wrapper .h_img,
+  ::v-deep .hiprint_rul_wrapper .v_img {
+    max-width: none;
   }
   // build 拖拽
   ::v-deep .hiprint-printElement-type > li > ul > li > a {
