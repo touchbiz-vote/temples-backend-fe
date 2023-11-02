@@ -9,12 +9,16 @@
 <template>
   <BasicModal @register="registerModal" :title="title" width="95%">
     <a-row :gutter="[8, 0]">
-      <a-form name="basic" :label-col="{ span: 8 }" :wrapper-col="{ span: 24 }" autocomplete="off">
-        <a-form-item label="模版名称" name="template_name" :model="record" :rules="[{ required: true, message: '请输入模版名称!' }]">
+      <a-form name="basic" :label-col="{ span: 8 }" :wrapper-col="{ span: 24 }" autocomplete="off" :model="record">
+        <a-form-item label="模版名称" name="template_name" :rules="[{ required: true, message: '请输入模版名称!' }]">
           <a-input style="width: 300px" v-model:value="record.template_name" />
+        </a-form-item>
+        <a-form-item label="模板背景" name="background">
+          <JUpload v-model:value="record.background" fileType="image" :max-count="1" :multiple="false" />
         </a-form-item>
       </a-form>
     </a-row>
+
     <a-row :gutter="[8, 0]" style="margin-bottom: 10px">
       <a-col :span="24">
         <a-space>
@@ -59,10 +63,10 @@
           />
           <a-button size="small" type="text" preIcon="ant-design:zoom-in" @click="changeScale(true)" />
 
-          <a-input-group compact>
+          <!-- <a-input-group compact>
             <a-input size="small" v-model:value="record.background" placeholder="请输入背景图片地址" style="width: 78%" />
             <a-button size="small" type="primary" @click="handleUpload">上传</a-button>
-          </a-input-group>
+          </a-input-group> -->
         </a-space>
       </a-col>
     </a-row>
@@ -129,12 +133,14 @@
   import providers from './providers';
   import { uploadImg } from '/@/api/sys/upload';
   import { defineComponent } from 'vue';
+  import { JUpload } from '/@/components/Form';
 
   export default defineComponent({
     components: {
       BasicModal,
       printPreview,
       jsonView,
+      JUpload,
     },
     emits: ['register', 'success'],
     setup(_, { emit }) {
@@ -190,8 +196,8 @@
       });
       // 自定义纸张
       const paperPopVisible = ref(false);
-      const paperWidth = ref('220');
-      const paperHeight = ref('80');
+      const paperWidth = ref(220);
+      const paperHeight = ref(80);
       const curPaperType = computed(() => {
         let type = 'other';
         for (const key in paperTypes.value) {
@@ -374,6 +380,8 @@
         scaleMax,
         scaleMin,
         paperPopVisible,
+        paperWidth,
+        paperHeight,
         previewRef,
         template,
         paperTypes,

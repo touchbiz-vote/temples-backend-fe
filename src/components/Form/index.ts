@@ -28,6 +28,7 @@ export { default as JTreeSelect } from './src/jeecg/components/JTreeSelect.vue';
 export { default as JSearchSelect } from './src/jeecg/components/JSearchSelect.vue';
 export { default as JSelectUserByDept } from './src/jeecg/components/JSelectUserByDept.vue';
 export { default as JEditor } from './src/jeecg/components/JEditor.vue';
+export { JUpload, JUploadModal } from './src/jeecg/components/JUpload';
 // Jeecg自定义校验
 export { JCronValidator } from '/@/components/Form/src/jeecg/components/JEasyCron';
 

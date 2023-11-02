@@ -22,7 +22,7 @@
         <span>{{ text }}</span>
       </a-button>
     </a-upload>
-    <a-tag color="warning">
+    <a-tag color="warning" v-if="helpMessage">
       <template #icon>
         <ExclamationCircleOutlined />
       </template>
