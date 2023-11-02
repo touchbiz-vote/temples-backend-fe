@@ -409,7 +409,7 @@
   // }
   ::v-deep .hiprint-printPaper {
     background-image: var(--paperBackground);
-    background-size: 100%;
+    background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: left top;
   }
