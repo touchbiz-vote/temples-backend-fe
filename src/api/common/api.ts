@@ -14,7 +14,7 @@ enum Api {
   getTableList = '/sys/user/queryUserComponentData',
   getCategoryData = '/sys/category/loadAllData',
   getColumns = '/online/cgform/api/getColumns/',
-  getList = '/online/cgform/api/getData/',
+  getList = '/api/online/cgform/api/getData/',
 }
 
 /**

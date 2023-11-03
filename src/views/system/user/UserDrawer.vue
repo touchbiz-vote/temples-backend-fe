@@ -57,22 +57,6 @@
           data.record.selectedroles = userRoles;
         }
       } catch (error) {}
-
-      //查所属部门/赋值
-      const userDepart = await getUserDepartList({ userId: data.record.id });
-      if (userDepart && userDepart.length > 0) {
-        data.record.selecteddeparts = userDepart;
-        let selectDepartKeys = Array.from(userDepart, ({ key }) => key);
-        data.record.selecteddeparts = selectDepartKeys.join(',');
-        departOptions.value = userDepart.map((item) => {
-          return { label: item.title, value: item.key };
-        });
-      }
-      //负责部门/赋值
-      data.record.departIds && !Array.isArray(data.record.departIds) && (data.record.departIds = data.record.departIds.split(','));
-      //update-begin---author:zyf   Date:20211210  for：避免空值显示异常------------
-      data.record.departIds = data.record.departIds == '' ? [] : data.record.departIds;
-      //update-begin---author:zyf   Date:20211210  for：避免空值显示异常------------
     }
     //处理角色用户列表情况(和角色列表有关系)
     data.selectedroles && (await setFieldsValue({ selectedroles: data.selectedroles }));

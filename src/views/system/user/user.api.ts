@@ -26,7 +26,6 @@ enum Api {
   syncUser = '/act/process/extActProcess/doSyncUser',
   userQuitAgent = '/sys/user/userQuitAgent',
   getQuitList = '/sys/user/getQuitList',
-  putCancelQuit = '/sys/user/putCancelQuit',
 }
 /**
  * 导出api
@@ -192,12 +191,3 @@ export const getQuitList = (params) => {
   return defHttp.get({ url: Api.getQuitList, params });
 };
 
-/**
- * 取消离职
- * @param params
- */
-export const putCancelQuit = (params, handleSuccess) => {
-  return defHttp.put({ url: Api.putCancelQuit, params }, { joinParamsToUrl: true }).then(() => {
-    handleSuccess();
-  });
-};

@@ -69,7 +69,7 @@ const CONTEXT_PROP_DESCRIPTION = {
 const onlineUrl = {
   getColumns: '/online/cgform/api/getColumns/',
   getQueryInfo: '/online/cgform/api/getQueryInfo/',
-  getData: '/online/cgform/api/getData/',
+  getData: '/api/online/cgform/api/getData/',
   getTreeData: '/online/cgform/api/getTreeData/',
   optPre: '/online/cgform/api/form/',
   buttonAction: '/online/cgform/api/doButton',

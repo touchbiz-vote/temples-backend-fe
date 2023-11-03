@@ -3,7 +3,7 @@ import { defHttp } from '/@/utils/http/axios';
 const tableId = '4028f8c98a844d8c018a844d8ca40000';
 
 enum Api {
-  list = '/online/cgform/api/getData/',
+  list = '/api/online/cgform/api/getData/',
   save = '/test/jeecgDemo/add',
   edit = '/test/jeecgDemo/edit',
   get = '/test/jeecgDemo/queryById',

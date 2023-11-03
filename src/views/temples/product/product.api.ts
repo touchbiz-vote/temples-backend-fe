@@ -1,10 +1,9 @@
 import { defHttp } from '/@/utils/http/axios';
-import { Modal } from 'ant-design-vue';
 
 const tableId = 'c37247320d744855bf85fac76f0cebfa';
 
 export enum Api {
-  list = '/online/cgform/api/getData/',
+  list = '/api/online/cgform/api/getData/',
   save = '/api/temples/product',
   get = '/online/cgform/api/form/',
   enabled = '/api/temples/product/enabled/',

@@ -3,7 +3,7 @@ import { defHttp } from '/@/utils/http/axios';
 const tableId = '20231016174250';
 
 export enum Api {
-  list = '/online/cgform/api/getData/',
+  list = '/api/online/cgform/api/getData/',
   save = '/online/cgform/api/form/' + tableId,
   get = '/online/cgform/api/form/',
   delete = '/online/cgform/api/form/',

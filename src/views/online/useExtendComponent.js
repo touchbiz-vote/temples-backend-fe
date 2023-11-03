@@ -3997,7 +3997,7 @@ var OnlinePopModal$1 = /* @__PURE__ */ Object.freeze(
   )
 );
 function queryTableData(tableName, params) {
-  const url = '/online/cgform/api/getData/' + tableName;
+  const url = '/api/online/cgform/api/getData/' + tableName;
   return defHttp.get({ url, params });
 }
 function queryTableColumns(tableName, params) {
@@ -5020,7 +5020,7 @@ const _sfc_main$1 = defineComponent({
       }, 200);
     }
     function queryTableData2(params) {
-      const url = '/online/cgform/api/getData/' + props.id;
+      const url = '/api/online/cgform/api/getData/' + props.id;
       return defHttp.get({ url, params });
     }
     function list(params) {

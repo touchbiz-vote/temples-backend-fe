@@ -36,7 +36,7 @@
   const tableId = '4028f8c98a844d8c018a844d8ca40000';
   const url = {
     importExcel: 'api/biz/activity/case/import/',
-    list: '/online/cgform/api/getData/',
+    list: '/api/online/cgform/api/getData/',
     update: '/online/cgform/api/form/',
     columns: '/online/cgform/api/getColumns/',
     exportXlsUrl: 'api/biz/activity/case/export/',

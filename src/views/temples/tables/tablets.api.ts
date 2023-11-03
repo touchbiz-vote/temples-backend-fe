@@ -9,7 +9,7 @@ export enum Api {
   get = '/online/cgform/api/form/',
   exportXlsUrl = '/sys/sysDepart/exportXls',
   importExcelUrl = '/sys/sysDepart/importExcel',
-  list = '/online/cgform/api/getData/',
+  list = '/api/online/cgform/api/getData/',
   searchOrder = '/api/temples/order/search',
   assign = '/api/temples/tablets/assign/byOrder',
 }

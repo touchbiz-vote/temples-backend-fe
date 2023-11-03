@@ -190,6 +190,22 @@ function useInitialData() {
       queryMode: 'single',
       dbIsSync: '1',
     },
+    {
+      dbFieldName: 'deleted',
+      dbFieldTxt: '标记删除',
+      dbLength: 1,
+      dbPointLength: 0,
+      dbDefaultVal: '0',
+      dbType: 'int',
+      dbIsKey: '0',
+      dbIsNull: '0',
+      isShowForm: '0',
+      isShowList: '0',
+      fieldShowType: 'text',
+      fieldLength: '1',
+      queryMode: 'single',
+      dbIsSync: '1',
+    },
   ];
   let tempIds = [];
   initialData.forEach((record) => {
