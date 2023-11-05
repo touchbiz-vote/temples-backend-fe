@@ -123,6 +123,18 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
           onClick: () => onShowList(record.id),
         },
         {
+          label: '生成表单',
+          class: ['low-app-hide'],
+          // onClick: () => onGoToTest(record),
+          // ifShow: () => (isNormalPage ? record.isDbSynch == 'Y' && record.tableType !== 3 : true),
+        },
+        {
+          label: '查看表单',
+          class: ['low-app-hide'],
+          // onClick: () => onGoToTest(record),
+          // ifShow: () => (isNormalPage ? record.isDbSynch == 'Y' && record.tableType !== 3 : true),
+        },
+        {
           label: '\u914D\u7F6E\u5730\u5740',
           class: ['low-app-hide'],
           onClick: () => onShowOnlineUrl(record),

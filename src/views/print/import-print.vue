@@ -12,7 +12,7 @@
         >
       </template>
     </BasicTable>
-    <PrintModal @register="registerModal" />
+    <PrintModal :printData="tableData" @register="registerModal" />
   </div>
 </template>
 <script lang="ts" setup>

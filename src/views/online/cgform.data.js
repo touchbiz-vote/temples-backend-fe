@@ -4,7 +4,7 @@ import { buildUUID } from '/@/utils/uuid';
 const VALIDATE_FAILED = 'validate-failed';
 const columns = [
   {
-    title: '\u8868\u7C7B\u578B',
+    title: '表类型',
     align: 'center',
     sorter: true,
     dataIndex: 'tableType',
@@ -26,7 +26,21 @@ const columns = [
     },
   },
   {
-    title: '\u8868\u540D',
+    title: '对象类型',
+    align: 'center',
+    sorter: true,
+    dataIndex: 'is_view',
+    width: 140,
+    customRender({ text, record }) {
+      let tbTypeText = '物理表';
+      if (record.isView === 1) {
+        tbTypeText = '视图';
+      }
+      return tbTypeText;
+    },
+  },
+  {
+    title: '表名',
     sorter: true,
     align: 'center',
     dataIndex: 'tableName',
@@ -62,7 +76,7 @@ const columns = [
 ];
 const searchFormSchema = [
   {
-    label: '\u8868\u540D',
+    label: '表名',
     field: 'tableName',
     component: 'JInput',
   },

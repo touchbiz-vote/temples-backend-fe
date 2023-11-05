@@ -162,6 +162,7 @@
   });
 
   function connect(host) {
+    host = 'http://192.168.0.27:17521';
     hiprint.hiwebSocket.setHost(host);
     // 这是异步的
     hiprint.refreshPrinterList((list) => {
@@ -226,14 +227,24 @@
   const print2List = () => {
     if (hiprint.hiwebSocket.opened) {
       const panel = hiprintTemplate.getJson().panels[0];
+      console.log(props.printData);
       //从模版中获取打印尺寸
-      hiprintTemplate.print2(props.printData, {
+      const params = {
         printer: formState.value.print, // 打印机 名称
         title: '打印任务名称',
         color: false, // 是否打印颜色 默认 true
         copies: 1, // 打印份数 默认 1
-        deviceName: formState.value.print,
-        pageSize: { height: panel.height * 1000, widfht: panel.width * 1000 },
+        // deviceName: formState.value.print,
+        pageSize: { height: panel.height * 1000, width: panel.width * 1000 },
+      };
+      console.log(params);
+      hiprintTemplate.print2(props.printData, params);
+      hiprintTemplate.on('printSuccess', function (data) {
+        $message.createSuccessModal({ content: '打印完成' });
+      });
+      hiprintTemplate.on('printError', function (data) {
+        $message.createErrorModal({ content: '打印失败' });
+        console.log(data);
       });
     } else {
       alert('请先连接客户端(刷新网页), 然后再点击「直接打印」');

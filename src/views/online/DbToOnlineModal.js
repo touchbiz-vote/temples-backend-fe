@@ -13,22 +13,26 @@ const _sfc_main = defineComponent({
   emits: ['success', 'register'],
   setup(_, { emit }) {
     const { createMessage: $message } = useMessage();
-    const emptyText = ref('\u6682\u65E0\u6570\u636E');
+    const emptyText = ref('暂无数据');
     const confirmLoading = ref(false);
     const btnLoading = ref(false);
     const metaSource = ref([]);
     const dataSource = ref([]);
     const [registerModal, { closeModal }] = useModalInner(() => {
       btnLoading.value = false;
-      emptyText.value = '\u6682\u65E0\u6570\u636E';
+      emptyText.value = '暂无数据';
       selectedRowKeys.value = [];
       queryTables();
     });
     const [registerTable, { setPagination }, { rowSelection, selectedRowKeys }] = useListTable({
       bordered: true,
-      columns: [{ title: '\u8868\u540D', align: 'left', dataIndex: 'id' }],
+      columns: [
+        { title: '表名', align: 'left', dataIndex: 'tableName' },
+        { title: '表类型', align: 'center', dataIndex: 'tableTypeDesc' },
+      ],
       dataSource,
-      maxHeight: 300,
+      rowKey: 'tableName',
+      maxHeight: 500,
       locale: { emptyText },
       pagination: {
         showQuickJumper: false,
@@ -40,12 +44,12 @@ const _sfc_main = defineComponent({
       formConfig: {
         schemas: [
           {
-            label: '\u8868\u540D',
+            label: '表名',
             field: 'tableName',
             component: 'Input',
             componentProps: {
               style: { width: '100%' },
-              placeholder: '\u8BF7\u8F93\u5165\u8868\u540D\u4EE5\u6A21\u7CCA\u7B5B\u9009',
+              placeholder: '请输入表名以模糊筛选',
               onChange: (e) => searchFilter(e.target.value),
             },
             disabledLabelWidth: true,
@@ -64,7 +68,7 @@ const _sfc_main = defineComponent({
       return defHttp
         .get(
           {
-            url: '/api/online/cgform/head/queryTables/',
+            url: '/api/online/cgform/head/queryTables/v2',
           },
           {
             errorMessageMode: 'none',
@@ -96,7 +100,7 @@ const _sfc_main = defineComponent({
       if (!keyword) {
         dataSource.value = [...metaSource.value];
       } else {
-        dataSource.value = metaSource.value.filter((item) => item.id.toLowerCase().includes(keyword.toLowerCase()));
+        dataSource.value = metaSource.value.filter((item) => item.tableName.toLowerCase().includes(keyword.toLowerCase()));
         emptyText.value = dataSource.value.length === 0 ? '\u65E0\u7B5B\u9009\u7ED3\u679C' : '\u6682\u65E0\u6570\u636E';
       }
       setPagination({ current: 1 });
@@ -139,7 +143,7 @@ const _hoisted_1 = /* @__PURE__ */ createElementVNode(
   'div',
   null,
   [
-    /* @__PURE__ */ createTextVNode(' \u6CE8\uFF1A\u5BFC\u5165\u8868\u4F1A\u6392\u9664\u914D\u7F6E\u524D\u7F00\u8868 '),
+    /* @__PURE__ */ createTextVNode(' 注：导入表会排除配置前缀表 '),
     /* @__PURE__ */ createElementVNode(
       'a',
       {
@@ -162,8 +166,8 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       _component_BasicModal,
       {
         onRegister: _ctx.registerModal,
-        width: 500,
-        title: '\u4ECE\u6570\u636E\u5E93\u5BFC\u5165\u8868\u5355',
+        width: 600,
+        title: '从数据库导入表单',
         confirmLoading: _ctx.confirmLoading,
         onCancel: _ctx.handleCancel,
       },
@@ -173,7 +177,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
             _component_a_button,
             { onClick: _ctx.handleCancel },
             {
-              default: withCtx(() => [createTextVNode('\u5173\u95ED')]),
+              default: withCtx(() => [createTextVNode('关闭')]),
               _: 1,
             },
             8,
@@ -188,7 +192,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
               loading: _ctx.confirmLoading || _ctx.btnLoading,
             },
             {
-              default: withCtx(() => [createTextVNode(' \u751F\u6210\u8868\u5355 ')]),
+              default: withCtx(() => [createTextVNode(' 生成表单 ')]),
               _: 1,
             },
             8,

@@ -149,7 +149,7 @@ const _sfc_main = defineComponent({
         { title: '\u539F\u8868\u7248\u672C', dataIndex: 'copyVersion' },
         { title: '\u89C6\u56FE\u7248\u672C', dataIndex: 'tableVersion' },
       ],
-      formSchemas: [{ label: '\u8868\u540D', field: 'tableName', component: 'JInput' }],
+      formSchemas: [{ label: '表名', field: 'tableName', component: 'JInput' }],
     });
     const { prefixCls, tableContext } = pageContext;
     const [registerTable, { reload }, { rowSelection }] = tableContext;

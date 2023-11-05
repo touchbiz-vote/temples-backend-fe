@@ -303,6 +303,7 @@
         if (record.value.template) {
           const template = JSON.parse(record.value.template);
           const value = { width: template.panels[0].width, height: template.panels[0].height };
+          console.log(value);
           setPaper('other', value);
         }
       }
@@ -321,6 +322,9 @@
             curPaper.value = { type: 'other', width: value.width, height: value.height };
             hiprintTemplate.setPaper(value.width, value.height);
           }
+          console.log(curPaper.value);
+          // curPaperSize.value.height = curPaper.value.height;
+          // curPaperSize.value.width = curPaper.value.width;
         } catch (error) {
           createMessage.error(`操作失败: ${error}`);
         }

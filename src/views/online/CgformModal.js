@@ -77,7 +77,7 @@ import { buildUUID } from '/@/utils/uuid';
 import { sleep } from '/@/utils';
 import { g as getRefPromise } from './useExtendComponent.js';
 import { _ as _export_sfc } from './index.js';
-const list = (params) => defHttp.get({ url: '/online/cgform/head/list', params });
+const list = (params) => defHttp.get({ url: '/api/online/cgform/head/list', params });
 const doBatchRemove = (idList) => doRemove(idList, 0);
 const doSingleRemove = (pid) => defHttp.delete({ url: '/online/cgform/head/removeRecord', params: { id: pid } }, { joinParamsToUrl: true });
 const doBatchDelete = (idList) => doRemove(idList, 1);

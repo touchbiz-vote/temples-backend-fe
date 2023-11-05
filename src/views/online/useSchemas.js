@@ -36,7 +36,7 @@ function useFormSchemas(_props, handlers) {
     { label: '', field: 'id', component: 'Input', show: false },
     { label: '', field: 'tableVersion', component: 'Input', show: false },
     mapFormSchema({
-      label: '\u8868\u540D',
+      label: '表名',
       field: 'tableName',
       component: 'Input',
       required: true,
