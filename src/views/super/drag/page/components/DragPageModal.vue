@@ -33,7 +33,7 @@
   import { ref, unref, reactive, nextTick, computed } from 'vue';
   import { getToken, getTenantId } from '/@/utils/auth';
   import { queryById } from '../page.api';
-  import { BasicModal, useModalInner } from '/src/components/Modal';
+  import { BasicModal, useModalInner } from '/@/components/Modal';
   import { getCacheByDynKey } from '/@/utils/auth';
   import { JDragConfigEnum } from '/@/enums/jeecgEnum';
   import PasswordModal from './PasswordModal.vue';

@@ -69,7 +69,7 @@ export const batchDeleteRole = (params, handleSuccess) => {
  * @param params
  */
 export const saveOrUpdateRole = (params, isUpdate) => {
-  let url = isUpdate ? Api.edit : Api.save;
+  const url = isUpdate ? Api.edit : Api.save;
   return defHttp.post({ url: url, params });
 };
 /**

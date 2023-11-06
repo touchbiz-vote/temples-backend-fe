@@ -40,11 +40,10 @@
 
 <script lang="ts" name="system-category" setup>
   //ts语法
-  import { ref, computed, unref, toRaw, nextTick } from 'vue';
-  import { BasicTable, useTable, TableAction } from '/src/components/Table';
-  import { useDrawer } from '/src/components/Drawer';
+  import { ref, unref } from 'vue';
+  import { BasicTable, useTable, TableAction } from '/@/components/Table';
   import CategoryModal from './components/CategoryModal.vue';
-  import { useModal } from '/src/components/Modal';
+  import { useModal } from '/@/components/Modal';
   import { columns, searchFormSchema } from './category.data';
   import { list, deleteCategory, batchDeleteCategory, getExportUrl, getImportUrl, getChildList, getChildListBatch } from './category.api';
   import { useListPage } from '/@/hooks/system/useListPage';

@@ -46,7 +46,7 @@
   import { useMessage } from '/@/hooks/web/useMessage';
   const { createConfirm } = useMessage();
   // import JImportModal from '/@/components/Form/src/jeecg/components/JImportModal.vue';
-  import { getList, batchDelete, deleteProduct, enable, disable, getImportUrl, Api, getExportUrl } from './product.api';
+  import { getList, batchDelete, deleteProduct, enable, disable, getImportUrl, getExportUrl } from './product.api';
   import { columns, searchFormSchema } from './product.data';
   // import { useMethods } from '/@/hooks/system/useMethods';
   import { useListPage } from '/@/hooks/system/useListPage';

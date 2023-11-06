@@ -4,9 +4,9 @@
   </BasicModal>
 </template>
 <script lang="ts" setup>
-  import { defineProps, ref, computed, unref, reactive } from 'vue';
-  import { BasicModal, useModalInner } from '/src/components/Modal';
-  import { BasicForm, useForm } from '/src/components/Form';
+  import { defineProps, ref, computed, unref } from 'vue';
+  import { BasicModal, useModalInner } from '/@/components/Modal';
+  import { BasicForm, useForm } from '/@/components/Form';
   import { itemFormSchema } from '../dict.data';
   import { saveOrUpdateDictItem } from '../dict.api';
   // 声明Emits

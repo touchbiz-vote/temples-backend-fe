@@ -46,13 +46,12 @@
   </BasicDrawer>
 </template>
 <script lang="ts" setup>
-  import { ref, computed, unref, onMounted } from 'vue';
-  import { BasicDrawer, useDrawer, useDrawerInner } from '/src/components/Drawer';
-  import { BasicTree, TreeItem } from '/src/components/Tree';
+  import { ref, unref } from 'vue';
+  import { BasicDrawer, useDrawer, useDrawerInner } from '/@/components/Drawer';
+  import { BasicTree, TreeItem } from '/@/components/Tree';
   import { PopConfirmButton } from '/@/components/Button';
   import RoleDataRuleDrawer from './RoleDataRuleDrawer.vue';
   import { queryTreeListForRole, queryRolePermission, saveRolePermission } from '../role.api';
-  const emit = defineEmits(['register']);
   //树的信息
   const treeData = ref<TreeItem[]>([]);
   //树的全部节点信息

@@ -10,8 +10,8 @@
 </template>
 <script lang="ts" setup>
   import { ref, toRaw } from 'vue';
-  import { BasicModal, useModalInner } from '/src/components/Modal';
-  import { BasicTable, useTable, TableAction } from '/src/components/Table';
+  import { BasicModal, useModalInner } from '/@/components/Modal';
+  import { BasicTable, useTable, TableAction } from '/@/components/Table';
   import { recycleBincolumns } from '../dict.data';
   import { getRecycleBinList, putRecycleBin, deleteRecycleBin } from '../dict.api';
   // 声明Emits

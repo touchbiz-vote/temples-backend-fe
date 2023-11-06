@@ -39,17 +39,17 @@
 
 <script lang="ts" name="system-dict" setup>
   //ts语法
-  import { BasicTable, TableAction } from '/@//components/Table';
+  import { BasicTable, TableAction } from '/@/components/Table';
   import { useDrawer } from '/@/components/Drawer';
   import { useModal } from '/@/components/Modal';
   import DictItemList from './components/DictItemList.vue';
   import DictModal from './components/DictModal.vue';
   import DictRecycleBinModal from './components/DictRecycleBinModal.vue';
   import { useMessage } from '/@/hooks/web/useMessage';
-  import { removeAuthCache, setAuthCache } from '/src/utils/auth';
+  import { removeAuthCache, setAuthCache } from '/@/utils/auth';
   import { columns, searchFormSchema } from './dict.data';
   import { list, deleteDict, batchDeleteDict, getExportUrl, getImportUrl, refreshCache, queryAllDictItems } from './dict.api';
-  import { DB_DICT_DATA_KEY } from '/src/enums/cacheEnum';
+  import { DB_DICT_DATA_KEY } from '/@/enums/cacheEnum';
 
   const { createMessage } = useMessage();
   //字典model
@@ -62,7 +62,7 @@
   const [registerModal1, { openModal: openRecycleModal }] = useModal();
 
   // 列表页面公共参数、方法
-  const { prefixCls, tableContext, onExportXls, onImportXls } = useListPage({
+  const { tableContext, onExportXls, onImportXls } = useListPage({
     designScope: 'dict-template',
     tableProps: {
       title: '数据字典',

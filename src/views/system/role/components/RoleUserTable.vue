@@ -9,14 +9,14 @@
           <template #overlay>
             <a-menu>
               <a-menu-item key="1" @click="batchHandleDelete">
-                <Icon icon="bx:bx-unlink"></Icon>
+                <Icon icon="bx:bx-unlink" />
                 取消关联
               </a-menu-item>
             </a-menu>
           </template>
           <a-button
             >批量操作
-            <Icon icon="ant-design:down-outlined"></Icon>
+            <Icon icon="ant-design:down-outlined" />
           </a-button>
         </a-dropdown>
       </template>
@@ -31,24 +31,23 @@
   </BasicDrawer>
 </template>
 <script lang="ts" setup>
-  import { ref, defineProps, watch, unref } from 'vue';
-  import { BasicTable, useTable, TableAction } from '/src/components/Table';
-  import { BasicDrawer, useDrawer, useDrawerInner } from '/src/components/Drawer';
-  import { useModal } from '/src/components/Modal';
+  import { ref, defineProps } from 'vue';
+  import { BasicTable, useTable, TableAction } from '/@/components/Table';
+  import { BasicDrawer, useDrawer, useDrawerInner } from '/@/components/Drawer';
+  import { useModal } from '/@/components/Modal';
   import UserDrawer from '../../user/UserDrawer.vue';
   import UseSelectModal from './UseSelectModal.vue';
   import { userList, deleteUserRole, batchDeleteUserRole, addUserRole } from '../role.api';
   import { userColumns, searchUserFormSchema } from '../role.data';
   import { getUserRoles } from '../../user/user.api';
 
-  const emit = defineEmits(['register', 'hideUserList']);
   const props = defineProps({
-    disableUserEdit: {type:Boolean,default:false}
-  })
-  
+    disableUserEdit: { type: Boolean, default: false },
+  });
+
   const checkedKeys = ref<Array<string | number>>([]);
   const roleId = ref('');
-  const [registerBaseDrawer, { setDrawerProps, closeDrawer }] = useDrawerInner(async (data) => {
+  const [registerBaseDrawer] = useDrawerInner(async (data) => {
     roleId.value = data.id;
     setProps({ searchInfo: { roleId: data.id } });
     reload();
