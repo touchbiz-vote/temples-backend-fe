@@ -19,7 +19,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { ref, unref, watch } from 'vue';
+  import { ref } from 'vue';
   import { BasicTable, TableAction } from '/@/components/Table';
   import { useModal } from '/@/components/Modal';
   import PrintTemplateModal from './PrintTemplateModal.vue';
@@ -64,7 +64,7 @@
 
   const [registerTable, { reload }] = tableContext;
 
-  function download(record){
+  function download(record) {
     console.log(record.file_url);
     window.open(record.file_url);
   }
@@ -163,11 +163,6 @@
       reload();
     });
   }
-
-  const customSearch = ref(false);
-  watch(customSearch, () => {
-    setProps({ useSearchForm: !unref(customSearch) });
-  });
 </script>
 <style lang="less" scoped>
   .jeecg-basic-table-form-container {

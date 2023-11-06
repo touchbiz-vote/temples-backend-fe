@@ -31,6 +31,24 @@ export const columns: BasicColumn[] = [
 ];
 
 export const searchFormSchema: FormSchema[] = [
+  {
+    field: 'template_name',
+    label: '模版名称',
+    component: 'JInput',
+    colProps: { style: 'width:220px' },
+  },
+  {
+    field: 'enabled',
+    label: '是否启用',
+    colProps: { style: 'width:80px' },
+    component: 'Select',
+    componentProps: {
+      options: [
+        { label: '启用', value: 1 },
+        { label: '停用', value: 2 },
+      ],
+    },
+  },
 ];
 export const formSchema: FormSchema[] = [
   {

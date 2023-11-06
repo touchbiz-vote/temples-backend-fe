@@ -65,11 +65,6 @@
             :parser="(value) => value.replace('%', '')"
           />
           <a-button size="small" type="text" preIcon="ant-design:zoom-in" @click="changeScale(true)" />
-
-          <!-- <a-input-group compact>
-            <a-input size="small" v-model:value="record.background" placeholder="请输入背景图片地址" style="width: 78%" />
-            <a-button size="small" type="primary" @click="handleUpload">上传</a-button>
-          </a-input-group> -->
         </a-space>
       </a-col>
     </a-row>
@@ -134,7 +129,6 @@
   import { useMessage } from '/@/hooks/web/useMessage';
   import $ from 'jquery';
   import providers from './providers';
-  import { uploadImg } from '/@/api/sys/upload';
   import { defineComponent } from 'vue';
   import { JUpload } from '/@/components/Form';
 
@@ -227,29 +221,6 @@
         }
       });
 
-      function handleUpload() {
-        let input = document.createElement('input');
-        input.type = 'file';
-        input.style.display = 'none';
-        input.accept = '.jpg,.png,.gif';
-        input.onchange = (e) => {
-          console.log('e', e);
-          const file = e.target.files[0];
-          createMessage.loading('上传中...', 0);
-          uploadImg({
-            name: 'file',
-            file: file,
-            fileName: file.name,
-          }).then((res) => {
-            createMessage.destroy();
-            createMessage.success('上传成功');
-            record.value.background = res.message;
-            document.body.removeChild(input);
-          });
-        };
-        input.click();
-        document.body.append(input);
-      }
       let hiprintTemplate;
 
       const isUpdate = ref(true);
@@ -307,7 +278,8 @@
         if (record.value.template) {
           const template = JSON.parse(record.value.template);
           const value = { width: template.panels[0].width, height: template.panels[0].height };
-          console.log(value);
+          paperWidth.value = value.width;
+          paperHeight.value = value.height;
           setPaper('other', value);
         }
       }
@@ -327,8 +299,6 @@
             hiprintTemplate.setPaper(value.width, value.height);
           }
           console.log(curPaper.value);
-          // curPaperSize.value.height = curPaper.value.height;
-          // curPaperSize.value.width = curPaper.value.width;
         } catch (error) {
           createMessage.error(`操作失败: ${error}`);
         }
@@ -397,7 +367,6 @@
         curPaperType,
         curPaperSize,
         title,
-        handleUpload,
         setPaper,
         otherPaper,
         changeScale,
