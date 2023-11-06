@@ -9,7 +9,7 @@
 <template>
   <BasicModal @register="registerModal" title="打印" width="800px">
     <a-form name="basic" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }" autocomplete="off">
-      <a-form-item label="打印模版" name="templateId" :model="formState">
+      <a-form-item v-if="currentTemplate == null" label="打印模版" name="templateId" :model="formState">
         <a-select placeholder="请选择打印模版" @change="templateChange" v-model:value="formState.templateId">
           <a-select-option :value="null">请选择…</a-select-option>
           <template v-for="item in dictOptions" :key="`${item.value}`">
@@ -22,14 +22,11 @@
         </a-select>
       </a-form-item>
 
-      <a-form-item label="打印方式" name="printType">
+      <a-form-item v-if="showPrintType" label="打印方式" name="printType">
         <a-radio-group button-style="solid" v-model:value="formState.printType" @change="printTypeChange">
           <a-radio-button value="web">浏览器打印</a-radio-button>
           <a-radio-button value="direct">直接打印</a-radio-button>
         </a-radio-group>
-      </a-form-item>
-      <a-form-item v-if="formState.printType === 'direct'" label="打印客户端访问地址" name="printHost">
-        <a-input v-model:value="formState.printHost" />
       </a-form-item>
       <a-form-item v-if="formState.printType === 'direct'" label="打印机列表" name="print">
         <a-select placeholder="请选择打印机" v-model:value="formState.print">
@@ -70,16 +67,23 @@
 
   import { hiprint } from 'vue-plugin-hiprint';
   import startPreview from './components/preview.vue';
+  import { Modal } from 'ant-design-vue';
 
   import { getList, getPrintHost, getTemplateContent } from './print.api';
+  //按钮权限问题
+  import { usePermission } from '/@/hooks/web/usePermission';
+  const { hasPermission } = usePermission();
+
   //提示弹窗
   const $message = useMessage();
   const preview = ref(null);
 
   const dictOptions = ref([]);
   const dictPrintList = ref([]);
+  const currentTemplate = ref(null);
+  const showPrintType = ref(false);
   const formState = ref({
-    printType: 'web',
+    printType: 'direct',
     printHost: '',
   });
   const scaleValue = ref(1);
@@ -92,11 +96,19 @@
     },
   });
   // const attrs = useAttrs();
-  const [registerModal, { closeModal }] = useModalInner();
+  const [registerModal, { closeModal }] = useModalInner((data) => {
+    console.log(data);
+    currentTemplate.value = data.template;
+    const state = formState.value;
+    state.templateId = data.template.id;
+    templateChange(state.templateId);
+    showPrintType.value = hasPermission('system:print:printType');
+  });
 
   function printTypeChange(e) {
     console.log(e);
   }
+
   function handleOk() {
     const state = formState.value;
     if (!state.templateId) {
@@ -109,7 +121,7 @@
     if (state.printType === 'direct' && !state.print) {
       $message.createWarningModal({
         title: '错误',
-        content: '请选择一个选择打印机',
+        content: '请选择一个本地打印机',
       });
       return;
     }
@@ -135,11 +147,23 @@
     }
 
     console.log(props.printData);
-    if (state.printType === 'web') {
-      printList();
-    } else {
-      print2List();
-    }
+
+    Modal.confirm({
+      title: '确认打印',
+      content: '是否确认使用[' + currentTemplate.value.template_name + ']进行打印操作,共打印' + props.printData.length + '条数据',
+      okText: '打印',
+      cancelText: '取消',
+      onOk: () => {
+        return defHttp.delete({ url: Api.deleteBatch, data: params }, { joinParamsToUrl: true }).then(() => {
+          if (state.printType === 'web') {
+            printList();
+          } else {
+            print2List();
+          }
+        });
+      },
+    });
+
     // //根据选择的打印方式选择对象的打印方法
     // closeModal();
   }
