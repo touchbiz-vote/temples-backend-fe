@@ -15,7 +15,7 @@
 </template>
 <script lang="ts">
   import { FormSchema } from '/@/components/Form';
-  import { BasicColumn, TableAction, BasicTable, useTable } from '/@/components/Table';
+  import { TableAction, BasicColumn } from '/@/components/Table';
   import { defineComponent, ref } from 'vue';
   import { BasicModal, useModalInner } from '/@/components/Modal';
   import { searchOrder } from '../tablets.api';

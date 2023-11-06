@@ -17,7 +17,7 @@
   // 声明Emits
   const emit = defineEmits(['success', 'register']);
   const checkedKeys = ref<Array<string | number>>([]);
-  const [registerModal, { setModalProps, closeModal }] = useModalInner();
+  const [registerModal] = useModalInner();
   //注册table数据
   const [registerTable, { reload }] = useTable({
     api: getRecycleBinList,

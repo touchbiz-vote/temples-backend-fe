@@ -24,7 +24,7 @@
   </div>
 </template>
 <script lang="ts">
-  import { BasicColumn, TableAction, BasicTable, useTable } from '/@/components/Table';
+  import { TableAction, BasicTable } from '/@/components/Table';
   import { defineComponent, ref, watch } from 'vue';
   import { BasicModal, useModalInner } from '/@/components/Modal';
   import { columns } from '../schedule.data';

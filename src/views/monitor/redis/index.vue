@@ -12,12 +12,12 @@
       </a-row>
     </a-card>
 
-    <BasicTable @register="registerTable" :api="getInfo"></BasicTable>
+    <BasicTable @register="registerTable" :api="getInfo" />
   </div>
 </template>
 <script lang="ts" name="monitor-redis" setup>
   import { onMounted, ref, reactive, Ref, onUnmounted } from 'vue';
-  import { BasicTable, useTable, TableAction } from '/@/components/Table';
+  import { BasicTable, useTable } from '/@/components/Table';
   import { getInfo, getRedisInfo } from './redis.api';
   import dayjs from 'dayjs';
   import { columns } from './redis.data';

@@ -28,7 +28,8 @@
   </div>
 </template>
 <script lang="ts" name="monitor-datasource" setup>
-  import { BasicTable, TableAction } from '/@/components/Table';
+  import { BasicTable } from '/@/components/Table';
+  import { TableAction } from '/@/components/Table';
   import { useModal } from '/@/components/Modal';
   import { getDataSourceList, getExportUrl, getImportUrl } from './datasource.api';
   import { columns, searchFormSchema } from './datasource.data';

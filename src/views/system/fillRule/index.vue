@@ -32,7 +32,8 @@
 </template>
 
 <script name="system-fillrule" lang="ts" setup>
-  import { BasicTable, TableAction } from '/@/components/Table';
+  import { BasicTable } from '/@/components/Table';
+  import { TableAction } from '/@/components/Table';
   import { useListPage } from '/@/hooks/system/useListPage';
   import { getFillRuleList, exportUrl, importUrl, deleteFillRule, batchDeleteFillRule, handleTest } from '/@/views/system/fillRule/fill.rule.api';
   import { columns, searchFormSchema } from '/@/views/system/fillRule/fill.rule.data';

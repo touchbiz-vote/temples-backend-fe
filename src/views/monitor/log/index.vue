@@ -22,7 +22,7 @@
 </template>
 <script lang="ts" name="monitor-log" setup>
   import { ref } from 'vue';
-  import { BasicTable, useTable, TableAction } from '/@/components/Table';
+  import { BasicTable } from '/@/components/Table';
   import { getLogList } from './log.api';
   import { columns, searchFormSchema, operationLogColumn } from './log.data';
   import { useListPage } from '/@/hooks/system/useListPage';

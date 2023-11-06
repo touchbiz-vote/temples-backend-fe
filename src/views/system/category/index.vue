@@ -41,7 +41,8 @@
 <script lang="ts" name="system-category" setup>
   //ts语法
   import { ref, unref } from 'vue';
-  import { BasicTable, useTable, TableAction } from '/@/components/Table';
+  import { BasicTable } from '/@/components/Table';
+  import { TableAction } from '/@/components/Table';
   import CategoryModal from './components/CategoryModal.vue';
   import { useModal } from '/@/components/Modal';
   import { columns, searchFormSchema } from './category.data';

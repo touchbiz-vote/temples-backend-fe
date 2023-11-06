@@ -19,7 +19,8 @@
   import TableFormModal from './TableFormModal.vue';
   import OrderSelectModal from './OrderSelectModal.vue';
   import { watch, ref, unref, onMounted } from 'vue';
-  import { BasicTable, TableAction } from '/@/components/Table';
+  import { BasicTable } from '/@/components/Table';
+  import { TableAction } from '/@/components/Table';
   import { getList, deleteTable, assign } from '../tablets.api';
   import { columns } from '../tablets.data';
   import { useListPage } from '/@/hooks/system/useListPage';

@@ -39,7 +39,8 @@
 
 <script lang="ts" name="system-dict" setup>
   //ts语法
-  import { BasicTable, TableAction } from '/@/components/Table';
+  import { BasicTable } from '/@/components/Table';
+  import { TableAction } from '/@/components/Table';
   import { useDrawer } from '/@/components/Drawer';
   import { useModal } from '/@/components/Modal';
   import DictItemList from './components/DictItemList.vue';

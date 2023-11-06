@@ -36,7 +36,8 @@
 </template>
 <script lang="ts" name="system-role" setup>
   import { ref } from 'vue';
-  import { BasicTable, TableAction } from '/@/components/Table';
+  import { BasicTable } from '/@/components/Table';
+  import { TableAction } from '/@/components/Table';
   import { useDrawer } from '/@/components/Drawer';
   import { useModal } from '/@/components/Modal';
   import RoleDrawer from './components/RoleDrawer.vue';

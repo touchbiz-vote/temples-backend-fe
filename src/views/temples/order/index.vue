@@ -19,12 +19,10 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { ref, unref, reactive, toRaw, watch, computed } from 'vue';
-  import { BasicTable, TableAction } from '/@/components/Table';
+  import { ref, unref, watch } from 'vue';
   import { useListPage } from '/@/hooks/system/useListPage';
 
   import { useModal } from '/@/components/Modal';
-  import OrderModal from './OrderModal.vue';
   import { getList, cancel, confirmOrder } from './order.api';
   import { columns, searchFormSchema } from './order.data';
   import { useRoute } from 'vue-router';

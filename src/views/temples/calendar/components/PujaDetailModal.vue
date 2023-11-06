@@ -19,8 +19,8 @@
   </div>
 </template>
 <script lang="ts">
-  import { BasicColumn, TableAction, BasicTable } from '/@/components/Table';
-  import { defineComponent, ref, watch } from 'vue';
+  import { TableAction, BasicTable } from '/@/components/Table';
+  import { defineComponent, ref } from 'vue';
   import { BasicModal, useModalInner } from '/@/components/Modal';
   import { columns } from '../schedule.data';
   import { useAttrs } from '/@/hooks/core/useAttrs';

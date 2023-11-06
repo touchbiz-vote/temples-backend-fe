@@ -13,7 +13,8 @@
 </template>
 <script lang="ts" name="monitor-mynews" setup>
   import { ref, onMounted } from 'vue';
-  import { BasicTable, useTable, TableAction } from '/@/components/Table';
+  import { BasicTable } from '/@/components/Table';
+  import { TableAction } from '/@/components/Table';
   import DetailModal from './DetailModal.vue';
   import { getMyNewsList, editCementSend, syncNotic, readAllMsg, getOne } from './mynews.api';
   import { columns, searchFormSchema } from './mynews.data';

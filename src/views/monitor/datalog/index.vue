@@ -10,7 +10,7 @@
 </template>
 <script lang="ts" name="monitor-datalog" setup>
   import { ref } from 'vue';
-  import { BasicTable, TableAction } from '/@/components/Table';
+  import { BasicTable } from '/@/components/Table';
   import DataLogCompareModal from './DataLogCompareModal.vue';
   const [registerModal, { openModal }] = useModal();
   import { getDataLogList } from './datalog.api';
@@ -22,7 +22,7 @@
   const checkedRows = ref<Array<object | number>>([]);
 
   // 列表页面公共参数、方法
-  const { prefixCls, tableContext } = useListPage({
+  const { tableContext } = useListPage({
     designScope: 'datalog-template',
     tableProps: {
       title: '数据日志列表',

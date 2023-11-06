@@ -29,7 +29,8 @@
 <script lang="ts" setup name="user-quit-modal">
   import { ref } from 'vue';
   import { BasicModal, useModalInner } from '/@/components/Modal';
-  import { BasicTable, useTable, TableAction } from '/@/components/Table';
+  import { BasicTable } from '/@/components/Table';
+  import { TableAction } from '/@/components/Table';
   import { recycleColumns } from './user.data';
   import { getQuitList } from './user.api';
   import { useListPage } from '/@/hooks/system/useListPage';
