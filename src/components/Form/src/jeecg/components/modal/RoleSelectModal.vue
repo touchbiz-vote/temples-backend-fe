@@ -11,7 +11,7 @@
         :searchInfo="searchInfo"
         :rowSelection="rowSelection"
         :indexColumnProps="indexColumnProps"
-      ></BasicTable>
+      />
     </BasicModal>
   </div>
 </template>

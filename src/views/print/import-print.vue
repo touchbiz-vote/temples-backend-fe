@@ -1,7 +1,7 @@
 <template>
   <div>
     <!--自定义查询区域-->
-    <BasicTable @register="registerTable" :columns="columns" :dataSource="tableData">
+    <BasicTable @register="registerTable" :columns="columns" :dataSource="tableData" :rowSelection="rowSelection">
       <template #tableTitle>
         <a-upload name="file" :showUploadList="false" :customRequest="(file) => onImportXls(file)">
           <a-button type="primary" preIcon="ant-design:import-outlined">导入用于打印的批量数据</a-button>
@@ -24,7 +24,7 @@
   import { useListPage } from '/@/hooks/system/useListPage';
   import * as xlsx from 'xlsx';
   const [registerModal, { openModal }] = useModal();
-  const tableData = ref([]);
+  const tableData = ref<any>([]);
   const columns = ref([]);
 
   function onImportXls(e) {
@@ -68,8 +68,6 @@
         } as BasicColumn;
       });
     }
-    console.log(data);
-    console.log(columns);
     return data;
   };
   // 列表页面公共参数、方法
@@ -87,20 +85,22 @@
       useSearchForm: false,
       showTableSetting: true,
       bordered: true,
-      showIndexColumn: false,
+      showIndexColumn: true,
       pagination: false,
       showActionColumn: false,
       tableSetting: { fullScreen: true },
-      rowKey: 'id',
+      rowKey: '',
     },
   });
 
-  const [registerTable] = tableContext;
+  const [registerTable, {}, { rowSelection, selectedRows }] = tableContext;
 
   /**
    * 新增事件
    */
   function handlePrint() {
+    const printData = selectedRows.value ? selectedRows.value : tableData.value;
+    // console.log(JSON.stringify(selectedRows.value));
     openModal(true, {
       printData: tableData.value,
     });
