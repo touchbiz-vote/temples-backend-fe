@@ -36,6 +36,20 @@ export const aProvider = function () {
           },
         },
         {
+          tid: 'defaultModule.html',
+          title: 'html',
+          data: 'html',
+          type: 'html',
+          options: {
+            testData: 'html',
+            height: 16,
+            fontSize: 15,
+            fontWeight: '700',
+            textAlign: 'center',
+            hideTitle: true,
+          },
+        },
+        {
           tid: 'aProviderModule.order',
           title: '订单编号',
           data: 'XS888888888',

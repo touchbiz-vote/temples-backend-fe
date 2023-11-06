@@ -540,7 +540,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
               ]),
               fileSlot: withCtx(({ text }) => [
                 !text
-                  ? (openBlock(), createElementBlock('span', _hoisted_2, '\u65E0\u6587\u4EF6'))
+                  ? (openBlock(), createElementBlock('span', _hoisted_2, '无文件'))
                   : (openBlock(),
                     createBlock(
                       _component_a_button,
@@ -553,7 +553,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
                         onClick: ($event) => _ctx.downloadRowFile(text),
                       },
                       {
-                        default: withCtx(() => [createTextVNode(' \u4E0B\u8F7D ')]),
+                        default: withCtx(() => [createTextVNode(' 下载 ')]),
                         _: 2,
                       },
                       1032,

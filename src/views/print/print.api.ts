@@ -8,6 +8,8 @@ export enum Api {
   get = '/online/cgform/api/form/',
   delete = '/online/cgform/api/form/',
   printHost = '/sys/setting',
+  enabled = '/api/temples/printTemplate/enabled/',
+  disable = '/api/temples/printTemplate/disable/',
 }
 /**
  * 查询打印的系统配置
@@ -40,6 +42,22 @@ export const saveOrUpdate = (params, isUpdate) => {
  */
 export const getById = (id) => {
   return defHttp.get({ url: Api.get + tableId + '/' + id });
+};
+
+/**
+ * 查询详情
+ * @param id
+ */
+export const enabled = (id) => {
+  return defHttp.put({ url: Api.enabled + id });
+};
+
+/**
+ * 查询详情
+ * @param id
+ */
+export const disable = (id) => {
+  return defHttp.put({ url: Api.disable + id });
 };
 
 /**

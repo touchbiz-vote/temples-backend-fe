@@ -16,6 +16,9 @@
         <a-form-item label="模板背景" name="background">
           <JUpload v-model:value="record.background" fileType="image" :max-count="1" :multiple="false" />
         </a-form-item>
+        <a-form-item label="导入模版" name="file_url">
+          <JUpload v-model:value="record.file_url" accept=".xlsx" :max-count="1" :multiple="false" />
+        </a-form-item>
       </a-form>
     </a-row>
 
@@ -102,7 +105,7 @@
     <template #footer>
       <a-space>
         <!-- 预览/打印 -->
-        <a-button type="primary" preIcon="ant-design:eye" @click="preView"> 预览 </a-button>
+        <a-button v-if="false" type="primary" preIcon="ant-design:eye" @click="preView"> 预览 </a-button>
         <!-- 保存/清空 -->
         <a-button type="primary" preIcon="ant-design:save" @click="save"> 保存 </a-button>
         <!-- <a-popconfirm title="是否确认清空?" okType="danger" okText="确定清空" @confirm="clearPaper">
@@ -193,6 +196,7 @@
         template_name: '',
         template: '',
         background: '',
+        file_url: '',
       });
       // 自定义纸张
       const paperPopVisible = ref(false);

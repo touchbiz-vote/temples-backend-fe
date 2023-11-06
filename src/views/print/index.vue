@@ -5,6 +5,11 @@
       <template #tableTitle>
         <a-button preIcon="ant-design:plus-outlined" type="primary" @click="handleAdd">新增</a-button>
       </template>
+      <template #bodyCell="{ column, record }">
+        <template v-if="column.dataIndex == 'file_url' && record.file_url">
+          <a-button key="1" type="primary" :ghost="ghost" size="small" preIcon="ant-design:download" @click="download(record)">下载</a-button>
+        </template>
+      </template>
       <!--操作栏-->
       <template #action="{ record }">
         <TableAction :actions="getTableAction(record)" :dropDownActions="getDropDownAction(record)" />
@@ -15,15 +20,17 @@
 </template>
 <script lang="ts" setup>
   import { ref, unref, watch } from 'vue';
+  // import { downloadRowFile } from '../online/useExtendComponent.js';
   import { BasicTable, TableAction } from '/@/components/Table';
   import { useModal } from '/@/components/Modal';
   import PrintTemplateModal from './PrintTemplateModal.vue';
-  import { getList, deleteTemplate } from './print.api';
+  import { getList, deleteTemplate, disable, enabled } from './print.api';
   import { columns, searchFormSchema } from './print.data';
   import { useListPage } from '/@/hooks/system/useListPage';
 
   const [registerModal, { openModal }] = useModal();
   const isDisabled = ref(false);
+  const ghost = ref(true);
 
   // 列表页面公共参数、方法
   const { tableContext } = useListPage({
@@ -56,6 +63,10 @@
 
   const [registerTable, { reload }] = tableContext;
 
+  function download(record){
+    console.log(record.file_url);
+    window.open(record.file_url);
+  }
   /**
    * 操作列定义
    * @param record
@@ -67,10 +78,17 @@
         onClick: handleEdit.bind(null, record),
       },
       {
-        label: '删除',
+        label: '启用',
         popConfirm: {
-          title: '是否确认进行删除操作，删除以后将无法进行恢复',
-          confirm: handleDelete.bind(null, record),
+          title: '是否确认进行启用操作，启用后就可以用该模版进行打印操作',
+          confirm: handleEnabled.bind(null, record),
+        },
+      },
+      {
+        label: '停用',
+        popConfirm: {
+          title: '是否确认进行停用操作，停用后就无法用该模版进行打印操作',
+          confirm: handleDisable.bind(null, record),
         },
       },
     ];
@@ -78,22 +96,13 @@
 
   function getDropDownAction(record) {
     return [
-      // {
-      //   label: '编辑',
-      //   onClick: handleEdit.bind(null, record),
-      // },
-      // {
-      //   label: '详情',
-      //   onClick: handleDetail.bind(null, record),
-      // },
-      // {
-      //   label: '删除',
-      //   disabled: record.enabled == 1,
-      //   popConfirm: {
-      //     title: '是否确认删除',
-      //     confirm: handleDelete.bind(null, record),
-      //   },
-      // },
+      {
+        label: '删除',
+        popConfirm: {
+          title: '是否确认进行删除操作，删除以后将无法进行恢复',
+          confirm: handleDelete.bind(null, record),
+        },
+      },
       {
         label: '复制',
         onClick: handleClone.bind(null, record),
@@ -130,12 +139,23 @@
     });
   }
 
-
   /**
    * 删除事件
    */
   async function handleDelete(record) {
     await deleteTemplate(record, reload);
+  }
+
+  function handleEnabled(record) {
+    enabled(record.id).then(() => {
+      reload();
+    });
+  }
+
+  function handleDisable(record) {
+    disable(record.id).then(() => {
+      reload();
+    });
   }
 
   const customSearch = ref(false);

@@ -149,7 +149,7 @@
    */
   onMounted(() => {
     // buildDesigner();
-    getList({ pageSize: 100 }).then((res) => {
+    getList({ pageSize: 100, enabled: 1 }).then((res) => {
       dictOptions.value = res.records;
     });
     templateChange();
