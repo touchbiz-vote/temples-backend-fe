@@ -306,7 +306,7 @@
    * 判断是否有模板操作权限
    */
   function hasAuth(){
-    return hasPermission('drag:template:edit')
+    return hasPermission('drag:template:edit');
   }
   /**
    * 是否包含保护码

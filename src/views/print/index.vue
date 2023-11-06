@@ -7,7 +7,7 @@
       </template>
       <template #bodyCell="{ column, record }">
         <template v-if="column.dataIndex == 'file_url' && record.file_url">
-          <a-button key="1" type="primary" :ghost="ghost" size="small" preIcon="ant-design:download" @click="download(record)">下载</a-button>
+          <a-button key="1" type="primary" :ghost="ghost" size="small" preIcon="ant-design:download" @click="download(record)">下载导入模版</a-button>
         </template>
       </template>
       <!--操作栏-->
@@ -20,14 +20,15 @@
 </template>
 <script lang="ts" setup>
   import { ref, unref, watch } from 'vue';
-  // import { downloadRowFile } from '../online/useExtendComponent.js';
   import { BasicTable, TableAction } from '/@/components/Table';
   import { useModal } from '/@/components/Modal';
   import PrintTemplateModal from './PrintTemplateModal.vue';
   import { getList, deleteTemplate, disable, enabled } from './print.api';
   import { columns, searchFormSchema } from './print.data';
   import { useListPage } from '/@/hooks/system/useListPage';
-
+  //按钮权限问题
+  import { usePermission } from '/@/hooks/web/usePermission';
+  const { hasPermission } = usePermission();
   const [registerModal, { openModal }] = useModal();
   const isDisabled = ref(false);
   const ghost = ref(true);
@@ -76,20 +77,7 @@
       {
         label: '编辑',
         onClick: handleEdit.bind(null, record),
-      },
-      {
-        label: '启用',
-        popConfirm: {
-          title: '是否确认进行启用操作，启用后就可以用该模版进行打印操作',
-          confirm: handleEnabled.bind(null, record),
-        },
-      },
-      {
-        label: '停用',
-        popConfirm: {
-          title: '是否确认进行停用操作，停用后就无法用该模版进行打印操作',
-          confirm: handleDisable.bind(null, record),
-        },
+        ifShow: () => hasPermission('system:print:edit'),
       },
     ];
   }
@@ -97,15 +85,33 @@
   function getDropDownAction(record) {
     return [
       {
+        label: '启用',
+        popConfirm: {
+          title: '是否确认进行启用操作，启用后就可以用该模版进行打印操作',
+          confirm: handleEnabled.bind(null, record),
+        },
+        ifShow: () => hasPermission('system:print:enabled'),
+      },
+      {
+        label: '停用',
+        popConfirm: {
+          title: '是否确认进行停用操作，停用后就无法用该模版进行打印操作',
+          confirm: handleDisable.bind(null, record),
+        },
+        ifShow: () => hasPermission('system:print:disable'),
+      },
+      {
         label: '删除',
         popConfirm: {
           title: '是否确认进行删除操作，删除以后将无法进行恢复',
           confirm: handleDelete.bind(null, record),
         },
+        ifShow: () => hasPermission('system:print:delete'),
       },
       {
         label: '复制',
         onClick: handleClone.bind(null, record),
+        ifShow: () => hasPermission('system:print:clone'),
       },
     ];
   }
