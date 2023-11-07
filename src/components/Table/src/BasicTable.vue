@@ -17,14 +17,21 @@
     <!-- antd v3 升级兼容，阻止数据的收集，防止控制台报错 -->
     <!-- https://antdv.com/docs/vue/migration-v3-cn -->
     <a-form-item-rest>
-      <Table ref="tableElRef" v-bind="getBindValues" :rowClassName="getRowClassName" v-show="getEmptyDataIsShowTable" @resizeColumn="handleResizeColumn" @change="handleTableChange">
+      <Table
+        ref="tableElRef"
+        v-bind="getBindValues"
+        :rowClassName="getRowClassName"
+        v-show="getEmptyDataIsShowTable"
+        @resizeColumn="handleResizeColumn"
+        @change="handleTableChange"
+      >
         <!-- antd的原生插槽直接传递 -->
         <template #[item]="data" v-for="item in slotNamesGroup.native" :key="item">
           <slot :name="item" v-bind="data || {}"></slot>
         </template>
         <template #headerCell="{ column }">
           <!-- update-begin--author:sunjianlei---date:220230630---for：【QQYUN-5571】自封装选择列，解决数据行选择卡顿问题 -->
-          <CustomSelectHeader v-if="isCustomSelection(column)" v-bind="selectHeaderProps"/>
+          <CustomSelectHeader v-if="isCustomSelection(column)" v-bind="selectHeaderProps" />
           <HeaderCell v-else :column="column" />
           <!-- update-end--author:sunjianlei---date:220230630---for：【QQYUN-5571】自封装选择列，解决数据行选择卡顿问题 -->
         </template>
@@ -51,14 +58,12 @@
   import { BasicForm, useForm } from '/@/components/Form/index';
   import { PageWrapperFixedHeightKey } from '/@/components/Page/injectionKey';
   import CustomSelectHeader from './components/CustomSelectHeader.vue';
-  import expandIcon from './components/ExpandIcon';
   import HeaderCell from './components/HeaderCell.vue';
   import { InnerHandlers } from './types/table';
   import { usePagination } from './hooks/usePagination';
   import { useColumns } from './hooks/useColumns';
   import { useDataSource } from './hooks/useDataSource';
   import { useLoading } from './hooks/useLoading';
-  import { useRowSelection } from './hooks/useRowSelection';
   import { useTableScroll } from './hooks/useTableScroll';
   import { useCustomRow } from './hooks/useCustomRow';
   import { useTableStyle } from './hooks/useTableStyle';
@@ -68,7 +73,7 @@
   import { useTableFooter } from './hooks/useTableFooter';
   import { useTableForm } from './hooks/useTableForm';
   import { useDesign } from '/@/hooks/web/useDesign';
-  import { useCustomSelection } from "./hooks/useCustomSelection";
+  import { useCustomSelection } from './hooks/useCustomSelection';
 
   import { omit } from 'lodash-es';
   import { basicProps } from './props';
@@ -127,11 +132,6 @@
       const { getLoading, setLoading } = useLoading(getProps);
       const { getPaginationInfo, getPagination, setPagination, setShowPagination, getShowPagination } = usePagination(getProps);
 
-      // update-begin--author:sunjianlei---date:220230630---for：【QQYUN-5571】自封装选择列，解决数据行选择卡顿问题
-
-      // const { getRowSelection, getRowSelectionRef, getSelectRows, clearSelectedRowKeys, getSelectRowKeys, deleteSelectRowByKey, setSelectedRowKeys } =
-      //   useRowSelection(getProps, tableData, emit);
-
       // 子级列名
       const childrenColumnName = computed(() => getProps.value.childrenColumnName || 'children');
 
@@ -148,14 +148,7 @@
         clearSelectedRowKeys,
         deleteSelectRowByKey,
         getExpandIconColumnIndex,
-      } = useCustomSelection(
-        getProps,
-        emit,
-        wrapRef,
-        getPaginationInfo,
-        tableData,
-        childrenColumnName
-      )
+      } = useCustomSelection(getProps, emit, wrapRef, getPaginationInfo, tableData, childrenColumnName);
       // update-end--author:sunjianlei---date:220230630---for：【QQYUN-5571】自封装选择列，解决数据行选择卡顿问题
 
       const {
@@ -198,7 +191,7 @@
         getProps,
         getPaginationInfo,
         // update-begin--author:sunjianlei---date:220230630---for：【QQYUN-5571】自封装选择列，解决数据行选择卡顿问题
-        handleCustomSelectColumn,
+        handleCustomSelectColumn
         // update-end--author:sunjianlei---date:220230630---for：【QQYUN-5571】自封装选择列，解决数据行选择卡顿问题
       );
 
@@ -237,7 +230,6 @@
           ...attrs,
           customRow,
           //树列表展开使用AntDesignVue默认的加减图标 author:scott date:20210914
-          //expandIcon: slots.expandIcon ? null : expandIcon(),
           ...unref(getProps),
           ...unref(getHeaderProps),
           scroll: unref(getScrollRef),
@@ -259,7 +251,7 @@
         /*if (slots.expandedRowRender) {
           propsData = omit(propsData, 'scroll');
         }*/
-        //update-end---author:wangshuai ---date:20230214  for：[QQYUN-4237]代码生成 内嵌子表模式 没有滚动条------------ 
+        //update-end---author:wangshuai ---date:20230214  for：[QQYUN-4237]代码生成 内嵌子表模式 没有滚动条------------
 
         // update-begin--author:sunjianlei---date:220230630---for：【QQYUN-5571】自封装选择列，解决数据行选择卡顿问题
         // 自定义选择列，需要去掉原生的
@@ -370,7 +362,6 @@
 
       emit('register', tableAction, formActions);
 
-      
       return {
         tableElRef,
         getBindValues,

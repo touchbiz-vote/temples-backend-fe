@@ -107,15 +107,7 @@
       isUpdate: true,
     });
   }
-  /**
-   * 详情
-   */
-  async function handleDetail(record) {
-    openModal(true, {
-      record,
-      isUpdate: true,
-    });
-  }
+
   /**
    * 删除事件
    */

@@ -9,7 +9,6 @@
   </div>
 </template>
 <script lang="ts" name="monitor-datalog" setup>
-  import { ref } from 'vue';
   import { BasicTable } from '/@/components/Table';
   import DataLogCompareModal from './DataLogCompareModal.vue';
   const [registerModal, { openModal }] = useModal();
@@ -19,7 +18,6 @@
   import { useModal } from '/@/components/Modal';
   import { useListPage } from '/@/hooks/system/useListPage';
   const { createMessage } = useMessage();
-  const checkedRows = ref<Array<object | number>>([]);
 
   // 列表页面公共参数、方法
   const { tableContext } = useListPage({
@@ -32,11 +30,11 @@
         labelWidth: 120,
         schemas: searchFormSchema,
       },
-      actionColumn: false,
+      showActionColumn: false,
     },
   });
 
-  const [registerTable, { reload }, { rowSelection, selectedRowKeys, selectedRows }] = tableContext;
+  const [registerTable, { reload }, { rowSelection, selectedRows }] = tableContext;
 
   function handleCompare() {
     let obj = selectedRows.value;

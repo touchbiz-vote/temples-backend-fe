@@ -9,14 +9,12 @@
   </BasicModal>
 </template>
 <script lang="ts" setup>
-  import { ref, toRaw } from 'vue';
   import { BasicModal, useModalInner } from '/@/components/Modal';
   import { BasicTable, useTable, TableAction } from '/@/components/Table';
   import { recycleBincolumns } from '../dict.data';
   import { getRecycleBinList, putRecycleBin, deleteRecycleBin } from '../dict.api';
   // 声明Emits
   const emit = defineEmits(['success', 'register']);
-  const checkedKeys = ref<Array<string | number>>([]);
   const [registerModal] = useModalInner();
   //注册table数据
   const [registerTable, { reload }] = useTable({
@@ -52,18 +50,6 @@
    */
   async function handleDelete(record) {
     await deleteRecycleBin(record.id, reload);
-  }
-  /**
-   * 批量还原事件
-   */
-  function batchHandleRevert() {
-    handleRevert({ id: toRaw(checkedKeys.value).join(',') });
-  }
-  /**
-   * 批量删除事件
-   */
-  function batchHandleDelete() {
-    handleDelete({ id: toRaw(checkedKeys.value).join(',') });
   }
   //获取操作栏事件
   function getTableAction(record) {

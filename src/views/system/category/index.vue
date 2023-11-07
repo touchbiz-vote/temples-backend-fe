@@ -77,8 +77,7 @@
   });
 
   //注册table数据
-  const [registerTable, { reload, collapseAll, updateTableDataRecord, findTableDataRecord, getDataSource }, { rowSelection, selectedRowKeys }] =
-    tableContext;
+  const [registerTable, { reload, updateTableDataRecord, findTableDataRecord, getDataSource }, { rowSelection, selectedRowKeys }] = tableContext;
 
   /**
    * 新增事件
@@ -98,18 +97,6 @@
       isUpdate: true,
     });
   }
-
-  /**
-   * 详情
-   */
-  async function handleDetail(record) {
-    openModal(true, {
-      record,
-      isUpdate: true,
-      hideFooter: true,
-    });
-  }
-
   /**
    * 删除事件
    */

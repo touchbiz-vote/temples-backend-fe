@@ -21,17 +21,13 @@
   import { getInfo, getRedisInfo } from './redis.api';
   import dayjs from 'dayjs';
   import { columns } from './redis.data';
-  import { useMessage } from '/@/hooks/web/useMessage';
   import { useECharts } from '/@/hooks/web/useECharts';
 
-  const dataSource = ref([]);
   const chartRef = ref<HTMLDivElement | null>(null);
   const chartRef2 = ref<HTMLDivElement | null>(null);
-  const { setOptions, echarts } = useECharts(chartRef as Ref<HTMLDivElement>);
-  const { setOptions: setOptions2, echarts: echarts2 } = useECharts(chartRef2 as Ref<HTMLDivElement>);
-  const loading = ref(false);
+  const { setOptions } = useECharts(chartRef as Ref<HTMLDivElement>);
+  const { setOptions: setOptions2 } = useECharts(chartRef2 as Ref<HTMLDivElement>);
   let timer = null;
-  const { createMessage } = useMessage();
   const key = reactive({
     title: {
       text: 'Redis Key 实时数量（个）',
@@ -87,40 +83,12 @@
     ],
   });
 
-  const [registerTable, { reload }] = useTable({
+  const [registerTable, {}] = useTable({
     columns,
     showIndexColumn: false,
     pagination: false,
     bordered: true,
   });
-
-  // 获取一组数据中最大和最小的值
-  function getMaxAndMin(dataSource, field) {
-    let maxValue = null,
-      minValue = null;
-    dataSource.forEach((item) => {
-      let value = Number.parseInt(item[field]);
-      // max
-      if (maxValue == null) {
-        maxValue = value;
-      } else if (value > maxValue) {
-        maxValue = value;
-      }
-      // min
-      if (minValue == null) {
-        minValue = value;
-      } else if (value < minValue) {
-        minValue = value;
-      }
-    });
-    return [maxValue, minValue];
-  }
-
-  function loadRedisInfo() {
-    getInfo().then((res) => {
-      dataSource.value = res.result;
-    });
-  }
 
   function initCharts() {
     setOptions(memory);

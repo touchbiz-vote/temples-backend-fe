@@ -99,22 +99,19 @@
     </a-row>
     <template #footer>
       <a-space>
-        <!-- 预览/打印 -->
-        <a-button v-if="false" type="primary" preIcon="ant-design:eye" @click="preView"> 预览 </a-button>
         <!-- 保存/清空 -->
         <a-button type="primary" preIcon="ant-design:save" @click="save"> 保存 </a-button>
-        <!-- <a-popconfirm title="是否确认清空?" okType="danger" okText="确定清空" @confirm="clearPaper">
+        <a-popconfirm title="是否确认清空?" okType="danger" okText="确定清空" @confirm="clearPaper">
           <a-button type="danger">
             清空
             <a-icon type="close" />
           </a-button>
-        </a-popconfirm> -->
+        </a-popconfirm>
         <json-view :template="template" />
         <a-button @click="handleCancel">取消</a-button>
       </a-space>
     </template>
     <!-- 预览 -->
-    <print-preview ref="previewRef" />
   </BasicModal>
 </template>
 
@@ -122,7 +119,6 @@
   import { BasicModal, useModalInner } from '/@/components/Modal';
   import { hiprint } from 'vue-plugin-hiprint';
   import 'vue-plugin-hiprint/dist/print-lock.css';
-  import printPreview from './preview.vue';
   import jsonView from './json-view.vue';
   import { getById, saveOrUpdate } from './print.api';
   import { ref, computed, unref } from 'vue';
@@ -135,7 +131,6 @@
   export default defineComponent({
     components: {
       BasicModal,
-      printPreview,
       jsonView,
       JUpload,
     },
@@ -143,8 +138,6 @@
     setup(_, { emit }) {
       const { createMessage } = useMessage();
       const template = ref(null);
-      const previewRef = ref(null);
-
       // 模板选择
       // const mode = ref(0);
       // const modeList = ref([]);
@@ -185,7 +178,7 @@
       const scaleValue = ref(1);
       const scaleMax = ref(5);
       const scaleMin = ref(0.5);
-      const record = ref<Object>({
+      const record = ref<any>({
         id: null,
         template_name: '',
         template: '',
@@ -323,10 +316,7 @@
         paperPopVisible.value = false;
         setPaper('other', value);
       }
-      function preView() {
-        let { width } = curPaper.value;
-        previewRef.value.show(hiprintTemplate, JSON.parse(record.value.template || '{}'), width);
-      }
+
       function save() {
         if (!record.value.template_name) {
           createMessage.error('清输入模版名称');
@@ -360,7 +350,6 @@
         paperPopVisible,
         paperWidth,
         paperHeight,
-        previewRef,
         template,
         paperTypes,
         record,
@@ -370,7 +359,6 @@
         setPaper,
         otherPaper,
         changeScale,
-        preView,
         save,
         clearPaper,
         handleCancel,
