@@ -30,7 +30,9 @@
     </div>
 
     <div class="footer">
-      <a-button :disabled="tableData.length == 0 || currentTemplate == null" type="primary" preIcon="ant-design:printer-outlined" @click="handlePrint">打印</a-button>
+      <a-button :disabled="tableData.length == 0 || currentTemplate == null" type="primary" preIcon="ant-design:printer-outlined" @click="handlePrint"
+        >打印</a-button
+      >
     </div>
     <PrintModal :printData="tableData" @register="registerModal" />
   </div>

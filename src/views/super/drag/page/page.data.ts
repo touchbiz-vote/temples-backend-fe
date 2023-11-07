@@ -57,9 +57,9 @@ export const formSchema: FormSchema[] = [
           label: '门户设计器',
           value: '2',
           key: '2',
-        }
-      ]
-    }
+        },
+      ],
+    },
   },
   {
     label: '商品介绍',

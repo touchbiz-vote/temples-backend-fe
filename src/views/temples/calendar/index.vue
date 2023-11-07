@@ -1,6 +1,6 @@
 <template>
   <FullCalendar :options="calendarOptions" ref="calendarRef">
-    <template v-slot:eventContent="arg">
+    <template #eventContent="arg">
       <template v-if="arg.event.extendedProps.details.type == 1">
         <div class="event-item rituals-event-item">
           <span class="event-item--title" :disabled="arg.event.extendedProps?.details.status == 2">{{ arg.event.title }}</span>
@@ -33,8 +33,7 @@
   import ScheduleDetailModal from './components/ScheduleDetailModal.vue';
 
   //传递开始结束时间查询法schedule信息
-  import { getScheduleList, disable, enabled } from './schedule.api';
-  import calendar from '/@/router/routes/modules/calendar';
+  import { getScheduleList } from './schedule.api';
 
   const [registerPujaModal, { openModal: openPujaModal }] = useModal();
   const [registerScheduleDetailModal, { openModal: openScheduleDetailModal }] = useModal();
@@ -104,28 +103,6 @@
         }
       });
       calendarOptions.value.events = events;
-    });
-  }
-
-  function reload() {}
-
-  /**
-   * 详情法会页面
-   */
-  function handlePujaDetail(record) {
-    openPujaModal(true, {
-      record,
-      isUpdate: true,
-    });
-  }
-
-  /**
-   * 详情法会页面
-   */
-  function handleScheduleDetail(record) {
-    openScheduleDetailModal(true, {
-      record,
-      isUpdate: true,
     });
   }
 

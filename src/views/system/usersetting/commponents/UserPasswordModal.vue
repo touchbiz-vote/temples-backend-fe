@@ -25,27 +25,30 @@
   import { BasicModal, useModalInner } from '/@/components/Modal';
   import { Rule } from '/@/components/Form/index';
   import { updateUserPassword } from '../UserSetting.api';
-  import { useMessage } from "/@/hooks/web/useMessage";
-  import { useUserStore, useUserStoreWithOut } from "/@/store/modules/user";
+  import { useMessage } from '/@/hooks/web/useMessage';
+  import { useUserStore, useUserStoreWithOut } from '/@/store/modules/user';
 
   const $message = useMessage();
   //用户名
-  const username = ref<string>('')
+  const username = ref<string>('');
   const formRef = ref();
   const formState = reactive({
-    oldpassword:'',
-    password:'',
+    oldpassword: '',
+    password: '',
   });
   // 声明Emits
   const emit = defineEmits(['success', 'register']);
   //表单赋值
   const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
     setModalProps({ confirmLoading: false });
-    username.value = data.record.username
+    username.value = data.record.username;
   });
   const userStore = useUserStore();
   const validatorRules: Record<string, Rule[]> = {
-    password: [{ required: true, validator:checkPassword},{ pattern:/^(?=.*[0-9])(?=.*[a-zA-Z])(.{8,20})$/,message:'8-20位，需包含字母和数字'}],
+    password: [
+      { required: true, validator: checkPassword },
+      { pattern: /^(?=.*[0-9])(?=.*[a-zA-Z])(.{8,20})$/, message: '8-20位，需包含字母和数字' },
+    ],
     oldpassword: [{ required: true, message: '请输入原有密码' }],
   };
 
@@ -56,20 +59,20 @@
       setModalProps({ confirmLoading: true });
       //提交表单
       values.username = unref(username);
-      values.confirmpassword = values.password ;
-      await updateUserPassword(values).then((res) =>{
-        if(res.success){
+      values.confirmpassword = values.password;
+      await updateUserPassword(values).then((res) => {
+        if (res.success) {
           $message.createMessage.info({
-            content:'密码修改成功，请重新登录！3s后自动退出登录',
-            duration: 3
-          })
+            content: '密码修改成功，请重新登录！3s后自动退出登录',
+            duration: 3,
+          });
           //3s后返回登录页面
-          setTimeout(()=>{
+          setTimeout(() => {
             userStore.logout(true);
-          },3000)
+          }, 3000);
           //关闭弹窗
           closeModal();
-        }else{
+        } else {
           $message.createMessage.warn(res.message);
         }
       });
@@ -82,7 +85,7 @@
    * 验证新密码是否为空
    */
   function checkPassword(_rule: Rule, value: string) {
-    if(value === ''){
+    if (value === '') {
       return Promise.reject('请输入新密码');
     }
     return Promise.resolve();
@@ -106,9 +109,9 @@
     padding-top: 10px;
     padding-bottom: 10px;
   }
-  .forget{
+  .forget {
     float: right;
-    color: #1e88e5!important;
-    cursor: pointer
+    color: #1e88e5 !important;
+    cursor: pointer;
   }
 </style>

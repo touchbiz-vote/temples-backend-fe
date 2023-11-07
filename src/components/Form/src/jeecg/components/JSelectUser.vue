@@ -1,8 +1,8 @@
 <!--用户选择组件-->
 <template>
   <div>
-    <JSelectBiz @change="handleChange" @handleOpen="handleOpen" :loading="loadingEcho" v-bind="attrs"></JSelectBiz>
-    <UserSelectModal :rowKey="rowKey" @register="regModal" @getSelectResult="setValue" v-bind="getBindValue"></UserSelectModal>
+    <JSelectBiz @change="handleChange" @handleOpen="handleOpen" :loading="loadingEcho" v-bind="attrs" />
+    <UserSelectModal :rowKey="rowKey" @register="regModal" @getSelectResult="setValue" v-bind="getBindValue" />
   </div>
 </template>
 <script lang="ts">
@@ -129,7 +129,7 @@
         emit('update:value', values);
       }
       //update-end---author:wangshuai ---date:20230711  for：换成异步组件加载，否则会影响到其他页面描述------------
-      
+
       return {
         state,
         attrs,

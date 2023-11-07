@@ -1,4 +1,4 @@
-import { LocationQueryValue } from "vue-router";
+import { LocationQueryValue } from 'vue-router';
 
 export function convertKeysToCamelCase(obj) {
   if (obj === null || typeof obj !== 'object') {

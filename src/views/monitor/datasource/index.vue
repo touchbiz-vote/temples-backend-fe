@@ -60,9 +60,4 @@
   });
 
   const [registerTable, { reload }, { selectedRowKeys }] = tableContext;
-
-
-
-
-
 </script>

@@ -38,6 +38,9 @@ export default defineComponent({
       vxeDataSource: data.vxeDataSource,
     };
   },
+  created() {
+    this.instanceRef = this;
+  },
   render() {
     return h(
       'div',
@@ -70,8 +73,5 @@ export default defineComponent({
         }
       )
     );
-  },
-  created() {
-    this.instanceRef = this;
   },
 });

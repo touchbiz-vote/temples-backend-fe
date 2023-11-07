@@ -8,7 +8,6 @@
           <a @click="loadDate">立即刷新</a>
         </div>
       </template>
-
     </BasicTable>
   </div>
 </template>

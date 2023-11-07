@@ -21,7 +21,7 @@ import JVxeTextareaCell from './components/cells/JVxeTextareaCell.vue';
 const componentMap = new Map<JVxeTypes | string, JVxeVueComponent>();
 
 /** span 组件结尾 */
-export const spanEnds: string = ':span';
+export const spanEnds = ':span';
 
 /** 定义不能用于注册的关键字 */
 export const excludeKeywords: Array<JVxeTypes> = [

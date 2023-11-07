@@ -94,10 +94,6 @@
     },
   });
 
-  function sort(e) {
-    console.log(e);
-  }
-
   async function fillData(list) {
     for (const item of list) {
       const res = await fetchDataWithCache('t_biz_type', item.biz_type_id);

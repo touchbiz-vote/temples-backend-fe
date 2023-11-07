@@ -89,4 +89,3 @@ export const disable = (product, handleSuccess) => {
     handleSuccess();
   });
 };
-

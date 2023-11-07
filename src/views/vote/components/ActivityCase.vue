@@ -125,19 +125,6 @@
     checkedKeys.value = selectedRowKeys;
   }
 
-  /**
-   * 批量删除事件
-   */
-  function batchHandleDelete() {
-    // createConfirm({
-    //   iconType: 'warning',
-    //   title: '删除',
-    //   content: '确定要永久删除吗？删除后将不可恢复！',
-    //   onOk: () => batchDelete(toRaw(unref(checkedKeys)).join(','), reload),
-    //   onCancel() {},
-    // });
-  }
-
   function loadData(params) {
     return getList(tableId, params);
   }

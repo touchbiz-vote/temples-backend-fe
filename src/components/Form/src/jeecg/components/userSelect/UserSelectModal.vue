@@ -35,7 +35,14 @@
         <a-tabs v-model:activeKey="myActiveKey" :centered="true" @change="onChangeTab">
           <!-- 所有用户 -->
           <a-tab-pane key="1" tab="全部" forceRender>
-            <user-list :excludeUserIdList="excludeUserIdList" :dataList="userDataList" :selectedIdList="selectedIdList" depart @selected="onSelectUser" @unSelect="unSelectUser" />
+            <user-list
+              :excludeUserIdList="excludeUserIdList"
+              :dataList="userDataList"
+              :selectedIdList="selectedIdList"
+              depart
+              @selected="onSelectUser"
+              @unSelect="unSelectUser"
+            />
           </a-tab-pane>
 
           <!-- 部门用户 -->
@@ -52,7 +59,13 @@
 
           <!-- 角色用户 -->
           <a-tab-pane key="3" tab="按角色" forceRender>
-            <role-user-list :excludeUserIdList="excludeUserIdList" :searchText="searchText" :selectedIdList="selectedIdList" @selected="onSelectUser" @unSelect="unSelectUser" />
+            <role-user-list
+              :excludeUserIdList="excludeUserIdList"
+              :searchText="searchText"
+              :selectedIdList="selectedIdList"
+              @selected="onSelectUser"
+              @unSelect="unSelectUser"
+            />
           </a-tab-pane>
         </a-tabs>
       </div>
@@ -145,9 +158,9 @@
         } else {
           selectedUserList.value = [];
         }
-        if(data.excludeUserIdList){
+        if (data.excludeUserIdList) {
           excludeUserIdList.value = data.excludeUserIdList;
-        }else{
+        } else {
           excludeUserIdList.value = [];
         }
         //如果排除我自己，直接excludeUserIdList.push排除即可
@@ -292,7 +305,7 @@
         selectedIdList,
         onSelectUser,
         unSelectUser,
-        excludeUserIdList
+        excludeUserIdList,
       };
     },
   };

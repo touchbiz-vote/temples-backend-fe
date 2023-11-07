@@ -75,7 +75,7 @@
         // 是否有序号列
         let hasIndexCol = false;
         // 是否有选择列
-        let hasSelection = table.getRowSelection() && hasRowSummary
+        let hasSelection = table.getRowSelection() && hasRowSummary;
 
         if (index !== -1) {
           if (hasIndexSummary) {
@@ -95,7 +95,7 @@
             key: 'selectionKey',
             align: 'center',
             ...(isFixed ? { fixed: 'left' } : {}),
-            customRender: ({ record }) => hasIndexCol ? '' : record[SUMMARY_ROW_KEY],
+            customRender: ({ record }) => (hasIndexCol ? '' : record[SUMMARY_ROW_KEY]),
           });
         }
 

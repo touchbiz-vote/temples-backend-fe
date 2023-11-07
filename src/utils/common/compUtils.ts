@@ -15,9 +15,9 @@ export const getFileAccessHttpUrl = (fileUrl, prefix = 'http') => {
   try {
     if (fileUrl && fileUrl.length > 0 && !fileUrl.startsWith(prefix)) {
       //判断是否是数组格式
-      let isArray = fileUrl.indexOf('[') != -1;
+      const isArray = fileUrl.indexOf('[') != -1;
       if (!isArray) {
-        let prefix = `${baseApiUrl}/sys/common/static/`;
+        const prefix = `${baseApiUrl}/sys/common/static/`;
         // 判断是否已包含前缀
         if (!fileUrl.startsWith(prefix)) {
           result = `${prefix}${fileUrl}`;
@@ -32,7 +32,7 @@ export const getFileAccessHttpUrl = (fileUrl, prefix = 'http') => {
  * 触发 window.resize
  */
 export function triggerWindowResizeEvent() {
-  let event: any = document.createEvent('HTMLEvents');
+  const event: any = document.createEvent('HTMLEvents');
   event.initEvent('resize', true, true);
   event.eventType = 'message';
   window.dispatchEvent(event);
@@ -42,7 +42,7 @@ export function triggerWindowResizeEvent() {
  * 获取随机数
  *  @param length 数字位数
  */
-export const getRandom = (length: number = 1) => {
+export const getRandom = (length = 1) => {
   return '-' + parseInt(String(Math.random() * 10000 + 1), length);
 };
 
@@ -60,7 +60,7 @@ export function randomString(length: number, chats?: string) {
   }
   let str = '';
   for (let i = 0; i < length; i++) {
-    let num = random(0, chats.length - 1);
+    const num = random(0, chats.length - 1);
     str += chats[num];
   }
   return str;
@@ -134,7 +134,7 @@ export const toTree = (array, startPid, currentDept, opt) => {
  * @param fieldKeys 要计算合计的列字段
  */
 export function mapTableTotalSummary(tableData: Recordable[], fieldKeys: string[]) {
-  let totals: any = { _row: '合计', _index: '合计' };
+  const totals: any = { _row: '合计', _index: '合计' };
   fieldKeys.forEach((key) => {
     totals[key] = tableData.reduce((prev, next) => {
       prev += next[key];
@@ -158,7 +158,7 @@ export function mapTableTotalSummary(tableData: Recordable[], fieldKeys: string[
 export function simpleDebounce(fn, delay = 100) {
   let timer: any | null = null;
   return function () {
-    let args = arguments;
+    const args = arguments;
     if (timer) {
       clearTimeout(timer);
     }
@@ -213,8 +213,8 @@ export function dateFormat(date, block) {
  * 目前使用的地方：JVxeTable Span模式
  */
 export function getEventPath(event) {
-  let target = event.target;
-  let path = (event.composedPath && event.composedPath()) || event.path;
+  const target = event.target;
+  const path = (event.composedPath && event.composedPath()) || event.path;
 
   if (path != null) {
     return path.indexOf(window) < 0 ? path.concat(window) : path;
@@ -224,7 +224,7 @@ export function getEventPath(event) {
     return [window];
   }
 
-  let getParents = (node, memo) => {
+  const getParents = (node, memo) => {
     const parentNode = node.parentNode;
 
     if (!parentNode) {
@@ -244,7 +244,7 @@ export function getEventPath(event) {
  * @returns {boolean} 成功 push 返回 true，不处理返回 false
  */
 export function pushIfNotExist(array, value, key?) {
-  for (let item of array) {
+  for (const item of array) {
     if (key && item[key] === value[key]) {
       return false;
     } else if (item === value) {
@@ -264,7 +264,7 @@ export function filterObj(obj) {
     return;
   }
 
-  for (let key in obj) {
+  for (const key in obj) {
     if (obj.hasOwnProperty(key) && (obj[key] == null || obj[key] == undefined || obj[key] === '')) {
       delete obj[key];
     }
@@ -288,13 +288,13 @@ export function underLine2CamelCase(string: string) {
  */
 export function findTree(treeList: any[], fn: Fn, childrenKey = 'children') {
   for (let i = 0; i < treeList.length; i++) {
-    let item = treeList[i];
+    const item = treeList[i];
     if (fn(item, i, treeList)) {
       return item;
     }
-    let children = item[childrenKey];
+    const children = item[childrenKey];
     if (isArray(children)) {
-      let findResult = findTree(children, fn, childrenKey);
+      const findResult = findTree(children, fn, childrenKey);
       if (findResult) {
         return findResult;
       }
@@ -331,37 +331,37 @@ export function stringIsNull(str) {
  * @param node
  */
 export function getAutoScrollContainer(node: HTMLElement) {
-  let element: Nullable<HTMLElement> = node
+  let element: Nullable<HTMLElement> = node;
   while (element != null) {
     if (element.classList.contains('scrollbar__view')) {
       // 判断是否有滚动条
       if (element.clientHeight < element.scrollHeight) {
         // 有滚动条时，挂载到父级，解决滚动问题
-        return node.parentElement
+        return node.parentElement;
       } else {
         // 无滚动条时，挂载到body上，解决下拉框遮盖问题
-        return document.body
+        return document.body;
       }
     } else {
-      element = element.parentElement
+      element = element.parentElement;
     }
   }
   // 不在弹窗内，走默认逻辑
-  return node.parentElement
+  return node.parentElement;
 }
 
 /**
  * 判断子菜单是否全部隐藏
  * @param menuTreeItem
  */
-export  function checkChildrenHidden(menuTreeItem){
+export function checkChildrenHidden(menuTreeItem) {
   //是否是聚合路由
-  let alwaysShow=menuTreeItem.alwaysShow;
-  if(alwaysShow){
+  const alwaysShow = menuTreeItem.alwaysShow;
+  if (alwaysShow) {
     return false;
   }
-  if(!menuTreeItem.children){
-    return false
+  if (!menuTreeItem.children) {
+    return false;
   }
   return menuTreeItem.children?.find((item) => item.hideMenu == false) != null;
 }

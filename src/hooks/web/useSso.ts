@@ -7,14 +7,14 @@ import { useUserStore } from '/@/store/modules/user';
 const globSetting = useGlobSetting();
 const openSso = globSetting.openSso;
 export function useSso() {
-  let locationUrl = 'http://' + window.location.host + '/';
+  const locationUrl = 'http://' + window.location.host + '/';
   /**
    * 单点登录
    */
   async function ssoLogin() {
     if (openSso == 'true') {
-      let token = getToken();
-      let ticket = getUrlParam('ticket');
+      const token = getToken();
+      const ticket = getUrlParam('ticket');
       if (!token) {
         if (ticket) {
           await validateCasLogin({

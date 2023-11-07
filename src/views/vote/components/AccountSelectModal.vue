@@ -7,7 +7,7 @@
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent, ref, unref } from 'vue';
+  import { defineComponent, unref } from 'vue';
   import { BasicModal, useModalInner } from '/@/components/Modal';
   import { searchAccount } from '../vote.api';
   import { useSelectBiz } from '/@/components/Form/src/jeecg/hooks/useSelectBiz';
@@ -28,7 +28,7 @@
       ...selectProps,
     },
     emits: ['register', 'getSelectResult'],
-    setup(props, { emit, refs }) {
+    setup(props, { emit }) {
       //注册弹框
       const [register, { closeModal }] = useModalInner();
       const attrs = useAttrs();

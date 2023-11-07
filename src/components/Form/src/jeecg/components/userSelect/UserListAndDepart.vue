@@ -11,13 +11,18 @@
           :selectedKeys="selectedKeys"
           v-model:expandedKeys="expandedKeys"
           @select="onSelect"
-        >
-        </a-tree>
+        />
       </div>
     </a-col>
     <a-col :span="12" style="padding-left: 10px">
       <div :style="containerStyle">
-        <user-list :excludeUserIdList="excludeUserIdList" :dataList="userDataList" :selectedIdList="selectedIdList" @selected="onSelectUser" @unSelect="unSelectUser" />
+        <user-list
+          :excludeUserIdList="excludeUserIdList"
+          :dataList="userDataList"
+          :selectedIdList="selectedIdList"
+          @selected="onSelectUser"
+          @unSelect="unSelectUser"
+        />
       </div>
     </a-col>
   </a-row>
@@ -42,10 +47,10 @@
         type: Array,
         default: () => [],
       },
-      excludeUserIdList:{
+      excludeUserIdList: {
         type: Array,
         default: () => [],
-      }
+      },
     },
     emits: ['loaded', 'selected', 'unSelect'],
     setup(props, { emit }) {

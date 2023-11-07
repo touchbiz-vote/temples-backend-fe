@@ -13,7 +13,7 @@
   import { ref, watch } from 'vue';
   import { Form } from 'ant-design-vue';
   import { propTypes } from '/@/utils/propTypes';
-  
+
   export default {
     name: 'JRangeNumber',
     props: {
@@ -24,7 +24,7 @@
       const beginValue = ref('');
       const endValue = ref('');
       const formItemContext = Form.useInjectFormItemContext();
-      
+
       function handleChangeBegin(e) {
         beginValue.value = e.target.value;
         emitArray();
@@ -56,7 +56,8 @@
             beginValue.value = '';
             endValue.value = '';
           }
-        }, {immediate: true}
+        },
+        { immediate: true }
       );
 
       return {

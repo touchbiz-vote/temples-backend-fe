@@ -118,19 +118,19 @@
           // handle date type
           if (defaultValue && dateItemType.includes(component)) {
             //update-begin---author:wangshuai ---date:20230410  for：【issues/435】代码生成的日期控件赋默认值报错------------
-            let valueFormat:string = "";
-            if(componentProps){
+            let valueFormat = '';
+            if (componentProps) {
               valueFormat = componentProps?.valueFormat;
             }
-            if(!valueFormat){
-              console.warn("未配置valueFormat,可能导致格式化错误！");
+            if (!valueFormat) {
+              console.warn('未配置valueFormat,可能导致格式化错误！');
             }
             //update-end---author:wangshuai ---date:20230410  for：【issues/435】代码生成的日期控件赋默认值报错------------
             if (!Array.isArray(defaultValue)) {
               //update-begin---author:wangshuai ---date:20221124  for：[issues/215]列表页查询框（日期选择框）设置初始时间，一进入页面时，后台报日期转换类型错误的------------
-              if(valueFormat){
+              if (valueFormat) {
                 schema.defaultValue = dateUtil(defaultValue).format(valueFormat);
-              }else{
+              } else {
                 schema.defaultValue = dateUtil(defaultValue);
               }
               //update-end---author:wangshuai ---date:20221124  for：[issues/215]列表页查询框（日期选择框）设置初始时间，一进入页面时，后台报日期转换类型错误的------------
@@ -138,9 +138,9 @@
               const def: dayjs.Dayjs[] = [];
               defaultValue.forEach((item) => {
                 //update-begin---author:wangshuai ---date:20221124  for：[issues/215]列表页查询框（日期选择框）设置初始时间，一进入页面时，后台报日期转换类型错误的------------
-                if(valueFormat){
+                if (valueFormat) {
                   def.push(dateUtil(item).format(valueFormat));
-                }else{
+                } else {
                   def.push(dateUtil(item));
                 }
                 //update-end---author:wangshuai ---date:20221124  for：[issues/215]列表页查询框（日期选择框）设置初始时间，一进入页面时，后台报日期转换类型错误的------------
@@ -256,7 +256,7 @@
         if (!validateTrigger || validateTrigger === 'change') {
           validateFields([key]).catch((_) => {});
         }
-        if(props.autoSearch === true){
+        if (props.autoSearch === true) {
           onFormSubmitWhenChange();
         }
       }
@@ -351,7 +351,7 @@
       }
     }
     /*【美化表单】form的字体改小一号*/
-    .ant-form-item-label > label{
+    .ant-form-item-label > label {
       font-size: 13px;
     }
     .ant-form-item .ant-select {
@@ -367,7 +367,7 @@
       font-size: 13px;
     }
     /*【美化表单】form的字体改小一号*/
-    
+
     .ant-form-explain {
       font-size: 14px;
     }

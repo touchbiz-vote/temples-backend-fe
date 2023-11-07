@@ -1,8 +1,8 @@
 <!--用户选择组件-->
 <template>
   <div>
-    <JSelectBiz @change="handleChange" @handleOpen="handleOpen" :loading="loadingEcho" v-bind="attrs"></JSelectBiz>
-    <UserSelectByDepModal :rowKey="rowKey" @register="regModal" @getSelectResult="setValue" v-bind="getBindValue"></UserSelectByDepModal>
+    <JSelectBiz @change="handleChange" @handleOpen="handleOpen" :loading="loadingEcho" v-bind="attrs" />
+    <UserSelectByDepModal :rowKey="rowKey" @register="regModal" @getSelectResult="setValue" v-bind="getBindValue" />
   </div>
 </template>
 <script lang="ts">

@@ -28,7 +28,6 @@
   import { defineComponent, ref, watch } from 'vue';
   import { BasicModal, useModalInner } from '/@/components/Modal';
   import { columns } from '../schedule.data';
-  import { useAttrs } from '/@/hooks/core/useAttrs';
   import { selectProps } from '/@/components/Form/src/jeecg/props/props';
   import { useListPage } from '/@/hooks/system/useListPage';
   import { disable, enabled } from '../schedule.api';
@@ -48,7 +47,7 @@
       ...selectProps,
     },
     emits: ['register', 'success'],
-    setup(props, { emit, refs }) {
+    setup(props, { emit }) {
       // 列表页面公共参数、方法
       const { tableContext } = useListPage({
         tableProps: {
@@ -105,7 +104,6 @@
       const [register, { closeModal }] = useModalInner(({ record }) => {
         schedule.value = record;
       });
-      const attrs = useAttrs();
 
       //查询form
       const formConfig = {
@@ -118,21 +116,6 @@
           xxl: 12,
         },
       };
-
-      async function fillData(list) {
-        for (const order of list) {
-          const orderInfo = JSON.parse(order.orderInfo);
-          console.log(orderInfo);
-          for (const item of orderInfo) {
-            if (item.name === 'name') {
-              order.name = item.value;
-            }
-            if (item.name === 'name2') {
-              order.name2 = item.value;
-            }
-          }
-        }
-      }
 
       /**
        * 确定选择

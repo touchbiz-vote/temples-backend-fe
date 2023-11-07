@@ -4,7 +4,7 @@
   </BasicModal>
 </template>
 <script lang="ts" setup name="ProductModal">
-  import { ref, computed, unref, defineProps } from 'vue';
+  import { ref, computed, unref } from 'vue';
   import { BasicModal, useModalInner } from '/@/components/Modal';
   import { BasicForm, useForm } from '/@/components/Form/index';
   import { formSchema } from '../tablets.data';
@@ -46,7 +46,7 @@
   //设置标题
   const title = computed(() => (!unref(isUpdate) ? '新增牌位' : '编辑牌位'));
   //表单提交事件
-  async function handleSubmit(v) {
+  async function handleSubmit() {
     try {
       let values = await validate();
       setModalProps({ confirmLoading: true });
@@ -61,4 +61,3 @@
     }
   }
 </script>
-../tablets.data

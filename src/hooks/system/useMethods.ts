@@ -29,7 +29,7 @@ export function useMethods() {
     if (!name || typeof name != 'string') {
       name = '导出文件';
     }
-    let blobOptions = { type: 'application/vnd.ms-excel' };
+    const blobOptions = { type: 'application/vnd.ms-excel' };
     let fileSuffix = '.xls';
     if (isXlsx === true) {
       blobOptions['type'] = XLSX_MIME_TYPE;
@@ -38,8 +38,8 @@ export function useMethods() {
     if (typeof window.navigator.msSaveBlob !== 'undefined') {
       window.navigator.msSaveBlob(new Blob([data], blobOptions), name + fileSuffix);
     } else {
-      let url = window.URL.createObjectURL(new Blob([data], blobOptions));
-      let link = document.createElement('a');
+      const url = window.URL.createObjectURL(new Blob([data], blobOptions));
+      const link = document.createElement('a');
       link.style.display = 'none';
       link.href = url;
       link.setAttribute('download', name + fileSuffix);
@@ -60,11 +60,11 @@ export function useMethods() {
     const isReturn = (fileInfo) => {
       try {
         if (fileInfo.code === 201) {
-          let {
+          const {
             message,
             result: { msg, fileUrl, fileName },
           } = fileInfo;
-          let href = glob.uploadUrl + fileUrl;
+          const href = glob.uploadUrl + fileUrl;
           createWarningModal({
             title: message,
             centered: false,

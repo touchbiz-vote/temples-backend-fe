@@ -100,7 +100,7 @@ export function doLogout() {
 }
 
 export function getCodeInfo(currdatetime) {
-  let url = Api.getInputCode + `/${currdatetime}`;
+  const url = Api.getInputCode + `/${currdatetime}`;
   return defHttp.get({ url: url });
 }
 /**
@@ -174,7 +174,7 @@ export function setThirdCaptcha(params) {
  * 获取登录二维码信息
  */
 export function getLoginQrcode() {
-  let url = Api.getLoginQrcode;
+  const url = Api.getLoginQrcode;
   return defHttp.get({ url: url });
 }
 
@@ -182,7 +182,7 @@ export function getLoginQrcode() {
  * 监控扫码状态
  */
 export function getQrcodeToken(params) {
-  let url = Api.getQrcodeToken;
+  const url = Api.getQrcodeToken;
   return defHttp.get({ url: url, params });
 }
 
@@ -190,6 +190,6 @@ export function getQrcodeToken(params) {
  * SSO登录校验
  */
 export async function validateCasLogin(params) {
-  let url = Api.validateCasLogin;
+  const url = Api.validateCasLogin;
   return defHttp.get({ url: url, params });
 }

@@ -14,7 +14,7 @@
   import { saveOrUpdate } from '../page.api';
   import { removeCacheByDynKey } from '/@/utils/auth';
   import { JDragConfigEnum } from '/@/enums/jeecgEnum';
-  import { encryptByBase64,decodeByBase64 } from '/@/utils/cipher.ts';
+  import { encryptByBase64, decodeByBase64 } from '/@/utils/cipher.ts';
   // 声明Emits
   const emit = defineEmits(['success', 'register']);
   const isUpdate = ref(true);
@@ -30,11 +30,11 @@
     setModalProps({ confirmLoading: false });
     isUpdate.value = !!data?.isUpdate;
     if (unref(isUpdate)) {
-			let obj = {...data.record}
-			//解密
-			if(obj.protectionCode && obj.protectionCode.length>0){
-				 obj.protectionCode = decodeByBase64( obj.protectionCode)
-			}
+      let obj = { ...data.record };
+      //解密
+      if (obj.protectionCode && obj.protectionCode.length > 0) {
+        obj.protectionCode = decodeByBase64(obj.protectionCode);
+      }
       //表单赋值
       await setFieldsValue({
         ...obj,
@@ -53,9 +53,9 @@
       const values = await validate();
       setModalProps({ confirmLoading: true });
       //加密
-      if(values.protectionCode){
-        values.protectionCode = encryptByBase64(values.protectionCode)   
-			}
+      if (values.protectionCode) {
+        values.protectionCode = encryptByBase64(values.protectionCode);
+      }
       //提交表单
       const res = await saveOrUpdate(values, isUpdate.value);
       //编辑后，将缓存中的密码清除掉

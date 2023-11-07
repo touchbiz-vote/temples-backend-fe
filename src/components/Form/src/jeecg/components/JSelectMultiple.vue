@@ -97,13 +97,16 @@
       );
 
       //适用于 动态改变下拉选项的操作
-      watch(()=>props.options, ()=>{
-        if (props.dictCode) {
-          // nothing to do
-        } else {
-          dictOptions.value = props.options;
+      watch(
+        () => props.options,
+        () => {
+          if (props.dictCode) {
+            // nothing to do
+          } else {
+            dictOptions.value = props.options;
+          }
         }
-      });
+      );
 
       function onChange(selectedValue) {
         if (props.triggerChange) {

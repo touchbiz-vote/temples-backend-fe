@@ -47,7 +47,7 @@
         default: (node) => node.parentNode,
       },
     },
-    emits: ['change', 'update:value','update:area','update:city','update:province'],
+    emits: ['change', 'update:value', 'update:area', 'update:city', 'update:province'],
     setup(props, { emit, refs }) {
       const emitData = ref<any[]>([]);
       //下拉框的选择值

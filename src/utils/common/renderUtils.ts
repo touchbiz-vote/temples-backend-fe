@@ -15,7 +15,7 @@ const render = {
    */
   renderAvatar: ({ record }) => {
     if (record.avatar) {
-      let avatarList = record.avatar.split(',');
+      const avatarList = record.avatar.split(',');
       return h(
         'span',
         avatarList.map((item) => {
@@ -45,8 +45,8 @@ const render = {
    */
   renderDict: (v, code, renderTag = false) => {
     let text = '';
-    let array = getDictItemsByCode(code) || [];
-    let obj = array.filter((item) => {
+    const array = getDictItemsByCode(code) || [];
+    const obj = array.filter((item) => {
       return item.value == v;
     });
     if (obj.length > 0) {
@@ -69,7 +69,7 @@ const render = {
         }
       );
     }
-    let avatarList = text.split(',');
+    const avatarList = text.split(',');
     return h(
       'span',
       avatarList.map((item) => {
@@ -115,7 +115,7 @@ const render = {
   renderDictNative: (v, array, renderTag = false) => {
     let text = '';
     let color = '';
-    let obj = array.filter((item) => {
+    const obj = array.filter((item) => {
       return item.value == v;
     });
     if (obj.length > 0) {
@@ -142,7 +142,7 @@ const render = {
     return text ? filterMultiDictText(arr, text) : '';
   },
   renderCategoryTree: (text, code) => {
-    let array = getDictItemsByCode(code);
+    const array = getDictItemsByCode(code);
     return filterMultiDictText(array, text);
   },
   renderTag(text, color) {

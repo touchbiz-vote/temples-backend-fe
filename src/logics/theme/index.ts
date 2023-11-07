@@ -11,7 +11,7 @@ export async function changeTheme(color: string) {
     color,
   });
 
-  let res = await replaceStyleVariables({
+  const res = await replaceStyleVariables({
     colorVariables: [...getThemeColors(color), ...colors],
   });
   fixDark();
@@ -20,7 +20,7 @@ export async function changeTheme(color: string) {
 
 // 【LOWCOD-2262】修复黑暗模式下切换皮肤无效的问题
 async function fixDark() {
-  let el = document.getElementById('__VITE_PLUGIN_THEME__');
+  const el = document.getElementById('__VITE_PLUGIN_THEME__');
   if (el) {
     el.innerHTML = el.innerHTML.replace(/\\["']dark\\["']/g, `'dark'`);
   }

@@ -28,7 +28,7 @@
   import { passwordChange } from '/@/api/sys/user';
 
   export default defineComponent({
-    name: 'step2',
+    name: 'Step2',
     components: {
       Button,
       Form,

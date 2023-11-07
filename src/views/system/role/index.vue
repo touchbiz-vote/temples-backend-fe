@@ -8,14 +8,14 @@
         <template #overlay>
           <a-menu>
             <a-menu-item key="1" @click="batchHandleDelete">
-              <Icon icon="ant-design:delete-outlined"></Icon>
+              <Icon icon="ant-design:delete-outlined" />
               删除
             </a-menu-item>
           </a-menu>
         </template>
         <a-button
           >批量操作
-          <Icon icon="mdi:chevron-down"></Icon>
+          <Icon icon="mdi:chevron-down" />
         </a-button>
       </a-dropdown>
     </template>
@@ -28,7 +28,7 @@
   <!--角色编辑抽屉-->
   <RoleDrawer @register="registerDrawer" @success="reload" :showFooter="showFooter" />
   <!--角色详情-->
-  <RoleDesc @register="registerDesc"></RoleDesc>
+  <RoleDesc @register="registerDesc" />
   <!--角色菜单授权抽屉-->
   <RolePermissionDrawer @register="rolePermissionDrawer" />
   <!--角色首页配置-->

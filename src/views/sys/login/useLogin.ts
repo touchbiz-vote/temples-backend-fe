@@ -152,7 +152,7 @@ function checkUsername(rule, value, callback) {
 }
 async function checkPhone(rule, value, callback) {
   const { t } = useI18n();
-  var reg = /^1[3456789]\d{9}$/;
+  const reg = /^1[3456789]\d{9}$/;
   if (!reg.test(value)) {
     return Promise.reject(new Error('请输入正确手机号'));
   } else {

@@ -104,7 +104,7 @@
     },
   });
 
-  const [registerTable, { reload }, { rowSelection, selectedRowKeys }] = tableContext;
+  const [registerTable, { reload }] = tableContext;
 
   /**
    * 批量删除事件
@@ -222,18 +222,6 @@
       isClone: true,
     });
   }
-
-  /**
-   * 详情页面
-   */
-  function handleDetail(record) {
-    isDisabled.value = true;
-    openModal(true, {
-      record,
-      isUpdate: true,
-    });
-  }
-
   /**
    * 删除事件
    */

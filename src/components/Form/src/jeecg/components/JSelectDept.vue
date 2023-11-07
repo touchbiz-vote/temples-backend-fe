@@ -1,7 +1,7 @@
 <!--部门选择组件-->
 <template>
   <div>
-    <JSelectBiz @handleOpen="handleOpen" :loading="loadingEcho" v-bind="attrs" @change="handleChange"/>
+    <JSelectBiz @handleOpen="handleOpen" :loading="loadingEcho" v-bind="attrs" @change="handleChange" />
     <DeptSelectModal @register="regModal" @getSelectResult="setValue" v-bind="getBindValue" />
   </div>
 </template>
@@ -79,7 +79,7 @@
        * 监听selectOptions变化
        */
       watch(selectOptions, () => {
-        if (selectOptions) {
+        if (selectOptions.value) {
           emit('select', toRaw(unref(selectOptions)), toRaw(unref(selectValues)));
         }
       });
@@ -129,7 +129,7 @@
         emit('update:value', values);
       }
       //update-end---author:wangshuai ---date:20230406  for：【issues/397】在表单中使用v-model:value绑定JSelectDept组件时无法清除已选择的数据------------
-      
+
       return {
         state,
         attrs,
@@ -141,7 +141,7 @@
         regModal,
         setValue,
         handleOpen,
-        handleChange
+        handleChange,
       };
     },
   });

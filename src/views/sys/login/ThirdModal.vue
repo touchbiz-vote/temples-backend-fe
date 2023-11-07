@@ -25,14 +25,14 @@
       <FormItem class="enter-x">
         <a-input size="large" placeholder="请输入手机号" v-model:value="thirdPhone" class="fix-auto-fill">
           <template #prefix>
-            <Icon icon="ant-design:mobile-outlined" :style="{ color: 'rgba(0,0,0,.25)' }"></Icon>
+            <Icon icon="ant-design:mobile-outlined" :style="{ color: 'rgba(0,0,0,.25)' }" />
           </template>
         </a-input>
       </FormItem>
       <FormItem name="sms" class="enter-x">
         <CountdownInput size="large" class="fix-auto-fill" v-model:value="thirdCaptcha" placeholder="请输入验证码" :sendCodeApi="sendCodeApi">
           <template #prefix>
-            <Icon icon="ant-design:mail-outlined" :style="{ color: 'rgba(0,0,0,.25)' }"></Icon>
+            <Icon icon="ant-design:mail-outlined" :style="{ color: 'rgba(0,0,0,.25)' }" />
           </template>
         </CountdownInput>
       </FormItem>

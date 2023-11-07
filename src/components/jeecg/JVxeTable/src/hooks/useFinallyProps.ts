@@ -13,8 +13,8 @@ export function useFinallyProps(props: JVxeTableProps, data: JVxeDataProps, meth
   const vxeEditRules = computed(() => merge({}, props.editRules, data.innerEditRules));
   // vxe 最终 events
   const vxeEvents = computed(() => {
-    let listeners = { ...unref(attrs) };
-    let events = {
+    const listeners = { ...unref(attrs) };
+    const events = {
       onScroll: methods.handleVxeScroll,
       onCellClick: methods.handleCellClick,
       onEditClosed: methods.handleEditClosed,

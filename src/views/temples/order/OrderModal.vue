@@ -1,7 +1,5 @@
 <template>
-  <div>
-    
-  </div>
+  <div> </div>
   <BasicModal v-bind="$attrs" @register="registerModal" :title="title" @ok="handleSubmit" width="40%">
     <BasicForm @register="registerForm" :disabled="isDisabled" />
   </BasicModal>
@@ -11,7 +9,6 @@
   import { BasicModal, useModalInner } from '/@/components/Modal';
   import { BasicForm, useForm } from '/@/components/Form/index';
   import { formSchema } from './order.data';
-  import { saveOrUpdateDemo, getDemoById } from './order.api';
   // 声明Emits
   const emit = defineEmits(['register', 'success']);
   const isUpdate = ref(true);
@@ -35,13 +32,13 @@
   const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
     //重置表单
     await resetFields();
-    setModalProps({ confirmLoading: false, showOkBtn: !props.isDisabled});
+    setModalProps({ confirmLoading: false, showOkBtn: !props.isDisabled });
     isUpdate.value = !!data?.isUpdate;
-    if(data.createBy){
-      await setFieldsValue({createBy: data.createBy})
+    if (data.createBy) {
+      await setFieldsValue({ createBy: data.createBy });
     }
-    if(data.createTime){
-      await setFieldsValue({createTime: data.createTime})
+    if (data.createTime) {
+      await setFieldsValue({ createTime: data.createTime });
     }
     if (unref(isUpdate)) {
       //获取详情
@@ -70,5 +67,4 @@
     }
   }
 </script>
-./order.api
-./order.data
+./order.api ./order.data

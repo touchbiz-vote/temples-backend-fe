@@ -38,7 +38,7 @@
                 <template #title>
                   <em class="aui-tag"><div class="aui-tag-re"></div><div class="aui-tag-ye"></div><div class="aui-tag-bl"></div></em>
                   <span class="lock-to-right" v-if="item.protectionCode">
-                    <Icon icon="ant-design:lock-filled" :size="15" style="margin: 5px;"/>
+                    <Icon icon="ant-design:lock-filled" :size="15" style="margin: 5px" />
                   </span>
                 </template>
                 <!--<template #extra>-->
@@ -86,7 +86,7 @@
   import { useMessage } from '/@/hooks/web/useMessage';
   import { getFileAccessHttpUrl } from '/@/utils/common/compUtils';
   import { usePermission } from '/@/hooks/web/usePermission';
-  
+
   const { hasPermission } = usePermission();
   const ListItem = List.Item;
   const defCover = 'https://jeecgdev.oss-cn-beijing.aliyuncs.com/temp/designCover_1655434422024.png';
@@ -116,7 +116,7 @@
   });
   const width = computed(() => {
     let rowNum = grid.value;
-    let width = rowNum==4?"360px":rowNum==6?"230px":rowNum==7?"190px":"280px";
+    let width = rowNum == 4 ? '360px' : rowNum == 6 ? '230px' : rowNum == 7 ? '190px' : '280px';
     return width;
   });
   //表单
@@ -215,11 +215,11 @@
    */
   function getDropDownAction(record) {
     //1.如果是模板案例
-    if(props.params.izTemplate === '1'){
+    if (props.params.izTemplate === '1') {
       let commonAction = [];
       //1.1有权限的用户操作
-      if(hasAuth()){
-         commonAction = [
+      if (hasAuth()) {
+        commonAction = [
           {
             text: '编辑',
             event: '1',
@@ -229,24 +229,25 @@
             text: '复制面板',
             event: '2',
             onClick: handleCopy.bind(null, record.id),
-          },{
-             text: '取消模板',
-             event: '6',
-             onClick: handleTemplate.bind(null, record,'0'),
-           }
+          },
+          {
+            text: '取消模板',
+            event: '6',
+            onClick: handleTemplate.bind(null, record, '0'),
+          },
         ];
-      }else{
+      } else {
         ///1.2没有权限的用户只能复制和预览
-         commonAction = [
+        commonAction = [
           {
             text: '复制面板',
             event: '2',
             onClick: handleCopy.bind(null, record.id),
-          }
+          },
         ];
       }
       return commonAction;
-    }else{
+    } else {
       //非模板案例的tab下的按钮显示
       let commonAction = [
         {
@@ -266,38 +267,38 @@
         },
       ];
       //模板按钮的显隐逻辑判断
-      if(hasAuth()){
-        if(record.izTemplate == '1'){
+      if (hasAuth()) {
+        if (record.izTemplate == '1') {
           commonAction.push({
             text: '取消模板',
             event: '6',
-            onClick: handleTemplate.bind(null, record,'0'),
-          })
-        }else{
+            onClick: handleTemplate.bind(null, record, '0'),
+          });
+        } else {
           commonAction.push({
             text: '收藏模板',
             event: '5',
-            onClick: handleTemplate.bind(null, record,'1'),
-          })
+            onClick: handleTemplate.bind(null, record, '1'),
+          });
         }
       }
 
       //删除按钮的逻辑判断
-      if(!hasPassword(record)){
+      if (!hasPassword(record)) {
         commonAction.push({
           text: '删除',
           event: '4',
           popConfirm: {
             title: '是否确认删除',
             confirm: handleDelete.bind(null, record),
-          }
-        })
-      }else {
+          },
+        });
+      } else {
         commonAction.push({
           text: '删除',
           event: '4',
           onClick: handleDelete.bind(null, record),
-        })
+        });
       }
       return commonAction;
     }
@@ -305,13 +306,13 @@
   /**
    * 判断是否有模板操作权限
    */
-  function hasAuth(){
+  function hasAuth() {
     return hasPermission('drag:template:edit');
   }
   /**
    * 是否包含保护码
    **/
-  function hasPassword(record){
+  function hasPassword(record) {
     return record.protectionCode && record.protectionCode.length > 0;
   }
   /**
@@ -354,16 +355,16 @@
   }
 
   async function handleDesign(record) {
-    if(props.params.izTemplate === '1' && !hasAuth()){
+    if (props.params.izTemplate === '1' && !hasAuth()) {
       //模板案例tab下并且没有操作权限时,只能预览
       emit('view', record.id);
-    }else{
+    } else {
       emit('design', record);
     }
   }
-  
-  async function handleTemplate(record,izTemplate) {
-    emit('template', record.id,izTemplate);
+
+  async function handleTemplate(record, izTemplate) {
+    emit('template', record.id, izTemplate);
   }
 </script>
 <style scoped lang="less">
@@ -392,9 +393,9 @@
       font-size: 14px;
       border-bottom: 1px solid #efefef;
     }
-    
+
     .ellipsis {
-      display:block;
+      display: block;
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
@@ -452,14 +453,14 @@
     }
   }
   /*右上角锁标记*/
-  .lock-to-right{
-      z-index: 0;
-      color: #fff;
-      position: absolute;
-      right: 0;
-      top: 0;
+  .lock-to-right {
+    z-index: 0;
+    color: #fff;
+    position: absolute;
+    right: 0;
+    top: 0;
   }
-  
+
   .lock-to-right::after {
     content: '';
     position: absolute;
@@ -468,6 +469,6 @@
     border-style: solid;
     border-width: 0 50px 40px 0;
     border-color: transparent #db2828 transparent transparent;
-    z-index: -1
+    z-index: -1;
   }
 </style>

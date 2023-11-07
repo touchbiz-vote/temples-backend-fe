@@ -19,7 +19,7 @@
         <a-tab-pane key="1">
           <template #tab>
             <span>
-              <Icon icon="ant-design:bar-chart-outlined" :size="20"></Icon>
+              <Icon icon="ant-design:bar-chart-outlined" :size="20" />
               仪表盘设计
             </span>
           </template>
@@ -27,7 +27,7 @@
         <a-tab-pane key="3">
           <template #tab>
             <span>
-              <Icon icon="ant-design:star-outlined" :size="20"></Icon>
+              <Icon icon="ant-design:star-outlined" :size="20" />
               模板
             </span>
           </template>
@@ -38,27 +38,27 @@
   <!--编辑弹窗-->
   <PageModal @register="registerModal" @success="handleOk" />
   <!--保护密码弹窗-->
-  <PasswordModal ref="passwordRef" @success="checkPassOk"/>
+  <PasswordModal ref="passwordRef" @success="checkPassOk" />
   <!--页面配置弹窗-->
-  <DragPageModal @register="registerDragModal" @success="success" :isLowApp="false"/>
+  <DragPageModal @register="registerDragModal" @success="success" :isLowApp="false" />
 </template>
 <script lang="ts" setup name="drag-page">
   import CardList from './components/CardList.vue';
   import PageModal from './components/PageModal.vue';
   import PasswordModal from './components/PasswordModal.vue';
   import DragPageModal from './components/DragPageModal.vue';
-  import { ref,reactive } from 'vue';
+  import { ref, reactive } from 'vue';
   import { useModal } from '/@/components/Modal';
   import { router } from '/@/router';
-  import { list, deleteOne, copyPage ,saveOrUpdate} from './page.api';
+  import { list, deleteOne, copyPage, saveOrUpdate } from './page.api';
   import { searchFormSchema } from './page.data';
 
   const [registerModal, { openModal }] = useModal();
   const [registerDragModal, { openModal: openDragModal }] = useModal();
-  const passwordRef = ref()
+  const passwordRef = ref();
   let reload = (params?) => {};
-   //额外的查询参数
-  const params = reactive({type:"1",izTemplate:'0'});
+  //额外的查询参数
+  const params = reactive({ type: '1', izTemplate: '0' });
   // 获取内部fetch方法;
   function getMethod(m: any) {
     reload = m;
@@ -149,22 +149,22 @@
   /**
    * 收藏模板
    */
-  async function handleTemplate(id,template) {
-    let params = {id, izTemplate:template};
-    const res = await saveOrUpdate(params,true);
-    console.log('handleTemplate-------------->res:',res)
+  async function handleTemplate(id, template) {
+    let params = { id, izTemplate: template };
+    const res = await saveOrUpdate(params, true);
+    console.log('handleTemplate-------------->res:', res);
     reload();
   }
   // 面板类型
   function tabChange(key) {
-    if(key!=='3'){
+    if (key !== '3') {
       params.type = key;
       params.izTemplate = '0';
-    }else{
+    } else {
       params.type = '';
       params.izTemplate = '1';
     }
-    reload({pageNo:1});
+    reload({ pageNo: 1 });
   }
 
   /**

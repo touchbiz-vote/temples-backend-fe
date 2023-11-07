@@ -2,12 +2,18 @@
   <a-row>
     <a-col :span="12">
       <div :style="containerStyle">
-        <a-tree v-if="treeData.length > 0" showIcon :treeData="treeData" :selectedKeys="selectedKeys" @select="onSelect"> </a-tree>
+        <a-tree v-if="treeData.length > 0" showIcon :treeData="treeData" :selectedKeys="selectedKeys" @select="onSelect" />
       </div>
     </a-col>
     <a-col :span="12" style="padding-left: 10px">
       <div :style="containerStyle">
-        <user-list :excludeUserIdList="excludeUserIdList" :dataList="userDataList" :selectedIdList="selectedIdList" @selected="onSelectUser" @unSelect="unSelectUser" />
+        <user-list
+          :excludeUserIdList="excludeUserIdList"
+          :dataList="userDataList"
+          :selectedIdList="selectedIdList"
+          @selected="onSelectUser"
+          @unSelect="unSelectUser"
+        />
       </div>
     </a-col>
   </a-row>
@@ -32,10 +38,10 @@
         type: Array,
         default: () => [],
       },
-      excludeUserIdList:{
+      excludeUserIdList: {
         type: Array,
         default: () => [],
-      }
+      },
     },
     emits: ['selected', 'unSelect'],
     setup(props, { emit }) {

@@ -133,7 +133,7 @@ export function useCustomSelection(
     if (bodyEl.value) {
       // 监听div高度变化
       bodyResizeObserver = new ResizeObserver((entries) => {
-        for (let entry of entries) {
+        for (const entry of entries) {
           if (entry.target === bodyEl.value && entry.contentRect) {
             const { height } = entry.contentRect;
             bodyHeight.value = Math.ceil(height);
@@ -185,7 +185,7 @@ export function useCustomSelection(
       }
       let showCount = 0;
       // 最小选中数量
-      let minSelect = 100;
+      const minSelect = 100;
       const hidden: Recordable[] = [];
       flattedData.value.forEach((item, index, array) => {
         if (array.length > 120) {

@@ -81,8 +81,8 @@
       console.log('glob.onlineUrl', glob.viewUrl);
       let filePath = encodeURIComponent(record.url);
       //文档采用pdf预览高级模式
-      if(filePath.endsWith(".pdf") || filePath.endsWith(".doc") || filePath.endsWith(".docx")){
-        filePath = filePath + '&officePreviewType=pdf'
+      if (filePath.endsWith('.pdf') || filePath.endsWith('.doc') || filePath.endsWith('.docx')) {
+        filePath = filePath + '&officePreviewType=pdf';
       }
       let url = `${glob.viewUrl}?url=` + filePath;
       window.open(url, '_blank');

@@ -48,9 +48,9 @@
 
   export default defineComponent({
     name: 'JCodeEditor',
+    components: {},
     // 不将 attrs 的属性绑定到 html 标签上
     inheritAttrs: false,
-    components: {},
     props: {
       value: propTypes.string.def(''),
       height: propTypes.string.def('auto'),
@@ -188,24 +188,27 @@
         }
       );
       //update-end-author:taoyan date:2022-5-9 for: codeEditor禁用功能
-      
+
       // 支持动态设置语言
-      watch(()=>props.language, (val)=>{
-        if(val && coder){
-          coder.setOption('mode', val);
+      watch(
+        () => props.language,
+        (val) => {
+          if (val && coder) {
+            coder.setOption('mode', val);
+          }
         }
-      });
+      );
 
       const getBindValue = Object.assign({}, unref(props), unref(attrs));
 
       //update-begin-author:taoyan date:2022-10-18 for: VUEN-2480【严重bug】online vue3测试的问题 8、online js增强样式问题
-      function refresh(){
-        if(coder){
+      function refresh() {
+        if (coder) {
           coder.refresh();
         }
       }
       //update-end-author:taoyan date:2022-10-18 for: VUEN-2480【严重bug】online vue3测试的问题 8、online js增强样式问题
-      
+
       return {
         state,
         textarea,
@@ -215,7 +218,7 @@
         isFullScreen,
         fullScreenIcon,
         onToggleFullScreen,
-        refresh
+        refresh,
       };
     },
   });
@@ -289,9 +292,9 @@
         height: 100%;
       }
     }
-    
+
     /** VUEN-2344【vue3】这个样式有问题，是不是加个边框 */
-    .CodeMirror{
+    .CodeMirror {
       border: 1px solid #ddd;
     }
   }

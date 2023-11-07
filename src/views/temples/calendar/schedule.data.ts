@@ -1,6 +1,5 @@
 import { FormSchema } from '/@/components/Form';
 import { BasicColumn } from '/@/components/Table';
-import { render } from '/@/utils/common/renderUtils';
 import { rules } from '/@/utils/helper/validator';
 
 export const columns: BasicColumn[] = [

@@ -33,7 +33,7 @@
     >
       <template #title="{ slotTitle, ruleFlag }">
         {{ slotTitle }}
-        <Icon v-if="ruleFlag" icon="ant-design:align-left-outlined" style="margin-left: 5px; color: red"></Icon>
+        <Icon v-if="ruleFlag" icon="ant-design:align-left-outlined" style="margin-left: 5px; color: red" />
       </template>
     </BasicTree>
     <!--右下角按钮-->
@@ -132,28 +132,28 @@
       lastpermissionIds: unref(defaultCheckedKeys).join(','),
     };
     //update-begin-author:taoyan date:2023-2-11 for: issues/352 VUE角色授权重复保存
-    if(loading.value===false){
-      await doSave(params)
-    }else{
+    if (loading.value === false) {
+      await doSave(params);
+    } else {
       console.log('请等待上次执行完毕!');
     }
-    if(exit){
+    if (exit) {
       // 如果关闭
       closeDrawer();
-    }else{
+    } else {
       // 没有关闭需要重新获取选中数据
       const permResult = await queryRolePermission({ roleId: unref(roleId) });
       defaultCheckedKeys.value = permResult;
     }
   }
-  
+
   // VUE角色授权重复保存 #352
   async function doSave(params) {
     loading.value = true;
     await saveRolePermission(params);
-    setTimeout(()=>{
+    setTimeout(() => {
       loading.value = false;
-    }, 500)
+    }, 500);
   }
   //update-end-author:taoyan date:2023-2-11 for: issues/352 VUE角色授权重复保存
 
@@ -198,7 +198,7 @@
     margin-right: 2px;
     cursor: pointer;
   }
-  :deep(.jeecg-tree-header){
+  :deep(.jeecg-tree-header) {
     border-bottom: none;
   }
   //update-end---author:wangshuai ---date:20230202  for：抽屉弹窗标题图标下拉样式------------

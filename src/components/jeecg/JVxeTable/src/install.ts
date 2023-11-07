@@ -22,17 +22,17 @@ export function registerJVxeTable(app: App) {
   // 比如点击了某个组件的弹出层面板之后，此时被激活单元格不应该被自动关闭，通过返回 false 可以阻止默认的行为。
   VXETable.interceptor.add('event.clearActived', function (this: any, params) {
     // 获取组件增强
-    let col = params.column.params;
-    let { $event } = params;
+    const col = params.column.params;
+    const { $event } = params;
     const interceptor = getEnhanced(col.type).interceptor;
     // 执行增强
-    let flag = interceptor['event.clearActived']?.call(this, ...arguments);
+    const flag = interceptor['event.clearActived']?.call(this, ...arguments);
     if (flag === false) {
       return false;
     }
 
-    let path = getEventPath($event);
-    for (let p of path) {
+    const path = getEventPath($event);
+    for (const p of path) {
       let className: any = p.className || '';
       className = typeof className === 'string' ? className : className.toString();
 
@@ -51,7 +51,7 @@ export function registerJVxeTable(app: App) {
         return false;
       }
       // 执行增强
-      let flag = interceptor['event.clearActived.className']?.call(this, className, ...arguments);
+      const flag = interceptor['event.clearActived.className']?.call(this, className, ...arguments);
       if (flag === false) {
         return false;
       }

@@ -141,7 +141,7 @@ export const itemFormSchema: FormSchema[] = [
               return Promise.reject('数据值不能包含特殊字符！');
             }
             return new Promise<void>((resolve, reject) => {
-              let params = {
+              const params = {
                 dictId: values.dictId,
                 id: model.id,
                 itemValue: value,

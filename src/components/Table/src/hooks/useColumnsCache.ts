@@ -14,9 +14,9 @@ export function useColumnsCache(opt, setColumns, handleColumnFixed) {
   const { createMessage: $message } = useMessage();
   // 列表配置缓存key
   const cacheKey = computed(() => {
-    let { fullPath } = router.currentRoute.value;
+    const { fullPath } = router.currentRoute.value;
     let key = fullPath.replace(/[\/\\]/g, '_');
-    let cacheKey = table.getBindValues.value.tableSetting?.cacheKey;
+    const cacheKey = table.getBindValues.value.tableSetting?.cacheKey;
     if (cacheKey) {
       key += ':' + cacheKey;
     }
@@ -35,7 +35,7 @@ export function useColumnsCache(opt, setColumns, handleColumnFixed) {
       return;
     }
     isInit = true;
-    let columnCache = $ls.get(cacheKey.value);
+    const columnCache = $ls.get(cacheKey.value);
     if (columnCache && columnCache.checkedList) {
       const { checkedList, sortedList, sortableOrder, checkIndex } = columnCache;
       await nextTick();
@@ -64,7 +64,7 @@ export function useColumnsCache(opt, setColumns, handleColumnFixed) {
     const { fixedColumns } = columnCache;
     const columns = opt.plainOptions.value;
     for (const column of columns) {
-      let fixedCol = fixedColumns.find((fc) => fc.key === (column.key || column.dataIndex));
+      const fixedCol = fixedColumns.find((fc) => fc.key === (column.key || column.dataIndex));
       if (fixedCol) {
         await nextTick();
         handleColumnFixed(column, fixedCol.fixed);
@@ -77,7 +77,7 @@ export function useColumnsCache(opt, setColumns, handleColumnFixed) {
 
   /** 获取被固定的列 */
   function getFixedColumns() {
-    let fixedColumns: any[] = [];
+    const fixedColumns: any[] = [];
     const columns = opt.plainOptions.value;
     for (const column of columns) {
       if (fixedReg.test((column.fixed ?? '').toString())) {

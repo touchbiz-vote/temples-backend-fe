@@ -27,7 +27,7 @@
             :pagination="false"
           >
             <template #ellipsisText="{ text }">
-              <JEllipsis :value="text" :length="textMaxLength"></JEllipsis>
+              <JEllipsis :value="text" :length="textMaxLength" />
             </template>
 
             <template #dayWarnning="{ text, record }">
@@ -67,7 +67,7 @@
             :pagination="false"
           >
             <template #ellipsisText="{ text }">
-              <JEllipsis :value="text" :length="textMaxLength"></JEllipsis>
+              <JEllipsis :value="text" :length="textMaxLength" />
             </template>
 
             <template #dayWarnning="{ text, record }">
@@ -104,7 +104,7 @@
             :pagination="false"
           >
             <template #ellipsisText="{ text }">
-              <JEllipsis :value="text" :length="textMaxLength"></JEllipsis>
+              <JEllipsis :value="text" :length="textMaxLength" />
             </template>
 
             <template #dayWarnning="{ text, record }">
@@ -137,7 +137,7 @@
             :pagination="false"
           >
             <template #ellipsisText="{ text }">
-              <JEllipsis :value="text" :length="textMaxLength"></JEllipsis>
+              <JEllipsis :value="text" :length="textMaxLength" />
             </template>
 
             <template #dayWarnning="{ text, record }">
@@ -294,7 +294,6 @@
   function goPage() {
     $message.createMessage.success('请根据具体业务跳转页面');
   }
-
 </script>
 
 <style scoped lang="less">
@@ -364,25 +363,27 @@
     }
 
     :deep(
-      .ant-table-small
-      > .ant-table-content
-      > .ant-table-fixed-left
-      > .ant-table-body-outer
-      > .ant-table-body-inner
-      > table
-      > .ant-table-thead
-      > tr
-      > th),
+        .ant-table-small
+          > .ant-table-content
+          > .ant-table-fixed-left
+          > .ant-table-body-outer
+          > .ant-table-body-inner
+          > table
+          > .ant-table-thead
+          > tr
+          > th
+      ),
     :deep(
-      .ant-table-small
-      > .ant-table-content
-      > .ant-table-fixed-right
-      > .ant-table-body-outer
-      > .ant-table-body-inner
-      > table
-      > .ant-table-thead
-      > tr
-      > th) {
+        .ant-table-small
+          > .ant-table-content
+          > .ant-table-fixed-right
+          > .ant-table-body-outer
+          > .ant-table-body-inner
+          > table
+          > .ant-table-thead
+          > tr
+          > th
+      ) {
       border-bottom: 1px solid #90aeff;
     }
 

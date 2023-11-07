@@ -23,7 +23,6 @@
   import { defineComponent, ref } from 'vue';
   import { BasicModal, useModalInner } from '/@/components/Modal';
   import { columns } from '../schedule.data';
-  import { useAttrs } from '/@/hooks/core/useAttrs';
   import { selectProps } from '/@/components/Form/src/jeecg/props/props';
   import { useListPage } from '/@/hooks/system/useListPage';
   import { getList as getOrderList } from '../../order/order.api';
@@ -90,12 +89,10 @@
       const product = ref<Object>({ scheduleName: '', date: '' });
 
       //注册弹框
-      const [register, { closeModal }] = useModalInner(({ record }) => {
+      const [register] = useModalInner(({ record }) => {
         console.log('record', record);
         product.value = record;
       });
-      const attrs = useAttrs();
-
       //查询form
       const formConfig = {
         baseColProps: {
@@ -107,22 +104,6 @@
           xxl: 12,
         },
       };
-
-      async function fillData(list) {
-        for (const order of list) {
-          const orderInfo = JSON.parse(order.orderInfo);
-          console.log(orderInfo);
-          for (const item of orderInfo) {
-            if (item.name === 'name') {
-              order.name = item.value;
-            }
-            if (item.name === 'name2') {
-              order.name2 = item.value;
-            }
-          }
-        }
-      }
-
       /**
        * 编辑
        */

@@ -190,4 +190,3 @@ export const userQuitAgent = (params) => {
 export const getQuitList = (params) => {
   return defHttp.get({ url: Api.getQuitList, params });
 };
-

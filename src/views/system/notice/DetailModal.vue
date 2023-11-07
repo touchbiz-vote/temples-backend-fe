@@ -1,6 +1,6 @@
 <template>
   <BasicModal v-bind="$attrs" @register="registerModal" title="查看详情" :showCancelBtn="false" :showOkBtn="false" :height="500">
-    <iframe :src="frameSrc" class="detail-iframe" />
+    <iframe :src="frameSrc" class="detail-iframe"></iframe>
   </BasicModal>
 </template>
 <script lang="ts" setup>

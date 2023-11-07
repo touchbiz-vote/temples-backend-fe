@@ -7,7 +7,7 @@
             <a-checkbox v-model:checked="checkStatus[item.id]" />
           </div>
           <div>
-            <a-avatar v-if="item.avatar" :src="getFileAccessHttpUrl(item.avatar)"></a-avatar>
+            <a-avatar v-if="item.avatar" :src="getFileAccessHttpUrl(item.avatar)" />
             <a-avatar v-else>
               <template #icon><UserOutlined /></template>
             </a-avatar>
@@ -28,9 +28,12 @@
   import { UserOutlined } from '@ant-design/icons-vue';
   import { computed, toRaw, reactive, watchEffect, ref } from 'vue';
   import { getFileAccessHttpUrl } from '/@/utils/common/compUtils';
-  
+
   export default {
     name: 'UserList',
+    components: {
+      UserOutlined,
+    },
     props: {
       dataList: {
         type: Array,
@@ -45,13 +48,10 @@
         type: Array,
         default: () => [],
       },
-      excludeUserIdList:{
+      excludeUserIdList: {
         type: Array,
         default: () => [],
-      }
-    },
-    components: {
-      UserOutlined,
+      },
     },
     emits: ['selected', 'unSelect'],
     setup(props, { emit }) {
@@ -103,7 +103,7 @@
         console.error('onChangeChecked', e);
       }
 
-     // const showDataList = ref<any[]>([])
+      // const showDataList = ref<any[]>([])
       const checkStatus = reactive<any>({});
       watchEffect(() => {
         let arr1 = props.dataList;
@@ -118,8 +118,6 @@
             checkStatus[item.id] = false;
           }
         }
-        
-      
       });
 
       function prevent(e) {
@@ -128,22 +126,22 @@
       }
 
       function records2DataList() {
-        let arr:any[] = [];
+        let arr: any[] = [];
         let excludeList = props.excludeUserIdList;
         let records = props.dataList;
-        if(records && records.length>0){
-          for(let item of records){
-            if(excludeList.indexOf(item.id)<0){
-              arr.push({...item})
+        if (records && records.length > 0) {
+          for (let item of records) {
+            if (excludeList.indexOf(item.id) < 0) {
+              arr.push({ ...item });
             }
           }
         }
         return arr;
       }
-      
-      const showDataList = computed(()=>{
+
+      const showDataList = computed(() => {
         let excludeList = props.excludeUserIdList;
-        if(excludeList && excludeList.length>0){
+        if (excludeList && excludeList.length > 0) {
           return records2DataList();
         }
         return props.dataList;
@@ -157,7 +155,7 @@
         onChangeChecked,
         checkStatus,
         showDataList,
-        getFileAccessHttpUrl
+        getFileAccessHttpUrl,
       };
     },
   };

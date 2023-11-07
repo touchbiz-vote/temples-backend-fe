@@ -18,7 +18,7 @@ import { ERROR_LOG_ROUTE, PAGE_NOT_FOUND_ROUTE } from '/@/router/routes/basic';
 
 import { filter } from '/@/utils/helper/treeHelper';
 
-import { getMenuList,switchVue3Menu } from '/@/api/sys/menu';
+import { getMenuList, switchVue3Menu } from '/@/api/sys/menu';
 import { getPermCode } from '/@/api/sys/user';
 
 import { useMessage } from '/@/hooks/web/useMessage';
@@ -220,9 +220,9 @@ export const usePermissionStore = defineStore({
             this.changePermissionCode();
             routeList = (await getMenuList()) as AppRouteRecordRaw[];
             // update-begin----author:sunjianlei---date:20220315------for: 判断是否是 vue3 版本的菜单 ---
-            let hasIndex: boolean = false;
-            let hasIcon: boolean = false;
-            for (let menuItem of routeList) {
+            let hasIndex = false;
+            let hasIcon = false;
+            for (const menuItem of routeList) {
               // 条件1：判断组件是否是 layouts/default/index
               if (!hasIndex) {
                 hasIndex = menuItem.component === 'layouts/default/index';
@@ -243,12 +243,11 @@ export const usePermissionStore = defineStore({
                 () =>
                   createWarningModal({
                     title: '检测提示',
-                    content:
-                      '当前菜单表是 <b>Vue2版本</b>，导致菜单加载异常!<br>点击确认，切换到Vue3版菜单！',
-                    onOk:function () {
+                    content: '当前菜单表是 <b>Vue2版本</b>，导致菜单加载异常!<br>点击确认，切换到Vue3版菜单！',
+                    onOk: function () {
                       switchVue3Menu();
                       location.reload();
-                    }
+                    },
                   }),
                 100
               );

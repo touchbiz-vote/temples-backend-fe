@@ -37,7 +37,7 @@
   import { useDrawer } from '/@/components/Drawer';
   import MenuDrawer from './MenuDrawer.vue';
   import DataRuleList from './DataRuleList.vue';
-  import { columns,searchFormSchema } from './menu.data';
+  import { columns, searchFormSchema } from './menu.data';
   import { list, deleteMenu, batchDeleteMenu } from './menu.api';
 
   const checkedKeys = ref<Array<string | number>>([]);

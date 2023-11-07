@@ -238,10 +238,7 @@ export const formSchema: FormSchema[] = [
     field: 'email',
     component: 'Input',
     dynamicRules: ({ model, schema }) => {
-      return [
-        { ...rules.duplicateCheckRule('sys_user', 'email', model, schema, true)[0] },
-        { ...rules.rule('email', false)[0] },
-      ];
+      return [{ ...rules.duplicateCheckRule('sys_user', 'email', model, schema, true)[0] }, { ...rules.rule('email', false)[0] }];
     },
   },
   {

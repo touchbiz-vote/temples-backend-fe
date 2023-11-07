@@ -56,5 +56,3 @@ export const confirmOrder = (order, handleSuccess) => {
     handleSuccess();
   });
 };
-
-

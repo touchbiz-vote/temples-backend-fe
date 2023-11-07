@@ -38,7 +38,7 @@
             :formConfig="{ showActionButtonGroup: false, baseRowStyle: { minHeight: '40px' } }"
           >
             <template #action="{ record }">
-              <a href="javascript:void(0)" @click="handleDeleteSelected(record)"><Icon icon="ant-design:delete-outlined"></Icon></a>
+              <a href="javascript:void(0)" @click="handleDeleteSelected(record)"><Icon icon="ant-design:delete-outlined" /></a>
             </template>
           </BasicTable>
         </a-col>

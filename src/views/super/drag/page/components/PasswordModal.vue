@@ -27,7 +27,7 @@
   import { encryptByBase64 } from '/@/utils/cipher.ts';
   import { setCacheByDynKey } from '/@/utils/auth';
   import { JDragConfigEnum } from '/@/enums/jeecgEnum';
-  
+
   export default defineComponent({
     name: 'PasswordModal',
     emits: ['success', 'closed'],
@@ -45,7 +45,7 @@
       //表单信息
       const formState = reactive({ password: '' });
       //显示modal
-      function showModal(type,record) {
+      function showModal(type, record) {
         formModal.value = { ...record };
         formState.password = '';
         operatorType.value = type;
@@ -77,11 +77,11 @@
           .then(async () => {
             let values = toRaw(unref(formModal));
             //返回表单信息，编辑时候需要
-            emit('success', unref(operatorType),values);
+            emit('success', unref(operatorType), values);
             //判断是设计页面的时候弹窗
             let isEdit = unref(extraMsg) && unref(extraMsg).length > 0;
             //设计页面密码正确后，保存到缓存中
-            !isEdit && setCacheByDynKey(JDragConfigEnum.DRAG_CACHE_PREFIX+values.id, values.protectionCode);
+            !isEdit && setCacheByDynKey(JDragConfigEnum.DRAG_CACHE_PREFIX + values.id, values.protectionCode);
             visible.value = false;
           })
           .catch((error) => {

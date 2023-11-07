@@ -6,12 +6,12 @@
           <template v-for="(item, index) in queryInfo">
             <template v-if="item.hidden === '1'">
               <a-col :md="6" :sm="24" :key="'query' + index" v-show="toggleSearchStatus">
-                <SearchFormItem :formElRef="formRef" :queryParam="queryParam" :item="item" :dictOptions="dictOptions"></SearchFormItem>
+                <SearchFormItem :formElRef="formRef" :queryParam="queryParam" :item="item" :dictOptions="dictOptions" />
               </a-col>
             </template>
             <template v-else>
               <a-col :md="6" :sm="24" :key="'query' + index">
-                <SearchFormItem :formElRef="formRef" :queryParam="queryParam" :item="item" :dictOptions="dictOptions"></SearchFormItem>
+                <SearchFormItem :formElRef="formRef" :queryParam="queryParam" :item="item" :dictOptions="dictOptions" />
               </a-col>
             </template>
           </template>
@@ -64,7 +64,7 @@
   import { usePopBiz } from '/@/components/jeecg/OnLine/hooks/usePopBiz';
   import { useMessage } from '/@/hooks/web/useMessage';
   import { useRoute } from 'vue-router';
-  
+
   export default defineComponent({
     name: 'JPopupOnlReport',
     components: {
@@ -91,9 +91,9 @@
       const attrs = useAttrs();
       const tableScroll = ref({ x: true });
       const route = useRoute();
-      console.log('route.query = ',route.query)
-      const getBindValue = Object.assign({}, {routeQuery: route.query}, unref(props), unref(attrs));
-      
+      console.log('route.query = ', route.query);
+      const getBindValue = Object.assign({}, { routeQuery: route.query }, unref(props), unref(attrs));
+
       const [
         {
           visibleChange,

@@ -11,12 +11,12 @@
   export default defineComponent({
     name: 'BasicModalHeader',
     components: { BasicTitle },
-    emits: ['dblclick'],
     props: {
       helpMessage: {
         type: [String, Array] as PropType<string | string[]>,
       },
       title: { type: String },
     },
+    emits: ['dblclick'],
   });
 </script>

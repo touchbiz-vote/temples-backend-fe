@@ -1,10 +1,17 @@
 <template>
-  <a-input :disabled="disabled" :style="{ width }" readOnly :placeholder="t('component.icon.placeholder')" :class="prefixCls" v-model:value="currentSelect">
+  <a-input
+    :disabled="disabled"
+    :style="{ width }"
+    readOnly
+    :placeholder="t('component.icon.placeholder')"
+    :class="prefixCls"
+    v-model:value="currentSelect"
+  >
     <template #addonAfter>
       <a-popover placement="bottomLeft" trigger="click" v-model="visible" :overlayClassName="`${prefixCls}-popover`">
         <template #title>
           <div class="flex justify-between">
-            <a-input :placeholder="t('component.icon.search')"  @change="debounceHandleSearchChange" allowClear />
+            <a-input :placeholder="t('component.icon.search')" @change="debounceHandleSearchChange" allowClear />
           </div>
         </template>
 
@@ -89,7 +96,7 @@
     copy: propTypes.bool.def(false),
     mode: propTypes.oneOf<('svg' | 'iconify')[]>(['svg', 'iconify']).def('iconify'),
     disabled: propTypes.bool.def(true),
-    clearSelect: propTypes.bool.def(false)
+    clearSelect: propTypes.bool.def(false),
   });
 
   const emit = defineEmits(['change', 'update:value']);
@@ -127,13 +134,13 @@
   }
 
   function handleClick(icon: string) {
-    if(props.clearSelect === true){
-      if(currentSelect.value===icon){
-        currentSelect.value = ''
-      }else{
+    if (props.clearSelect === true) {
+      if (currentSelect.value === icon) {
+        currentSelect.value = '';
+      } else {
         currentSelect.value = icon;
       }
-    }else{
+    } else {
       currentSelect.value = icon;
       if (props.copy) {
         clipboardRef.value = icon;
@@ -142,7 +149,6 @@
         }
       }
     }
-    
   }
 
   function handleSearchChange(e: ChangeEvent) {

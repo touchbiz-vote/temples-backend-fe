@@ -25,14 +25,14 @@ export interface HandleArgs {
 
 export function useColumns(props: JVxeTableProps, data: JVxeDataProps, methods: JVxeTableMethods, slots) {
   data.vxeColumns = computed(() => {
-    let columns: JVxeColumn[] = [];
+    const columns: JVxeColumn[] = [];
     if (isArray(props.columns)) {
       // handle 方法参数
       const args: HandleArgs = { props, slots, data, methods, columns };
       let seqColumn, selectionColumn, expandColumn, dragSortColumn;
       props.columns.forEach((column: JVxeColumn) => {
         // 排除未授权的列 1 = 显示/隐藏； 2 = 禁用
-        let auth = methods.getColAuth(column.key);
+        const auth = methods.getColAuth(column.key);
         if (auth?.type == '1' && !auth.isAuth) {
           return;
         } else if (auth?.type == '2' && !auth.isAuth) {
@@ -42,7 +42,7 @@ export function useColumns(props: JVxeTableProps, data: JVxeDataProps, methods: 
         if (column.type == null || isEmpty(column.type)) {
           column.type = JVxeTypes.normal;
         }
-        let col: JVxeColumn = cloneDeep(column);
+        const col: JVxeColumn = cloneDeep(column);
         // 处理隐藏列
         if (col.type === JVxeTypes.hidden) {
           return handleInnerColumn(args, col, handleHiddenColumn);
@@ -98,7 +98,7 @@ export function useColumns(props: JVxeTableProps, data: JVxeDataProps, methods: 
 
 /** 处理内置列 */
 function handleInnerColumn(args: HandleArgs, col: JVxeColumn, handler: (args: HandleArgs) => void, assign?: boolean) {
-  let renderOptions = col?.editRender || col?.cellRender;
+  const renderOptions = col?.editRender || col?.cellRender;
   return handler({
     ...args,
     col: col,
@@ -121,7 +121,7 @@ function handleHiddenColumn({ col, columns }: HandleArgs) {
 function handleSeqColumn({ props, col, columns }: HandleArgs) {
   // 判断是否开启了行号列
   if (props.rowNumber) {
-    let column = {
+    const column = {
       type: 'seq',
       title: '#',
       width: 60,
@@ -146,7 +146,7 @@ function handleSelectionColumn({ props, data, col, columns }: HandleArgs) {
     if (data.statistics.has && !props.rowExpand && !props.dragSort) {
       width = 60;
     }
-    let column = {
+    const column = {
       type: props.rowSelectionType,
       width: width,
       fixed: 'left',
@@ -170,7 +170,7 @@ function handleExpandColumn({ props, data, col, columns }: HandleArgs) {
     if (data.statistics.has && !props.dragSort) {
       width = 60;
     }
-    let column = {
+    const column = {
       type: 'expand',
       title: '',
       width: width,
@@ -194,13 +194,13 @@ function handleDragSortColumn({ props, data, col, columns, renderOptions }: Hand
     if (data.statistics.has) {
       width = 60;
     }
-    let column: any = {
+    const column: any = {
       title: '',
       width: width,
       fixed: 'left',
       align: 'center',
     };
-    let cellRender = {
+    const cellRender = {
       name: JVxeTypePrefix + JVxeTypes.rowDragSort,
       sortKey: props.sortKey,
     };
@@ -221,12 +221,12 @@ function handleDragSortColumn({ props, data, col, columns, renderOptions }: Hand
 function handlerCol(args: HandleArgs) {
   const { props, col, columns, enhanced } = args;
   if (!col) return;
-  let { type } = col;
+  const { type } = col;
   col.field = col.key;
   delete col.type;
   let renderName = 'cellRender';
   // 渲染选项
-  let $renderOptions: any = { name: JVxeTypePrefix + type };
+  const $renderOptions: any = { name: JVxeTypePrefix + type };
   if (enhanced?.switches.editRender) {
     if (!(enhanced.switches.visible || props.alwaysEdit)) {
       renderName = 'editRender';
@@ -269,7 +269,7 @@ async function handleDict({ col, methods }: HandleArgs) {
           }
           const dictOptions: any = await initDictOptions(dictCodeString);
           //update-end-author:taoyan date:2022-6-1 for: VUEN-1180 【代码生成】子表不支持带条件？
-          let options = col.params.options ?? [];
+          const options = col.params.options ?? [];
           dictOptions.forEach((dict) => {
             // 过滤重复数据
             if (options.findIndex((o) => o.value === dict.value) === -1) {
@@ -308,7 +308,7 @@ function handleStatistics({ col, data }: HandleArgs) {
     data.statistics.has = true;
     col.statistics.forEach((item) => {
       if (!isEmpty(item)) {
-        let arr = data.statistics[(item as string).toLowerCase()];
+        const arr = data.statistics[(item as string).toLowerCase()];
         if (isArray(arr)) {
           pushIfNotExist(arr, col.key);
         }

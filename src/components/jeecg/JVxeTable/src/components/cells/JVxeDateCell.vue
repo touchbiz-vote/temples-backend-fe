@@ -58,8 +58,7 @@
     },
     // 【组件增强】注释详见：JVxeComponent.Enhanced
     enhanced: {
-      aopEvents: {
-      },
+      aopEvents: {},
     } as JVxeComponent.EnhancedPartial,
   });
 </script>
