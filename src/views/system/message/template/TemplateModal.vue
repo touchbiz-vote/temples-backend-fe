@@ -17,7 +17,7 @@
   const isUpdate = ref<boolean>(false);
   // 注册 form
   //update-begin---author:wangshuai ---date:20221123  for：[VUEN-2807]消息模板加一个查看功能------------
-  const [registerForm, { resetFields, setFieldsValue, validate, updateSchema, setProps }] = useForm({
+  const [registerForm, { resetFields, setFieldsValue, validate, setProps }] = useForm({
     //update-end---author:wangshuai ---date:20221123  for：[VUEN-2807]消息模板加一个查看功能--------------z
     schemas: formSchemas,
     showActionButtonGroup: false,

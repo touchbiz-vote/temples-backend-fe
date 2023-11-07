@@ -36,7 +36,7 @@
   //设置标题
   const title = computed(() => (!unref(isUpdate) ? '新增' : '编辑'));
   //表单提交事件
-  async function handleSubmit(v) {
+  async function handleSubmit() {
     try {
       let values = await validate();
       setModalProps({ confirmLoading: true });

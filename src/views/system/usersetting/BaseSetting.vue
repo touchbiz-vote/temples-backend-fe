@@ -65,17 +65,12 @@
 </template>
 <script lang="ts" setup>
   import { computed, onMounted, ref } from 'vue';
-  import { CollapseContainer } from '/@/components/Container';
-  import { CropperAvatar } from '/@/components/Cropper';
   import { useMessage } from '/@/hooks/web/useMessage';
-  import { defHttp } from '/@/utils/http/axios';
   import { useUserStore } from '/@/store/modules/user';
-  import { uploadImg } from '/@/api/sys/upload';
   import { getFileAccessHttpUrl } from '/@/utils/common/compUtils';
   import dayjs from 'dayjs';
-  import { ajaxGetDictItems, getDictItemsByCode, initDictOptions } from '/@/utils/dict';
-  import { userEdit, getUserData, queryNameByCodes } from './UserSetting.api';
-  import UserAccountModal from './commponents/UserAccountModal.vue';
+  import { getDictItemsByCode } from '/@/utils/dict';
+  import { userEdit, getUserData } from './UserSetting.api';
   import { useModal } from '/@/components/Modal';
   import { cloneDeep } from 'lodash-es';
 

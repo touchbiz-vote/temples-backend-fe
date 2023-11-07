@@ -4,7 +4,6 @@
   </BasicModal>
 </template>
 <script lang="ts" name="PassWordModal" setup>
-  import { ref, computed, unref } from 'vue';
   import { BasicModal, useModalInner } from '/@/components/Modal';
   import { BasicForm, useForm } from '/@/components/Form/index';
   import { formPasswordSchema } from './user.data';

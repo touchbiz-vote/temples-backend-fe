@@ -55,7 +55,7 @@
     },
   });
   //注册table数据
-  const [registerTable, { reload }, { selectedRowKeys, selectedRows }] = tableContext;
+  const [registerTable] = tableContext;
 
   //获取操作栏事件
 </script>

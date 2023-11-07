@@ -10,9 +10,9 @@
   import { formSchemas } from './manage.data';
 
   // 声明 emits
-  const emit = defineEmits(['register']);
+  defineEmits(['register']);
   // 注册 form
-  const [registerForm, { resetFields, setFieldsValue, validate, updateSchema }] = useForm({
+  const [registerForm, { resetFields, setFieldsValue }] = useForm({
     schemas: formSchemas,
     showActionButtonGroup: false,
   });

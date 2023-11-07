@@ -105,13 +105,6 @@
   }
 
   /**
-   * 微信绑定解绑事件
-   */
-  function wechatBind() {
-    console.log('微信绑定解绑事件');
-  }
-
-  /**
    * 注销事件
    */
   function cancellation() {}

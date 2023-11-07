@@ -12,7 +12,7 @@
   // 声明Emits
   const emit = defineEmits(['success', 'register']);
   //表单配置
-  const [registerForm, { resetFields, setFieldsValue, validate, clearValidate }] = useForm({
+  const [registerForm, { resetFields, setFieldsValue, validate }] = useForm({
     schemas: formQuitAgentSchema,
     showActionButtonGroup: false,
   });

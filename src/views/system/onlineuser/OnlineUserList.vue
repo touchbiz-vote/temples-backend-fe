@@ -29,7 +29,7 @@
       rowSelection: null,
     },
   });
-  const [registerTable, { reload }, { rowSelection, selectedRowKeys }] = tableContext;
+  const [registerTable, { reload }, {}] = tableContext;
   const $message = useMessage();
 
   //操作栏

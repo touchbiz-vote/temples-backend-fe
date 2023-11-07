@@ -12,17 +12,16 @@
   </BasicDrawer>
 </template>
 <script lang="ts" setup>
-  import { defineComponent, ref, computed, unref, useAttrs } from 'vue';
+  import { ref, computed, unref } from 'vue';
   import { BasicForm, useForm } from '/@/components/Form/index';
   import { formSchema } from './user.data';
   import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
-  import { saveOrUpdateUser, getUserRoles, getUserDepartList, getAllRolesListNoByTenant, getAllRolesList } from './user.api';
+  import { saveOrUpdateUser, getUserRoles, getAllRolesListNoByTenant, getAllRolesList } from './user.api';
   import { useDrawerAdaptiveWidth } from '/@/hooks/jeecg/useAdaptiveWidth';
   import { getTenantId } from '/@/utils/auth';
 
   // 声明Emits
   const emit = defineEmits(['success', 'register']);
-  const attrs = useAttrs();
   const isUpdate = ref(true);
   const rowId = ref('');
   const departOptions = ref([]);
