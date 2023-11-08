@@ -24,7 +24,7 @@
     name: 'JSONView',
     props: {
       template: {
-        type: any,
+        type: Object,
       },
     },
     data() {
