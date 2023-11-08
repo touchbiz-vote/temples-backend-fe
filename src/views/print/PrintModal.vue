@@ -41,7 +41,7 @@
         </a-select>
       </a-form-item>
       <a-form-item name="模版">
-        <div class="hiprint-printTemplate" id="hiprint-printTemplate"></div>
+        <div class="hiprint-printTemplate" id="hiprint-printTemplate" :style="{ '--paperBackground': `url('${background}')` }"></div>
       </a-form-item>
     </a-form>
     <template #footer>
@@ -209,13 +209,14 @@
     let html = hiprintTemplate.getHtml(printData);
     preview.value.showModal(html);
   };
-
+  const background = ref('');
   const templateChange = (e) => {
     if (!e) {
       return;
     }
     getTemplateContent(e).then((res) => {
       // let provider = providers[0];
+      background.value = res.background;
       hiprint.init({
         //providers: [provider.f],
       });
@@ -275,3 +276,17 @@
     }
   };
 </script>
+<style lang="less" scoped>
+  ::v-deep .hiprint-printPaper {
+    background-image: var(--paperBackground);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: left top;
+  }
+
+  @media print {
+    ::v-deep .hiprint-printPaper {
+      background-image: none;
+    }
+  }
+</style>

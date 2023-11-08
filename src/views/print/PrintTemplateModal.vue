@@ -127,6 +127,7 @@
   import providers from './providers';
   import { defineComponent } from 'vue';
   import { JUpload } from '/@/components/Form';
+  import fontSize from './font-size';
 
   export default defineComponent({
     components: {
@@ -246,6 +247,11 @@
         hiprint.init({
           providers: [provider.f],
         });
+        hiprint.setConfig();
+        hiprint.setConfig({
+          // 替换字体大小配置
+          optionItems: [fontSize],
+        });
         $('#hiprint-printTemplate').empty();
         $('.hiprintEpContainer').empty();
         hiprint.PrintElementTypeManager.build('.hiprintEpContainer', provider.value);
@@ -262,6 +268,16 @@
             // console.log(hiprintTemplate.historyList)
           },
           settingContainer: '#PrintElementOptionSetting',
+          // 字体添加
+          fontList: [
+            { title: '微软雅黑', value: 'Microsoft YaHei' },
+            { title: '黑体', value: 'STHeitiSC-Light' },
+            { title: '思源黑体', value: 'SourceHanSansCN-Normal' },
+            { title: '王羲之书法体', value: '王羲之书法体' },
+            { title: '宋体', value: 'SimSun' },
+            { title: '华为楷体', value: 'STKaiti' },
+            { title: 'cursive', value: 'cursive' },
+          ],
           // paginationContainer: '.hiprint-printPagination',
         });
         hiprintTemplate.design('#hiprint-printTemplate');
