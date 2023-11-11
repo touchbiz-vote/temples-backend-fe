@@ -41,7 +41,11 @@
         </a-select>
       </a-form-item>
       <a-form-item name="模版">
-        <div class="hiprint-printTemplate" id="hiprint-printTemplate" :style="{ '--paperBackground': `url('${background}')` }"></div>
+        <div
+          class="hiprint-printTemplate"
+          id="hiprint-printTemplate"
+          :style="{ '--paperBackground': `url('${background}')`, width: `${width}mm`, height: `${height}mm` }"
+        ></div>
       </a-form-item>
     </a-form>
     <template #footer>
@@ -49,7 +53,7 @@
       <!-- <a-button type="primary" @click="getHtml">打印预览</a-button> -->
       <a-button type="primary" @click="closeModal">取消</a-button>
     </template>
-    <start-preview ref="preview" />
+    <!-- <start-preview ref="preview" /> -->
   </BasicModal>
 </template>
 
@@ -66,7 +70,9 @@
   import { useMessage } from '/@/hooks/web/useMessage';
 
   import { hiprint } from 'vue-plugin-hiprint';
-  import startPreview from './components/preview.vue';
+  import providers from './providers';
+
+  // import startPreview from './components/preview.vue';
   import { Modal } from 'ant-design-vue';
 
   import { getList, getPrintHost, getTemplateContent } from './print.api';
@@ -82,19 +88,15 @@
   const dictPrintList = ref([]);
   const currentTemplate = ref(null);
   const showPrintType = ref(false);
+  const width = ref();
+  const height = ref();
   const formState = ref({
     printType: 'direct',
     printHost: '',
   });
   const scaleValue = ref(1);
+  const printData = ref([]);
 
-  //自定义接受参数
-  const props = defineProps({
-    //是否禁用页面
-    printData: {
-      type: Object,
-    },
-  });
   // const attrs = useAttrs();
   const [registerModal, { closeModal }] = useModalInner((data) => {
     console.log(data);
@@ -103,6 +105,7 @@
     state.templateId = data.template.id;
     templateChange(state.templateId);
     showPrintType.value = hasPermission('system:print:printType');
+    printData.value = data.printData;
   });
 
   function printTypeChange(e) {
@@ -150,7 +153,7 @@
 
     Modal.confirm({
       title: '确认打印',
-      content: '是否确认使用[' + currentTemplate.value.template_name + ']进行打印操作,共打印' + props.printData.length + '条数据',
+      content: '是否确认使用[' + currentTemplate.value.template_name + ']进行打印操作,共打印' + printData.value.length + '条数据',
       okText: '打印',
       cancelText: '取消',
       onOk: () => {
@@ -206,7 +209,7 @@
    * 获取打印html
    */
   const getHtml = () => {
-    let html = hiprintTemplate.getHtml(printData);
+    let html = hiprintTemplate.getHtml(printData.value);
     preview.value.showModal(html);
   };
   const background = ref('');
@@ -218,18 +221,32 @@
       // let provider = providers[0];
       background.value = res.background;
       hiprint.init({
-        //providers: [provider.f],
+        providers: [providers[0].f],
       });
-      $('#hiprint-printTemplate').empty();
+      // $('#hiprint-printTemplate').empty();
 
       hiprintTemplate = new hiprint.PrintTemplate({
         template: JSON.parse(res.template),
+        dataMode: 1,
+        // 字体添加
+        fontList: [
+          { title: '微软雅黑', value: 'Microsoft YaHei' },
+          { title: '黑体', value: 'STHeitiSC-Light' },
+          // { title: '思源黑体', value: 'SourceHanSansCN-Normal' },
+          { title: '宋体', value: 'SimSun' },
+          { title: '华文行楷', value: 'STXingkai' },
+          { title: '华文新魏', value: 'STXinwei' },
+          // { title: '王羲之书法体', value: '王羲之书法体' },
+        ],
         // paginationContainer: '.hiprint-printPagination',
       });
-      hiprintTemplate.design('#hiprint-printTemplate');
-      console.log(hiprintTemplate);
+      width.value = hiprintTemplate.printPanels[0].width;
+      height.value = hiprintTemplate.printPanels[0].height;
+      $('.hiprint-printTemplate').html(hiprintTemplate.getHtml(printData.value));
+      // hiprintTemplate.design('#hiprint-printTemplate');
+      //  console.log(hiprintTemplate);
       // 获取当前放大比例, 当zoom时传true 才会有
-      scaleValue.value = hiprintTemplate.editingPanel.scale || 1;
+      // scaleValue.value = hiprintTemplate.editingPanel.scale || 1;
     });
   };
 

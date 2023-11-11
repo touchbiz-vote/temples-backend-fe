@@ -73,7 +73,7 @@
       return;
     }
     console.log(e);
-    currentTemplate.value = dictOptions.value.filter((x) => x.id == e)[0];
+    currentTemplate.value = dictOptions.value.find((x) => x.id == e);
     console.log(currentTemplate.value);
   };
 
@@ -144,7 +144,7 @@
    * 新增事件
    */
   function handlePrint() {
-    const printData = selectedRows.value ? selectedRows.value : tableData.value;
+    const printData = selectedRows.value.length > 0 ? selectedRows.value : tableData.value;
     openModal(true, {
       printData: printData,
       template: currentTemplate.value,
