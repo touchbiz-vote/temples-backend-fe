@@ -154,13 +154,11 @@
       okText: '打印',
       cancelText: '取消',
       onOk: () => {
-        return defHttp.delete({ url: Api.deleteBatch, data: params }, { joinParamsToUrl: true }).then(() => {
-          if (state.printType === 'web') {
-            printList();
-          } else {
-            print2List();
-          }
-        });
+        if (state.printType === 'web') {
+          printList();
+        } else {
+          print2List();
+        }
       },
     });
 
@@ -186,7 +184,7 @@
   });
 
   function connect(host) {
-    host = 'http://192.168.0.27:17521';
+    console.log(host);
     hiprint.hiwebSocket.setHost(host);
     // 这是异步的
     hiprint.refreshPrinterList((list) => {
