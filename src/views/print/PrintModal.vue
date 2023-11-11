@@ -149,8 +149,6 @@
       return;
     }
 
-    console.log(props.printData);
-
     Modal.confirm({
       title: '确认打印',
       content: '是否确认使用[' + currentTemplate.value.template_name + ']进行打印操作,共打印' + printData.value.length + '条数据',
@@ -262,12 +260,12 @@
       },
     };
     // 调用浏览器打印
-    hiprintTemplate.print(props.printData, options, ext);
+    hiprintTemplate.print(printData.value, options, ext);
   };
   const print2List = () => {
     if (hiprint.hiwebSocket.opened) {
       const panel = hiprintTemplate.getJson().panels[0];
-      console.log(props.printData);
+      console.log(printData.value);
       //从模版中获取打印尺寸
       const params = {
         printer: formState.value.print, // 打印机 名称
@@ -278,7 +276,7 @@
         pageSize: { height: panel.height * 1000, width: panel.width * 1000 },
       };
       console.log(params);
-      hiprintTemplate.print2(props.printData, params);
+      hiprintTemplate.print2(printData.value, params);
       hiprintTemplate.on('printSuccess', function (data) {
         $message.createSuccessModal({ content: '打印完成' });
       });
