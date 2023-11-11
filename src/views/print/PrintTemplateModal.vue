@@ -128,6 +128,7 @@
   import { defineComponent } from 'vue';
   import { JUpload } from '/@/components/Form';
   import fontSize from './font-size';
+  import lineHeight from './line-height';
 
   export default defineComponent({
     components: {
@@ -250,7 +251,7 @@
         hiprint.setConfig();
         hiprint.setConfig({
           // 替换字体大小配置
-          optionItems: [fontSize],
+          optionItems: [fontSize, lineHeight],
         });
         $('#hiprint-printTemplate').empty();
         $('.hiprintEpContainer').empty();
