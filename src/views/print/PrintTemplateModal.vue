@@ -229,9 +229,14 @@
           template: '',
           background: '',
         };
-        if (isUpdate.value) {
+        if (isClone.value || isUpdate.value) {
           getById(data.record.id).then((res) => {
-            record.value = res;
+            record.value = {
+              id: isUpdate.value ? res.id : null,
+              template_name: isClone.value ? res.template_name + '复制' : res.template_name,
+              template: res.template,
+              background: res.background,
+            };
             init();
             otherPaper();
             hiprintTemplate.update(JSON.parse(res.template || '{}'));
@@ -242,7 +247,7 @@
         }
         //查询数据
       });
-      const title = computed(() => (!unref(isUpdate) ? '新增' : !unref(isClone) ? '编辑' : '复制'));
+      const title = computed(() => (unref(isClone) ? '复制' : unref(isUpdate) ? '编辑' : '新增'));
       function init() {
         let provider = providers[0];
         hiprint.init({
@@ -340,7 +345,7 @@
           return;
         }
         record.value.template = JSON.stringify(hiprintTemplate.getJson());
-        saveOrUpdate(record.value, isUpdate.value).then(() => {
+        saveOrUpdate(record.value, isClone.value ? false : isUpdate.value).then(() => {
           //刷新列表
           emit('success');
           closeModal();
