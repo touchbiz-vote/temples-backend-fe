@@ -50,10 +50,8 @@
     </a-form>
     <template #footer>
       <a-button type="primary" @click="handleOk">打印</a-button>
-      <!-- <a-button type="primary" @click="getHtml">打印预览</a-button> -->
       <a-button type="primary" @click="closeModal">取消</a-button>
     </template>
-    <!-- <start-preview ref="preview" /> -->
   </BasicModal>
 </template>
 
@@ -72,7 +70,6 @@
   import { hiprint } from 'vue-plugin-hiprint';
   import providers from './providers';
 
-  // import startPreview from './components/preview.vue';
   import { Modal } from 'ant-design-vue';
 
   import { getList, getPrintHost, getTemplateContent } from './print.api';
@@ -82,7 +79,6 @@
 
   //提示弹窗
   const $message = useMessage();
-  const preview = ref(null);
 
   const dictOptions = ref([]);
   const dictPrintList = ref([]);
@@ -94,12 +90,10 @@
     printType: 'direct',
     printHost: '',
   });
-  const scaleValue = ref(1);
   const printData = ref([]);
-
-  // const attrs = useAttrs();
+  const targetClient = ref(null);
+  const targetClientId = ref('');
   const [registerModal, { closeModal }] = useModalInner((data) => {
-    console.log(data);
     currentTemplate.value = data.template;
     const state = formState.value;
     state.templateId = data.template.id;
@@ -170,8 +164,13 @@
    * 这里必须要在 onMounted 中去构建 左侧可拖拽元素 或者 设计器
    * 因为都是把元素挂载到对应容器中, 必须要先找到该容器
    */
+
   onMounted(() => {
-    // buildDesigner();
+    console.log('onMounted');
+    init();
+  });
+
+  function init() {
     getList({ pageSize: 100, enabled: 1 }).then((res) => {
       dictOptions.value = res.records;
     });
@@ -182,14 +181,37 @@
       formState.value.printHost = res.configValue;
       connect(formState.value.printHost);
     });
-  });
+  }
+
+  function findClient() {
+    console.log('findClient', hiprint.hiwebSocket);
+
+    const clients = hiprint.hiwebSocket.clients;
+    console.log(clients);
+    for (const obj of Object.keys(clients)) {
+      const client = clients[obj];
+
+      if (client.clientUrl === formState.value.printHost) {
+        targetClient.value = client;
+        targetClientId.value = obj;
+        break;
+      } else {
+        targetClient.value = client;
+        targetClientId.value = obj;
+      }
+    }
+    console.log(targetClientId.value, targetClient.value);
+  }
 
   function connect(host) {
     console.log(host);
-    hiprint.hiwebSocket.setHost(host);
+
+    hiprint.hiwebSocket.setHost('https://temples-api.touchbiz.tech:17521', 'touchbiz-temples');
+
     // 这是异步的
     hiprint.refreshPrinterList((list) => {
       console.log(list);
+      findClient();
       // hiprint对象获取
       dictPrintList.value = list;
     });
@@ -201,20 +223,12 @@
    */
   let hiprintTemplate;
 
-  /**
-   * 获取打印html
-   */
-  const getHtml = () => {
-    let html = hiprintTemplate.getHtml(printData.value);
-    preview.value.showModal(html);
-  };
   const background = ref('');
   const templateChange = (e) => {
     if (!e) {
       return;
     }
     getTemplateContent(e).then((res) => {
-      // let provider = providers[0];
       background.value = res.background;
       hiprint.init({
         providers: [providers[0].f],
@@ -239,10 +253,6 @@
       width.value = hiprintTemplate.printPanels[0].width;
       height.value = hiprintTemplate.printPanels[0].height;
       $('.hiprint-printTemplate').html(hiprintTemplate.getHtml(printData.value));
-      // hiprintTemplate.design('#hiprint-printTemplate');
-      //  console.log(hiprintTemplate);
-      // 获取当前放大比例, 当zoom时传true 才会有
-      // scaleValue.value = hiprintTemplate.editingPanel.scale || 1;
     });
   };
 
@@ -268,6 +278,7 @@
       console.log(printData.value);
       //从模版中获取打印尺寸
       const params = {
+        client: targetClientId.value,
         printer: formState.value.print, // 打印机 名称
         title: '打印任务名称',
         color: false, // 是否打印颜色 默认 true
@@ -276,6 +287,7 @@
         pageSize: { height: panel.height * 1000, width: panel.width * 1000 },
       };
       console.log(params);
+
       hiprintTemplate.print2(printData.value, params);
       hiprintTemplate.on('printSuccess', function (data) {
         $message.createSuccessModal({ content: '打印完成' });
