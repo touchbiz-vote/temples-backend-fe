@@ -67,7 +67,7 @@ export default {
     signUpFormTitle: '注册',
     forgetFormTitle: '重置密码',
 
-    signInTitle: '数字寺庙',
+    signInTitle: '运营管理平台',
     signInDesc: '~',
     policy: '我同意敲敲云隐私政策',
     scanSign: `扫码后，即可完成登录`,
