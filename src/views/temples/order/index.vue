@@ -15,7 +15,7 @@
         <TableAction :actions="getTableAction(record)" :dropDownActions="getDropDownAction(record)" />
       </template>
     </BasicTable>
-    <OrderModal @register="registerModal" @success="reload" :isDisabled="isDisabled" />
+    <!-- <OrderModal @register="registerModal" @success="reload" :isDisabled="isDisabled" /> -->
   </div>
 </template>
 <script lang="ts" setup>
